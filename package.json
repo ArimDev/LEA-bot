@@ -1,6 +1,6 @@
 {
   "name": "sahp-bot",
-  "version": "1.0",
+  "version": "1.1",
   "description": "RefreshRP (FiveM GTA V roleplay) Discord bot for SAHP - making internal police department actions easier.",
   "type": "module",
   "main": "index.js",
