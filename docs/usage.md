@@ -47,6 +47,7 @@ Bot se hlavně zatím používá pomocí jednoduchých příkazů:
 1. Použij příkaz **`/duty`**.
 
 ![Duty pop-up ukázka](/assets/duty-modal.png)
+
 2. **Vyplň údaje** v tzv. pop-upu.
 3. **Potvrď odeslání** a zkontroluj výsledek.
 
@@ -56,6 +57,7 @@ Bot se hlavně zatím používá pomocí jednoduchých příkazů:
 1. Použij příkaz **`/omluvenka`**.
 
 ![Omluvenka pop-up ukázka](/assets/apology-modal.png)
+
 2. **Vyplň údaje** v tzv. pop-upu.
 3. **Potvrď odeslání** a zkontroluj výsledek.
 
@@ -65,6 +67,7 @@ Bot se hlavně zatím používá pomocí jednoduchých příkazů:
 1. Použij příkaz **`/cpz`**.
 
 ![CPZ pop-up ukázka](/assets/cpz-modal.png)
+
 2. **Vyplň údaje** v tzv. pop-upu.
 3. **Potvrď odeslání** a zkontroluj výsledek.
 
