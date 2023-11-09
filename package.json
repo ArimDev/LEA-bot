@@ -1,0 +1,35 @@
+{
+  "name": "sahp-bot",
+  "version": "1.0",
+  "description": "RefreshRP (FiveM GTA V roleplay) Discord bot for SAHP - making internal police department actions easier.",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js start",
+    "test": "node index.js test"
+  },
+  "keywords": [
+    "discord-bot",
+    "discord",
+    "bot",
+    "chatbot",
+    "fivem",
+    "roleplay",
+    "gta5",
+    "police"
+  ],
+  "author": "PetyXbron",
+  "license": "CC-BY-NC-ND-4.0",
+  "bugs": {
+    "url": "https://github.com/Azator-Entertainment/SAHP-bot/issues"
+  },
+  "homepage": "https://github.com/Azator-Entertainment/SAHP-bot",
+  "engines": {
+    "node": ">=16.11.0"
+  },
+  "dependencies": {
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1",
+    "fs": "^0.0.1-security"
+  }
+}

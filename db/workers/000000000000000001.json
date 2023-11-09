@@ -1,0 +1,43 @@
+{
+    "badge": 1050,
+    "id": "000000000000000000001",
+    "name": "Will Smith",
+    "radio": "Ocean-32",
+    "rank": "Commissioner",
+    "folder": "0000000000000000001",
+    "hours": 4,
+    "duties": [
+        {
+            "date": "31. 12. 2020",
+            "start": "13:00",
+            "end": "17:00",
+            "hours": 4
+        }
+    ],
+    "apologies": [
+        {
+            "shared": "2. 7. 2020",
+            "start": "3. 7. 2020",
+            "end": "7. 7. 2020",
+            "ooc": "Rodinná akce",
+            "ic": "Zlomená ruka"
+        }
+    ],
+    "warns": [
+        {
+            "date": "31. 12. 2020",
+            "boss": "[Heaven-4] Adam Sandler",
+            "reason": "Toxicita"
+        }
+    ],
+    "rankups": [
+        {
+            "date": "5. 11. 2023",
+            "to": "Trooper III",
+            "from": "Trooper II",
+            "boss": "[Heaven-4] Adam Sandler",
+            "reason": "Úspěšná hodnocená patrola",
+            "hours": 0
+        }
+    ]
+}
