@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from "discord.js";
 import { checkDB } from "../../src/functions/db.js";
 
 export const slash = new SlashCommandBuilder()
-    .setName('hledat')
+    .setName("hledat")
     .setDescription(`Najít kolegu`)
     .setDMPermission(true)
     .setNSFW(false);

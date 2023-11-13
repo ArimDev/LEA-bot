@@ -1,7 +1,7 @@
 let runType;
 if (process.argv[2] === "start") { runType = 0; }
 else if (process.argv[2] === "test") { runType = 1; }
-else { runType = 2; console.error("ERR! Correct launch: 'node index.js test|start'"); process.exit(4); }
+else { runType = 2; console.error("ERR! Correct launch: \"node index.js test|start\""); process.exit(4); }
 export { runType };
 
 console.log("-------------------------------> SAHP-bot <-------------------------------");
@@ -14,7 +14,7 @@ import { Client, GatewayIntentBits, Collection } from "discord.js";
 
 let bot = new Client({
     intents: [
-        GatewayIntentBits.GuildMessages
+        GatewayIntentBits.Guilds
     ]
 });
 

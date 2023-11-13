@@ -1,7 +1,7 @@
 import { ActionRowBuilder, ModalBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
 
 export const slash = new SlashCommandBuilder()
-    .setName('warn')
+    .setName("warn")
     .setDescription(`Zapíše varování zaměstnanci`)
     .setDMPermission(false)
     .setNSFW(false);
@@ -17,38 +17,6 @@ export default async function run(bot, i) {
     if (admin.id === "411436203330502658") passed = true; //PetyXbron
     if (!passed) return i.reply({ content: "🛑 **K tomuhle má přístup jen admin.**", ephemeral: true });
 
-    if (!passed) return i.reply({ content: "🛑 **K tomuhle má přístup jen admin.**", ephemeral: true });
-    return i.reply({ content: "> 🛑 **Tahle funkce ještě nebyla dokončena! (ID 2.1)**", ephemeral: true });
-    const modal = new ModalBuilder()
-        .setCustomId('dutyModal')
-        .setTitle('SAHP | Zápis služby');
-
-    const dateInput = new TextInputBuilder()
-        .setCustomId('datum')
-        .setLabel("Datum služby [31. 12. 2023]")
-        .setStyle(TextInputStyle.Short);
-
-    const startInput = new TextInputBuilder()
-        .setCustomId('start')
-        .setLabel("Začátek služby [13:00]")
-        .setStyle(TextInputStyle.Short);
-
-    const endInput = new TextInputBuilder()
-        .setCustomId('end')
-        .setLabel("Konec služby [17:00]")
-        .setStyle(TextInputStyle.Short);
-
-    const signInput = new TextInputBuilder()
-        .setCustomId('signature')
-        .setLabel("Podpis [Smith]")
-        .setStyle(TextInputStyle.Short);
-
-    const actionRow0 = new ActionRowBuilder().addComponents(dateInput);
-    const actionRow1 = new ActionRowBuilder().addComponents(startInput);
-    const actionRow2 = new ActionRowBuilder().addComponents(endInput);
-    const actionRow3 = new ActionRowBuilder().addComponents(signInput);
-
-    modal.addComponents(actionRow0, actionRow1, actionRow2, actionRow3);
-
-    await i.showModal(modal);
+    return i.reply({ content: "> 🛑 **Tahle funkce ještě nebyla dokončena! (ID 2)**", ephemeral: true });
+    //TODO
 };

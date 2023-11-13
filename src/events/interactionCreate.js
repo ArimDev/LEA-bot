@@ -22,6 +22,7 @@ export default async function (bot, i) {
             if (admin.id === "607915400604286997") passed = true; //Samus
             if (admin.id === "436180906533715969") passed = true; //Mičut
             if (admin.id === "411436203330502658") passed = true; //PetyXbron
+            if (admin.id === i.message.interaction.user.id) passed = true; //Owner
             if (!passed) {
                 return i.reply({ content: "🛑 **Nemůžeš přepisovat cizí záznamy!**", ephemeral: true });
             }
@@ -33,26 +34,26 @@ export default async function (bot, i) {
 
             if (type === 0) {
                 const modal = new ModalBuilder()
-                    .setCustomId('dutyOWModal')
-                    .setTitle('SAHP | Přepis služby');
+                    .setCustomId("dutyOWModal")
+                    .setTitle("SAHP | Přepis služby");
 
                 const dateInput = new TextInputBuilder()
-                    .setCustomId('datum')
+                    .setCustomId("datum")
                     .setLabel("Datum služby [31. 12. 2023]")
                     .setStyle(TextInputStyle.Short);
 
                 const startInput = new TextInputBuilder()
-                    .setCustomId('start')
+                    .setCustomId("start")
                     .setLabel("Začátek služby [13:00]")
                     .setStyle(TextInputStyle.Short);
 
                 const endInput = new TextInputBuilder()
-                    .setCustomId('end')
+                    .setCustomId("end")
                     .setLabel("Konec služby [17:00]")
                     .setStyle(TextInputStyle.Short);
 
                 const signInput = new TextInputBuilder()
-                    .setCustomId('signature')
+                    .setCustomId("signature")
                     .setLabel("Podpis [Smith]")
                     .setStyle(TextInputStyle.Short);
 
@@ -66,31 +67,31 @@ export default async function (bot, i) {
                 await i.showModal(modal);
             } else if (type === 1) {
                 const modal = new ModalBuilder()
-                    .setCustomId('apologyOWModal')
-                    .setTitle('SAHP | Přepis omluvenky');
+                    .setCustomId("apologyOWModal")
+                    .setTitle("SAHP | Přepis omluvenky");
 
                 const startInput = new TextInputBuilder()
-                    .setCustomId('start')
+                    .setCustomId("start")
                     .setLabel("Od kdy [31. 12. 2023]")
                     .setStyle(TextInputStyle.Short);
 
                 const endInput = new TextInputBuilder()
-                    .setCustomId('end')
+                    .setCustomId("end")
                     .setLabel("Do kdy [5. 1. 2024]")
                     .setStyle(TextInputStyle.Short);
 
                 const oocInput = new TextInputBuilder()
-                    .setCustomId('ooc')
+                    .setCustomId("ooc")
                     .setLabel("OOC důvod [Rodinná akce]")
                     .setStyle(TextInputStyle.Paragraph);
 
                 const icInput = new TextInputBuilder()
-                    .setCustomId('ic')
+                    .setCustomId("ic")
                     .setLabel("IC důvod [Zlomená ruka]")
                     .setStyle(TextInputStyle.Paragraph);
 
                 const signInput = new TextInputBuilder()
-                    .setCustomId('signature')
+                    .setCustomId("signature")
                     .setLabel("Podpis [Smith]")
                     .setStyle(TextInputStyle.Short);
 
@@ -105,31 +106,31 @@ export default async function (bot, i) {
                 await i.showModal(modal);
             } else if (type === 2) {
                 const modal = new ModalBuilder()
-                    .setCustomId('cpzOWModal')
-                    .setTitle('SAHP | Přepis CPZ');
+                    .setCustomId("cpzOWModal")
+                    .setTitle("SAHP | Přepis CPZ");
 
                 const nameInput = new TextInputBuilder()
-                    .setCustomId('name')
+                    .setCustomId("name")
                     .setLabel("Jméno občana [Will Smith]")
                     .setStyle(TextInputStyle.Short);
 
                 const birthInput = new TextInputBuilder()
-                    .setCustomId('birth')
+                    .setCustomId("birth")
                     .setLabel("Narození občana [12/31/1990]")
                     .setStyle(TextInputStyle.Short);
 
                 const reasonInput = new TextInputBuilder()
-                    .setCustomId('reason')
+                    .setCustomId("reason")
                     .setLabel("Důvod zadržení [Nelegální akce]")
                     .setStyle(TextInputStyle.Paragraph);
 
                 const moneyInput = new TextInputBuilder()
-                    .setCustomId('money')
+                    .setCustomId("money")
                     .setLabel("Výpis trestu / pokut")
                     .setStyle(TextInputStyle.Paragraph);
 
                 const pdInput = new TextInputBuilder()
-                    .setCustomId('pd')
+                    .setCustomId("pd")
                     .setLabel("Řešili [Chris Evans, Adam Sandler]")
                     .setStyle(TextInputStyle.Short);
 
@@ -155,23 +156,33 @@ export default async function (bot, i) {
             const log = JSON.parse(fs.readFileSync((path.resolve("./db/workers") + "/" + worker.id + ".json"), "utf-8"));
 
             let moHours = 0;
-            log.duties.forEach(function (e) {
-                const mo = parseInt(e.date.split(". ")[1]);
-                const tMo = new Date().getMonth() + 1;
-                if (mo === tMo) moHours = moHours + e.hours;
+            await log.duties.filter(d => !d.removed).forEach(function (e) {
+                const dutyDateArr = e.date.split(". ");
+                const dutyDate = new Date(dutyDateArr[1] + "/" + dutyDateArr[0] + "/" + dutyDateArr[2]).getTime();
+                const todayDate = new Date().getTime();
+                const ms30days = 1000 * 60 * 60 * 24 * 30;
+
+                if (todayDate - dutyDate < ms30days) moHours = moHours + e.hours;
             });
 
             const summEmbed = new EmbedBuilder()
                 .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
                 .setTitle("Souhrn zaměstnance")
+                .setDescription("Pro zjištění dalších informací,\npoužij </kolega:1171119036730449975>.")
                 .addFields([
                     {
-                        name: `Duties`, inline: false,
+                        name: `Omluvenky`, inline: false,
                         value:
-                            `> **Počet vykonanných služeb:** \`${log.duties.length}\`\n`
+                            `> **Počet omluvenek:** \`${log.apologies.filter(d => !d.removed).length}\`\n`
+                            + `> **Omluvenek za posledních 30 dnů:** \`${log.apologies.filter(a => !a.removed).length}\``
+                    },
+                    {
+                        name: `Služby`, inline: false,
+                        value:
+                            `> **Počet vykonanných služeb:** \`${log.duties.filter(d => !d.removed).length}\`\n`
                             + `> **Hodin celkem:** \`${log.hours}\`\n`
                             + `> **Hodin od povýšení:** \`${log.hours - log.rankups.slice(-1)[0].hours}\`\n`
-                            + `> **Hodin za tento měsíc:** \`${await moHours}\``
+                            + `> **Hodin za posledních 30 dnů:** \`${await moHours}\``
                     }
                 ])
                 .setThumbnail("https://i.imgur.com/wDab7i4.png")
@@ -184,36 +195,66 @@ export default async function (bot, i) {
 
     if (i.type === InteractionType.ModalSubmit) {
         if (i.customId === "dutyModal") {
-            await i.deferReply();
-
             let content = JSON.parse(fs.readFileSync((path.resolve("./db/workers") + "/" + i.user.id + ".json"), "utf-8"));
             const index = content.duties.length + 1;
 
             const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
-                        .setCustomId('edit')
-                        .setLabel('Přepsat')
+                        .setCustomId("edit")
+                        .setLabel("Přepsat")
                         .setStyle(ButtonStyle.Primary)
                         .setEmoji("📝"),
                 )
                 .addComponents(
                     new ButtonBuilder()
-                        .setCustomId('summary')
-                        .setLabel('Souhrn')
+                        .setCustomId("summary")
+                        .setLabel("Souhrn")
                         .setStyle(ButtonStyle.Success)
                         .setEmoji("👀"),
                 );
 
+            if (
+                (i.fields.getTextInputValue("datum").split(" ").length - 1) !== 2
+                || (i.fields.getTextInputValue("datum").split(".").length - 1) !== 2
+            ) {
+                return await i.reply({
+                    content:
+                        "### Nalezena chyba - datum!"
+                        + "\n- Formát data je špatně. Napiš např. `24. 12. 2023` (tečky a mezery)"
+                        + "\nZadal(a) jsi:\n"
+                        + `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
+                        + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
+                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\`\n`
+                        + `> **Podpis:** ${i.fields.getTextInputValue("signature")}`,
+                    ephemeral: true
+                });
+            } else if (!i.fields.getTextInputValue("start").includes(":") || !i.fields.getTextInputValue("end").includes(":")) {
+                return await i.reply({
+                    content:
+                        "### Nalezena chyba - čas!"
+                        + "\n- V některém z časů se neobjevila `:`."
+                        + "\nZadal(a) jsi:\n"
+                        + `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
+                        + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
+                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\`\n`
+                        + `> **Podpis:** ${i.fields.getTextInputValue("signature")}`,
+                    ephemeral: true
+                });
+            }
+
+            await i.deferReply();
+
             let hours,
-                h1 = parseInt(i.fields.getTextInputValue('start').slice(0, 2)),
-                h2 = parseInt(i.fields.getTextInputValue('end').slice(0, 2)),
-                m1 = parseInt(i.fields.getTextInputValue('start').slice(3, 5)),
-                m2 = parseInt(i.fields.getTextInputValue('end').slice(3, 5)),
+                h1 = parseInt(i.fields.getTextInputValue("start").split(":")[0]),
+                h2 = parseInt(i.fields.getTextInputValue("end").split(":")[0]),
+                m1 = parseInt(i.fields.getTextInputValue("start").split(":")[1]),
+                m2 = parseInt(i.fields.getTextInputValue("end").split(":")[1]),
                 min1 = h1 * 60 + m1,
                 min2 = h2 * 60 + m2;
             hours = (min2 - min1) / 60;
             if (hours < 0) hours = hours + 24;
+            hours = Math.round((hours + Number.EPSILON) * 100) / 100;
 
             const dutyEmbed = new EmbedBuilder()
                 .setAuthor({ name: i.member.displayName, iconURL: i.member.displayAvatarURL() })
@@ -222,11 +263,11 @@ export default async function (bot, i) {
                     {
                         name: `Duty #` + index, inline: false,
                         value:
-                            `> **Datum:** \`${i.fields.getTextInputValue('datum')}\`\n`
-                            + `> **Od:** \`${i.fields.getTextInputValue('start')}\`\n`
-                            + `> **Do:** \`${i.fields.getTextInputValue('end')}\`\n`
+                            `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
+                            + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
+                            + `> **Do:** \`${i.fields.getTextInputValue("end")}\`\n`
                             + `> **Hodin:**  \`${hours}\`\n`
-                            + `> **Podpis:** ${i.fields.getTextInputValue('signature')}`
+                            + `> **Podpis:** ${i.fields.getTextInputValue("signature")}`
                     }
                 ])
                 .setThumbnail("https://i.imgur.com/dsZyqaJ.png")
@@ -236,12 +277,13 @@ export default async function (bot, i) {
             await i.editReply({ embeds: [dutyEmbed], components: [row] });
 
             content.duties.push({
-                "date": i.fields.getTextInputValue('datum'),
-                "start": i.fields.getTextInputValue('start'),
-                "end": i.fields.getTextInputValue('end'),
+                "removed": false,
+                "date": i.fields.getTextInputValue("datum"),
+                "start": i.fields.getTextInputValue("start"),
+                "end": i.fields.getTextInputValue("end"),
                 "hours": hours
             });
-            content.hours = content.hours + hours;
+            content.hours = (Math.round((parseInt(content.hours) + Number.EPSILON) * 100) / 100) + hours;
             content.folder = i.channelId;
 
             fs.writeFileSync(
@@ -249,19 +291,37 @@ export default async function (bot, i) {
                 JSON.stringify(content, null, 4)
             );
         } else if (i.customId === "apologyModal") {
-            await i.deferReply();
-
             let content = JSON.parse(fs.readFileSync((path.resolve("./db/workers") + "/" + i.user.id + ".json"), "utf-8"));
             const index = content.apologies.length + 1;
 
             const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
-                        .setCustomId('edit')
-                        .setLabel('Přepsat')
+                        .setCustomId("edit")
+                        .setLabel("Přepsat")
                         .setStyle(ButtonStyle.Primary)
                         .setEmoji("📝"),
                 );
+
+            if (
+                (i.fields.getTextInputValue("start").split(" ").length - 1) !== 2
+                || (i.fields.getTextInputValue("end").split(".").length - 1) !== 2
+            ) {
+                return await i.reply({
+                    content:
+                        "### Nalezena chyba - datum!"
+                        + "\n- Formát data je špatně. Napiš např. `24. 12. 2023` (tečky a mezery)"
+                        + "\nZadal(a) jsi:\n"
+                        + `> **Začátek:** \`${i.fields.getTextInputValue("start")}\`\n`
+                        + `> **Konec:** \`${i.fields.getTextInputValue("end")}\`\n`
+                        + `> **OOC Důvod:** \`${i.fields.getTextInputValue("ooc")}\`\n`
+                        + `> **IC Důvod:** \`${i.fields.getTextInputValue("ic")}\`\n`
+                        + `> **Podpis:** ${i.fields.getTextInputValue("signature")}`,
+                    ephemeral: true
+                });
+            }
+
+            await i.deferReply();
 
             const dutyEmbed = new EmbedBuilder()
                 .setAuthor({ name: i.member.displayName, iconURL: i.member.displayAvatarURL() })
@@ -270,11 +330,11 @@ export default async function (bot, i) {
                     {
                         name: `Omluvenka #` + index, inline: false,
                         value:
-                            `> **Začátek:** \`${i.fields.getTextInputValue('start')}\`\n`
-                            + `> **Konec:** \`${i.fields.getTextInputValue('end')}\`\n`
-                            + `> **OOC Důvod:** \`${i.fields.getTextInputValue('ooc')}\`\n`
-                            + `> **IC Důvod:** \`${i.fields.getTextInputValue('ic')}\`\n`
-                            + `> **Podpis:** ${i.fields.getTextInputValue('signature')}`
+                            `> **Začátek:** \`${i.fields.getTextInputValue("start")}\`\n`
+                            + `> **Konec:** \`${i.fields.getTextInputValue("end")}\`\n`
+                            + `> **OOC Důvod:** \`${i.fields.getTextInputValue("ooc")}\`\n`
+                            + `> **IC Důvod:** \`${i.fields.getTextInputValue("ic")}\`\n`
+                            + `> **Podpis:** ${i.fields.getTextInputValue("signature")}`
                     }
                 ])
                 .setThumbnail("https://i.imgur.com/Ja58hkU.png")
@@ -285,11 +345,12 @@ export default async function (bot, i) {
 
             const today = new Date();
             content.apologies.push({
+                "removed": false,
                 "shared": today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear(),
-                "start": i.fields.getTextInputValue('start'),
-                "end": i.fields.getTextInputValue('end'),
-                "ooc": i.fields.getTextInputValue('ooc'),
-                "ic": i.fields.getTextInputValue('ic')
+                "start": i.fields.getTextInputValue("start"),
+                "end": i.fields.getTextInputValue("end"),
+                "ooc": i.fields.getTextInputValue("ooc"),
+                "ic": i.fields.getTextInputValue("ic")
             });
             content.folder = i.channelId;
 
@@ -303,24 +364,24 @@ export default async function (bot, i) {
             const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
-                        .setCustomId('edit')
-                        .setLabel('Přepsat')
+                        .setCustomId("edit")
+                        .setLabel("Přepsat")
                         .setStyle(ButtonStyle.Primary)
                         .setEmoji("📝"),
                 );
 
             const cpzEmbed = new EmbedBuilder()
                 .setAuthor({ name: i.member.displayName, iconURL: i.member.displayAvatarURL() })
-                .setTitle(i.fields.getTextInputValue('name'))
+                .setTitle(i.fields.getTextInputValue("name"))
                 .addFields([
                     {
                         name: "CPZ záznam", inline: false,
                         value:
-                            `**Jméno:** \`${i.fields.getTextInputValue('name')}\`\n`
-                            + `**Narozen(a):** \`${i.fields.getTextInputValue('birth')}\`\n`
-                            + `**Důvod:** \`\`\`${i.fields.getTextInputValue('reason')}\`\`\`\n`
-                            + `**Tresty:** \`${i.fields.getTextInputValue('money')}\`\n`
-                            + `**Řešili:** \`${i.fields.getTextInputValue('pd')}\``
+                            `**Jméno:** \`${i.fields.getTextInputValue("name")}\`\n`
+                            + `**Narozen(a):** \`${i.fields.getTextInputValue("birth")}\`\n`
+                            + `**Důvod:** \`\`\`${i.fields.getTextInputValue("reason")}\`\`\`\n`
+                            + `**Tresty:** \`${i.fields.getTextInputValue("money")}\`\n`
+                            + `**Řešili:** \`${i.fields.getTextInputValue("pd")}\``
                     }
                 ])
                 .setThumbnail("https://i.imgur.com/31WU5cn.png")
@@ -331,15 +392,15 @@ export default async function (bot, i) {
         } else if (i.customId === "loginModal") {
             await i.deferReply({ ephemeral: true });
 
-            if (await checkDB(i.fields.getTextInputValue('id'))) return i.editReply({ content: "🛑 <@" + i.fields.getTextInputValue('id') + "> **už je v DB.**", ephemeral: true });
+            if (await checkDB(i.fields.getTextInputValue("id"))) return i.editReply({ content: "🛑 <@" + i.fields.getTextInputValue("id") + "> **už je v DB.**", ephemeral: true });
 
             const today = new Date();
 
             const worker = {
-                "badge": parseInt(i.fields.getTextInputValue('badge')),
-                "name": i.fields.getTextInputValue('name'),
-                "radio": i.fields.getTextInputValue('call'),
-                "rank": i.fields.getTextInputValue('rank'),
+                "badge": parseInt(i.fields.getTextInputValue("badge")),
+                "name": i.fields.getTextInputValue("name"),
+                "radio": i.fields.getTextInputValue("call"),
+                "rank": i.fields.getTextInputValue("rank"),
                 "folder": null,
                 "hours": 0,
                 "duties": [],
@@ -347,7 +408,7 @@ export default async function (bot, i) {
                 "rankups": [
                     {
                         "date": today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear(),
-                        "to": i.fields.getTextInputValue('rank'),
+                        "to": i.fields.getTextInputValue("rank"),
                         "from": null,
                         "boss": i.member.displayName,
                         "reason": "Přidání do DB",
@@ -357,13 +418,13 @@ export default async function (bot, i) {
             };
 
             fs.writeFileSync(
-                (path.resolve("./db/workers") + "/" + i.fields.getTextInputValue('id') + ".json"),
+                (path.resolve("./db/workers") + "/" + i.fields.getTextInputValue("id") + ".json"),
                 JSON.stringify(worker, null, 4)
             );
 
             const loginEmbed = new EmbedBuilder()
                 .setTitle("Úspěch")
-                .setDescription(`<@${i.fields.getTextInputValue('id')}> přidán(a) do datbáze!`)
+                .setDescription(`<@${i.fields.getTextInputValue("id")}> přidán(a) do datbáze!`)
                 .setColor(bot.SAHP.c.master)
                 .setFooter({ text: "SAHP", iconURL: bot.user.avatarURL() });
 
@@ -371,36 +432,59 @@ export default async function (bot, i) {
         } else if (i.customId === "rankUpModal") {
             await i.deferReply({ ephemeral: true });
 
-            if (!(await checkDB(i.fields.getTextInputValue('id')))) return i.editReply({ content: "🛑 <@" + i.fields.getTextInputValue('id') + "> **není v DB.**", ephemeral: true });
+            if (!(await checkDB(i.fields.getTextInputValue("id")))) return i.editReply({ content: "🛑 <@" + i.fields.getTextInputValue("id") + "> **není v DB.**", ephemeral: true });
 
-            let content = JSON.parse(fs.readFileSync((path.resolve("./db/workers") + "/" + i.fields.getTextInputValue('id') + ".json"), "utf-8"));
+            let content = JSON.parse(fs.readFileSync((path.resolve("./db/workers") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
             const today = new Date();
 
             const rankup = {
                 "date": today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear(),
-                "to": i.fields.getTextInputValue('rank'),
+                "to": i.fields.getTextInputValue("rank"),
                 "from": content.rank,
                 "boss": i.member.displayName,
-                "reason": i.fields.getTextInputValue('reason'),
+                "reason": i.fields.getTextInputValue("reason"),
                 "hours": content.hours
             };
             content.rankups.push(rankup);
-            content.badge = parseInt(i.fields.getTextInputValue('badge'));
-            content.radio = i.fields.getTextInputValue('call');
-            content.rank = i.fields.getTextInputValue('rank');
+            content.badge = parseInt(i.fields.getTextInputValue("badge"));
+            content.radio = i.fields.getTextInputValue("call");
+            content.rank = i.fields.getTextInputValue("rank");
 
             fs.writeFileSync(
-                (path.resolve("./db/workers") + "/" + i.fields.getTextInputValue('id') + ".json"),
+                (path.resolve("./db/workers") + "/" + i.fields.getTextInputValue("id") + ".json"),
                 JSON.stringify(content, null, 4)
             );
 
-            const loginEmbed = new EmbedBuilder()
+            const rankupEmbed = new EmbedBuilder()
                 .setTitle("Úspěch")
-                .setDescription(`<@${i.fields.getTextInputValue('id')}> byl(a) povýšen(a)!`)
+                .setDescription(`<@${i.fields.getTextInputValue("id")}> byl(a) povýšen(a)!`)
                 .setColor(bot.SAHP.c.master)
                 .setFooter({ text: "SAHP", iconURL: bot.user.avatarURL() });
 
-            await i.editReply({ embeds: [loginEmbed], ephemeral: true });
+            await i.editReply({ embeds: [rankupEmbed], ephemeral: true });
+
+            if (content.folder) {
+                try {
+                    const folder = await i.guild.channels.fetch(content.folder);
+                    const rankup2Embed = new EmbedBuilder()
+                        .setTitle("Povýšení!")
+                        .setDescription(`Gratuluji, <@${i.fields.getTextInputValue("id")}> byl(a) jsi úspěšně povýšen(a).\nZkontroluj si své nové údaje:`)
+                        .addFields([
+                            {
+                                name: `Aktuální údaje`, inline: false,
+                                value:
+                                    `> **Hodnost:** \`${i.fields.getTextInputValue("rank")}\`\n`
+                                    + `> **Volačka:** \`${i.fields.getTextInputValue("call")}\`\n`
+                                    + `> **Č. Odznaku:** \`${i.fields.getTextInputValue("badge")}\``
+                            }
+                        ])
+                        .setColor(bot.SAHP.c.master)
+                        .setFooter({ text: "SAHP", iconURL: bot.user.avatarURL() });
+                    await folder.send({ content: `<@${i.fields.getTextInputValue("id")}>`, embeds: [rankup2Embed] });
+                } catch (e) {
+                    console.error(e);
+                }
+            }
         } else if (i.customId === "dutyOWModal") {
             await i.deferReply({ ephemeral: true });
 
@@ -413,29 +497,59 @@ export default async function (bot, i) {
             const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
-                        .setCustomId('edit')
-                        .setLabel('Přepsat')
+                        .setCustomId("edit")
+                        .setLabel("Přepsat")
                         .setStyle(ButtonStyle.Primary)
                         .setEmoji("📝"),
                 )
                 .addComponents(
                     new ButtonBuilder()
-                        .setCustomId('summary')
-                        .setLabel('Souhrn')
+                        .setCustomId("summary")
+                        .setLabel("Souhrn")
                         .setStyle(ButtonStyle.Success)
                         .setEmoji("👀"),
                 );
 
+            if (
+                (i.fields.getTextInputValue("datum").split(" ").length - 1) !== 2
+                || (i.fields.getTextInputValue("datum").split(".").length - 1) !== 2
+            ) {
+                return await i.editReply({
+                    content:
+                        "### Nalezena chyba - datum!"
+                        + "\n- Formát data je špatně. Napiš např. `24. 12. 2023` (tečky a mezery)"
+                        + "\nZadal(a) jsi:\n"
+                        + `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
+                        + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
+                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\`\n`
+                        + `> **Podpis:** ${i.fields.getTextInputValue("signature")}`,
+                    ephemeral: true
+                });
+            } else if (!i.fields.getTextInputValue("start").includes(":") || !i.fields.getTextInputValue("end").includes(":")) {
+                return await i.editReply({
+                    content:
+                        "### Nalezena chyba - čas!"
+                        + "\n- V některém z časů se neobjevila `:`."
+                        + "\nZadal(a) jsi:\n"
+                        + `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
+                        + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
+                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\`\n`
+                        + `> **Podpis:** ${i.fields.getTextInputValue("signature")}`,
+                    ephemeral: true
+                });
+            }
+
             const hoursBefore = parseInt(i.message.embeds[0].fields[0].value.split("`")[7]);
             let hoursAfter,
-                h1 = parseInt(i.fields.getTextInputValue('start').slice(0, 2)),
-                h2 = parseInt(i.fields.getTextInputValue('end').slice(0, 2)),
-                m1 = parseInt(i.fields.getTextInputValue('start').slice(3, 5)),
-                m2 = parseInt(i.fields.getTextInputValue('end').slice(3, 5)),
+                h1 = parseInt(i.fields.getTextInputValue("start").split(":")[0]),
+                h2 = parseInt(i.fields.getTextInputValue("end").split(":")[0]),
+                m1 = parseInt(i.fields.getTextInputValue("start").split(":")[1]),
+                m2 = parseInt(i.fields.getTextInputValue("end").split(":")[1]),
                 min1 = h1 * 60 + m1,
                 min2 = h2 * 60 + m2;
             hoursAfter = (min2 - min1) / 60;
             if (hoursAfter < 0) hoursAfter = hoursAfter + 24;
+            hoursAfter = Math.round((hoursAfter + Number.EPSILON) * 100) / 100;
 
 
             const dutyEmbed = new EmbedBuilder()
@@ -445,11 +559,11 @@ export default async function (bot, i) {
                     {
                         name: `Duty #` + (index + 1), inline: false,
                         value:
-                            `> **Datum:** \`${i.fields.getTextInputValue('datum')}\`\n`
-                            + `> **Od:** \`${i.fields.getTextInputValue('start')}\`\n`
-                            + `> **Do:** \`${i.fields.getTextInputValue('end')}\`\n`
+                            `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
+                            + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
+                            + `> **Do:** \`${i.fields.getTextInputValue("end")}\`\n`
                             + `> **Hodin:**  \`${hoursAfter}\`\n`
-                            + `> **Podpis:** ${i.fields.getTextInputValue('signature')}`
+                            + `> **Podpis:** ${i.fields.getTextInputValue("signature")}`
                     }
                 ])
                 .setThumbnail("https://i.imgur.com/dsZyqaJ.png")
@@ -459,18 +573,20 @@ export default async function (bot, i) {
             try {
                 await i.message.edit({ embeds: [dutyEmbed], components: [row] });
             } catch (e) {
+                console.error(e);
                 return await i.editReply({ content: "> 🛑 **Chyba! Zpráva nešla upravit.**```" + e + "```" });
             }
 
             content.duties[index] = {
-                "date": i.fields.getTextInputValue('datum'),
-                "start": i.fields.getTextInputValue('start'),
-                "end": i.fields.getTextInputValue('end'),
+                "removed": false,
+                "date": i.fields.getTextInputValue("datum"),
+                "start": i.fields.getTextInputValue("start"),
+                "end": i.fields.getTextInputValue("end"),
                 "hours": hoursAfter
             };
 
             content.hours = parseInt(content.hours) - parseInt(hoursBefore);
-            content.hours = parseInt(content.hours) + parseInt(hoursAfter);
+            content.hours = (Math.round((parseInt(content.hours) + Number.EPSILON) * 100) / 100) + parseInt(hoursAfter);
 
             fs.writeFileSync(
                 (path.resolve("./db/workers") + "/" + i.message.interaction.user.id + ".json"),
@@ -490,11 +606,29 @@ export default async function (bot, i) {
             const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
-                        .setCustomId('edit')
-                        .setLabel('Přepsat')
+                        .setCustomId("edit")
+                        .setLabel("Přepsat")
                         .setStyle(ButtonStyle.Primary)
                         .setEmoji("📝"),
                 );
+
+            if (
+                (i.fields.getTextInputValue("start").split(" ").length - 1) !== 2
+                || (i.fields.getTextInputValue("end").split(".").length - 1) !== 2
+            ) {
+                return await i.editReply({
+                    content:
+                        "### Nalezena chyba - datum!"
+                        + "\n- Formát data je špatně. Napiš např. `24. 12. 2023` (tečky a mezery)"
+                        + "\nZadal(a) jsi:\n"
+                        + `> **Začátek:** \`${i.fields.getTextInputValue("start")}\`\n`
+                        + `> **Konec:** \`${i.fields.getTextInputValue("end")}\`\n`
+                        + `> **OOC Důvod:** \`${i.fields.getTextInputValue("ooc")}\`\n`
+                        + `> **IC Důvod:** \`${i.fields.getTextInputValue("ic")}\`\n`
+                        + `> **Podpis:** ${i.fields.getTextInputValue("signature")}`,
+                    ephemeral: true
+                });
+            }
 
             const apologyEmbed = new EmbedBuilder()
                 .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
@@ -503,11 +637,11 @@ export default async function (bot, i) {
                     {
                         name: `Omluvenka #` + (index + 1), inline: false,
                         value:
-                            `> **Začátek:** \`${i.fields.getTextInputValue('start')}\`\n`
-                            + `> **Konec:** \`${i.fields.getTextInputValue('end')}\`\n`
-                            + `> **OOC Důvod:** \`${i.fields.getTextInputValue('ooc')}\`\n`
-                            + `> **IC Důvod:** \`${i.fields.getTextInputValue('ic')}\`\n`
-                            + `> **Podpis:** ${i.fields.getTextInputValue('signature')}`
+                            `> **Začátek:** \`${i.fields.getTextInputValue("start")}\`\n`
+                            + `> **Konec:** \`${i.fields.getTextInputValue("end")}\`\n`
+                            + `> **OOC Důvod:** \`${i.fields.getTextInputValue("ooc")}\`\n`
+                            + `> **IC Důvod:** \`${i.fields.getTextInputValue("ic")}\`\n`
+                            + `> **Podpis:** ${i.fields.getTextInputValue("signature")}`
                     }
                 ])
                 .setThumbnail("https://i.imgur.com/Ja58hkU.png")
@@ -517,25 +651,28 @@ export default async function (bot, i) {
             try {
                 await i.message.edit({ embeds: [apologyEmbed], components: [row] });
             } catch (e) {
+                console.error(e);
                 return await i.editReply({ content: "> 🛑 **Chyba! Zpráva nešla upravit.**```" + e + "```" });
             }
 
             const today = new Date();
             if (content.apologies[index]) {
                 content.apologies[index] = {
+                    "removed": false,
                     "shared": content.apologies[index].shared ? content.apologies[index].shared : today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear(),
-                    "start": i.fields.getTextInputValue('start'),
-                    "end": i.fields.getTextInputValue('end'),
-                    "ooc": i.fields.getTextInputValue('ooc'),
-                    "ic": i.fields.getTextInputValue('ic')
+                    "start": i.fields.getTextInputValue("start"),
+                    "end": i.fields.getTextInputValue("end"),
+                    "ooc": i.fields.getTextInputValue("ooc"),
+                    "ic": i.fields.getTextInputValue("ic")
                 };
             } else {
                 content.apologies.push({
+                    "removed": false,
                     "shared": today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear(),
-                    "start": i.fields.getTextInputValue('start'),
-                    "end": i.fields.getTextInputValue('end'),
-                    "ooc": i.fields.getTextInputValue('ooc'),
-                    "ic": i.fields.getTextInputValue('ic')
+                    "start": i.fields.getTextInputValue("start"),
+                    "end": i.fields.getTextInputValue("end"),
+                    "ooc": i.fields.getTextInputValue("ooc"),
+                    "ic": i.fields.getTextInputValue("ic")
                 });
             }
 
@@ -553,24 +690,24 @@ export default async function (bot, i) {
             const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
-                        .setCustomId('edit')
-                        .setLabel('Přepsat')
+                        .setCustomId("edit")
+                        .setLabel("Přepsat")
                         .setStyle(ButtonStyle.Primary)
                         .setEmoji("📝"),
                 );
 
             const cpzEmbed = new EmbedBuilder()
                 .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
-                .setTitle(i.fields.getTextInputValue('name'))
+                .setTitle(i.fields.getTextInputValue("name"))
                 .addFields([
                     {
                         name: "CPZ záznam", inline: false,
                         value:
-                            `**Jméno:** \`${i.fields.getTextInputValue('name')}\`\n`
-                            + `**Narozen(a):** \`${i.fields.getTextInputValue('birth')}\`\n`
-                            + `**Důvod:** \`\`\`${i.fields.getTextInputValue('reason')}\`\`\`\n`
-                            + `**Tresty:** \`${i.fields.getTextInputValue('money')}\`\n`
-                            + `**Řešili:** \`${i.fields.getTextInputValue('pd')}\``
+                            `**Jméno:** \`${i.fields.getTextInputValue("name")}\`\n`
+                            + `**Narozen(a):** \`${i.fields.getTextInputValue("birth")}\`\n`
+                            + `**Důvod:** \`\`\`${i.fields.getTextInputValue("reason")}\`\`\`\n`
+                            + `**Tresty:** \`${i.fields.getTextInputValue("money")}\`\n`
+                            + `**Řešili:** \`${i.fields.getTextInputValue("pd")}\``
                     }
                 ])
                 .setThumbnail("https://i.imgur.com/31WU5cn.png")
@@ -580,6 +717,7 @@ export default async function (bot, i) {
             try {
                 await i.message.edit({ embeds: [cpzEmbed], components: [row] });
             } catch (e) {
+                console.error(e);
                 return await i.editReply({ content: "> 🛑 **Chyba! Zpráva nešla upravit.**```" + e + "```" });
             }
 

@@ -4,28 +4,28 @@ import path from "path";
 import { checkDB } from "../../src/functions/db.js";
 
 export const slash = new SlashCommandBuilder()
-    .setName('db')
+    .setName("db")
     .setDescription(`Úprava systému zaměstnanců`)
     .addStringOption(option =>
-        option.setName('choice')
-            .setDescription('Co chceš udělat?')
+        option.setName("choice")
+            .setDescription("Co chceš udělat?")
             .setRequired(true)
             .addChoices(
-                { name: 'Registrace', value: "p" },
-                { name: 'Kontrola', value: "z" },
-                { name: 'Povýšit', value: "r" },
-                { name: 'Smazání', value: "s" }
+                { name: "Registrace", value: "p" },
+                { name: "Kontrola", value: "z" },
+                { name: "Povýšit", value: "r" },
+                { name: "Smazání", value: "s" }
             ))
     .addUserOption(option =>
-        option.setName('user')
-            .setDescription('Vyber člena')
+        option.setName("user")
+            .setDescription("Vyber člena")
             .setRequired(true))
     .setDMPermission(false)
     .setNSFW(false);
 
 export default async function run(bot, i) {
-    const choice = i.options.getString('choice');
-    let user = i.options.getUser('user');
+    const choice = i.options.getString("choice");
+    let user = i.options.getUser("user");
 
     let passed = false;
     await i.guild.fetch();
@@ -39,31 +39,31 @@ export default async function run(bot, i) {
 
     if (choice === "p") {
         const modal = new ModalBuilder()
-            .setCustomId('loginModal')
-            .setTitle('SAHP | Přihlášení');
+            .setCustomId("loginModal")
+            .setTitle("SAHP | Přihlášení");
 
         const idInput = new TextInputBuilder()
-            .setCustomId('id')
+            .setCustomId("id")
             .setLabel("ID Discord člena [411436203330502658]")
             .setStyle(TextInputStyle.Short);
 
         const nameInput = new TextInputBuilder()
-            .setCustomId('name')
+            .setCustomId("name")
             .setLabel("Jméno [Will Smith]")
             .setStyle(TextInputStyle.Short);
 
         const callInput = new TextInputBuilder()
-            .setCustomId('call')
+            .setCustomId("call")
             .setLabel("Volačka [Heaven-2]")
             .setStyle(TextInputStyle.Short);
 
         const badgeInput = new TextInputBuilder()
-            .setCustomId('badge')
+            .setCustomId("badge")
             .setLabel("Číslo odznaku [1033]")
             .setStyle(TextInputStyle.Short);
 
         const rankInput = new TextInputBuilder()
-            .setCustomId('rank')
+            .setCustomId("rank")
             .setLabel("Hodnost [Trooper II]")
             .setStyle(TextInputStyle.Short);
 
@@ -83,31 +83,31 @@ export default async function run(bot, i) {
     } else if (choice === "r") {
         if (!(await checkDB(user.id))) return i.reply({ content: "🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
         const modal = new ModalBuilder()
-            .setCustomId('rankUpModal')
-            .setTitle('SAHP | Povýšení');
+            .setCustomId("rankUpModal")
+            .setTitle("SAHP | Povýšení");
 
         const idInput = new TextInputBuilder()
-            .setCustomId('id')
+            .setCustomId("id")
             .setLabel("ID Discord člena [411436203330502658]")
             .setStyle(TextInputStyle.Short);
 
         const callInput = new TextInputBuilder()
-            .setCustomId('call')
+            .setCustomId("call")
             .setLabel("Volačka [Heaven-2]")
             .setStyle(TextInputStyle.Short);
 
         const badgeInput = new TextInputBuilder()
-            .setCustomId('badge')
+            .setCustomId("badge")
             .setLabel("Číslo odznaku [1033]")
             .setStyle(TextInputStyle.Short);
 
         const rankInput = new TextInputBuilder()
-            .setCustomId('rank')
+            .setCustomId("rank")
             .setLabel("Hodnost [Trooper II]")
             .setStyle(TextInputStyle.Short);
 
         const reasonInput = new TextInputBuilder()
-            .setCustomId('reason')
+            .setCustomId("reason")
             .setLabel("Důvod [Úspěšná hodnocená patrola]")
             .setStyle(TextInputStyle.Paragraph);
 

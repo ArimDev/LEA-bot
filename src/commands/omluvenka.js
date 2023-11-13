@@ -2,40 +2,41 @@ import { ActionRowBuilder, ModalBuilder, SlashCommandBuilder, TextInputBuilder, 
 import { checkDB } from "../../src/functions/db.js";;
 
 export const slash = new SlashCommandBuilder()
-    .setName('omluvenka')
+    .setName("omluvenka")
     .setDescription(`Zapíše omluvenku`)
     .setDMPermission(false)
     .setNSFW(false);
 
 export default async function run(bot, i) {
     if (!(await checkDB(i.user.id))) return i.reply({ content: "🛑 **Před zadáváním __duties__ a __omluvenek__ tě musí admin přilásit do DB.**\nZalož si <#1139284046388674610>", ephemeral: true });
+    if (!i.channel.isThread() || i.channel.parentId !== "1139311793555116172") return i.reply({ content: "🛑 **Zápis __duties__ a __omluvenek__ je povolen pouze ve své složce, v <#1139311793555116172>.**", ephemeral: true });
 
     const modal = new ModalBuilder()
-        .setCustomId('apologyModal')
-        .setTitle('SAHP | Zápis omluvenky');
+        .setCustomId("apologyModal")
+        .setTitle("SAHP | Zápis omluvenky");
 
     const startInput = new TextInputBuilder()
-        .setCustomId('start')
+        .setCustomId("start")
         .setLabel("Od kdy [31. 12. 2023]")
         .setStyle(TextInputStyle.Short);
 
     const endInput = new TextInputBuilder()
-        .setCustomId('end')
+        .setCustomId("end")
         .setLabel("Do kdy [5. 1. 2024]")
         .setStyle(TextInputStyle.Short);
 
     const oocInput = new TextInputBuilder()
-        .setCustomId('ooc')
+        .setCustomId("ooc")
         .setLabel("OOC důvod [Rodinná akce]")
         .setStyle(TextInputStyle.Paragraph);
 
     const icInput = new TextInputBuilder()
-        .setCustomId('ic')
+        .setCustomId("ic")
         .setLabel("IC důvod [Zlomená ruka]")
         .setStyle(TextInputStyle.Paragraph);
 
     const signInput = new TextInputBuilder()
-        .setCustomId('signature')
+        .setCustomId("signature")
         .setLabel("Podpis [Smith]")
         .setStyle(TextInputStyle.Short);
 

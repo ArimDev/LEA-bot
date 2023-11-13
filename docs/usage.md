@@ -21,11 +21,12 @@ Před spuštěním nezapomeň použít `npm install` pro instalaci balíčků (`
 - `npm test` pro kontrolu bezproblémového zapnutí
 
 ### 2. Přidání bota na server
-Použitím pozvánky https://discord.com/oauth2/authorize?client_id=ID-APLIKACE&permissions=274877990912&scope=bot%20applications.commands s oprávněními:
-- [x] Odesílání zpráv *(úprava zpráv)*
-- [x] Odesílání zpráv ve vláknech *(úprava zpráv)*
+Použitím pozvánky https://discord.com/oauth2/authorize?client_id=ID-APLIKACE&permissions=274877926464&scope=bot%20applications.commands s oprávněními:
+- [x] Číst zprávy a zobrazovat kanály *(odesílání a úprava zpráv)*
+- [x] Odesílání zpráv *(odesílání a úprava zpráv)*
+- [x] Odesílání zpráv ve vláknech *(odesílání a úprava zpráv)*
 - [x] Vkládat odkazy *(embeds)*
-- [x] Číst historii zpráv *(úprava zpráv)*
+- [x] Přidávat reakce *(označení složky za správnou nebo chybnou)*
 
 ### 3. Používání funkcí
 Bot se hlavně zatím používá pomocí jednoduchých příkazů:
@@ -36,12 +37,13 @@ Bot se hlavně zatím používá pomocí jednoduchých příkazů:
 - 🫡✅ **`/kolega`** - Vyhledat zaměstnance podle Discord člena
 - 🫡✅ **`/menu`** - Základní přehled / pomocné menu bota
 - 🫡✅ **`/omluvenka`** - Zápis omluvenky
+- 🫡❌ **`/online`** - Členi serveru, kteří aktuálně hrají RefreshRP
 - 👮❌ **`/warn`** - Varování zaměstnance
-
-🫡 značí příkaz pro **všechny / zaměstnance**
-👮 značí příkaz pro **adminy**
-✅ značí příkaz, který je v téhle verzi **funkční**
-❌ značí příkaz, který je v téhle verzi **nefunkční / nedokončený**
+####
+- 🫡 značí příkaz pro **všechny / zaměstnance**
+- 👮 značí příkaz pro **adminy**
+- ✅ značí příkaz, který je v téhle verzi **funkční**
+- ❌ značí příkaz, který je v téhle verzi **nefunkční / nedokončený**
 
 #### i. Zapsání duty
 1. Použij příkaz **`/duty`**.

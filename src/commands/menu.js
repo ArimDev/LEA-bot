@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 
 export const slash = new SlashCommandBuilder()
-    .setName('menu')
+    .setName("menu")
     .setDescription(`Otevře pomocné menu bota`)
     .setDMPermission(true)
     .setNSFW(false);
@@ -46,7 +46,7 @@ export default async function run(bot, i) {
         return tPassed.join(" a ")
     }
 
-    const commands = fs.readdirSync(path.resolve("./src/commands")).filter(file => file.endsWith('.js'));
+    const commands = fs.readdirSync(path.resolve("./src/commands")).filter(file => file.endsWith(".js"));
     const helpEmbed = new EmbedBuilder()
         .setTitle("Menu")
         .setDescription(`> **Odezva**: \`${bot.ws.ping > 1 ? bot.ws.ping + " ms" : "N/A"}\`\n> **Uptime**: \`${msToTime(bot.uptime)}\`\n> **Příkazů**: \`${commands.length}\`\n> **GitHub**: [zde](https://github.com/Azator-Entertainment/SAHP-bot)`)

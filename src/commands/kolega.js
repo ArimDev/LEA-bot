@@ -4,17 +4,17 @@ import path from "path";
 import { checkDB } from "../../src/functions/db.js";
 
 export const slash = new SlashCommandBuilder()
-    .setName('kolega')
+    .setName("kolega")
     .setDescription(`Aktuální informace o zaměstnanci z DB`)
     .addUserOption(option =>
-        option.setName('worker')
-            .setDescription('Vyber kolegu')
+        option.setName("worker")
+            .setDescription("Vyber kolegu")
             .setRequired(true))
     .setDMPermission(false)
     .setNSFW(false);
 
 export default async function run(bot, i) {
-    let worker = i.options.getUser('worker');
+    let worker = i.options.getUser("worker");
 
     if (!(await checkDB(worker.id))) return i.editReply({ content: "🛑 <@" + worker.id + "> **není v DB.**", ephemeral: true });
 

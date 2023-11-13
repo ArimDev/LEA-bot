@@ -1,7 +1,7 @@
 import { ActionRowBuilder, ModalBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
 
 export const slash = new SlashCommandBuilder()
-    .setName('cpz')
+    .setName("cpz")
     .setDescription(`Zapíše CPZ`)
     .setDMPermission(false)
     .setNSFW(false);
@@ -16,35 +16,35 @@ export default async function run(bot, i) {
     if (admin.id === "436180906533715969") passed = true; //Mičut
     if (admin.id === "411436203330502658") passed = true; //PetyXbron
     if (!passed) {
-        if (i.channelId !== "1139268053213917235") return i.reply({ content: "🛑 **Zápis CPZ je povolen pouze v <#1139268053213917235>.", ephemeral: true });
+        if (i.channelId !== "1139268053213917235") return i.reply({ content: "🛑 **Zápis __CPZ__ je povolen pouze v <#1139268053213917235>.**", ephemeral: true });
     }
 
     const modal = new ModalBuilder()
-        .setCustomId('cpzModal')
-        .setTitle('SAHP | Zápis CPZ');
+        .setCustomId("cpzModal")
+        .setTitle("SAHP | Zápis CPZ");
 
     const nameInput = new TextInputBuilder()
-        .setCustomId('name')
+        .setCustomId("name")
         .setLabel("Jméno občana [Will Smith]")
         .setStyle(TextInputStyle.Short);
 
     const birthInput = new TextInputBuilder()
-        .setCustomId('birth')
+        .setCustomId("birth")
         .setLabel("Narození občana [12/31/1990]")
         .setStyle(TextInputStyle.Short);
 
     const reasonInput = new TextInputBuilder()
-        .setCustomId('reason')
+        .setCustomId("reason")
         .setLabel("Důvod zadržení [Nelegální akce]")
         .setStyle(TextInputStyle.Paragraph);
 
     const moneyInput = new TextInputBuilder()
-        .setCustomId('money')
+        .setCustomId("money")
         .setLabel("Výpis trestu / pokut")
         .setStyle(TextInputStyle.Paragraph);
 
     const pdInput = new TextInputBuilder()
-        .setCustomId('pd')
+        .setCustomId("pd")
         .setLabel("Řešili [Chris Evans, Adam Sandler]")
         .setStyle(TextInputStyle.Short);
 
