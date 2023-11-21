@@ -33,6 +33,7 @@ Bot se hlavně zatím používá pomocí jednoduchých příkazů:
 - 🫡✅ **`/cpz`** - Zápis CPZ
 - 👮✅ **`/db`** - Správa databáze zaměstnanců
 - 🫡✅ **`/duty`** - Zápis služby
+- 🫡✅ **`/event`** - Příkaz pro soutěže
 - 🫡❌ **`/hledat`** - Vyhledat zaměstnance podle údaje mimo těch z Discordu
 - 🫡✅ **`/kolega`** - Vyhledat zaměstnance podle Discord člena
 - 🫡✅ **`/menu`** - Základní přehled / pomocné menu bota

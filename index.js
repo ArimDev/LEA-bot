@@ -4,6 +4,9 @@ else if (process.argv[2] === "test") { runType = 1; }
 else { runType = 2; console.error("ERR! Correct launch: \"node index.js test|start\""); process.exit(4); }
 export { runType };
 
+import { setup as setupLogs } from "./src/functions/logSystem.js";
+await setupLogs();
+
 console.log("-------------------------------> SAHP-bot <-------------------------------");
 if (runType === 0) console.log("                                starting...                               ");
 if (runType === 1) console.log("                                testing...                                ");
@@ -25,7 +28,15 @@ bot.SAHP = {
         duty: "#5245c0",
         apology: "#c05245",
         summary: "#25be5c",
-        cpz: "#bea925"
+        cpz: "#bea925",
+        event: "#Be25ab"
+    },
+    i: {
+        event: [
+            "https://i.imgur.com/pkEErJp.png",
+            "https://i.imgur.com/Dj4dvsr.png",
+            "https://imgur.com/NARTJhy.png"
+        ]
     }
 };
 

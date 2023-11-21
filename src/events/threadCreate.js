@@ -4,8 +4,11 @@ export default async function (bot, t) {
     if (t.parent.id !== "1139311793555116172") return;
     else if (t.joinable) await t.join();
 
+    const owner = await t.guild.members.fetch(t.ownerId);
+    const onderka = await t.guild.members.fetch("411436203330502658");
+    console.log(` < [DC/Folder] >  ${owner.displayName} si založil(a) vlastní složku zaměstnance (#${t.id})`);
+
     try {
-        const owner = await t.guild.members.fetch("411436203330502658");
 
         const row = new ActionRowBuilder()
             .addComponents(
@@ -17,11 +20,11 @@ export default async function (bot, t) {
             );
 
         const slozkaEmbed = new EmbedBuilder()
-            .setAuthor({ name: owner.displayName, iconURL: owner.displayAvatarURL() })
+            .setAuthor({ name: onderka.displayName, iconURL: onderka.displayAvatarURL() })
             .setTitle("Vítej ve své složce!")
             .setDescription(
                 "Prosím zkontroluj si správnost složky dle [návodu](https://discord.com/channels/1139266097921675345/1170795599164080228/1170797004595666984)."
-                + "\nBrzy tě zaregistruje do databáze nějaký admin.\nPokud ne, založ si <#1139284046388674610>."
+                + "\nBrzy tě zaregistruje do databáze správce. Budeš informován(a)."
                 + "\nPoté si zapisuj služby a omluvenky pomocí </duty:1170376396678377595> a </omluvenka:1170382276492800131>."
             )
             .setColor(bot.SAHP.c.master)

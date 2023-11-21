@@ -8,7 +8,7 @@ export const slash = new SlashCommandBuilder()
     .setNSFW(false);
 
 export default async function run(bot, i) {
-    if (!(await checkDB(i.user.id))) return i.reply({ content: "🛑 **Před zadáváním __duties__ a __omluvenek__ tě musí admin přilásit do DB.**\nZalož si <#1139284046388674610>.", ephemeral: true });
+    if (!(await checkDB(i.user.id))) return i.reply({ content: "🛑 **Před zadáváním __duties__ a __omluvenek__ tě musí admin přilásit do DB.**\nZalož si vlastní složku a počkej na správce DB.", ephemeral: true });
     if (!i.channel.isThread() || i.channel.parentId !== "1139311793555116172") return i.reply({ content: "🛑 **Zápis __duties__ a __omluvenek__ je povolen pouze ve své složce, v <#1139311793555116172>.**", ephemeral: true });
 
     const modal = new ModalBuilder()

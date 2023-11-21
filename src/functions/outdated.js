@@ -18,6 +18,7 @@ export async function checkApologies(bot) {
             if (todayDate.getTime() - aDate.getTime() > ms30days) {
                 a.removed = true;
                 worker.apologies[i] = a;
+                console.log(` < [DB/Outdated/Apologies] >  Omluvenka končící ${aDate.toLocaleString()} od [${worker.radio}] ${worker.name} (${workerID}.json) byla odebrána`);
                 if (worker.folder) {
                     try {
                         const guild = await bot.guilds.fetch("1139266097921675345");

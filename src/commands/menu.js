@@ -43,8 +43,10 @@ export default async function run(bot, i) {
             else tPassed.push(s + " sekund");
         }
 
-        return tPassed.join(" a ")
+        return tPassed.join(" a ");
     }
+
+    console.log(" < [CMD/Menu] >  " + (i.member.displayName || i.user.displayName) + ` zobrazil(a) menu`);
 
     const commands = fs.readdirSync(path.resolve("./src/commands")).filter(file => file.endsWith(".js"));
     const helpEmbed = new EmbedBuilder()
@@ -52,5 +54,5 @@ export default async function run(bot, i) {
         .setDescription(`> **Odezva**: \`${bot.ws.ping > 1 ? bot.ws.ping + " ms" : "N/A"}\`\n> **Uptime**: \`${msToTime(bot.uptime)}\`\n> **Příkazů**: \`${commands.length}\`\n> **GitHub**: [zde](https://github.com/Azator-Entertainment/SAHP-bot)`)
         .setColor(bot.SAHP.c.master)
         .setFooter({ text: "SAHP", iconURL: bot.user.avatarURL() });
-    i.reply({ embeds: [helpEmbed], ephemeral: true });
+    return i.reply({ embeds: [helpEmbed], ephemeral: true });
 };

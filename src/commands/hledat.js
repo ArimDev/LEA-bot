@@ -4,7 +4,7 @@ import { checkDB } from "../../src/functions/db.js";
 export const slash = new SlashCommandBuilder()
     .setName("hledat")
     .setDescription(`Najít kolegu`)
-    .setDMPermission(true)
+    .setDMPermission(false)
     .setNSFW(false);
 
 export default async function run(bot, i) {

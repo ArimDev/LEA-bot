@@ -1,0 +1,16 @@
+{
+    "name": "Will Smith",
+    "stats": {
+        "value": 15000,
+        "invoices": 1
+    },
+    "invoices": [
+        {
+            "value": 15000,
+            "shared": "31. 12. 2023",
+            "reason": "Nelegální akce",
+            "name": "John Wick",
+            "id": 1
+        }
+    ]
+}

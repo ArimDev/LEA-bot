@@ -1,7 +1,7 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, InteractionType, ModalBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
 import fs from "fs";
 import path from "path";
-import { checkDB } from "../../src/functions/db.js";
+import { checkDB, checkEVENT } from "../../src/functions/db.js";
 
 export default async function (bot, i) {
     if (i.type === InteractionType.ApplicationCommand) {
@@ -180,14 +180,16 @@ export default async function (bot, i) {
                         name: `Služby`, inline: false,
                         value:
                             `> **Počet vykonanných služeb:** \`${log.duties.filter(d => !d.removed).length}\`\n`
-                            + `> **Hodin celkem:** \`${log.hours}\`\n`
-                            + `> **Hodin od povýšení:** \`${log.hours - log.rankups.slice(-1)[0].hours}\`\n`
-                            + `> **Hodin za posledních 30 dnů:** \`${await moHours}\``
+                            + `> **Hodin celkem:** \`${Math.round((log.hours + Number.EPSILON) * 100) / 100}\`\n`
+                            + `> **Hodin od povýšení:** \`${Math.round(((log.hours - log.rankups.slice(-1)[0].hours) + Number.EPSILON) * 100) / 100}\`\n`
+                            + `> **Hodin za posledních 30 dnů:** \`${Math.round(((await moHours) + Number.EPSILON) * 100) / 100}\``
                     }
                 ])
                 .setThumbnail("https://i.imgur.com/wDab7i4.png")
                 .setColor(bot.SAHP.c.summary)
                 .setFooter({ text: "SAHP", iconURL: bot.user.avatarURL() });
+
+            console.log(" < [DB/Souhrn] >  " + i.member.displayName + " zobrazil(a) souhrn " + member.displayName);
 
             await i.editReply({ embeds: [summEmbed], ephemeral: true });;
         }
@@ -283,13 +285,15 @@ export default async function (bot, i) {
                 "end": i.fields.getTextInputValue("end"),
                 "hours": hours
             });
-            content.hours = (Math.round((parseInt(content.hours) + Number.EPSILON) * 100) / 100) + hours;
+            content.hours = (Math.round((parseFloat(content.hours) + Number.EPSILON) * 100) / 100) + hours;
             content.folder = i.channelId;
 
             fs.writeFileSync(
                 (path.resolve("./db/workers") + "/" + i.user.id + ".json"),
                 JSON.stringify(content, null, 4)
             );
+
+            console.log(" < [DB/Duty] >  " + i.member.displayName + " zapsal(a) duty o délce" + hours.toString() + " hodin");
         } else if (i.customId === "apologyModal") {
             let content = JSON.parse(fs.readFileSync((path.resolve("./db/workers") + "/" + i.user.id + ".json"), "utf-8"));
             const index = content.apologies.length + 1;
@@ -358,6 +362,8 @@ export default async function (bot, i) {
                 (path.resolve("./db/workers") + "/" + i.user.id + ".json"),
                 JSON.stringify(content, null, 4)
             );
+
+            console.log(" < [DB/Apology] >  " + i.member.displayName + " zapsal(a) omluvenku trvající do " + i.fields.getTextInputValue("end"));
         } else if (i.customId === "cpzModal") {
             await i.deferReply();
 
@@ -387,6 +393,8 @@ export default async function (bot, i) {
                 .setThumbnail("https://i.imgur.com/31WU5cn.png")
                 .setColor(bot.SAHP.c.cpz)
                 .setFooter({ text: "SAHP", iconURL: bot.user.avatarURL() });
+
+            console.log(" < [CMD/CPZ] >  " + i.member.displayName + " zapsal(a) CPZ občana " + i.fields.getTextInputValue("name"));
 
             await i.editReply({ embeds: [cpzEmbed], components: [row] });
         } else if (i.customId === "loginModal") {
@@ -428,6 +436,8 @@ export default async function (bot, i) {
                 .setColor(bot.SAHP.c.master)
                 .setFooter({ text: "SAHP", iconURL: bot.user.avatarURL() });
 
+            console.log(" < [DB/Login] >  " + i.member.displayName + " zaregistroval(a) [" + i.fields.getTextInputValue("call") + "] " + i.fields.getTextInputValue("name") + " do DB");
+
             await i.editReply({ embeds: [loginEmbed], ephemeral: true });
         } else if (i.customId === "rankUpModal") {
             await i.deferReply({ ephemeral: true });
@@ -436,6 +446,8 @@ export default async function (bot, i) {
 
             let content = JSON.parse(fs.readFileSync((path.resolve("./db/workers") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
             const today = new Date();
+
+            console.log(" < [DB/Rankup] >  " + i.member.displayName + ` povýšil(a) [${content.radio}] ${content.name} na [${i.fields.getTextInputValue("call")}] ${content.name} (${i.fields.getTextInputValue("rank")})`);
 
             const rankup = {
                 "date": today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear(),
@@ -539,7 +551,7 @@ export default async function (bot, i) {
                 });
             }
 
-            const hoursBefore = parseInt(i.message.embeds[0].fields[0].value.split("`")[7]);
+            const hoursBefore = parseFloat(i.message.embeds[0].fields[0].value.split("`")[7]);
             let hoursAfter,
                 h1 = parseInt(i.fields.getTextInputValue("start").split(":")[0]),
                 h2 = parseInt(i.fields.getTextInputValue("end").split(":")[0]),
@@ -585,13 +597,15 @@ export default async function (bot, i) {
                 "hours": hoursAfter
             };
 
-            content.hours = parseInt(content.hours) - parseInt(hoursBefore);
-            content.hours = (Math.round((parseInt(content.hours) + Number.EPSILON) * 100) / 100) + parseInt(hoursAfter);
+            content.hours = parseFloat(content.hours) - parseFloat(hoursBefore);
+            content.hours = (Math.round((parseFloat(content.hours) + Number.EPSILON) * 100) / 100) + parseFloat(hoursAfter);
 
             fs.writeFileSync(
                 (path.resolve("./db/workers") + "/" + i.message.interaction.user.id + ".json"),
                 JSON.stringify(content, null, 4)
             );
+
+            console.log(" < [DB/OW/Duty] >  " + i.member.displayName + ` přepsal(a) duty [${content.radio}] ${content.name} (${index}) z ${i.fields.getTextInputValue("datum")}`);
 
             i.editReply({ content: "✅ **Přepsáno!**", ephemeral: true });
         } else if (i.customId === "apologyOWModal") {
@@ -681,6 +695,8 @@ export default async function (bot, i) {
                 JSON.stringify(content, null, 4)
             );
 
+            console.log(" < [DB/OW/Apology] >  " + i.member.displayName + ` přepsal(a) omluvenku [${content.radio}] ${content.name} (${index})`);
+
             i.editReply({ content: "✅ **Přepsáno!**", ephemeral: true });
         } else if (i.customId === "cpzOWModal") {
             await i.deferReply({ ephemeral: true });
@@ -721,7 +737,78 @@ export default async function (bot, i) {
                 return await i.editReply({ content: "> 🛑 **Chyba! Zpráva nešla upravit.**```" + e + "```" });
             }
 
+            console.log(" < [OW/CPZ] >  " + i.member.displayName + ` přepsal(a) CPZ zápis ${i.fields.getTextInputValue("name")} (${i.fields.getTextInputValue("birth")}) od ${i.fields.getTextInputValue("pd")}`);
+
             i.editReply({ content: "✅ **Přepsáno!**", ephemeral: true });
+        } else if (i.customId === "fakturaModal") {
+            if (!(await checkDB(i.user.id))) {
+                const worker = JSON.parse(fs.readFileSync((path.resolve("./db/workers") + "/" + i.user.id + ".json"), "utf-8"));
+                if (!worker) return i.reply({ content: "🛑 **Před zapsáním __faktury__ tě musí admin přilásit do DB.**\nZalož si vlastní složku v <#1139311793555116172> a počkej na správce DB.", ephemeral: true });
+            }
+
+            if (!(await checkEVENT(i.user.id))) {
+                const worker = JSON.parse(fs.readFileSync((path.resolve("./db/workers") + "/" + i.user.id + ".json"), "utf-8"));
+                const content = {
+                    name: worker.name,
+                    stats: {
+                        value: 0,
+                        invoices: 0
+                    },
+                    invoices: []
+                };
+
+                await fs.writeFileSync(
+                    (path.resolve("./db/event") + "/" + i.user.id + ".json"),
+                    JSON.stringify(content, null, 4)
+                );
+            }
+
+            const user = await JSON.parse(fs.readFileSync((path.resolve("./db/event") + "/" + i.user.id + ".json"), "utf-8"));
+
+            await i.deferReply({ ephemeral: true });
+
+            const idFile = fs.readdirSync(path.resolve("./db/event")).filter(f => f.endsWith(".txt"))[0];
+            const id = parseInt(idFile.split(".")[0]) + 1;
+
+            const invoiceEmbed = new EmbedBuilder()
+                .setAuthor({ name: i.member.displayName, iconURL: i.member.displayAvatarURL() })
+                .setTitle("EVENT | Zápis faktury")
+                .setDescription("Faktura byla zapsána do soutěže!")
+                .addFields([
+                    {
+                        name: `Faktura #` + id.toString(), inline: false,
+                        value:
+                            `> **Jméno:** \`${i.fields.getTextInputValue("name")}\`\n`
+                            + `> **Důvod:** \`\`\`${i.fields.getTextInputValue("reason")}\`\`\`\n`
+                            + `> **Částka:** \`${parseInt(i.fields.getTextInputValue("money").split(" ").join("")).toLocaleString()} $\``
+                    }
+                ])
+                .setThumbnail("https://i.imgur.com/bGCFY6I.png")
+                .setImage(bot.SAHP.i.event[Math.floor(Math.random() * bot.SAHP.i.event.length)])
+                .setColor(bot.SAHP.c.event)
+                .setFooter({ text: "SAHP", iconURL: bot.user.avatarURL() });
+
+            const today = new Date();
+            user.invoices.push({
+                "value": parseInt(i.fields.getTextInputValue("money").split(" ").join("")),
+                "shared": today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear(),
+                "reason": i.fields.getTextInputValue("reason"),
+                "name": i.fields.getTextInputValue("name"),
+                "id": id
+            });
+            user.stats.value = user.stats.value + parseInt(i.fields.getTextInputValue("money").split(" ").join(""));
+            user.stats.invoices = user.invoices.length;
+
+            fs.writeFileSync(
+                (path.resolve("./db/event") + "/" + i.user.id + ".json"),
+                JSON.stringify(user, null, 4)
+            );
+
+            fs.renameSync(path.resolve("./db/event") + "/" + idFile, path.resolve("./db/event") + "/" + id.toString() + ".txt");
+
+            console.log(" < [EVE/Faktura] >  " + i.member.displayName + " si zapsal fakturu s ID " + id);
+
+            await i.editReply({ embeds: [invoiceEmbed], ephemeral: true });
         }
     }
 }

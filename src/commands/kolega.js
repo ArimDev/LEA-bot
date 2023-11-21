@@ -39,5 +39,7 @@ export default async function run(bot, i) {
         .setColor(bot.SAHP.c.master)
         .setFooter({ text: "SAHP", iconURL: bot.user.avatarURL() });
 
+    console.log(" < [CMD/Kolega] >  " + i.member.displayName + ` zobrazil(a) kolegu / kolegyni [${log.radio}] ${log.name} (${worker.id}.json)`);
+
     await i.reply({ embeds: [workerEmbed], ephemeral: true });
 };

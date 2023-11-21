@@ -2,7 +2,7 @@ import { ActionRowBuilder, ActivityType, ButtonBuilder, ButtonStyle, EmbedBuilde
 import { checkApologies } from "../../src/functions/outdated.js";
 
 export default async function (bot) {
-    console.log(`< [DC] >  https://discord.com/oauth2/authorize?client_id=${bot.user.id}&permissions=274877926464&scope=bot%20applications.commands`);
+    console.log(` < [DC/Invite] >  https://discord.com/oauth2/authorize?client_id=${bot.user.id}&permissions=274877926464&scope=bot%20applications.commands`);
 
     bot.user.setPresence({ activities: [{ name: "Sloužit a chránit!", type: ActivityType.Listening }], status: "online", afk: false });
 
@@ -20,7 +20,7 @@ export default async function (bot) {
     console.log(vlakna)
     console.log(vlakna.threads.first())
     vlakna.threads.forEach(async (t) => {
-        if (t.joinable && !t.joined) await t.join(); console.log(`< [DT] >  thread ${t.name} joined`);
+        if (t.joinable && !t.joined) await t.join(); console.log(` < [DT] >  thread ${t.name} joined`);
     });*/
 
     /*ORIENTACE V NÁVODU
@@ -61,5 +61,5 @@ export default async function (bot) {
         .setFooter({ text: "SAHP", iconURL: bot.user.avatarURL() });
     await vlakno.send({ embeds: [navodEmbed], components: [row] });*/
 
-    console.log("< [PS] >  Discord bot operational!");
+    console.log(" < [PS/Info] >  Discord bot operational!");
 }

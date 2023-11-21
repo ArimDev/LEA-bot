@@ -17,7 +17,7 @@ export async function events(bot) {
 
     bot.once("ready", async () => {
         setTimeout(function () {
-            console.log("< [DC] >  Successfully registered " + events.length + " events!");
+            console.log(" < [DC] >  Úspěšně zaregistrováno " + events.length + " eventů!");
         }, 100);
     });
 }
@@ -43,10 +43,10 @@ export async function commands(bot) {
                 Routes.applicationCommands(bot.user.id),
                 { body: slashCommands },
             ).then(() => {
-                console.log("< [DC] >  Successfully registered " + slashCommands.length + " slash commands!");
+                console.log(" < [DC] >  Úspěšně zaregstrováno " + slashCommands.length + " slash příkazů!");
                 if (runType === 1) {
                     console.log("");
-                    console.log("                              test successful                             ");
+                    console.log("                               test úspěšný                               ");
                     console.log("-------------------------------> SAHP-bot <-------------------------------");
                     process.exit();
                 }

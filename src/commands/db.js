@@ -79,6 +79,9 @@ export default async function run(bot, i) {
     } else if (choice === "z") {
         if (!(await checkDB(user.id))) return i.reply({ content: "🛑 <@" + user.id + "> **není v DB.**", ephemeral: true });
         let log = fs.readFileSync((path.resolve("./db/workers") + "/" + user.id + ".json"), "utf-8");
+
+        console.log(" < [CMD/DB] >  " + i.member.displayName + ` zobrazil(a) DB záznam ${user.id}.json`);
+
         i.reply({ content: `\`\`\`json\n${log}\`\`\``, ephemeral: true });
     } else if (choice === "r") {
         if (!(await checkDB(user.id))) return i.reply({ content: "🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
@@ -125,6 +128,9 @@ export default async function run(bot, i) {
         let loc = path.resolve("./db/workers") + "/" + user.id + ".json";
         let log = fs.readFileSync(loc, "utf-8");
         fs.unlinkSync(loc);
+
+        console.log(" < [CMD/DB] >  " + i.member.displayName + ` smazal(a) DB záznam ${user.id}.json`);
+
         i.reply({ content: `\`\`\`json\n${log}\`\`\`Tenhle záznam (<@${user.id}>) byl vymazán z DB!`, ephemeral: true });
     }
 };

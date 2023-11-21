@@ -19,4 +19,6 @@ export default async function run(bot, i) {
 
     return i.reply({ content: "> 🛑 **Tahle funkce ještě nebyla dokončena! (ID 2)**", ephemeral: true });
     //TODO
+
+    console.log(" < [CMD/Warn] >  " + i.member.displayName + ` udělil(a) varování zaměstnancovi / zaměstnankyni [RADIO] NAME (ID.JSON)`);
 };
