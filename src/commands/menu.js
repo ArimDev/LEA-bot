@@ -51,7 +51,12 @@ export default async function run(bot, i) {
     const commands = fs.readdirSync(path.resolve("./src/commands")).filter(file => file.endsWith(".js"));
     const helpEmbed = new EmbedBuilder()
         .setTitle("Menu")
-        .setDescription(`> **Odezva**: \`${bot.ws.ping > 1 ? bot.ws.ping + " ms" : "N/A"}\`\n> **Uptime**: \`${msToTime(bot.uptime)}\`\n> **Příkazů**: \`${commands.length}\`\n> **GitHub**: [zde](https://github.com/Azator-Entertainment/SAHP-bot)`)
+        .setDescription(
+            `> **Odezva**: \`${bot.ws.ping > 1 ? bot.ws.ping + " ms" : "N/A"}\``
+            + `\n> **Uptime**: \`${msToTime(bot.uptime)}\``
+            + `\n> **Příkazů**: \`${commands.length}\``
+            + `\n> **GitHub**: [zde](https://github.com/Azator-Entertainment/SAHP-bot)`
+        )
         .setColor(bot.SAHP.c.master)
         .setFooter({ text: "SAHP", iconURL: bot.user.avatarURL() });
     return i.reply({ embeds: [helpEmbed], ephemeral: true });

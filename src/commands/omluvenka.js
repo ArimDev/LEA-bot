@@ -15,30 +15,46 @@ export default async function run(bot, i) {
         .setCustomId("apologyModal")
         .setTitle("SAHP | Zápis omluvenky");
 
+    const today = new Date();
+
     const startInput = new TextInputBuilder()
         .setCustomId("start")
-        .setLabel("Od kdy [31. 12. 2023]")
-        .setStyle(TextInputStyle.Short);
+        .setLabel("Od kdy")
+        .setStyle(TextInputStyle.Short)
+        .setValue(today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear())
+        .setMinLength(10)
+        .setMaxLength(12)
+        .setRequired(true);
 
     const endInput = new TextInputBuilder()
         .setCustomId("end")
-        .setLabel("Do kdy [5. 1. 2024]")
-        .setStyle(TextInputStyle.Short);
+        .setLabel("Do kdy")
+        .setStyle(TextInputStyle.Short)
+        .setPlaceholder("5. 1. 2024")
+        .setMinLength(10)
+        .setMaxLength(12)
+        .setRequired(true);
 
     const oocInput = new TextInputBuilder()
         .setCustomId("ooc")
-        .setLabel("OOC důvod [Rodinná akce]")
-        .setStyle(TextInputStyle.Paragraph);
+        .setLabel("OOC důvod")
+        .setStyle(TextInputStyle.Paragraph)
+        .setPlaceholder("Rodinna akce")
+        .setRequired(true);
 
     const icInput = new TextInputBuilder()
         .setCustomId("ic")
-        .setLabel("IC důvod [Zlomená ruka]")
-        .setStyle(TextInputStyle.Paragraph);
+        .setLabel("IC důvod")
+        .setStyle(TextInputStyle.Paragraph)
+        .setPlaceholder("Zlomená ruka")
+        .setRequired(true);
 
     const signInput = new TextInputBuilder()
         .setCustomId("signature")
-        .setLabel("Podpis [Smith]")
-        .setStyle(TextInputStyle.Short);
+        .setLabel("Podpis")
+        .setStyle(TextInputStyle.Short)
+        .setPlaceholder("Smith")
+        .setRequired(true);
 
     const actionRow0 = new ActionRowBuilder().addComponents(startInput);
     const actionRow1 = new ActionRowBuilder().addComponents(endInput);

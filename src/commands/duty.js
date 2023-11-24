@@ -15,25 +15,41 @@ export default async function run(bot, i) {
         .setCustomId("dutyModal")
         .setTitle("SAHP | Zápis služby");
 
+    const today = new Date();
+
     const dateInput = new TextInputBuilder()
         .setCustomId("datum")
-        .setLabel("Datum služby [31. 12. 2023]")
-        .setStyle(TextInputStyle.Short);
+        .setLabel("Datum služby")
+        .setStyle(TextInputStyle.Short)
+        .setValue(today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear())
+        .setMinLength(10)
+        .setMaxLength(12)
+        .setRequired(true);
 
     const startInput = new TextInputBuilder()
         .setCustomId("start")
-        .setLabel("Začátek služby [13:00]")
-        .setStyle(TextInputStyle.Short);
+        .setLabel("Začátek služby")
+        .setStyle(TextInputStyle.Short)
+        .setPlaceholder("13:00")
+        .setMinLength(5)
+        .setMaxLength(5)
+        .setRequired(true);
 
     const endInput = new TextInputBuilder()
         .setCustomId("end")
-        .setLabel("Konec služby [17:00]")
-        .setStyle(TextInputStyle.Short);
+        .setLabel("Konec služby")
+        .setStyle(TextInputStyle.Short)
+        .setPlaceholder("17:00")
+        .setMinLength(5)
+        .setMaxLength(5)
+        .setRequired(true);
 
     const signInput = new TextInputBuilder()
         .setCustomId("signature")
-        .setLabel("Podpis [Smith]")
-        .setStyle(TextInputStyle.Short);
+        .setLabel("Podpis")
+        .setStyle(TextInputStyle.Short)
+        .setPlaceholder("Smith")
+        .setRequired(true);
 
     const actionRow0 = new ActionRowBuilder().addComponents(dateInput);
     const actionRow1 = new ActionRowBuilder().addComponents(startInput);

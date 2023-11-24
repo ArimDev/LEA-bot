@@ -25,28 +25,40 @@ export default async function run(bot, i) {
 
     const nameInput = new TextInputBuilder()
         .setCustomId("name")
-        .setLabel("Jméno občana [Will Smith]")
-        .setStyle(TextInputStyle.Short);
+        .setLabel("Jméno občana")
+        .setStyle(TextInputStyle.Short)
+        .setPlaceholder("Will Smith")
+        .setRequired(true);
 
     const birthInput = new TextInputBuilder()
         .setCustomId("birth")
-        .setLabel("Narození občana [12/31/1990]")
-        .setStyle(TextInputStyle.Short);
+        .setLabel("Narození občana")
+        .setStyle(TextInputStyle.Short)
+        .setPlaceholder("12/31/1990")
+        .setMinLength(10)
+        .setMaxLength(10)
+        .setRequired(true);
 
     const reasonInput = new TextInputBuilder()
         .setCustomId("reason")
-        .setLabel("Důvod zadržení [Nelegální akce]")
-        .setStyle(TextInputStyle.Paragraph);
+        .setLabel("Důvod zadržení")
+        .setStyle(TextInputStyle.Paragraph)
+        .setPlaceholder("Nelegální akce")
+        .setRequired(true);
 
     const moneyInput = new TextInputBuilder()
         .setCustomId("money")
         .setLabel("Výpis trestu / pokut")
-        .setStyle(TextInputStyle.Paragraph);
+        .setStyle(TextInputStyle.Paragraph)
+        .setPlaceholder("15 000 $ + 1 rok odnětí svobody")
+        .setRequired(true);
 
     const pdInput = new TextInputBuilder()
         .setCustomId("pd")
-        .setLabel("Řešili [Chris Evans, Adam Sandler]")
-        .setStyle(TextInputStyle.Short);
+        .setLabel("Řešili")
+        .setStyle(TextInputStyle.Short)
+        .setPlaceholder("Chris Evans, Addam Sandler")
+        .setRequired(true);
 
     const actionRow0 = new ActionRowBuilder().addComponents(nameInput);
     const actionRow1 = new ActionRowBuilder().addComponents(birthInput);

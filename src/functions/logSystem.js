@@ -3,9 +3,18 @@ import path from "path";
 import util from "util";
 
 export function dg(date, option) {
-    if (option === "Month") return parseInt(date["get" + option]()) + 1;
-    if (option === "FullYear" || "Date") return parseInt(date["get" + option]());
-    return parseInt(date["get" + option]()) > 10 ? date["get" + option]() : "0" + date["get" + option]();
+    let r;
+    if (option === "Month") r = parseInt(date["get" + option]()) + 1;
+    else if (option === "FullYear" || option === "Date") r = date["get" + option]();
+    else {
+        if (parseInt(date["get" + option]()) < 10) {
+            r = "0" + date["get" + option]();
+        } else {
+            r = date["get" + option]();
+        }
+    }
+
+    return r.toString();
 }
 
 export async function setup() {
@@ -14,7 +23,6 @@ export async function setup() {
     async function getWriteStream() {
         let files = await fs.readdirSync(path.resolve("./logs/"));
 
-        console.log(dg(date, "FullYear") + "-" + dg(date, "Month") + "-" + dg(date, "Date"));
         files = await files.filter((d) => d.includes((dg(date, "FullYear") + "-" + dg(date, "Month") + "-" + dg(date, "Date"))));
 
         if (files[0]) await files.forEach((f, i) => {
@@ -34,24 +42,24 @@ export async function setup() {
     const logStream = await getWriteStream();
     const logStdout = process.stdout;
 
-    console.log = async function (d) {
-        const date = new Date();
+    console.log = function (d) {
+        const day = dg(date, "Date") + ":" + dg(date, "Month") + ":" + dg(date, "FullYear");
         const time = dg(date, "Hours") + ":" + dg(date, "Minutes") + ":" + dg(date, "Seconds");
-        logStream.write(`[${time} LOG] ${util.format(d)}` + "\n");
-        logStdout.write(`[${time} LOG] ${util.format(d)}` + "\n");
+        logStream.write(`[${day} | ${time} LOG] ${util.format(d)}` + "\n");
+        logStdout.write(`[${day} | ${time} LOG] ${util.format(d)}` + "\n");
     };
 
     console.error = function (d) {
-        const date = new Date();
+        const day = dg(date, "Date") + ":" + dg(date, "Month") + ":" + dg(date, "FullYear");
         const time = dg(date, "Hours") + ":" + dg(date, "Minutes") + ":" + dg(date, "Seconds");
-        logStream.write(`[${time} ERR] ${util.format(d)}` + "\n");
-        logStdout.write(`[${time} ERR] ${util.format(d)}` + "\n");
+        logStream.write(`[${day} | ${time} ERR] ${util.format(d)}` + "\n");
+        logStdout.write(`[${day} | ${time} ERR] ${util.format(d)}` + "\n");
     };
 
     console.warn = function (d) {
-        const date = new Date();
+        const day = dg(date, "Date") + ":" + dg(date, "Month") + ":" + dg(date, "FullYear");
         const time = dg(date, "Hours") + ":" + dg(date, "Minutes") + ":" + dg(date, "Seconds");
-        logStream.write(`[${time} WAR] ${util.format(d)}` + "\n");
-        logStdout.write(`[${time} WAR] ${util.format(d)}` + "\n");
+        logStream.write(`[${day} | ${time} WAR] ${util.format(d)}` + "\n");
+        logStdout.write(`[${day} | ${time} WAR] ${util.format(d)}` + "\n");
     };
 }

@@ -30,8 +30,6 @@ export const slash = new SlashCommandBuilder()
     .setNSFW(false);
 
 export default async function run(bot, i) {
-    console.log(" < [CMD/Event] >  " + i.member.displayName + ` se pokusil(a) použít příkaz /event`);
-    return i.reply({ content: "> 🛑 **Tahle funkce ještě nebyla dokončena! (ID 4)**", ephemeral: true });
     const sub = i.options._subcommand;
     const user = i.options.getUser("účastník");
 
@@ -51,18 +49,25 @@ export default async function run(bot, i) {
 
         const nameInput = new TextInputBuilder()
             .setCustomId("name")
-            .setLabel("Jméno občana [Will Smith]")
-            .setStyle(TextInputStyle.Short);
+            .setLabel("Jméno občana")
+            .setStyle(TextInputStyle.Short)
+            .setPlaceholder("Will Smith")
+            .setRequired(true);
 
         const birthInput = new TextInputBuilder()
             .setCustomId("reason")
-            .setLabel("Popis faktury [Nelegální akce]")
-            .setStyle(TextInputStyle.Paragraph);
+            .setLabel("Popis faktury")
+            .setStyle(TextInputStyle.Paragraph)
+            .setPlaceholder("Nelegální akce")
+            .setRequired(true);
 
         const moneyInput = new TextInputBuilder()
             .setCustomId("money")
-            .setLabel("Čáska faktury [15 000]")
-            .setStyle(TextInputStyle.Paragraph);
+            .setLabel("Čáska faktury")
+            .setStyle(TextInputStyle.Short)
+            .setPlaceholder("15 000")
+            .setMinLength(4)
+            .setRequired(true);
 
         const actionRow0 = new ActionRowBuilder().addComponents(nameInput);
         const actionRow1 = new ActionRowBuilder().addComponents(birthInput);
@@ -108,7 +113,7 @@ export default async function run(bot, i) {
 
         return i.reply({ embeds: [summaryEmbed], ephemeral: true });
     } else if (sub === "žebříček") { //Žěbříček
-        if (!passed) return i.reply({ content: "🛑 **Nemůžeš zobrazit žebříček.**", ephemeral: true });
+        //if (!passed) return i.reply({ content: "🛑 **Nemůžeš zobrazit žebříček.**", ephemeral: true });
 
         let users = [];
         const eventDB = fs.readdirSync(path.resolve("./db/event")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
@@ -122,7 +127,7 @@ export default async function run(bot, i) {
             };
             users.push(user);
         }
-        users = users.sort((a, b) => a.value - b.value);
+        users = users.sort((a, b) => b.value - a.value);
         users = users.slice(0, 5);
 
         users.forEach((user, i) => {
@@ -130,7 +135,7 @@ export default async function run(bot, i) {
         });
 
         const topEmbed = new EmbedBuilder()
-            .setTitle("EVENT | Žebříček")
+            .setTitle("EVENT | Žebříček (Top 5)")
             .setDescription(users.join("\n\n"))
             .setThumbnail("https://i.imgur.com/bGCFY6I.png")
             .setColor(bot.SAHP.c.event)

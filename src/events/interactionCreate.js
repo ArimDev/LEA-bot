@@ -2,6 +2,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, Interaction
 import fs from "fs";
 import path from "path";
 import { checkDB, checkEVENT } from "../../src/functions/db.js";
+import { dg } from "../../src/functions/logSystem.js";
 
 export default async function (bot, i) {
     if (i.type === InteractionType.ApplicationCommand) {
@@ -37,25 +38,41 @@ export default async function (bot, i) {
                     .setCustomId("dutyOWModal")
                     .setTitle("SAHP | Přepis služby");
 
+                const today = new Date();
+
                 const dateInput = new TextInputBuilder()
                     .setCustomId("datum")
-                    .setLabel("Datum služby [31. 12. 2023]")
-                    .setStyle(TextInputStyle.Short);
+                    .setLabel("Datum služby")
+                    .setStyle(TextInputStyle.Short)
+                    .setValue(today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear())
+                    .setMinLength(10)
+                    .setMaxLength(12)
+                    .setRequired(true);
 
                 const startInput = new TextInputBuilder()
                     .setCustomId("start")
-                    .setLabel("Začátek služby [13:00]")
-                    .setStyle(TextInputStyle.Short);
+                    .setLabel("Začátek služby")
+                    .setStyle(TextInputStyle.Short)
+                    .setPlaceholder("13:00")
+                    .setMinLength(5)
+                    .setMaxLength(5)
+                    .setRequired(true);
 
                 const endInput = new TextInputBuilder()
                     .setCustomId("end")
-                    .setLabel("Konec služby [17:00]")
-                    .setStyle(TextInputStyle.Short);
+                    .setLabel("Konec služby")
+                    .setStyle(TextInputStyle.Short)
+                    .setPlaceholder("17:00")
+                    .setMinLength(5)
+                    .setMaxLength(5)
+                    .setRequired(true);
 
                 const signInput = new TextInputBuilder()
                     .setCustomId("signature")
-                    .setLabel("Podpis [Smith]")
-                    .setStyle(TextInputStyle.Short);
+                    .setLabel("Podpis")
+                    .setStyle(TextInputStyle.Short)
+                    .setPlaceholder("Smith")
+                    .setRequired(true);
 
                 const actionRow0 = new ActionRowBuilder().addComponents(dateInput);
                 const actionRow1 = new ActionRowBuilder().addComponents(startInput);
@@ -70,30 +87,46 @@ export default async function (bot, i) {
                     .setCustomId("apologyOWModal")
                     .setTitle("SAHP | Přepis omluvenky");
 
+                const today = new Date();
+
                 const startInput = new TextInputBuilder()
                     .setCustomId("start")
-                    .setLabel("Od kdy [31. 12. 2023]")
-                    .setStyle(TextInputStyle.Short);
+                    .setLabel("Od kdy")
+                    .setStyle(TextInputStyle.Short)
+                    .setValue(today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear())
+                    .setMinLength(10)
+                    .setMaxLength(12)
+                    .setRequired(true);
 
                 const endInput = new TextInputBuilder()
                     .setCustomId("end")
-                    .setLabel("Do kdy [5. 1. 2024]")
-                    .setStyle(TextInputStyle.Short);
+                    .setLabel("Do kdy")
+                    .setStyle(TextInputStyle.Short)
+                    .setPlaceholder("5. 1. 2024")
+                    .setMinLength(10)
+                    .setMaxLength(12)
+                    .setRequired(true);
 
                 const oocInput = new TextInputBuilder()
                     .setCustomId("ooc")
-                    .setLabel("OOC důvod [Rodinná akce]")
-                    .setStyle(TextInputStyle.Paragraph);
+                    .setLabel("OOC důvod")
+                    .setStyle(TextInputStyle.Paragraph)
+                    .setPlaceholder("Rodinna akce")
+                    .setRequired(true);
 
                 const icInput = new TextInputBuilder()
                     .setCustomId("ic")
-                    .setLabel("IC důvod [Zlomená ruka]")
-                    .setStyle(TextInputStyle.Paragraph);
+                    .setLabel("IC důvod")
+                    .setStyle(TextInputStyle.Paragraph)
+                    .setPlaceholder("Zlomená ruka")
+                    .setRequired(true);
 
                 const signInput = new TextInputBuilder()
                     .setCustomId("signature")
-                    .setLabel("Podpis [Smith]")
-                    .setStyle(TextInputStyle.Short);
+                    .setLabel("Podpis")
+                    .setStyle(TextInputStyle.Short)
+                    .setPlaceholder("Smith")
+                    .setRequired(true);
 
                 const actionRow0 = new ActionRowBuilder().addComponents(startInput);
                 const actionRow1 = new ActionRowBuilder().addComponents(endInput);
@@ -111,28 +144,40 @@ export default async function (bot, i) {
 
                 const nameInput = new TextInputBuilder()
                     .setCustomId("name")
-                    .setLabel("Jméno občana [Will Smith]")
-                    .setStyle(TextInputStyle.Short);
+                    .setLabel("Jméno občana")
+                    .setStyle(TextInputStyle.Short)
+                    .setPlaceholder("Will Smith")
+                    .setRequired(true);
 
                 const birthInput = new TextInputBuilder()
                     .setCustomId("birth")
-                    .setLabel("Narození občana [12/31/1990]")
-                    .setStyle(TextInputStyle.Short);
+                    .setLabel("Narození občana")
+                    .setStyle(TextInputStyle.Short)
+                    .setPlaceholder("12/31/1990")
+                    .setMinLength(10)
+                    .setMaxLength(10)
+                    .setRequired(true);
 
                 const reasonInput = new TextInputBuilder()
                     .setCustomId("reason")
-                    .setLabel("Důvod zadržení [Nelegální akce]")
-                    .setStyle(TextInputStyle.Paragraph);
+                    .setLabel("Důvod zadržení")
+                    .setStyle(TextInputStyle.Paragraph)
+                    .setPlaceholder("Nelegální akce")
+                    .setRequired(true);
 
                 const moneyInput = new TextInputBuilder()
                     .setCustomId("money")
                     .setLabel("Výpis trestu / pokut")
-                    .setStyle(TextInputStyle.Paragraph);
+                    .setStyle(TextInputStyle.Paragraph)
+                    .setPlaceholder("15 000 $ + 1 rok odnětí svobody")
+                    .setRequired(true);
 
                 const pdInput = new TextInputBuilder()
                     .setCustomId("pd")
-                    .setLabel("Řešili [Chris Evans, Adam Sandler]")
-                    .setStyle(TextInputStyle.Short);
+                    .setLabel("Řešili")
+                    .setStyle(TextInputStyle.Short)
+                    .setPlaceholder("Chris Evans, Addam Sandler")
+                    .setRequired(true);
 
                 const actionRow0 = new ActionRowBuilder().addComponents(nameInput);
                 const actionRow1 = new ActionRowBuilder().addComponents(birthInput);
@@ -293,7 +338,7 @@ export default async function (bot, i) {
                 JSON.stringify(content, null, 4)
             );
 
-            console.log(" < [DB/Duty] >  " + i.member.displayName + " zapsal(a) duty o délce" + hours.toString() + " hodin");
+            console.log(" < [DB/Duty] >  " + i.member.displayName + " zapsal(a) duty o délce " + hours.toString() + " hodin");
         } else if (i.customId === "apologyModal") {
             let content = JSON.parse(fs.readFileSync((path.resolve("./db/workers") + "/" + i.user.id + ".json"), "utf-8"));
             const index = content.apologies.length + 1;
@@ -789,9 +834,13 @@ export default async function (bot, i) {
                 .setFooter({ text: "SAHP", iconURL: bot.user.avatarURL() });
 
             const today = new Date();
+
+            const day = dg(today, "Date") + ". " + dg(today, "Month") + ". " + dg(today, "FullYear");
+            const time = dg(today, "Hours") + ":" + dg(today, "Minutes") + ":" + dg(today, "Seconds");
+
             user.invoices.push({
                 "value": parseInt(i.fields.getTextInputValue("money").split(" ").join("")),
-                "shared": today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear(),
+                "shared": day + " " + time,
                 "reason": i.fields.getTextInputValue("reason"),
                 "name": i.fields.getTextInputValue("name"),
                 "id": id

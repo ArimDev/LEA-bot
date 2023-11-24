@@ -25,7 +25,7 @@ export const slash = new SlashCommandBuilder()
 
 export default async function run(bot, i) {
     const choice = i.options.getString("choice");
-    let user = i.options.getUser("user");
+    const user = i.options.getUser("user");
 
     let passed = false;
     await i.guild.fetch();
@@ -44,28 +44,40 @@ export default async function run(bot, i) {
 
         const idInput = new TextInputBuilder()
             .setCustomId("id")
-            .setLabel("ID Discord člena [411436203330502658]")
-            .setStyle(TextInputStyle.Short);
+            .setLabel("ID Discord člena")
+            .setStyle(TextInputStyle.Short)
+            .setValue(user.id.toString())
+            .setRequired(true);
 
         const nameInput = new TextInputBuilder()
             .setCustomId("name")
-            .setLabel("Jméno [Will Smith]")
-            .setStyle(TextInputStyle.Short);
+            .setLabel("Jméno")
+            .setStyle(TextInputStyle.Short)
+            .setPlaceholder("Will Smith")
+            .setRequired(true);
 
         const callInput = new TextInputBuilder()
             .setCustomId("call")
-            .setLabel("Volačka [Heaven-2]")
-            .setStyle(TextInputStyle.Short);
+            .setLabel("Volačka")
+            .setStyle(TextInputStyle.Short)
+            .setPlaceholder("Heaven-2")
+            .setRequired(true);
 
         const badgeInput = new TextInputBuilder()
             .setCustomId("badge")
-            .setLabel("Číslo odznaku [1033]")
-            .setStyle(TextInputStyle.Short);
+            .setLabel("Číslo odznaku")
+            .setStyle(TextInputStyle.Short)
+            .setPlaceholder("1033")
+            .setMinLength(4)
+            .setMaxLength(4)
+            .setRequired(true);
 
         const rankInput = new TextInputBuilder()
             .setCustomId("rank")
-            .setLabel("Hodnost [Trooper II]")
-            .setStyle(TextInputStyle.Short);
+            .setLabel("Hodnost")
+            .setStyle(TextInputStyle.Short)
+            .setPlaceholder("Trooper II")
+            .setRequired(true);
 
         const actionRow0 = new ActionRowBuilder().addComponents(idInput);
         const actionRow1 = new ActionRowBuilder().addComponents(nameInput);
@@ -91,28 +103,40 @@ export default async function run(bot, i) {
 
         const idInput = new TextInputBuilder()
             .setCustomId("id")
-            .setLabel("ID Discord člena [411436203330502658]")
-            .setStyle(TextInputStyle.Short);
+            .setLabel("ID Discord člena")
+            .setStyle(TextInputStyle.Short)
+            .setValue(user.id.toString())
+            .setRequired(true);
 
         const callInput = new TextInputBuilder()
             .setCustomId("call")
-            .setLabel("Volačka [Heaven-2]")
-            .setStyle(TextInputStyle.Short);
+            .setLabel("Volačka")
+            .setStyle(TextInputStyle.Short)
+            .setPlaceholder("Heaven-2")
+            .setRequired(true);
 
         const badgeInput = new TextInputBuilder()
             .setCustomId("badge")
-            .setLabel("Číslo odznaku [1033]")
-            .setStyle(TextInputStyle.Short);
+            .setLabel("Číslo odznaku")
+            .setStyle(TextInputStyle.Short)
+            .setPlaceholder("1033")
+            .setMinLength(4)
+            .setMaxLength(4)
+            .setRequired(true);
 
         const rankInput = new TextInputBuilder()
             .setCustomId("rank")
-            .setLabel("Hodnost [Trooper II]")
-            .setStyle(TextInputStyle.Short);
+            .setLabel("Hodnost")
+            .setStyle(TextInputStyle.Short)
+            .setPlaceholder("Trooper II")
+            .setRequired(true);
 
         const reasonInput = new TextInputBuilder()
             .setCustomId("reason")
-            .setLabel("Důvod [Úspěšná hodnocená patrola]")
-            .setStyle(TextInputStyle.Paragraph);
+            .setLabel("Důvod")
+            .setStyle(TextInputStyle.Paragraph)
+            .setPlaceholder("Úspěšná hodnocená patrola")
+            .setRequired(true);
 
         const actionRow0 = new ActionRowBuilder().addComponents(idInput);
         const actionRow1 = new ActionRowBuilder().addComponents(callInput);
