@@ -1,7 +1,7 @@
-# SAHP-bot | Podmínky Použití (TOS)
-- Vytvořil **[@PetyXbron](https://github.com/PetyXbron/)**
+# LEA Bot | Podmínky Použití (TOS)
+- Vytvořil **[@PetyXbron aka b1ngo](https://github.com/PetyXbron/)**
 - Veřejně dostupné na platformě GitHub.
-- SAHP-bot primárně slouží pouze **San Andreas Highway Patrol** na FiveM serveru **RefreshRP**. Jeho jiné používání není doporučeno a je nutné se řídit podmínkami.
+- LEA Bot primárně slouží pouze **San Andreas Highway Patrol** a **Los Santos Sheriff Department** na FiveM serveru **RefreshRP**. Jeho jiné používání není doporučeno a je nutné se řídit podmínkami.
 - Zkontroluj **[licenci](/LICENSE.md)** před používáním
 
 [![Creative Commons License](https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-nd/4.0/)
@@ -15,15 +15,15 @@
 - [Možné ukončení](#možné-ukončení)
 
 ### Poznámky:
-Podmínky Použití musí znát a dodržovat každý uživatel. Platí převážně pro veřejný projekt SAHP-bot a měl by platit i pro všechny jednotlivé kopie a pro jejich uživatele. V případě modifikace provozovatelem kopie musí tyhle podmínky být aktualizovány a být kdykoliv dostupné uživatelům na vhodném místě, na kterém je může kdokoliv zobrazit.
-Majitel a tvůrci projektu SAHP-bot odmítají odpovědnost za jakýkoliv provoz a postup řízení kopie tohoto projektu.
+Podmínky Použití musí znát a dodržovat každý uživatel. Platí převážně pro veřejný projekt LEA Bot a měl by platit i pro všechny jednotlivé kopie a pro jejich uživatele. V případě modifikace provozovatelem kopie musí tyhle podmínky být aktualizovány a být kdykoliv dostupné uživatelům na vhodném místě, na kterém je může kdokoliv zobrazit.
+Majitel a tvůrci projektu LEA Bot odmítají odpovědnost za jakýkoliv provoz a postup řízení kopie tohoto projektu.
 #### Aliasy:
-- "Projekt" - myšlen jako veřejný projekt SAHP-bot.
-- "Bot" - tenhle projekt Discord chatbota - SAHP-bot.
+- "Projekt" - myšlen jako veřejný projekt LEA Bot.
+- "Bot" - tenhle projekt Discord chatbota - LEA Bot.
 - "Provozovatel kopie" je člověk, který bota hostuje / poskytuje / provozuje na svém, či pronajatém zařízení.
 
 ### Používání uživatelem
-SAHP-bot veřejný projekt a zároveň jeho kopie je přísně zakázáno k používání:
+LEA Bot veřejný projekt a zároveň jeho kopie je přísně zakázáno k používání:
 - ❌ vyhrožování nebo poškozovaní ostatních uživatelů, či jiných lidí
 - ❌ spamu, sdílení virů a dalšího nevhodné obsahu (tzv. NSFW)
 - ❌ poškození uživatelů, projektu či jiných osob a softwaru
@@ -46,7 +46,7 @@ Majitel projektu může přikázat provozovateli k ukončení provozování proj
 Tenhle projekt je určený k velmi **častým úpravám**, modifikacím, aktualizacím. Projekt **může obsahovat chyby** nebo nepřesnosti. **Není možné zaručit bezchybnost** a bezproblémovost projektu. Proto si vyhazujeme **právo na aktualizace projektu a další změny bez předchozího upozornění**. Tyhle podmínky zároveň se Zásadami Ochrany Osobních Údajů se mohou kdykoliv bez upozornění aktualizovat a používáním tohoto projektu nebo jeho samotného bota jakýkoliv uživatel se všemi podmínkami souhlasí.
 
 ### Odmítnutí odpovědnosti
-Používání projektu nebo jeho samotného bota je **na vlastní riziko**. Projekt je poskytován bez záruk kteréhokoidruhu. SAHP-bot projekt nemůže zaručit, že:
+Používání projektu nebo jeho samotného bota je **na vlastní riziko**. Projekt je poskytován bez záruk kteréhokoidruhu. LEA Bot projekt nemůže zaručit, že:
 - projekt bude fungovat nepřerušovaně, zabezpečeně nebo dostupně v jakémkoli konkrétním čase nebo na jakémkoli místě
 - projekt neobsahuje viry ani jiné škodlivé komponenty
 - případné chyby nebo závady budou opraveny

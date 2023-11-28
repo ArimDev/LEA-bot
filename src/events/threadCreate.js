@@ -1,4 +1,5 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder } from "discord.js";
+import { getServer } from "../../src/functions/db.js";
 
 export default async function (bot, t) {
     if (t.parent.id !== "1139311793555116172") return;
@@ -27,8 +28,8 @@ export default async function (bot, t) {
                 + "\nBrzy tě zaregistruje do databáze správce. Budeš informován(a)."
                 + "\nPoté si zapisuj služby a omluvenky pomocí </duty:1170376396678377595> a </omluvenka:1170382276492800131>."
             )
-            .setColor(bot.SAHP.c.master)
-            .setFooter({ text: "SAHP", iconURL: bot.user.avatarURL() });
+            .setColor(getServer(i).color)
+            .setFooter(getServer(t).footer);
         await t.send({ content: `<@${t.ownerId}>, <@411436203330502658>, <@607915400604286997>`, embeds: [slozkaEmbed], components: [row] });
     } catch (e) {
         console.error(e);
@@ -63,7 +64,7 @@ export default async function (bot, t) {
         } if (!msg.content.includes("**")) {
             msgErr.push("chybí bold [`**`]");
             passed = false;
-        } if (!msg.content.includes(" ") || !msg.content.includes(": ")) {
+        } if (!msg.content.includes(" ") || !msg.content.includes(":** ")) {
             msgErr.push("chybí mezera");
             passed = false;
         } if (msgErr.length > 0) {

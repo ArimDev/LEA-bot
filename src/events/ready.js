@@ -2,7 +2,7 @@ import { ActionRowBuilder, ActivityType, ButtonBuilder, ButtonStyle, EmbedBuilde
 import { checkApologies } from "../../src/functions/outdated.js";
 
 export default async function (bot) {
-    console.log(` < [DC/Invite] >  https://discord.com/oauth2/authorize?client_id=${bot.user.id}&permissions=274877926464&scope=bot%20applications.commands`);
+    console.log(` < [DC/Invite] >  https://discord.com/oauth2/authorize?client_id=${bot.user.id}&permissions=274878221376&scope=bot%20applications.commands`);
 
     bot.user.setPresence({ activities: [{ name: "Sloužit a chránit!", type: ActivityType.Listening }], status: "online", afk: false });
 
@@ -10,7 +10,7 @@ export default async function (bot) {
 
     /*bot.guilds.cache.forEach(async (guild) => {
     const me = await guild.members.fetchMe();
-    if (me.nickname !== "SAHP") me.setNickname("SAHP");
+    if (me.nickname !== "LEA Bot") me.setNickname("LEA Bot");
     });*/
 
     /*const server = await bot.guilds.fetch("1139266097921675345");
@@ -57,8 +57,8 @@ export default async function (bot) {
         .setTitle("Revoluce zápisů")
         .setDescription("Klikni na tlačítko pro přesun na daný návod.")
         .setThumbnail("https://i.imgur.com/xgFoKuX.png")
-        .setColor(bot.SAHP.c.master)
-        .setFooter({ text: "SAHP", iconURL: bot.user.avatarURL() });
+        .setColor(getServer(i).color)
+        .setFooter({ text: "SAHP | Vytvořil b1ngo ✌️", iconURL: bot.LEA.i.SAHP });
     await vlakno.send({ embeds: [navodEmbed], components: [row] });*/
 
     console.log(" < [PS/Info] >  Discord bot operational!");

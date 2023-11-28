@@ -2,7 +2,7 @@ import { SlashCommandBuilder } from "discord.js";
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, InteractionType, ModalBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
 import fs, { copyFileSync } from "fs";
 import path from "path";
-import { checkDB, checkEVENT } from "../../src/functions/db.js";
+import { checkDB, checkEVENT, getServer } from "../../src/functions/db.js";
 
 export const slash = new SlashCommandBuilder()
     .setName("event")
@@ -42,6 +42,11 @@ export default async function run(bot, i) {
     if (admin.id === "436180906533715969") passed = true; //Mičut
     if (admin.id === "411436203330502658") passed = true; //PetyXbron
 
+    if (bot.LEA.g.LSSD.includes(i.guild.id)) return i.reply({
+        content: "> 🛑 **Příkazy </event faktura:1176554266652069989>, </event souhrn:1176554266652069989> a </event žebříček:1176554266652069989> nejsou aktuálně dostupné pro " + i.guild.name + ".**",
+        ephemeral: true
+    });
+
     if (sub === "faktura") { //Faktura
         const modal = new ModalBuilder()
             .setCustomId("fakturaModal")
@@ -78,7 +83,7 @@ export default async function run(bot, i) {
         await i.showModal(modal);
     } else if (sub === "souhrn") { //Souhrn
         if (user.id !== i.user.id && !passed) return i.reply({ content: "> 🛑 **Můžeš zobrazit pouze svoje faktury.**", ephemeral: true });
-        if (!(await checkEVENT(user.id))) return i.reply({ content: "> 🛑 **<@" + user.id + "> ještě nesoutěží.**", ephemeral: true });
+        if (!(await checkEVENT(user.id, i))) return i.reply({ content: "> 🛑 **<@" + user.id + "> ještě nesoutěží.**", ephemeral: true });
 
         const eventer = JSON.parse(fs.readFileSync((path.resolve("./db/event") + "/" + user.id + ".json"), "utf-8"));
         const member = await i.guild.members.fetch(user.id);
@@ -106,8 +111,8 @@ export default async function run(bot, i) {
                 }
             ])
             .setThumbnail("https://i.imgur.com/bGCFY6I.png")
-            .setColor(bot.SAHP.c.event)
-            .setFooter({ text: "SAHP", iconURL: bot.user.avatarURL() });
+            .setColor(bot.LEA.c.event)
+            .setFooter(getServer(i).footer);
 
         console.log(" < [EVE/Souhrn] >  " + i.member.displayName + " zobrazil(a) souhrn " + member.displayName);
 
@@ -138,8 +143,8 @@ export default async function run(bot, i) {
             .setTitle("EVENT | Žebříček (Top 5)")
             .setDescription(users.join("\n\n"))
             .setThumbnail("https://i.imgur.com/bGCFY6I.png")
-            .setColor(bot.SAHP.c.event)
-            .setFooter({ text: "SAHP", iconURL: bot.user.avatarURL() });
+            .setColor(bot.LEA.c.event)
+            .setFooter(getServer(i).footer);
 
         console.log(" < [EVE/Žěbříček] >  " + i.member.displayName + " zobrazil(a) žebříček");
 

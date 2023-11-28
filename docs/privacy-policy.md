@@ -1,7 +1,7 @@
-# SAHP-bot | Zásady Ochrany Osobních Údajů
-- Vytvořil **[@PetyXbron](https://github.com/PetyXbron/)**
+# LEA Bot | Zásady Ochrany Osobních Údajů
+- Vytvořil **[@PetyXbron aka b1ngo](https://github.com/PetyXbron/)**
 - Veřejně dostupné na platformě GitHub.
-- SAHP-bot primárně slouží pouze **San Andreas Highway Patrol** na FiveM serveru **RefreshRP**. Jeho jiné používání není doporučeno a je nutné se řídit podmínkami.
+- LEA Bot primárně slouží pouze **San Andreas Highway Patrol** a **Los Santos Sheriff Department** na FiveM serveru **RefreshRP**. Jeho jiné používání není doporučeno a je nutné se řídit podmínkami.
 - Zkontroluj **[licenci](/LICENSE.md)** před používáním
 
 [![Creative Commons License](https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-nd/4.0/)
@@ -16,10 +16,10 @@
     - [Kde jsou umístěny data?](#kde-jsou-umístěny-data)
 
 ### Poznámky:
-Tyhle Zásady Ochrany Osobních Údajů projektu SAHP-bot musí dodržovat provozovatel kopie a v případě modifikace provozovatelem kopie musí tyhle podmínky být aktualizovány a být kdykoliv dostupné uživatelům na vhodném místě, na kterém je může kdokoliv zobrazit.
-Majitel a tvůrci projektu SAHP-bot odmítají odpovědnost za jakýkoliv provoz a postup řízení kopie tohoto projektu.
+Tyhle Zásady Ochrany Osobních Údajů projektu LEA Bot musí dodržovat provozovatel kopie a v případě modifikace provozovatelem kopie musí tyhle podmínky být aktualizovány a být kdykoliv dostupné uživatelům na vhodném místě, na kterém je může kdokoliv zobrazit.
+Majitel a tvůrci projektu LEA Bot odmítají odpovědnost za jakýkoliv provoz a postup řízení kopie tohoto projektu.
 #### Aliasy:
-- "Bot" - tenhle projekt Discord chatbota - SAHP-bot.
+- "Bot" - tenhle projekt Discord chatbota - LEA Bot.
 - "Provozovatel kopie" je člověk, který bota hostuje / poskytuje / provozuje na svém, či pronajatém zařízení.
 - "Správce registrace" jako člen Discord serveru, kde provozovatel kopie přidal bota a má přístup k registracím dalších členů do databáze. Často je také jako správce tohoto Discord serveru.
 

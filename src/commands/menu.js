@@ -49,15 +49,49 @@ export default async function run(bot, i) {
     console.log(" < [CMD/Menu] >  " + (i.member.displayName || i.user.displayName) + ` zobrazil(a) menu`);
 
     const commands = fs.readdirSync(path.resolve("./src/commands")).filter(file => file.endsWith(".js"));
-    const helpEmbed = new EmbedBuilder()
-        .setTitle("Menu")
-        .setDescription(
-            `> **Odezva**: \`${bot.ws.ping > 1 ? bot.ws.ping + " ms" : "N/A"}\``
-            + `\n> **Uptime**: \`${msToTime(bot.uptime)}\``
-            + `\n> **Příkazů**: \`${commands.length}\``
-            + `\n> **GitHub**: [zde](https://github.com/Azator-Entertainment/SAHP-bot)`
-        )
-        .setColor(bot.SAHP.c.master)
-        .setFooter({ text: "SAHP", iconURL: bot.user.avatarURL() });
+    const events = fs.readdirSync(path.resolve("./src/events")).filter(file => file.endsWith(".js"));
+    let helpEmbed = new EmbedBuilder()
+        .setTitle("Bot Menu")
+        .setFields([
+            {
+                name: `Stav`, inline: true,
+                value:
+                    `> **Odezva**: \`${bot.ws.ping > 1 ? bot.ws.ping + " ms" : "N/A"}\``
+                    + `\n> **Uptime**: \`${msToTime(bot.uptime)}\``
+            },
+            {
+                name: `Analytika`, inline: true,
+                value:
+                    `> **Příkazů**: \`${commands.length}\``
+                    + `\n> **Eventů**: \`${events.length}\``
+            },
+            {
+                name: `Info`, inline: false,
+                value:
+                    `> **Autor:** <@411436203330502658> ([web](https://petyxbron.cz/cs/p))
+                    > **Sloužím:** SAHP a LSSD
+                    > **FiveM:** RefreshRP
+                    > **GitHub**: [petyxbron.cz/lea-bot](https://petyxbron.cz/lea-bot)`
+            },
+            {
+                name: `Další`, inline: true,
+                value:
+                    `> **Podmínky Použití (TOS):** [/docs/terms-of-use.md](https://github.com/Azator-Entertainment/LEA-bot/blob/master/docs/terms-of-use.md)
+                    > **Zásady Ochrany Osobních Údajů:** [/docs/privacy-policy.md](https://github.com/Azator-Entertainment/LEA-bot/blob/master/docs/privacy-policy.md)
+                    > **Jak Používat:** [/docs/usage.md](https://github.com/Azator-Entertainment/LEA-bot/blob/master/docs/usage.md)`
+            }
+        ])
+        .setColor(bot.LEA.c.LSPD)
+        .setThumbnail(bot.LEA.i.LSPD)
+        .setFooter({ text: `LEA Bot v${process.env.version} | Vytvořil b1ngo ✌️`, iconURL: bot.user.avatarURL() });
+
+    let group;
+    if (bot.LEA.g.SAHP.includes(i.guild.id)) group = "**SAHP** " + bot.LEA.e.SAHP;
+    else if (bot.LEA.g.LSSD.includes(i.guild.id)) group = "**LSSD** " + bot.LEA.e.LSSD;
+    else group = false;
+
+    if (group) helpEmbed.setDescription(`> ✅ Server **${i.guild.name}** je součástí sboru ${group}`);
+    else helpEmbed.setDescription(`> ❎ Server **${i.guild.name}** není součásti žádného sboru.`);
+
     return i.reply({ embeds: [helpEmbed], ephemeral: true });
 };

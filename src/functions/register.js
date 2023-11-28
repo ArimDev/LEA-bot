@@ -47,7 +47,7 @@ export async function commands(bot) {
                 if (runType === 1) {
                     console.log("");
                     console.log("                               test úspěšný                               ");
-                    console.log("-------------------------------> SAHP-bot <-------------------------------");
+                    console.log("-------------------------------> LEA Bot <-------------------------------");
                     process.exit();
                 }
             });

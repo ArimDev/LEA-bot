@@ -8,8 +8,11 @@ export const slash = new SlashCommandBuilder()
     .setNSFW(false);
 
 export default async function run(bot, i) {
-    if (!(await checkDB(i.user.id))) return i.reply({ content: "🛑 **Před zadáváním __duties__ a __omluvenek__ tě musí admin přilásit do DB.**\nZalož si vlastní složku a počkej na správce DB.", ephemeral: true });
-    if (!i.channel.isThread() || i.channel.parentId !== "1139311793555116172") return i.reply({ content: "🛑 **Zápis __duties__ a __omluvenek__ je povolen pouze ve své složce, v <#1139311793555116172>.**", ephemeral: true });
+    if (!(await checkDB(i.user.id, i))) return i.reply({ content: "🛑 **Před zadáváním __duties__ a __omluvenek__ tě musí admin přilásit do DB.**\nZalož si vlastní složku a počkej na správce DB.", ephemeral: true });
+
+    const folders = ["1139311793555116172", "1178098611733667880"];
+    if (!i.channel.isThread()) return i.reply({ content: "🛑 **Zápis __duties__ a __omluvenek__ je povolen pouze ve své složce, v <#1139311793555116172>.**", ephemeral: true });
+    if (!folders.includes(i.channel.parentId)) return i.reply({ content: "🛑 **Zápis __duties__ a __omluvenek__ je povolen pouze ve své složce, v <#1139311793555116172>.**", ephemeral: true });
 
     const modal = new ModalBuilder()
         .setCustomId("dutyModal")
@@ -22,6 +25,7 @@ export default async function run(bot, i) {
         .setLabel("Datum služby")
         .setStyle(TextInputStyle.Short)
         .setValue(today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear())
+        .setPlaceholder(today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear())
         .setMinLength(10)
         .setMaxLength(12)
         .setRequired(true);

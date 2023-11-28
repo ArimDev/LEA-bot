@@ -1,9 +1,11 @@
-# <img src="https://i.imgur.com/xgFoKuX.png" width="25" height="25"/> SAHP Bot <img src="https://i.imgur.com/xgFoKuX.png" width="25" height="25"/>
+# <img src="https://i.imgur.com/gfL0fGf.png" width="25" height="25"/> LEA Bot <img src="https://i.imgur.com/gfL0fGf.png" width="25" height="25"/>
+ℹ️ Formerly known as SAHP Bot. ℹ️
 ⚠️ Docs and most of the strings are primarily in the Czech language. ⚠️
 
 ## POPIS
 
-*Český Discord bot pro SAHP na GTA V FiveM roleplay serveru RefreshRP.*
+*Český Discord bot pro Law Enforcement Agencies na GTA V FiveM roleplay serveru RefreshRP.*
+*Aktuálně slouží SAHP <img src="https://i.imgur.com/xgFoKuX.png" width="15" height="15"/> a LSSD <img src="https://i.imgur.com/X3cH2iu.png" width="15" height="15"/>.*
 
 Slouží k:
 - zápisu služeb zaměstnanců
@@ -19,7 +21,7 @@ Slouží k:
 
 ##### GITHUB:
 
-[![Repo stars](https://img.shields.io/github/stars/Azator-Entertainment/SAHP-bot?style=flat&logo=github&labelColor=232121&color=457cc0&label=Hvězdy)](https://github.com/Azator-Entertainment/SAHP-bot/stargazers) [![Latest master version](https://img.shields.io/github/package-json/version/Azator-Entertainment/SAHP-bot?color=457cc0&label=Verze&labelColor=232121&logo=github&sort=semver&style=flat)](https://github.com/Azator-Entertainment/SAHP-bot/tree/master/) [![Repo licence](https://img.shields.io/badge/CC_BY_NC_ND_4.0-457cc0?style=flat&logo=github&labelColor=232121&label=Licence)](https://github.com/Azator-Entertainment/SAHP-bot/blob/master/LICENSE.md)
+[![Repo stars](https://img.shields.io/github/stars/Azator-Entertainment/LEA-bot?style=flat&logo=github&labelColor=232121&color=457cc0&label=Hvězdy)](https://github.com/Azator-Entertainment/LEA-bot/stargazers) [![Latest master version](https://img.shields.io/github/package-json/version/Azator-Entertainment/LEA-bot?color=457cc0&label=Verze&labelColor=232121&logo=github&sort=semver&style=flat)](https://github.com/Azator-Entertainment/LEA-bot/tree/master/) [![Repo licence](https://img.shields.io/badge/CC_BY_NC_ND_4.0-457cc0?style=flat&logo=github&labelColor=232121&label=Licence)](https://github.com/Azator-Entertainment/LEA-bot/blob/master/LICENSE.md)
 
 ##### VYROBENO S:
 

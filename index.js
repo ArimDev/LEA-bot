@@ -7,7 +7,7 @@ export { runType };
 import { setup as setupLogs } from "./src/functions/logSystem.js";
 await setupLogs();
 
-console.log("-------------------------------> SAHP-bot <-------------------------------");
+console.log("-------------------------------> LEA Bot <-------------------------------");
 if (runType === 0) console.log("                                starting...                               ");
 if (runType === 1) console.log("                                testing...                                ");
 console.log("");
@@ -22,9 +22,11 @@ let bot = new Client({
 });
 
 bot.slashes = new Collection();
-bot.SAHP = {
+bot.LEA = {
     c: {
-        master: "#2596be",
+        LSPD: "#000c1e",
+        SAHP: "#2596be",
+        LSSD: "#bd8131",
         duty: "#5245c0",
         apology: "#c05245",
         summary: "#25be5c",
@@ -32,10 +34,26 @@ bot.SAHP = {
         event: "#Be25ab"
     },
     i: {
+        LSPD: "https://i.imgur.com/gfL0fGf.png",
+        SAHP: "https://i.imgur.com/xgFoKuX.png",
+        LSSD: "https://i.imgur.com/X3cH2iu.png",
         event: [
             "https://i.imgur.com/pkEErJp.png",
             "https://i.imgur.com/Dj4dvsr.png",
             "https://imgur.com/NARTJhy.png"
+        ]
+    },
+    e: {
+        LSPD: "<:LSPD:1178108366514565181>",
+        SAHP: "<:SAHP:1174876044570931210>",
+        LSSD: "<:LSSD:1178106303198011412>"
+    },
+    g: {
+        SAHP: [
+            "1139266097921675345", "1174843772446703718", "714147774299373629"
+        ],
+        LSSD: [
+            "1035916575594795008"
         ]
     }
 };
@@ -45,3 +63,5 @@ events(bot);
 commands(bot);
 
 bot.login(secret().parsed.token);
+
+export { bot };

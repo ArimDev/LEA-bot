@@ -1,7 +1,7 @@
 {
-  "name": "sahp-bot",
-  "version": "1.5",
-  "description": "RefreshRP (FiveM GTA V roleplay) Discord bot for SAHP - making internal police department actions easier.",
+  "name": "lea-bot",
+  "version": "2.0",
+  "description": "RefreshRP (FiveM GTA V roleplay) Discord bot for LEA - making internal police department actions easier.",
   "type": "module",
   "main": "index.js",
   "scripts": {
@@ -16,14 +16,15 @@
     "fivem",
     "roleplay",
     "gta5",
+    "gtav",
     "police"
   ],
   "author": "PetyXbron",
   "license": "CC-BY-NC-ND-4.0",
   "bugs": {
-    "url": "https://github.com/Azator-Entertainment/SAHP-bot/issues"
+    "url": "https://github.com/Azator-Entertainment/LEA-bot/issues"
   },
-  "homepage": "https://github.com/Azator-Entertainment/SAHP-bot",
+  "homepage": "https://github.com/Azator-Entertainment/LEA-bot",
   "engines": {
     "node": ">=16.11.0"
   },

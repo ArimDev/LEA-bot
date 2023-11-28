@@ -89,14 +89,18 @@ export default async function run(bot, i) {
 
         await i.showModal(modal);
     } else if (choice === "z") {
-        if (!(await checkDB(user.id))) return i.reply({ content: "🛑 <@" + user.id + "> **není v DB.**", ephemeral: true });
-        let log = fs.readFileSync((path.resolve("./db/workers") + "/" + user.id + ".json"), "utf-8");
+        if (!(await checkDB(user.id, i))) return i.reply({ content: "🛑 <@" + user.id + "> **není v DB.**", ephemeral: true });
+
+        let log;
+        if (bot.LEA.g.SAHP.includes(i.guild.id)) log = fs.readFileSync((path.resolve("./db/SAHP") + "/" + user.id + ".json"), "utf-8");
+        else if (bot.LEA.g.LSSD.includes(i.guild.id)) log = fs.readFileSync((path.resolve("./db/LSSD") + "/" + user.id + ".json"), "utf-8");
+        else return i.reply({ content: "🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
         console.log(" < [CMD/DB] >  " + i.member.displayName + ` zobrazil(a) DB záznam ${user.id}.json`);
 
         i.reply({ content: `\`\`\`json\n${log}\`\`\``, ephemeral: true });
     } else if (choice === "r") {
-        if (!(await checkDB(user.id))) return i.reply({ content: "🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
+        if (!(await checkDB(user.id, i))) return i.reply({ content: "🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
         const modal = new ModalBuilder()
             .setCustomId("rankUpModal")
             .setTitle("SAHP | Povýšení");
@@ -148,8 +152,13 @@ export default async function run(bot, i) {
 
         await i.showModal(modal);
     } else if (choice === "s") {
-        if (!(await checkDB(user.id))) return i.reply({ content: "🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
-        let loc = path.resolve("./db/workers") + "/" + user.id + ".json";
+        if (!(await checkDB(user.id, i))) return i.reply({ content: "🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
+
+        let loc;
+        if (bot.LEA.g.SAHP.includes(i.guild.id)) loc = path.resolve("./db/SAHP") + "/" + user.id + ".json";
+        else if (bot.LEA.g.LSSD.includes(i.guild.id)) loc = path.resolve("./db/LSSD") + "/" + user.id + ".json";
+        else return i.reply({ content: "🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
+
         let log = fs.readFileSync(loc, "utf-8");
         fs.unlinkSync(loc);
 

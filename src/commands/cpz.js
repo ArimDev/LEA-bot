@@ -7,6 +7,8 @@ export const slash = new SlashCommandBuilder()
     .setNSFW(false);
 
 export default async function run(bot, i) {
+    if (bot.LEA.g.LSSD.includes(i.guild.id)) return i.reply({ content: "🛑 **Zápis __CPZ__ se nepoužívá v LSSD " + bot.LEA.e.LSSD + ".**", ephemeral: true });
+
     let passed = false;
     await i.guild.fetch();
     const admin = await i.member;
