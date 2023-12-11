@@ -7,7 +7,7 @@ export const slash = new SlashCommandBuilder()
     .setNSFW(false);
 
 export default async function run(bot, i) {
-    if (bot.LEA.g.LSSD.includes(i.guild.id)) return i.reply({ content: "🛑 **Zápis __CPZ__ se nepoužívá v LSSD " + bot.LEA.e.LSSD + ".**", ephemeral: true });
+    if (bot.LEA.g.LSSD.includes(i.guild.id)) return i.reply({ content: "> 🛑 **Zápis __CPZ__ se nepoužívá v LSSD " + bot.LEA.e.LSSD + ".**", ephemeral: true });
 
     let passed = false;
     await i.guild.fetch();
@@ -18,7 +18,8 @@ export default async function run(bot, i) {
     if (admin.id === "436180906533715969") passed = true; //Mičut
     if (admin.id === "411436203330502658") passed = true; //PetyXbron
     if (!passed) {
-        if (i.channelId !== "1139268053213917235") return i.reply({ content: "🛑 **Zápis __CPZ__ je povolen pouze v <#1139268053213917235>.**", ephemeral: true });
+        const ch = ["1139268053213917235", "1139268119391645756"];
+        if (!ch.includes(i.channel.id)) return i.reply({ content: "> 🛑 **Zápis __CPZ__ je povolen pouze v <#1139268053213917235>.**", ephemeral: true });
     }
 
     const modal = new ModalBuilder()

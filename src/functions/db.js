@@ -16,8 +16,9 @@ export async function checkEVENT(id, i) {
     return exists;
 }
 
-export async function getServer(i) {
+export function getServer(i) {
     let r = {};
+
     if (bot.LEA.g.SAHP.includes(i.guild.id)) {
         r.footer = { text: "SAHP | Vytvořil b1ngo ✌️", iconURL: bot.LEA.i.SAHP };
         r.color = bot.LEA.c.SAHP;

@@ -16,14 +16,14 @@ export const slash = new SlashCommandBuilder()
 export default async function run(bot, i) {
     let worker = i.options.getUser("worker");
 
-    if (!(await checkDB(worker.id, i))) return i.reply({ content: "🛑 <@" + worker.id + "> **není v DB.**", ephemeral: true });
+    if (!(await checkDB(worker.id, i))) return i.reply({ content: "> 🛑 <@" + worker.id + "> **není v DB.**", ephemeral: true });
 
     const member = await i.guild.members.fetch(worker.id);
 
     let log;
     if (bot.LEA.g.SAHP.includes(i.guild.id)) log = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + worker.id + ".json"), "utf-8"));
     else if (bot.LEA.g.LSSD.includes(i.guild.id)) log = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + worker.id + ".json"), "utf-8"));
-    else return i.reply({ content: "🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
+    else return i.reply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
     const workerEmbed = new EmbedBuilder()
         .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })

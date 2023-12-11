@@ -8,17 +8,25 @@ export const slash = new SlashCommandBuilder()
     .setNSFW(false);
 
 export default async function run(bot, i) {
-    if (!(await checkDB(i.user.id, i))) return i.reply({ content: "🛑 **Před zadáváním __duties__ a __omluvenek__ tě musí admin přilásit do DB.**\nZalož si vlastní složku a počkej na správce DB.", ephemeral: true });
+    if (!(await checkDB(i.user.id, i))) return i.reply({ content: "> 🛑 **Před zadáváním __duties__ a __omluvenek__ tě musí admin přilásit do DB.**\nZalož si vlastní složku a počkej na správce DB.", ephemeral: true });
 
     const folders = ["1139311793555116172", "1178098611733667880"];
-    if (!i.channel.isThread()) return i.reply({ content: "🛑 **Zápis __duties__ a __omluvenek__ je povolen pouze ve své složce, v <#1139311793555116172>.**", ephemeral: true });
-    if (!folders.includes(i.channel.parentId)) return i.reply({ content: "🛑 **Zápis __duties__ a __omluvenek__ je povolen pouze ve své složce, v <#1139311793555116172>.**", ephemeral: true });
+    if (!i.channel.isThread()) return i.reply({ content: "> 🛑 **Zápis __duties__ a __omluvenek__ je povolen pouze ve své složce, v <#1139311793555116172>.**", ephemeral: true });
+    if (!folders.includes(i.channel.parentId)) return i.reply({ content: "> 🛑 **Zápis __duties__ a __omluvenek__ je povolen pouze ve své složce, v <#1139311793555116172>.**", ephemeral: true });
 
     const modal = new ModalBuilder()
         .setCustomId("apologyModal")
         .setTitle("SAHP | Zápis omluvenky");
 
     const today = new Date();
+
+    const eventIDInput = new TextInputBuilder()
+        .setCustomId("eventID")
+        .setLabel("ID Události (nepovinné)")
+        .setStyle(TextInputStyle.Short)
+        .setPlaceholder("1")
+        .setMaxLength(5)
+        .setRequired(false);
 
     const startInput = new TextInputBuilder()
         .setCustomId("start")
@@ -53,18 +61,11 @@ export default async function run(bot, i) {
         .setPlaceholder("Zlomená ruka")
         .setRequired(true);
 
-    const signInput = new TextInputBuilder()
-        .setCustomId("signature")
-        .setLabel("Podpis")
-        .setStyle(TextInputStyle.Short)
-        .setPlaceholder("Smith")
-        .setRequired(true);
-
-    const actionRow0 = new ActionRowBuilder().addComponents(startInput);
-    const actionRow1 = new ActionRowBuilder().addComponents(endInput);
-    const actionRow2 = new ActionRowBuilder().addComponents(oocInput);
-    const actionRow3 = new ActionRowBuilder().addComponents(icInput);
-    const actionRow4 = new ActionRowBuilder().addComponents(signInput);
+    const actionRow0 = new ActionRowBuilder().addComponents(eventIDInput);
+    const actionRow1 = new ActionRowBuilder().addComponents(startInput);
+    const actionRow2 = new ActionRowBuilder().addComponents(endInput);
+    const actionRow3 = new ActionRowBuilder().addComponents(oocInput);
+    const actionRow4 = new ActionRowBuilder().addComponents(icInput);
 
     modal.addComponents(actionRow0, actionRow1, actionRow2, actionRow3, actionRow4);
 

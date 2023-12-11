@@ -11,10 +11,10 @@ export const slash = new SlashCommandBuilder()
             .setDescription("Co chceš udělat?")
             .setRequired(true)
             .addChoices(
-                { name: "Registrace", value: "p" },
-                { name: "Kontrola", value: "z" },
+                { name: "Registrovat", value: "p" },
+                { name: "Zkontrolovat", value: "z" },
                 { name: "Povýšit", value: "r" },
-                { name: "Smazání", value: "s" }
+                { name: "Smazat", value: "s" }
             ))
     .addUserOption(option =>
         option.setName("user")
@@ -35,7 +35,7 @@ export default async function run(bot, i) {
     if (admin.id === "607915400604286997") passed = true; //Samus
     if (admin.id === "436180906533715969") passed = true; //Mičut
     if (admin.id === "411436203330502658") passed = true; //PetyXbron
-    if (!passed) return i.reply({ content: "🛑 **K tomuhle má přístup jen admin.**", ephemeral: true });
+    if (!passed) return i.reply({ content: "> 🛑 **K tomuhle má přístup jen admin.**", ephemeral: true });
 
     if (choice === "p") {
         const modal = new ModalBuilder()
@@ -89,18 +89,18 @@ export default async function run(bot, i) {
 
         await i.showModal(modal);
     } else if (choice === "z") {
-        if (!(await checkDB(user.id, i))) return i.reply({ content: "🛑 <@" + user.id + "> **není v DB.**", ephemeral: true });
+        if (!(await checkDB(user.id, i))) return i.reply({ content: "> 🛑 <@" + user.id + "> **není v DB.**", ephemeral: true });
 
         let log;
-        if (bot.LEA.g.SAHP.includes(i.guild.id)) log = fs.readFileSync((path.resolve("./db/SAHP") + "/" + user.id + ".json"), "utf-8");
-        else if (bot.LEA.g.LSSD.includes(i.guild.id)) log = fs.readFileSync((path.resolve("./db/LSSD") + "/" + user.id + ".json"), "utf-8");
-        else return i.reply({ content: "🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
+        if (bot.LEA.g.SAHP.includes(i.guild.id)) log = path.resolve("./db/SAHP") + "/" + user.id + ".json";
+        else if (bot.LEA.g.LSSD.includes(i.guild.id)) log = path.resolve("./db/LSSD") + "/" + user.id + ".json";
+        else return i.reply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
         console.log(" < [CMD/DB] >  " + i.member.displayName + ` zobrazil(a) DB záznam ${user.id}.json`);
 
-        i.reply({ content: `\`\`\`json\n${log}\`\`\``, ephemeral: true });
+        i.reply({ files: [log], ephemeral: true });
     } else if (choice === "r") {
-        if (!(await checkDB(user.id, i))) return i.reply({ content: "🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
+        if (!(await checkDB(user.id, i))) return i.reply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
         const modal = new ModalBuilder()
             .setCustomId("rankUpModal")
             .setTitle("SAHP | Povýšení");
@@ -152,12 +152,12 @@ export default async function run(bot, i) {
 
         await i.showModal(modal);
     } else if (choice === "s") {
-        if (!(await checkDB(user.id, i))) return i.reply({ content: "🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
+        if (!(await checkDB(user.id, i))) return i.reply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
 
         let loc;
         if (bot.LEA.g.SAHP.includes(i.guild.id)) loc = path.resolve("./db/SAHP") + "/" + user.id + ".json";
         else if (bot.LEA.g.LSSD.includes(i.guild.id)) loc = path.resolve("./db/LSSD") + "/" + user.id + ".json";
-        else return i.reply({ content: "🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
+        else return i.reply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
         let log = fs.readFileSync(loc, "utf-8");
         fs.unlinkSync(loc);

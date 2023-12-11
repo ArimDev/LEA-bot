@@ -17,7 +17,9 @@ import { Client, GatewayIntentBits, Collection } from "discord.js";
 
 let bot = new Client({
     intents: [
-        GatewayIntentBits.Guilds
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildPresences,
+        GatewayIntentBits.GuildMembers
     ]
 });
 
@@ -25,7 +27,7 @@ bot.slashes = new Collection();
 bot.LEA = {
     c: {
         LSPD: "#000c1e",
-        SAHP: "#2596be",
+        SAHP: "#457cc0",
         LSSD: "#bd8131",
         duty: "#5245c0",
         apology: "#c05245",

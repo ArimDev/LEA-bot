@@ -1,16 +1,19 @@
 # <img src="https://i.imgur.com/gfL0fGf.png" width="25" height="25"/> LEA Bot <img src="https://i.imgur.com/gfL0fGf.png" width="25" height="25"/>
 ℹ️ Formerly known as SAHP Bot. ℹ️
+
 ⚠️ Docs and most of the strings are primarily in the Czech language. ⚠️
 
 ## POPIS
 
 *Český Discord bot pro Law Enforcement Agencies na GTA V FiveM roleplay serveru RefreshRP.*
+
 *Aktuálně slouží SAHP <img src="https://i.imgur.com/xgFoKuX.png" width="15" height="15"/> a LSSD <img src="https://i.imgur.com/X3cH2iu.png" width="15" height="15"/>.*
 
-Slouží k:
-- zápisu služeb zaměstnanců
-- zápisu omluvenek zaměstnanců
-- zápisu výpisů o občanech v CPZ
+Funkce:
+- zápis služeb zaměstnanců
+- zápiu omluvenek zaměstnanců
+- zápis výpisů z CPZ
+- účast v eventech
 - a další
 
 ## INFO

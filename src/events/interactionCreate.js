@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, InteractionType, ModalBuilder, TextInputBuilder, TextInputStyle, time } from "discord.js";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, EmbedBuilder, InteractionType, ModalBuilder, TextInputBuilder, TextInputStyle, time } from "discord.js";
 import fs from "fs";
 import path from "path";
 import { checkDB, checkEVENT, getServer } from "../../src/functions/db.js";
@@ -25,7 +25,7 @@ export default async function (bot, i) {
             if (admin.id === "411436203330502658") passed = true; //PetyXbron
             if (admin.id === i.message.interaction.user.id) passed = true; //Owner
             if (!passed) {
-                return i.reply({ content: "🛑 **Nemůžeš přepisovat cizí záznamy!**", ephemeral: true });
+                return i.reply({ content: "> 🛑 **Nemůžeš přepisovat cizí záznamy!**", ephemeral: true });
             }
 
             let type;
@@ -68,19 +68,11 @@ export default async function (bot, i) {
                     .setMaxLength(5)
                     .setRequired(true);
 
-                const signInput = new TextInputBuilder()
-                    .setCustomId("signature")
-                    .setLabel("Podpis")
-                    .setStyle(TextInputStyle.Short)
-                    .setPlaceholder("Smith")
-                    .setRequired(true);
-
                 const actionRow0 = new ActionRowBuilder().addComponents(dateInput);
                 const actionRow1 = new ActionRowBuilder().addComponents(startInput);
                 const actionRow2 = new ActionRowBuilder().addComponents(endInput);
-                const actionRow3 = new ActionRowBuilder().addComponents(signInput);
 
-                modal.addComponents(actionRow0, actionRow1, actionRow2, actionRow3);
+                modal.addComponents(actionRow0, actionRow1, actionRow2);
 
                 await i.showModal(modal);
             } else if (type === 1) {
@@ -89,6 +81,14 @@ export default async function (bot, i) {
                     .setTitle("SAHP | Přepis omluvenky");
 
                 const today = new Date();
+
+                const eventIDInput = new TextInputBuilder()
+                    .setCustomId("eventID")
+                    .setLabel("ID Události (nepovinné)")
+                    .setStyle(TextInputStyle.Short)
+                    .setPlaceholder("1")
+                    .setMaxLength(5)
+                    .setRequired(false);
 
                 const startInput = new TextInputBuilder()
                     .setCustomId("start")
@@ -123,18 +123,11 @@ export default async function (bot, i) {
                     .setPlaceholder("Zlomená ruka")
                     .setRequired(true);
 
-                const signInput = new TextInputBuilder()
-                    .setCustomId("signature")
-                    .setLabel("Podpis")
-                    .setStyle(TextInputStyle.Short)
-                    .setPlaceholder("Smith")
-                    .setRequired(true);
-
-                const actionRow0 = new ActionRowBuilder().addComponents(startInput);
-                const actionRow1 = new ActionRowBuilder().addComponents(endInput);
-                const actionRow2 = new ActionRowBuilder().addComponents(oocInput);
-                const actionRow3 = new ActionRowBuilder().addComponents(icInput);
-                const actionRow4 = new ActionRowBuilder().addComponents(signInput);
+                const actionRow0 = new ActionRowBuilder().addComponents(eventIDInput);
+                const actionRow1 = new ActionRowBuilder().addComponents(startInput);
+                const actionRow2 = new ActionRowBuilder().addComponents(endInput);
+                const actionRow3 = new ActionRowBuilder().addComponents(oocInput);
+                const actionRow4 = new ActionRowBuilder().addComponents(icInput);
 
                 modal.addComponents(actionRow0, actionRow1, actionRow2, actionRow3, actionRow4);
 
@@ -197,13 +190,13 @@ export default async function (bot, i) {
             await i.deferReply({ ephemeral: true });
 
             const worker = i.message.interaction.user;
-            if (!(await checkDB(worker.id, i))) return i.editReply({ content: "🛑 <@" + worker.id + "> **není v DB.**", ephemeral: true });
+            if (!(await checkDB(worker.id, i))) return i.editReply({ content: "> 🛑 <@" + worker.id + "> **není v DB.**", ephemeral: true });
             const member = await i.guild.members.fetch(worker.id);
 
             let log;
             if (bot.LEA.g.SAHP.includes(i.guild.id)) log = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + worker.id + ".json"), "utf-8"));
             else if (bot.LEA.g.LSSD.includes(i.guild.id)) log = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + worker.id + ".json"), "utf-8"));
-            else return i.editReply({ content: "🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
+            else return i.editReply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
             let moHours = 0;
             await log.duties.filter(d => !d.removed).forEach(function (e) {
@@ -243,6 +236,58 @@ export default async function (bot, i) {
 
             await i.editReply({ embeds: [summEmbed], ephemeral: true });;
         }
+
+        if (i.customId === "cidCreateCPZ") {
+            const modal = new ModalBuilder()
+                .setCustomId("cidCreateCPZmodal")
+                .setTitle("CID | Vytvoření CID kanálu");
+
+            const nameInput = new TextInputBuilder()
+                .setCustomId("name")
+                .setLabel("Jméno a přijmení zadrženého")
+                .setStyle(TextInputStyle.Short)
+                .setPlaceholder("Will Smith")
+                .setRequired(true);
+
+            const birthInput = new TextInputBuilder()
+                .setCustomId("birth")
+                .setLabel("Datum narození zadrženého")
+                .setStyle(TextInputStyle.Short)
+                .setPlaceholder("12/24/2023")
+                .setMinLength(10)
+                .setMaxLength(10)
+                .setRequired(true);
+
+            const actionRow0 = new ActionRowBuilder().addComponents(nameInput);
+            const actionRow1 = new ActionRowBuilder().addComponents(birthInput);
+
+            modal.addComponents(actionRow0, actionRow1);
+
+            await i.showModal(modal);
+
+            let submit = await i.awaitModalSubmit({ filter: int => int.user.id === i.user.id, time: 120000 }).catch(e => {
+                return false;
+            });
+
+            if (submit) {
+                const ch = await i.guild.channels.create({
+                    name: submit.fields.getTextInputValue("name").replaceAll(" ", "-"),
+                    type: ChannelType.GuildText,
+                    topic: "CPZ kanál na jméno \"" + submit.fields.getTextInputValue("name") + "\" narozen(a) " + submit.fields.getTextInputValue("birth"),
+                    nsfw: false,
+                    reason: "CPZ kanál na vyžádání " + i.user.tag,
+                    parent: i.channel.parent.id
+                });
+
+                await ch.send({ content: `## ${submit.fields.getTextInputValue("name")}\n> **Narozen(a):** ${submit.fields.getTextInputValue("birth")}\n> **Vytvořil(a):** <@${i.user.id}>` });
+
+                await submit.reply({ content: `> ✅ **Úspěch! Kanál <#${ch.id}> vytvořen!**`, ephemeral: true });
+            } else {
+                await i.reply({ content: `> ❌ **Chyba, kanál nebyl vytvořen!**`, ephemeral: true });
+            }
+
+            console.log(" < [CID/CPZ] >  " + i.member.displayName + " vytvořil(a) CID kanál");
+        }
     }
 
     if (i.type === InteractionType.ModalSubmit) {
@@ -250,7 +295,7 @@ export default async function (bot, i) {
             let content;
             if (bot.LEA.g.SAHP.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + i.user.id + ".json"), "utf-8"));
             else if (bot.LEA.g.LSSD.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.user.id + ".json"), "utf-8"));
-            else return i.reply({ content: "🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
+            else return i.reply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
             const index = content.duties.length + 1;
 
@@ -281,8 +326,7 @@ export default async function (bot, i) {
                         + "\nZadal(a) jsi:\n"
                         + `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
                         + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
-                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\`\n`
-                        + `> **Podpis:** ${i.fields.getTextInputValue("signature")}`,
+                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\``,
                     ephemeral: true
                 });
             } else if (!i.fields.getTextInputValue("start").includes(":") || !i.fields.getTextInputValue("end").includes(":")) {
@@ -293,8 +337,7 @@ export default async function (bot, i) {
                         + "\nZadal(a) jsi:\n"
                         + `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
                         + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
-                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\`\n`
-                        + `> **Podpis:** ${i.fields.getTextInputValue("signature")}`,
+                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\``,
                     ephemeral: true
                 });
             }
@@ -322,8 +365,7 @@ export default async function (bot, i) {
                             `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
                             + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
                             + `> **Do:** \`${i.fields.getTextInputValue("end")}\`\n`
-                            + `> **Hodin:**  \`${hours}\`\n`
-                            + `> **Podpis:** ${i.fields.getTextInputValue("signature")}`
+                            + `> **Hodin:**  \`${hours}\``
                     }
                 ])
                 .setThumbnail("https://i.imgur.com/dsZyqaJ.png")
@@ -356,7 +398,7 @@ export default async function (bot, i) {
             let content;
             if (bot.LEA.g.SAHP.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + i.user.id + ".json"), "utf-8"));
             else if (bot.LEA.g.LSSD.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.user.id + ".json"), "utf-8"));
-            else return i.reply({ content: "🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
+            else return i.reply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
             const index = content.apologies.length + 1;
 
@@ -378,11 +420,11 @@ export default async function (bot, i) {
                         "### Nalezena chyba - datum!"
                         + "\n- Formát data je špatně. Napiš např. `24. 12. 2023` (tečky a mezery)"
                         + "\nZadal(a) jsi:\n"
+                        + (i.fields.getTextInputValue("eventID") ? `> **ID Události:** \`${i.fields.getTextInputValue("eventID")}\`\n` : "")
                         + `> **Začátek:** \`${i.fields.getTextInputValue("start")}\`\n`
                         + `> **Konec:** \`${i.fields.getTextInputValue("end")}\`\n`
                         + `> **OOC Důvod:** \`${i.fields.getTextInputValue("ooc")}\`\n`
-                        + `> **IC Důvod:** \`${i.fields.getTextInputValue("ic")}\`\n`
-                        + `> **Podpis:** ${i.fields.getTextInputValue("signature")}`,
+                        + `> **IC Důvod:** \`${i.fields.getTextInputValue("ic")}\``,
                     ephemeral: true
                 });
             }
@@ -396,11 +438,11 @@ export default async function (bot, i) {
                     {
                         name: `Omluvenka #` + index, inline: false,
                         value:
-                            `> **Začátek:** \`${i.fields.getTextInputValue("start")}\`\n`
+                            `> **ID Události:** \`${i.fields.getTextInputValue("eventID") || "0"}\`\n`
+                            + `> **Začátek:** \`${i.fields.getTextInputValue("start")}\`\n`
                             + `> **Konec:** \`${i.fields.getTextInputValue("end")}\`\n`
                             + `> **OOC Důvod:** \`${i.fields.getTextInputValue("ooc")}\`\n`
-                            + `> **IC Důvod:** \`${i.fields.getTextInputValue("ic")}\`\n`
-                            + `> **Podpis:** ${i.fields.getTextInputValue("signature")}`
+                            + `> **IC Důvod:** \`${i.fields.getTextInputValue("ic")}\``
                     }
                 ])
                 .setThumbnail("https://i.imgur.com/Ja58hkU.png")
@@ -413,6 +455,7 @@ export default async function (bot, i) {
             content.apologies.push({
                 "removed": false,
                 "shared": today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear(),
+                "eventID": parseInt(i.fields.getTextInputValue("eventID")) || 0,
                 "start": i.fields.getTextInputValue("start"),
                 "end": i.fields.getTextInputValue("end"),
                 "ooc": i.fields.getTextInputValue("ooc"),
@@ -473,7 +516,7 @@ export default async function (bot, i) {
         } else if (i.customId === "loginModal") {
             await i.deferReply({ ephemeral: true });
 
-            if (await checkDB(i.fields.getTextInputValue("id"), i)) return i.editReply({ content: "🛑 <@" + i.fields.getTextInputValue("id") + "> **už je v DB.**", ephemeral: true });
+            if (await checkDB(i.fields.getTextInputValue("id"), i)) return i.editReply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **už je v DB.**", ephemeral: true });
 
             let post = false;
             if (i.guild.id === "1035916575594795008") { //LSSD
@@ -488,7 +531,14 @@ export default async function (bot, i) {
                             + `\n> **Volačka:** ${i.fields.getTextInputValue("call")}`
                     }
                 });
-            }
+            }/* else if (i.guild.id === "1139266097921675345") { //SAHP
+                const folders = await i.guild.channels.fetch("1139311793555116172");
+                const fetched = await folders.threads.fetch();
+                console.log(fetched);
+                const filtered = !!fetched ? await fetched.toArray().filter(t => t.ownerId === i.fields.getTextInputValue("id")) : undefined;
+                console.log(filtered);
+                if (filtered) post = filtered.first();
+            }*/
 
             const today = new Date();
 
@@ -516,7 +566,7 @@ export default async function (bot, i) {
             let workersPath;
             if (bot.LEA.g.SAHP.includes(i.guild.id)) workersPath = (path.resolve("./db/SAHP") + "/" + i.fields.getTextInputValue("id") + ".json");
             else if (bot.LEA.g.LSSD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSSD") + "/" + i.fields.getTextInputValue("id") + ".json");
-            else return i.editReply({ content: "🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
+            else return i.editReply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
             fs.writeFileSync(
                 workersPath,
@@ -525,7 +575,7 @@ export default async function (bot, i) {
 
             const loginEmbed = new EmbedBuilder()
                 .setTitle("Úspěch")
-                .setDescription(`<@${i.fields.getTextInputValue("id")}> přidán(a) do datbáze!` + (post ? `\nSložka: <#${post.id}>` : ""))
+                .setDescription(`<@${i.fields.getTextInputValue("id")}> přidán(a) do databáze!` + (post ? `\nSložka: <#${post.id}>` : ""))
                 .setColor(getServer(i).color)
                 .setFooter(getServer(i).footer);
 
@@ -535,7 +585,7 @@ export default async function (bot, i) {
         } else if (i.customId === "rankUpModal") {
             await i.deferReply({ ephemeral: true });
 
-            if (!(await checkDB(i.fields.getTextInputValue("id"), i))) return i.editReply({ content: "🛑 <@" + i.fields.getTextInputValue("id") + "> **není v DB.**", ephemeral: true });
+            if (!(await checkDB(i.fields.getTextInputValue("id"), i))) return i.editReply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **není v DB.**", ephemeral: true });
 
             let content;
             if (bot.LEA.g.SAHP.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
@@ -623,7 +673,7 @@ export default async function (bot, i) {
         } else if (i.customId === "dutyOWModal") {
             await i.deferReply({ ephemeral: true });
 
-            if (!(await checkDB(i.message.interaction.user.id, i))) return i.editReply({ content: "🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
+            if (!(await checkDB(i.message.interaction.user.id, i))) return i.editReply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
 
             let content;
             if (bot.LEA.g.SAHP.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + i.message.interaction.user.id + ".json"), "utf-8"));
@@ -659,8 +709,7 @@ export default async function (bot, i) {
                         + "\nZadal(a) jsi:\n"
                         + `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
                         + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
-                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\`\n`
-                        + `> **Podpis:** ${i.fields.getTextInputValue("signature")}`,
+                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\``,
                     ephemeral: true
                 });
             } else if (!i.fields.getTextInputValue("start").includes(":") || !i.fields.getTextInputValue("end").includes(":")) {
@@ -671,8 +720,7 @@ export default async function (bot, i) {
                         + "\nZadal(a) jsi:\n"
                         + `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
                         + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
-                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\`\n`
-                        + `> **Podpis:** ${i.fields.getTextInputValue("signature")}`,
+                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\``,
                     ephemeral: true
                 });
             }
@@ -700,8 +748,7 @@ export default async function (bot, i) {
                             `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
                             + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
                             + `> **Do:** \`${i.fields.getTextInputValue("end")}\`\n`
-                            + `> **Hodin:**  \`${hoursAfter}\`\n`
-                            + `> **Podpis:** ${i.fields.getTextInputValue("signature")}`
+                            + `> **Hodin:**  \`${hoursAfter}\``
                     }
                 ])
                 .setThumbnail("https://i.imgur.com/dsZyqaJ.png")
@@ -741,7 +788,7 @@ export default async function (bot, i) {
         } else if (i.customId === "apologyOWModal") {
             await i.deferReply({ ephemeral: true });
 
-            if (!(await checkDB(i.message.interaction.user.id, i))) return i.editReply({ content: "🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
+            if (!(await checkDB(i.message.interaction.user.id, i))) return i.editReply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
 
             let content;
             if (bot.LEA.g.SAHP.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + i.message.interaction.user.id + ".json"), "utf-8"));
@@ -768,11 +815,11 @@ export default async function (bot, i) {
                         "### Nalezena chyba - datum!"
                         + "\n- Formát data je špatně. Napiš např. `24. 12. 2023` (tečky a mezery)"
                         + "\nZadal(a) jsi:\n"
+                        + (i.fields.getTextInputValue("eventID") ? `> **ID Události:** \`${i.fields.getTextInputValue("eventID")}\`\n` : "")
                         + `> **Začátek:** \`${i.fields.getTextInputValue("start")}\`\n`
                         + `> **Konec:** \`${i.fields.getTextInputValue("end")}\`\n`
                         + `> **OOC Důvod:** \`${i.fields.getTextInputValue("ooc")}\`\n`
-                        + `> **IC Důvod:** \`${i.fields.getTextInputValue("ic")}\`\n`
-                        + `> **Podpis:** ${i.fields.getTextInputValue("signature")}`,
+                        + `> **IC Důvod:** \`${i.fields.getTextInputValue("ic")}\``,
                     ephemeral: true
                 });
             }
@@ -784,11 +831,11 @@ export default async function (bot, i) {
                     {
                         name: `Omluvenka #` + (index + 1), inline: false,
                         value:
-                            `> **Začátek:** \`${i.fields.getTextInputValue("start")}\`\n`
+                            `> **ID Události:** \`${i.fields.getTextInputValue("eventID") || "0"}\`\n`
+                            + `> **Začátek:** \`${i.fields.getTextInputValue("start")}\`\n`
                             + `> **Konec:** \`${i.fields.getTextInputValue("end")}\`\n`
                             + `> **OOC Důvod:** \`${i.fields.getTextInputValue("ooc")}\`\n`
-                            + `> **IC Důvod:** \`${i.fields.getTextInputValue("ic")}\`\n`
-                            + `> **Podpis:** ${i.fields.getTextInputValue("signature")}`
+                            + `> **IC Důvod:** \`${i.fields.getTextInputValue("ic")}\``
                     }
                 ])
                 .setThumbnail("https://i.imgur.com/Ja58hkU.png")
@@ -807,15 +854,17 @@ export default async function (bot, i) {
                 content.apologies[index] = {
                     "removed": false,
                     "shared": content.apologies[index].shared ? content.apologies[index].shared : today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear(),
+                    "eventID": parseInt(i.fields.getTextInputValue("eventID")) || 0,
                     "start": i.fields.getTextInputValue("start"),
                     "end": i.fields.getTextInputValue("end"),
                     "ooc": i.fields.getTextInputValue("ooc"),
                     "ic": i.fields.getTextInputValue("ic")
                 };
             } else {
-                content.apologies.push({
+                content.apologies.push({ 
                     "removed": false,
                     "shared": today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear(),
+                    "eventID": parseInt(i.fields.getTextInputValue("eventID")) || 0,
                     "start": i.fields.getTextInputValue("start"),
                     "end": i.fields.getTextInputValue("end"),
                     "ooc": i.fields.getTextInputValue("ooc"),
@@ -882,16 +931,16 @@ export default async function (bot, i) {
                 let worker;
                 if (bot.LEA.g.SAHP.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + i.user.id + ".json"), "utf-8"));
                 else if (bot.LEA.g.LSSD.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.user.id + ".json"), "utf-8"));
-                else return i.reply({ content: "🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
+                else return i.reply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
-                if (!worker) return i.reply({ content: "🛑 **Před zapsáním __faktury__ tě musí admin přilásit do DB.**\nZalož si vlastní složku v <#1139311793555116172> a počkej na správce DB.", ephemeral: true });
+                if (!worker) return i.reply({ content: "> 🛑 **Před zapsáním __faktury__ tě musí admin přilásit do DB.**\nZalož si vlastní složku v <#1139311793555116172> a počkej na správce DB.", ephemeral: true });
             }
 
             if (!(await checkEVENT(i.user.id, i))) {
                 let worker;
                 if (bot.LEA.g.SAHP.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + i.user.id + ".json"), "utf-8"));
                 else if (bot.LEA.g.LSSD.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.user.id + ".json"), "utf-8"));
-                else return i.reply({ content: "🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
+                else return i.reply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
                 const content = {
                     name: worker.name,

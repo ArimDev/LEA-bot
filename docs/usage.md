@@ -33,6 +33,7 @@ Použitím pozvánky https://discord.com/oauth2/authorize?client_id=ID-APLIKACE&
 
 ### 3. Používání funkcí
 Bot se hlavně zatím používá pomocí jednoduchých příkazů:
+- 👮✅ **`/admin`** - Obecná správa
 - 🫡✅ **`/cpz`** - Zápis CPZ
 - 👮✅ **`/db`** - Správa databáze zaměstnanců
 - 🫡✅ **`/duty`** - Zápis služby
@@ -41,7 +42,7 @@ Bot se hlavně zatím používá pomocí jednoduchých příkazů:
 - 🫡✅ **`/kolega`** - Vyhledat zaměstnance podle Discord člena
 - 🫡✅ **`/menu`** - Základní přehled / pomocné menu bota
 - 🫡✅ **`/omluvenka`** - Zápis omluvenky
-- 🫡❌ **`/online`** - Členi serveru, kteří aktuálně hrají RefreshRP
+- 🫡✅ **`/online`** - Členi serveru, kteří aktuálně hrají na RefreshRP
 ####
 - 🫡 značí příkaz pro **všechny / zaměstnance**
 - 👮 značí příkaz pro **adminy**

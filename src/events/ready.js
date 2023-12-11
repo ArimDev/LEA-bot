@@ -59,7 +59,33 @@ export default async function (bot) {
         .setThumbnail("https://i.imgur.com/xgFoKuX.png")
         .setColor(getServer(i).color)
         .setFooter({ text: "SAHP | Vytvořil b1ngo ✌️", iconURL: bot.LEA.i.SAHP });
-    await vlakno.send({ embeds: [navodEmbed], components: [row] });*/
+    await vlakno.send({ embeds: [navodEmbed], components: [row] });
+
+    const row = new ActionRowBuilder()
+        .addComponents(
+            new ButtonBuilder()
+                .setCustomId("cidCreateCPZ")
+                .setLabel("Vytvořit kanál")
+                .setStyle(ButtonStyle.Primary)
+                .setEmoji("🔐"),
+        );
+
+    const server = await bot.guilds.fetch("1174843772446703718");
+    const kanal = await server.channels.fetch("1180283017168699519");
+    const firstEmbed = new EmbedBuilder()
+        .setImage("https://i.imgur.com/887Lmui.png")
+        .setColor(4553920);
+    const secondEMBED = new EmbedBuilder()
+        .setDescription(
+            "## Vytvoření CPZ kanálu"
+            + "\nKanály slouží pro zadržené, např. když:"
+            + "\n- Nebylo možné učinit výslech"
+            + "\n- Zadržený se šel tzv. \"prospat\""
+            + "\nZůstane nad nimi tak kontrola v případě jejich náhlého zmizení."
+        )
+        .setThumbnail("https://i.imgur.com/PXYVwMh.png")
+        .setColor(4553920);
+    await kanal.send({ embeds: [firstEmbed, secondEMBED], components: [row] });*/
 
     console.log(" < [PS/Info] >  Discord bot operational!");
 }

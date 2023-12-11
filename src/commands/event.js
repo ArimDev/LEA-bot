@@ -118,7 +118,7 @@ export default async function run(bot, i) {
 
         return i.reply({ embeds: [summaryEmbed], ephemeral: true });
     } else if (sub === "žebříček") { //Žěbříček
-        //if (!passed) return i.reply({ content: "🛑 **Nemůžeš zobrazit žebříček.**", ephemeral: true });
+        if (!passed) return i.reply({ content: "> 🛑 **Žebříček je už skrytý! To je napětí...**", ephemeral: true });
 
         let users = [];
         const eventDB = fs.readdirSync(path.resolve("./db/event")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");

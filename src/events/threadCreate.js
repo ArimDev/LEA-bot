@@ -28,7 +28,7 @@ export default async function (bot, t) {
                 + "\nBrzy tě zaregistruje do databáze správce. Budeš informován(a)."
                 + "\nPoté si zapisuj služby a omluvenky pomocí </duty:1170376396678377595> a </omluvenka:1170382276492800131>."
             )
-            .setColor(getServer(i).color)
+            .setColor(getServer(t).color)
             .setFooter(getServer(t).footer);
         await t.send({ content: `<@${t.ownerId}>, <@411436203330502658>, <@607915400604286997>`, embeds: [slozkaEmbed], components: [row] });
     } catch (e) {
