@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 
 export async function checkApologies(bot) {
+    /* FIX
     let workers = (await fs.promises.readdir(path.resolve("./db/SAHP"))).concat(await fs.promises.readdir(path.resolve("./db/LSSD")));
 
     for (const fileName of workers.filter(f => f !== "000000000000000001.json")) {
@@ -9,8 +10,8 @@ export async function checkApologies(bot) {
 
         let sbor;
         let worker = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + workerID + ".json"), "utf-8"));
-        if (!worker) { worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + workerID + ".json"), "utf-8")); sbor = "SAHP"; }
-        else sbor = "LSSD";
+        if (!worker) { worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + workerID + ".json"), "utf-8")); sbor = "LSSD"; }
+        else sbor = "SAHP";
 
         await worker.apologies.filter(a => !a.removed).forEach(async (a, i) => {
             const aDateArr = a.end.split(". ");
@@ -46,5 +47,5 @@ export async function checkApologies(bot) {
             );
         }
     }
-    setTimeout(checkApologies, (1000 * 60 * 60 * 24)); //Every day
+    setTimeout(checkApologies, (1000 * 60 * 60 * 24));*/ //Every day
 }

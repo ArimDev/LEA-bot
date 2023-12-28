@@ -1,5 +1,6 @@
 import { ActionRowBuilder, ActivityType, ButtonBuilder, ButtonStyle, EmbedBuilder } from "discord.js";
 import { checkApologies } from "../../src/functions/outdated.js";
+import newSystem from "../../src/functions/newSystem.js";
 
 export default async function (bot) {
     console.log(` < [DC/Invite] >  https://discord.com/oauth2/authorize?client_id=${bot.user.id}&permissions=274878221376&scope=bot%20applications.commands`);
@@ -7,6 +8,7 @@ export default async function (bot) {
     bot.user.setPresence({ activities: [{ name: "Sloužit a chránit!", type: ActivityType.Listening }], status: "online", afk: false });
 
     checkApologies(bot);
+    newSystem(bot);
 
     /*bot.guilds.cache.forEach(async (guild) => {
     const me = await guild.members.fetchMe();
@@ -14,7 +16,7 @@ export default async function (bot) {
     });*/
 
     /*const server = await bot.guilds.fetch("1139266097921675345");
-    const kanal = await server.channels.fetch("1139311793555116172");
+    const kanal = await server.channels.fetch("1188146028440997948");
 
     const vlakna = await kanal.threads.fetchActive();
     console.log(vlakna)
@@ -48,7 +50,7 @@ export default async function (bot) {
         );
 
     const server = await bot.guilds.fetch("1139266097921675345");
-    const kanal = await server.channels.fetch("1139311793555116172");
+    const kanal = await server.channels.fetch("1188146028440997948");
     const vlakno = await kanal.threads.fetch("1170795599164080228");
     console.log(vlakno);
     const member = await server.members.fetch("411436203330502658");

@@ -28,6 +28,7 @@ export default async function run(bot, i) {
     if (!passed) return i.reply({ content: "> 🛑 **K tomuhle má přístup jen admin.**", ephemeral: true });
 
     if (sub === "docházka") {
+        const today = new Date();
         const modal = new ModalBuilder()
             .setCustomId("dochazkaModal")
             .setTitle("SAHP | Docházka");
@@ -40,17 +41,28 @@ export default async function run(bot, i) {
             .setMaxLength(5)
             .setRequired(true);
 
+        const dateInput = new TextInputBuilder()
+            .setCustomId("date")
+            .setLabel("Datum")
+            .setStyle(TextInputStyle.Short)
+            .setValue(today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear())
+            .setPlaceholder(today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear())
+            .setMinLength(10)
+            .setMaxLength(12)
+            .setRequired(true);
+
         const ignoreInput = new TextInputBuilder()
             .setCustomId("ignore")
-            .setLabel("Čísla odznakl, kteří se účastnili")
+            .setLabel("Čísla odznaků zaměstnanců, které ignorovat")
             .setStyle(TextInputStyle.Paragraph)
             .setPlaceholder("1012, 1035, 1036, 1037, 1050, 1061")
             .setRequired(false);
 
         const actionRow0 = new ActionRowBuilder().addComponents(idInput);
-        const actionRow1 = new ActionRowBuilder().addComponents(ignoreInput);
+        const actionRow1 = new ActionRowBuilder().addComponents(dateInput);
+        const actionRow2 = new ActionRowBuilder().addComponents(ignoreInput);
 
-        modal.addComponents(actionRow0, actionRow1);
+        modal.addComponents(actionRow0, actionRow1, actionRow2);
 
         await i.showModal(modal);
 
@@ -63,7 +75,8 @@ export default async function run(bot, i) {
 
             const id = parseInt(submit.fields.getTextInputValue("eventID"));
             const ignored = submit.fields.getTextInputValue("ignore").split(", ");
-            const nowDate = new Date();
+            const eventDateArr = submit.fields.getTextInputValue("date").split(". ");
+            const eventDate = new Date(eventDateArr[1] + "/" + eventDateArr[0] + "/" + eventDateArr[2]);
 
             let users = [], db;
             if (bot.LEA.g.SAHP.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/SAHP")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
@@ -94,7 +107,7 @@ export default async function run(bot, i) {
                             const startDate = new Date(startDateArr[1] + "/" + startDateArr[0] + "/" + startDateArr[2]);
                             const endDateArr = a.end.split(". ");
                             const endDate = new Date(endDateArr[1] + "/" + endDateArr[0] + "/" + endDateArr[2]);
-                            if (nowDate.getTime() >= startDate.getTime() && nowDate <= endDate.getTime()) {
+                            if (eventDate.getTime() >= startDate.getTime() && eventDate <= endDate.getTime()) {
                                 apologized = true;
                             }
                         }

@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, InteractionType, ModalBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
-import fs, { copyFileSync } from "fs";
+import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, InteractionType, ModalBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
+import fs from "fs";
 import path from "path";
 import { checkDB, checkEVENT, getServer } from "../../src/functions/db.js";
 
@@ -30,6 +30,7 @@ export const slash = new SlashCommandBuilder()
     .setNSFW(false);
 
 export default async function run(bot, i) {
+    return i.reply({ content: "> 🛑 **Aktuálně žádný event neprobíhá!**" });
     const sub = i.options._subcommand;
     const user = i.options.getUser("účastník");
 
@@ -90,7 +91,7 @@ export default async function run(bot, i) {
 
         let invoices = [], values = [];
         for (const inv of eventer.invoices) {
-            invoices.push(`> **ID** \`${inv.id}\` (${inv.shared})\n> \`${inv.value} $\``);
+            invoices.push(`ID: ${inv.id}\nDate: ${inv.shared}\nValue: ${inv.value} $`);
             values.push(inv.value);
         }
 
@@ -99,24 +100,26 @@ export default async function run(bot, i) {
             .setTitle("EVENT | Souhrn " + eventer.name)
             .addFields([
                 {
-                    name: "Faktury", inline: false,
-                    value: invoices.join("\n\n")
-                },
-                {
                     name: "Statistika", inline: false,
                     value:
-                        `> **Dohromady faktur:** \`${eventer.invoices.length}\`\n`
-                        + `> **Dohromady zadáno:** \`${eventer.stats.value} $\`\n`
-                        + `> **Průměrně zadáno:** \`${values.reduce((a, c) => a + c, 0) / values.length} $\``
+                        `> **Dohromady faktur:** \`${eventer.invoices.length.toLocaleString()}\`\n`
+                        + `> **Dohromady zadáno:** \`${eventer.stats.value.toLocaleString()} $\`\n`
+                        + `> **Průměrně zadáno:** \`${Math.trunc(values.reduce((a, c) => a + c, 0) / values.length).toLocaleString()} $\``
+                },
+                {
+                    name: "Faktury", inline: false,
+                    value:
+                        `Kvůli vysokému počtu dostupné v \`txt\` příloze.`
                 }
             ])
             .setThumbnail("https://i.imgur.com/bGCFY6I.png")
             .setColor(bot.LEA.c.event)
             .setFooter(getServer(i).footer);
+        const listAtt = new AttachmentBuilder(Buffer.from(invoices.join("\n\n")), { name: "faktury.txt" });
 
         console.log(" < [EVE/Souhrn] >  " + i.member.displayName + " zobrazil(a) souhrn " + member.displayName);
 
-        return i.reply({ embeds: [summaryEmbed], ephemeral: true });
+        return i.reply({ embeds: [summaryEmbed], files: [listAtt], ephemeral: true });
     } else if (sub === "žebříček") { //Žěbříček
         if (!passed) return i.reply({ content: "> 🛑 **Žebříček je už skrytý! To je napětí...**", ephemeral: true });
 
@@ -133,21 +136,28 @@ export default async function run(bot, i) {
             users.push(user);
         }
         users = users.sort((a, b) => b.value - a.value);
-        users = users.slice(0, 5);
+        users = users.slice(0, 10);
 
         users.forEach((user, i) => {
             users[i] = `> ### ${i + 1}. <@${user.id}>\n> **Faktur:** \`${user.invoices.toLocaleString()}\`\n> **Hodnota:** \`${user.value.toLocaleString()} $\``;
         });
 
-        const topEmbed = new EmbedBuilder()
-            .setTitle("EVENT | Žebříček (Top 5)")
-            .setDescription(users.join("\n\n"))
+        const firstEmbed = new EmbedBuilder()
+            .setTitle("EVENT | Žebříček (Top 1-5)")
+            .setDescription(users.slice(0, 5).join("\n\n"))
+            .setThumbnail("https://i.imgur.com/bGCFY6I.png")
+            .setColor(bot.LEA.c.event)
+            .setFooter(getServer(i).footer);
+
+        const secondEmbed = new EmbedBuilder()
+            .setTitle("EVENT | Žebříček (Top 5-10)")
+            .setDescription(users.slice(5, 10).join("\n\n"))
             .setThumbnail("https://i.imgur.com/bGCFY6I.png")
             .setColor(bot.LEA.c.event)
             .setFooter(getServer(i).footer);
 
         console.log(" < [EVE/Žěbříček] >  " + i.member.displayName + " zobrazil(a) žebříček");
 
-        return i.reply({ embeds: [topEmbed], ephemeral: true });
+        return i.reply({ embeds: [firstEmbed, secondEmbed], ephemeral: true });
     }
 };

@@ -7,13 +7,14 @@
 
 *Český Discord bot pro Law Enforcement Agencies na GTA V FiveM roleplay serveru RefreshRP.*
 
-*Aktuálně slouží SAHP <img src="https://i.imgur.com/xgFoKuX.png" width="15" height="15"/> a LSSD <img src="https://i.imgur.com/X3cH2iu.png" width="15" height="15"/>.*
+*Aktuálně podporuje sbory SAHP <img src="https://i.imgur.com/xgFoKuX.png" width="15" height="15"/> a LSSD <img src="https://i.imgur.com/X3cH2iu.png" width="15" height="15"/>.*
 
 Funkce:
 - zápis služeb zaměstnanců
 - zápiu omluvenek zaměstnanců
 - zápis výpisů z CPZ
 - účast v eventech
+- kontrola absence při událostech
 - a další
 
 ## INFO
