@@ -37,8 +37,8 @@ export default async function run(bot, i) {
                 }
             ])
             .setThumbnail(i.guild.iconURL())
-            .setColor(getServer(i).color)
-            .setFooter(getServer(i).footer);
+            .setColor(getServer(i.guild.id).color)
+            .setFooter(getServer(i.guild.id).footer);
 
         await i.editReply({ embeds: [onlineEmbed], ephemeral: true });
     } catch (e) {

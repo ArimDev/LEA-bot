@@ -69,8 +69,8 @@ export default async function run(bot, i) {
                 name: `Info`, inline: false,
                 value:
                     `> **Autor:** <@411436203330502658> ([web](https://petyxbron.cz/cs/p))
-                    > **Sloužím:** SAHP a LSSD
-                    > **FiveM:** RefreshRP
+                    > **Sloužím:** SAHP <:SAHP:1174876044570931210> a LSSD <:LSSD:1178106303198011412>
+                    > **FiveM:** RefreshRP 🌴
                     > **GitHub**: [petyxbron.cz/lea-bot](https://petyxbron.cz/lea-bot)`
             },
             {

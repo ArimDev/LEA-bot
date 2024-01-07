@@ -30,7 +30,7 @@ export const slash = new SlashCommandBuilder()
     .setNSFW(false);
 
 export default async function run(bot, i) {
-    return i.reply({ content: "> 🛑 **Aktuálně žádný event neprobíhá!**" });
+    return i.reply({ content: "> 🛑 **Aktuálně žádný event neprobíhá!**", ephemeral: true });
     const sub = i.options._subcommand;
     const user = i.options.getUser("účastník");
 
@@ -84,7 +84,7 @@ export default async function run(bot, i) {
         await i.showModal(modal);
     } else if (sub === "souhrn") { //Souhrn
         if (user.id !== i.user.id && !passed) return i.reply({ content: "> 🛑 **Můžeš zobrazit pouze svoje faktury.**", ephemeral: true });
-        if (!(await checkEVENT(user.id, i))) return i.reply({ content: "> 🛑 **<@" + user.id + "> ještě nesoutěží.**", ephemeral: true });
+        if (!(await checkEVENT(user.id))) return i.reply({ content: "> 🛑 **<@" + user.id + "> ještě nesoutěží.**", ephemeral: true });
 
         const eventer = JSON.parse(fs.readFileSync((path.resolve("./db/event") + "/" + user.id + ".json"), "utf-8"));
         const member = await i.guild.members.fetch(user.id);
@@ -114,7 +114,7 @@ export default async function run(bot, i) {
             ])
             .setThumbnail("https://i.imgur.com/bGCFY6I.png")
             .setColor(bot.LEA.c.event)
-            .setFooter(getServer(i).footer);
+            .setFooter(getServer(i.guild.id).footer);
         const listAtt = new AttachmentBuilder(Buffer.from(invoices.join("\n\n")), { name: "faktury.txt" });
 
         console.log(" < [EVE/Souhrn] >  " + i.member.displayName + " zobrazil(a) souhrn " + member.displayName);
@@ -147,14 +147,14 @@ export default async function run(bot, i) {
             .setDescription(users.slice(0, 5).join("\n\n"))
             .setThumbnail("https://i.imgur.com/bGCFY6I.png")
             .setColor(bot.LEA.c.event)
-            .setFooter(getServer(i).footer);
+            .setFooter(getServer(i.guild.id).footer);
 
         const secondEmbed = new EmbedBuilder()
             .setTitle("EVENT | Žebříček (Top 5-10)")
             .setDescription(users.slice(5, 10).join("\n\n"))
             .setThumbnail("https://i.imgur.com/bGCFY6I.png")
             .setColor(bot.LEA.c.event)
-            .setFooter(getServer(i).footer);
+            .setFooter(getServer(i.guild.id).footer);
 
         console.log(" < [EVE/Žěbříček] >  " + i.member.displayName + " zobrazil(a) žebříček");
 

@@ -3,7 +3,7 @@ import { checkApologies } from "../../src/functions/outdated.js";
 import newSystem from "../../src/functions/newSystem.js";
 
 export default async function (bot) {
-    console.log(` < [DC/Invite] >  https://discord.com/oauth2/authorize?client_id=${bot.user.id}&permissions=274878221376&scope=bot%20applications.commands`);
+    console.log(` < [DC/Invite] >  https://discord.com/oauth2/authorize?client_id=${bot.user.id}&permissions=309640612928&scope=bot%20applications.commands`);
 
     bot.user.setPresence({ activities: [{ name: "Sloužit a chránit!", type: ActivityType.Listening }], status: "online", afk: false });
 
@@ -15,7 +15,13 @@ export default async function (bot) {
     if (me.nickname !== "LEA Bot") me.setNickname("LEA Bot");
     });*/
 
-    /*const server = await bot.guilds.fetch("1139266097921675345");
+    /*const server = await bot.guilds.fetch("1167182546853961860");
+    const kanal = await server.channels.fetch("1193340608971018382");
+    for (const tag of kanal.availableTags) {
+        console.log(tag.name + " | " + tag.id);
+    }
+
+    const server = await bot.guilds.fetch("1139266097921675345");
     const kanal = await server.channels.fetch("1188146028440997948");
 
     const vlakna = await kanal.threads.fetchActive();
@@ -58,36 +64,10 @@ export default async function (bot) {
         .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
         .setTitle("Revoluce zápisů")
         .setDescription("Klikni na tlačítko pro přesun na daný návod.")
-        .setThumbnail("https://i.imgur.com/xgFoKuX.png")
-        .setColor(getServer(i).color)
+        .setThumbnail(bot.LEA.i.SAHP)
+        .setColor(getServer(i.guild.id).color)
         .setFooter({ text: "SAHP | Vytvořil b1ngo ✌️", iconURL: bot.LEA.i.SAHP });
-    await vlakno.send({ embeds: [navodEmbed], components: [row] });
-
-    const row = new ActionRowBuilder()
-        .addComponents(
-            new ButtonBuilder()
-                .setCustomId("cidCreateCPZ")
-                .setLabel("Vytvořit kanál")
-                .setStyle(ButtonStyle.Primary)
-                .setEmoji("🔐"),
-        );
-
-    const server = await bot.guilds.fetch("1174843772446703718");
-    const kanal = await server.channels.fetch("1180283017168699519");
-    const firstEmbed = new EmbedBuilder()
-        .setImage("https://i.imgur.com/887Lmui.png")
-        .setColor(4553920);
-    const secondEMBED = new EmbedBuilder()
-        .setDescription(
-            "## Vytvoření CPZ kanálu"
-            + "\nKanály slouží pro zadržené, např. když:"
-            + "\n- Nebylo možné učinit výslech"
-            + "\n- Zadržený se šel tzv. \"prospat\""
-            + "\nZůstane nad nimi tak kontrola v případě jejich náhlého zmizení."
-        )
-        .setThumbnail("https://i.imgur.com/PXYVwMh.png")
-        .setColor(4553920);
-    await kanal.send({ embeds: [firstEmbed, secondEMBED], components: [row] });*/
+    await vlakno.send({ embeds: [navodEmbed], components: [row] });*/
 
     console.log(" < [PS/Info] >  Discord bot operational!");
 }

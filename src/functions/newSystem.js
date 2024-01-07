@@ -43,7 +43,7 @@ export default async function folders(bot) {
                     + `\n> **Omluvenek:** \`${worker.apologies.filter(a => !a.removed).length}\``
                     + `\n> **Povýšení:** ${time(rankUpDate, "R")}`
                 )
-                .setThumbnail("https://i.imgur.com/xgFoKuX.png")
+                .setThumbnail(bot.LEA.i.SAHP)
                 .setColor(bot.LEA.c.SAHP)
                 .setFooter({ text: "SAHP | Vytvořil b1ngo ✌️", iconURL: bot.LEA.i.SAHP });
             const row = new ActionRowBuilder()

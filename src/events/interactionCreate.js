@@ -193,7 +193,7 @@ export default async function (bot, i) {
             else worker = i.message.interaction.user;
             await i.deferReply({ ephemeral: true });
 
-            if (!(await checkDB(worker.id, i))) return i.editReply({ content: "> 🛑 <@" + worker.id + "> **není v DB.**", ephemeral: true });
+            if (!(await checkDB(worker.id))) return i.editReply({ content: "> 🛑 <@" + worker.id + "> **není v DB.**", ephemeral: true });
             const member = await i.guild.members.fetch(worker.id);
 
             let log;
@@ -233,63 +233,11 @@ export default async function (bot, i) {
                 ])
                 .setThumbnail("https://i.imgur.com/wDab7i4.png")
                 .setColor(bot.LEA.c.summary)
-                .setFooter(getServer(i).footer);
+                .setFooter(getServer(i.guild.id).footer);
 
             console.log(" < [DB/Souhrn] >  " + i.member.displayName + " zobrazil(a) souhrn " + member.displayName);
 
             await i.editReply({ embeds: [summEmbed], ephemeral: true });;
-        }
-
-        if (i.customId === "cidCreateCPZ") {
-            const modal = new ModalBuilder()
-                .setCustomId("cidCreateCPZmodal")
-                .setTitle("CID | Vytvoření CID kanálu");
-
-            const nameInput = new TextInputBuilder()
-                .setCustomId("name")
-                .setLabel("Jméno a přijmení zadrženého")
-                .setStyle(TextInputStyle.Short)
-                .setPlaceholder("Will Smith")
-                .setRequired(true);
-
-            const birthInput = new TextInputBuilder()
-                .setCustomId("birth")
-                .setLabel("Datum narození zadrženého")
-                .setStyle(TextInputStyle.Short)
-                .setPlaceholder("12/24/2023")
-                .setMinLength(10)
-                .setMaxLength(10)
-                .setRequired(true);
-
-            const actionRow0 = new ActionRowBuilder().addComponents(nameInput);
-            const actionRow1 = new ActionRowBuilder().addComponents(birthInput);
-
-            modal.addComponents(actionRow0, actionRow1);
-
-            await i.showModal(modal);
-
-            let submit = await i.awaitModalSubmit({ filter: int => int.user.id === i.user.id, time: 120000 }).catch(e => {
-                return false;
-            });
-
-            if (submit) {
-                const ch = await i.guild.channels.create({
-                    name: submit.fields.getTextInputValue("name").replaceAll(" ", "-"),
-                    type: ChannelType.GuildText,
-                    topic: "CPZ kanál na jméno \"" + submit.fields.getTextInputValue("name") + "\" narozen(a) " + submit.fields.getTextInputValue("birth"),
-                    nsfw: false,
-                    reason: "CPZ kanál na vyžádání " + i.user.tag,
-                    parent: i.channel.parent.id
-                });
-
-                await ch.send({ content: `## ${submit.fields.getTextInputValue("name")}\n> **Narozen(a):** ${submit.fields.getTextInputValue("birth")}\n> **Vytvořil(a):** <@${i.user.id}>` });
-
-                await submit.reply({ content: `> ✅ **Úspěch! Kanál <#${ch.id}> vytvořen!**`, ephemeral: true });
-            } else {
-                await i.reply({ content: `> ❌ **Chyba, kanál nebyl vytvořen!**`, ephemeral: true });
-            }
-
-            console.log(" < [CID/CPZ] >  " + i.member.displayName + " vytvořil(a) CID kanál");
         }
     }
 
@@ -320,7 +268,7 @@ export default async function (bot, i) {
 
             if (
                 (i.fields.getTextInputValue("datum").split(" ").length - 1) !== 2
-                || (i.fields.getTextInputValue("datum").split(".").length - 1) !== 2
+                || (i.fields.getTextInputValue("datum").split(" ").length - 1) !== 2
             ) {
                 return await i.reply({
                     content:
@@ -373,7 +321,7 @@ export default async function (bot, i) {
                 ])
                 .setThumbnail("https://i.imgur.com/fhif3Xj.png")
                 .setColor(bot.LEA.c.duty)
-                .setFooter(getServer(i).footer);
+                .setFooter(getServer(i.guild.id).footer);
 
             const msg = await i.editReply({ embeds: [dutyEmbed], components: [row] });
 
@@ -451,7 +399,7 @@ export default async function (bot, i) {
                 ])
                 .setThumbnail("https://i.imgur.com/YQb9mPm.png")
                 .setColor(bot.LEA.c.apology)
-                .setFooter(getServer(i).footer);
+                .setFooter(getServer(i.guild.id).footer);
 
             const msg = await i.editReply({ embeds: [dutyEmbed], components: [row] });
 
@@ -506,7 +454,7 @@ export default async function (bot, i) {
                 ])
                 .setThumbnail("https://i.imgur.com/31WU5cn.png")
                 .setColor(bot.LEA.c.cpz)
-                .setFooter(getServer(i).footer);
+                .setFooter(getServer(i.guild.id).footer);
 
             console.log(" < [CMD/CPZ] >  " + i.member.displayName + " zapsal(a) CPZ občana " + i.fields.getTextInputValue("name"));
 
@@ -514,21 +462,84 @@ export default async function (bot, i) {
         } else if (i.customId === "loginModal") {
             if (await checkDB(i.fields.getTextInputValue("id"), i)) return i.reply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **už je v DB.**", ephemeral: true });
 
-            let post = false, folders;
+            let post = false, gotNick = true, gotRole = true, folders;
             const today = new Date();
-            if (i.guild.id === "1035916575594795008") { //LSSD
-                return await i.editReply({ content: "> 🛑 **LSSD má pozastavenou podporu.**" });
-                /*folders = await i.guild.channels.fetch("1178098611733667880");
+            if (i.guild.id === "1167182546853961860") { //LSSD
+                folders = await i.guild.channels.fetch("1193340608971018382");
+                try { var member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
+                catch (e) { await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true }); console.log(e); }
+
+                const rank = i.fields.getTextInputValue("rank"),
+                    name = i.fields.getTextInputValue("name"),
+                    radio = i.fields.getTextInputValue("call"),
+                    badge = i.fields.getTextInputValue("badge");
+                let roleID, tagID;
+                if (rank === "Deputy Trainee") roleID = "1167182546874945704", tagID = "1193350188765564988";
+                else if (rank === "Deputy I") roleID = "1167182546887520377", tagID = "1193350232684122252";
+                else if (rank === "Deputy II") roleID = "1167182546887520378", tagID = "1193350293300199534";
+                else if (rank === "Deputy III") roleID = "1167182546887520379", tagID = "1193350317765566494";
+                else if (rank === "Senior Deputy") roleID = "1190754447253586041", tagID = "1193350345628332152";
+                else if (rank === "Sergeant") roleID = "1167182546887520381", tagID = "1193350409138487427";
+                else if (rank === "Lieutenant") roleID = "1167182546887520384", tagID = "1193350438947397642";
+                else roleID = false, tagID = false;
+
+                if (!roleID) await i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${rank}\`)**`, ephemeral: true });
+
+                await i.deferReply();
+
+                const workerEmbed = new EmbedBuilder()
+                    .setAuthor({ name: `[${radio}] ${name}`, iconURL: member.displayAvatarURL() })
+                    .setDescription(
+                        `> **App:** <@${member.id}>`
+                        + `\n> **Jméno:** \`${name}\``
+                        + `\n> **Hodnost:** <@&${roleID}>`
+                        + `\n> **Odznak:** \`${badge}\``
+                        + `\n> **Volačka:** \`${radio}\``
+                        + "\n\n"
+                        + `\n> **Hodin:** \`0\``
+                        + `\n> **Omluvenek:** \`0\``
+                        + `\n> **Povýšení:** ${time(today, "R")}`
+                    )
+                    .setThumbnail(bot.LEA.i.LSSD)
+                    .setColor(bot.LEA.c.LSSD)
+                    .setFooter({ text: "LSSD | Vytvořil b1ngo ✌️", iconURL: bot.LEA.i.LSSD });
+                const row = new ActionRowBuilder()
+                    .addComponents(
+                        new ButtonBuilder()
+                            .setCustomId("summary_" + member.id)
+                            .setLabel("Souhrn")
+                            .setStyle(ButtonStyle.Success)
+                            .setEmoji("👀"),
+                    );
                 post = await folders.threads.create({
-                    name: `[${i.fields.getTextInputValue("call")}] ${i.fields.getTextInputValue("name")}`,
+                    name: `[${radio}] ${name}`,
                     message: {
-                        content:
-                            `> **Jméno:** ${i.fields.getTextInputValue("name")}`
-                            + `\n> **Hodnost:** ${i.fields.getTextInputValue("rank")}`
-                            + `\n> **Odznak:** ${i.fields.getTextInputValue("badge")}`
-                            + `\n> **Volačka:** ${i.fields.getTextInputValue("call")}`
-                    }
-                });*/
+                        content: `<@${member.id}>`,
+                        embeds: [workerEmbed],
+                        components: [row]
+                    },
+                    appliedTags: [tagID],
+                    reason: "Registrace od " + i.user.tag
+                });
+
+                try { await member.setNickname(`[${radio}] ${name}`); } catch { gotNick = false; }
+                try { await member.roles.add(["1167182546874945703", roleID]); } catch { gotRole = false; }
+
+                const onderka = await i.guild.members.fetch("411436203330502658");
+                const slozkaEmbed = new EmbedBuilder()
+                    .setAuthor({ name: onderka.displayName, iconURL: onderka.displayAvatarURL() })
+                    .setTitle("Vítejte ve Vaší složce!")
+                    .setDescription(
+                        `Zdravím <@${member.id}>, gratuluji Vám k úspěšnému přijetí na hodnost <@&${roleID}>.`
+                        + "\n**Zde si povinně zapisujete časy služeb a případné omluvenky.**"
+                        + "\n\n**Službu si zapisujete pomocí </duty:1170376396678377595> a omluvenku přes </omluvenka:1170382276492800131>.**"
+                        + "\nVe skutečnosti je to prosté. Systém Vás navede při použití příkazů."
+                        + "\nV případě dotazů, neváhejte mě (<@411436203330502658>) označit. Ovšem, nepište DMs."
+                    )
+                    .setThumbnail(bot.LEA.i.LSSD)
+                    .setColor(getServer(i.guild.id).color)
+                    .setFooter(getServer(i.guild.id).footer);
+                await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
             } else if (i.guild.id === "1139266097921675345") { //SAHP
                 folders = await i.guild.channels.fetch("1188146028440997948");
                 try { var member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
@@ -557,7 +568,7 @@ export default async function (bot, i) {
                     .setDescription(
                         `> **App:** <@${member.id}>`
                         + `\n> **Jméno:** \`${name}\``
-                        + `\n> **Hodnost:** ${roleID ? `<@&${roleID}>` : `\`${rank}\``}`
+                        + `\n> **Hodnost:** <@&${roleID}>`
                         + `\n> **Odznak:** \`${badge}\``
                         + `\n> **Volačka:** \`${radio}\``
                         + "\n\n"
@@ -565,7 +576,7 @@ export default async function (bot, i) {
                         + `\n> **Omluvenek:** \`0\``
                         + `\n> **Povýšení:** ${time(today, "R")}`
                     )
-                    .setThumbnail("https://i.imgur.com/xgFoKuX.png")
+                    .setThumbnail(bot.LEA.i.SAHP)
                     .setColor(bot.LEA.c.SAHP)
                     .setFooter({ text: "SAHP | Vytvořil b1ngo ✌️", iconURL: bot.LEA.i.SAHP });
                 const row = new ActionRowBuilder()
@@ -586,9 +597,9 @@ export default async function (bot, i) {
                     appliedTags: [tagID],
                     reason: "Registrace od " + i.user.tag
                 });
-                await member.setNickname(`[${radio}] ${name}`);
-                try { await member.roles.add(["1139276300188647444", roleID]); }
-                catch { }
+
+                try { await member.setNickname(`[${radio}] ${name}`); } catch { gotNick = false; }
+                try { await member.roles.add(["1139276300188647444", roleID]); } catch { gotRole = false; }
 
                 const onderka = await i.guild.members.fetch("411436203330502658");
                 const slozkaEmbed = new EmbedBuilder()
@@ -601,9 +612,9 @@ export default async function (bot, i) {
                         + "\nVe skutečnosti je to prosté. Systém Vás navede při použití příkazů."
                         + "\nV případě dotazů, neváhejte mě (<@411436203330502658>) označit. Ovšem, nepište DMs."
                     )
-                    .setThumbnail("https://i.imgur.com/xgFoKuX.png")
-                    .setColor(getServer(i).color)
-                    .setFooter(getServer(i).footer);
+                    .setThumbnail(bot.LEA.i.SAHP)
+                    .setColor(getServer(i.guild.id).color)
+                    .setFooter(getServer(i.guild.id).footer);
                 await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
             }
 
@@ -643,44 +654,67 @@ export default async function (bot, i) {
                 .setDescription(
                     `<@${i.fields.getTextInputValue("id")}> byl(a) přihlášen(a) do systému.`
                     + (post ? `\n> **Složka:** <#${post.id}>` : "\n> **Složka:** ✅")
-                    + "\n> **Přezdívka:** ✅"
-                    + "\n> **Role:** ✅"
+                    + "\n> **Přezdívka:** " + (gotNick ? "✅" : "❌")
+                    + "\n> **Role:** " + (gotRole ? "✅" : "❌")
                     + "\n> **Databáze:** ✅"
                 )
-                .setColor(getServer(i).color)
-                .setFooter(getServer(i).footer);
+                .setColor(getServer(i.guild.id).color)
+                .setFooter(getServer(i.guild.id).footer);
 
             console.log(" < [DB/Login] >  " + i.member.displayName + " zaregistroval(a) [" + i.fields.getTextInputValue("call") + "] " + i.fields.getTextInputValue("name") + " do DB");
 
             await i.editReply({ embeds: [loginEmbed] });
         } else if (i.customId === "rankUpModal") {
-            await i.deferReply({ ephemeral: true });
-
-            if (!(await checkDB(i.fields.getTextInputValue("id"), i))) return i.editReply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **není v DB.**", ephemeral: true });
-
-            let oldRoleID, roleID, tagID, newRank = i.fields.getTextInputValue("rank");
-            if (newRank === "Trooper Trainee") roleID = "1139276175819157646", tagID = "1188146360327872613";
-            else if (newRank === "Trooper I") roleID = "1139276036673130527", tagID = "1188146386206724126";
-            else if (newRank === "Trooper II") roleID = "1139275934025916568", tagID = "1188146415583625316";
-            else if (newRank === "Trooper III") roleID = "1139275782607347905", tagID = "1188146446885716030";
-            else if (newRank === "Sergeant") roleID = "1139275398295867453", tagID = "1188146467442012160";
-            else if (newRank === "Lieutenant") roleID = "1139275038877560856", tagID = "1188146485582377051";
-            else if (newRank === "Captain") roleID = "1139274974683746335", tagID = "1188146485582377051";
-            else roleID = false, tagID = false;
-            if (!roleID) await i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${newRank}\`)**`, ephemeral: true });
-
-            let content;
-            if (bot.LEA.g.SAHP.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
-            else if (bot.LEA.g.LSSD.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
+            if (!(await checkDB(i.fields.getTextInputValue("id"), i))) return i.reply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **není v DB.**", ephemeral: true });
             const member = await i.guild.members.fetch(i.fields.getTextInputValue("id"));
+            if (!member) return i.reply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **není v DB.**", ephemeral: true });
 
-            if (content.rank === "Trooper Trainee") oldRoleID = "1139276175819157646";
-            else if (content.rank === "Trooper I") oldRoleID = "1139276036673130527";
-            else if (content.rank === "Trooper II") oldRoleID = "1139275934025916568";
-            else if (content.rank === "Trooper III") oldRoleID = "1139275782607347905";
-            else if (content.rank === "Sergeant") oldRoleID = "1139275398295867453";
-            else if (content.rank === "Lieutenant") oldRoleID = "1139275038877560856";
-            else if (content.rank === "Captain") oldRoleID = "1139274974683746335";
+            let content, oldRoleID, roleID, tagID, gotNick = true, gotRole = true, newRank = i.fields.getTextInputValue("rank");
+            if (i.guild.id === "1167182546853961860") { //LSSD
+                if (newRank === "Deputy Trainee") roleID = "1167182546874945704", tagID = "1193350188765564988";
+                else if (newRank === "Deputy I") roleID = "1167182546887520377", tagID = "1193350232684122252";
+                else if (newRank === "Deputy II") roleID = "1167182546887520378", tagID = "1193350293300199534";
+                else if (newRank === "Deputy III") roleID = "1167182546887520379", tagID = "1193350317765566494";
+                else if (newRank === "Senior Deputy") roleID = "1190754447253586041", tagID = "1193350345628332152";
+                else if (newRank === "Sergeant") roleID = "1167182546887520381", tagID = "1193350409138487427";
+                else if (newRank === "Lieutenant") roleID = "1167182546887520384", tagID = "1193350438947397642";
+                else roleID = false, tagID = false;
+                if (!roleID) await i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${newRank}\`)**`, ephemeral: true });
+
+                content = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
+                if (!(await i.guild.channels.fetch(content.folder))) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
+
+                if (content.rank === "Deputy Trainee") oldRoleID = "1167182546874945704";
+                else if (content.rank === "Deputy I") oldRoleID = "1167182546887520377";
+                else if (content.rank === "Deputy II") oldRoleID = "1167182546887520378";
+                else if (content.rank === "Deputy III") oldRoleID = "1167182546887520379";
+                else if (content.rank === "Senior Deputy") oldRoleID = "1190754447253586041";
+                else if (content.rank === "Sergeant") oldRoleID = "1167182546887520381";
+                else if (content.rank === "Lieutenant") oldRoleID = "1167182546887520384";
+            } else if (i.guild.id === "1139266097921675345") { //SAHP
+                if (newRank === "Trooper Trainee") roleID = "1139276175819157646", tagID = "1188146360327872613";
+                else if (newRank === "Trooper I") roleID = "1139276036673130527", tagID = "1188146386206724126";
+                else if (newRank === "Trooper II") roleID = "1139275934025916568", tagID = "1188146415583625316";
+                else if (newRank === "Trooper III") roleID = "1139275782607347905", tagID = "1188146446885716030";
+                else if (newRank === "Sergeant") roleID = "1139275398295867453", tagID = "1188146467442012160";
+                else if (newRank === "Lieutenant") roleID = "1139275038877560856", tagID = "1188146485582377051";
+                else if (newRank === "Captain") roleID = "1139274974683746335", tagID = "1188146485582377051";
+                else roleID = false, tagID = false;
+                if (!roleID) await i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${newRank}\`)**`, ephemeral: true });
+
+                content = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
+                if (!(await i.guild.channels.fetch(content.folder))) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
+
+                if (content.rank === "Trooper Trainee") oldRoleID = "1139276175819157646";
+                else if (content.rank === "Trooper I") oldRoleID = "1139276036673130527";
+                else if (content.rank === "Trooper II") oldRoleID = "1139275934025916568";
+                else if (content.rank === "Trooper III") oldRoleID = "1139275782607347905";
+                else if (content.rank === "Sergeant") oldRoleID = "1139275398295867453";
+                else if (content.rank === "Lieutenant") oldRoleID = "1139275038877560856";
+                else if (content.rank === "Captain") oldRoleID = "1139274974683746335";
+            }
+
+            await i.deferReply();
 
             const today = new Date();
 
@@ -708,17 +742,9 @@ export default async function (bot, i) {
                 JSON.stringify(content, null, 4)
             );
 
-            await member.setNickname(`[${content.radio}] ${content.name}`);
-            await member.roles.remove([oldRoleID]);
-            await member.roles.add([roleID]);
-
-            const rankupEmbed = new EmbedBuilder()
-                .setTitle("Úspěch")
-                .setDescription(`<@${i.fields.getTextInputValue("id")}> byl(a) povýšen(a)!`)
-                .setColor(getServer(i).color)
-                .setFooter(getServer(i).footer);
-
-            await i.editReply({ embeds: [rankupEmbed], ephemeral: true });
+            try { await member.setNickname(`[${content.radio}] ${content.name}`); } catch { gotNick = false; }
+            try { await member.roles.remove([oldRoleID]); } catch { gotRole = false; }
+            try { await member.roles.add([roleID]); } catch { gotRole = false; }
 
             if (content.folder) {
                 try {
@@ -744,7 +770,7 @@ export default async function (bot, i) {
                                 + `\n> **Omluvenek:** \`${content.apologies.filter(a => !a.removed).length}\``
                                 + `\n> **Povýšení:** ${time(rankUpDate, "R")}`
                             )
-                            .setThumbnail("https://i.imgur.com/xgFoKuX.png")
+                            .setThumbnail(bot.LEA.i.SAHP)
                             .setColor(bot.LEA.c.SAHP)
                             .setFooter({ text: "SAHP | Vytvořil b1ngo ✌️", iconURL: bot.LEA.i.SAHP });
                         const row = new ActionRowBuilder()
@@ -757,6 +783,7 @@ export default async function (bot, i) {
                             );
                         await start.edit({ message: `<@${i.fields.getTextInputValue("id")}>`, embeds: [workerEmbed], components: [row] });
                     }
+
                     const rankup2Embed = new EmbedBuilder()
                         .setTitle("Povýšení!")
                         .setDescription(
@@ -768,9 +795,9 @@ export default async function (bot, i) {
                                 name: `Aktualizace`, inline: true,
                                 value:
                                     `> **Popis složky:** ${start ? "✅" : "❌"}\n`
-                                    + `> **Název složky:** "✅"\n`
-                                    + `> **Přezdívka:** "✅"`
-                                    + `> **Role:** "✅"`
+                                    + `> **Název složky:** ✅"\n`
+                                    + `> **Přezdívka:** ${gotNick ? "✅" : "❌"}\n`
+                                    + `> **Role:** ${gotRole ? "✅" : "❌"}`
                             },
                             {
                                 name: `Aktuální údaje`, inline: true,
@@ -781,34 +808,33 @@ export default async function (bot, i) {
                                     + `> **Č. Odznaku:** \`${i.fields.getTextInputValue("badge")}\``
                             }
                         ])
-                        .setThumbnail("https://i.imgur.com/xgFoKuX.png")
-                        .setColor(getServer(i).color)
-                        .setFooter(getServer(i).footer);
+                        .setThumbnail(getServer(i.guild.id).footer.iconURL)
+                        .setColor(getServer(i.guild.id).color)
+                        .setFooter(getServer(i.guild.id).footer);
                     await folder.send({ content: `<@${i.fields.getTextInputValue("id")}>` + (start ? "" : "<@411436203330502658>"), embeds: [rankup2Embed] });
+                    await folder.setName(`[${i.fields.getTextInputValue("call")}] ${content.name}`);
 
-                    await folder.setName(`[${i.fields.getTextInputValue("call")}] ${content.name}`);
-                    await folder.setName(`[${i.fields.getTextInputValue("call")}] ${content.name}`);
-                    await folder.setName(`[${i.fields.getTextInputValue("call")}] ${content.name}`);
+                    const rankupEmbed = new EmbedBuilder()
+                        .setTitle("Úspěch")
+                        .setDescription(
+                            `<@${i.fields.getTextInputValue("id")}> byl(a) povýšen(a)!`
+                            + `> **Popis složky:** ${start ? "✅" : "❌"}\n`
+                            + `> **Název složky:** ✅"\n`
+                            + `> **Přezdívka:** ${gotNick ? "✅" : "❌"}\n`
+                            + `> **Role:** ${gotRole ? "✅" : "❌"}`)
+                        .setColor(getServer(i.guild.id).color)
+                        .setFooter(getServer(i.guild.id).footer);
+
+                    await i.editReply({ embeds: [rankupEmbed], ephemeral: true });
                 } catch (e) {
                     console.error(e);
-                }
-
-                if (bot.LEA.g.LSSD.includes(i.guild.id) && !bot.LEA.g.SAHP.includes(i.guild.id)) {
-                    const msg = folder.fetchStarterMessage();
-                    await msg.edit({
-                        content:
-                            `> **Jméno:** ${content.name}`
-                            + `\n> **Hodnost:** ${i.fields.getTextInputValue("rank")}`
-                            + `\n> **Odznak:** ${i.fields.getTextInputValue("badge")}`
-                            + `\n> **Volačka:** ${i.fields.getTextInputValue("call")}`
-                    });
                 }
             }
 
         } else if (i.customId === "dutyOWModal") {
             await i.deferReply({ ephemeral: true });
 
-            if (!(await checkDB(i.message.interaction.user.id, i))) return i.editReply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
+            if (!(await checkDB(i.message.interaction.user.id))) return i.editReply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
 
             let content;
             if (bot.LEA.g.SAHP.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + i.message.interaction.user.id + ".json"), "utf-8"));
@@ -888,7 +914,7 @@ export default async function (bot, i) {
                 ])
                 .setThumbnail("https://i.imgur.com/fhif3Xj.png")
                 .setColor(bot.LEA.c.duty)
-                .setFooter(getServer(i).footer);
+                .setFooter(getServer(i.guild.id).footer);
 
             try {
                 await i.message.edit({ embeds: [dutyEmbed], components: [row] });
@@ -924,7 +950,7 @@ export default async function (bot, i) {
         } else if (i.customId === "apologyOWModal") {
             await i.deferReply({ ephemeral: true });
 
-            if (!(await checkDB(i.message.interaction.user.id, i))) return i.editReply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
+            if (!(await checkDB(i.message.interaction.user.id))) return i.editReply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
 
             let content;
             if (bot.LEA.g.SAHP.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + i.message.interaction.user.id + ".json"), "utf-8"));
@@ -976,7 +1002,7 @@ export default async function (bot, i) {
                 ])
                 .setThumbnail("https://i.imgur.com/YQb9mPm.png")
                 .setColor(bot.LEA.c.apology)
-                .setFooter(getServer(i).footer);
+                .setFooter(getServer(i.guild.id).footer);
 
             try {
                 await i.message.edit({ embeds: [apologyEmbed], components: [row] });
@@ -1052,7 +1078,7 @@ export default async function (bot, i) {
                 ])
                 .setThumbnail("https://i.imgur.com/31WU5cn.png")
                 .setColor(bot.LEA.c.cpz)
-                .setFooter(getServer(i).footer);
+                .setFooter(getServer(i.guild.id).footer);
 
             try {
                 await i.message.edit({ embeds: [cpzEmbed], components: [row] });
@@ -1065,7 +1091,7 @@ export default async function (bot, i) {
 
             i.editReply({ content: "✅ **Přepsáno!**", ephemeral: true });
         } else if (i.customId === "fakturaModal") {
-            if (!(await checkDB(i.user.id, i))) {
+            if (!(await checkDB(i.user.id))) {
                 let worker;
                 if (bot.LEA.g.SAHP.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + i.user.id + ".json"), "utf-8"));
                 else if (bot.LEA.g.LSSD.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.user.id + ".json"), "utf-8"));
@@ -1074,7 +1100,7 @@ export default async function (bot, i) {
                 if (!worker) return i.reply({ content: "> 🛑 **Před zapsáním __faktury__ tě musí admin přilásit do DB.** Můžeš si založit <#1139284046388674610>.", ephemeral: true });
             }
 
-            if (!(await checkEVENT(i.user.id, i))) {
+            if (!(await checkEVENT(i.user.id))) {
                 let worker;
                 if (bot.LEA.g.SAHP.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + i.user.id + ".json"), "utf-8"));
                 else if (bot.LEA.g.LSSD.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.user.id + ".json"), "utf-8"));
@@ -1118,7 +1144,7 @@ export default async function (bot, i) {
                 .setThumbnail("https://i.imgur.com/bGCFY6I.png")
                 .setImage(bot.LEA.i.event[Math.floor(Math.random() * bot.LEA.i.event.length)])
                 .setColor(bot.LEA.c.event)
-                .setFooter(getServer(i).footer);
+                .setFooter(getServer(i.guild.id).footer);
 
             const today = new Date();
 

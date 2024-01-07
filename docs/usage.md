@@ -22,12 +22,15 @@ Před spuštěním nezapomeň použít `npm install` pro instalaci balíčků (`
 - `npm test` pro kontrolu bezproblémového zapnutí
 
 ### 2. Přidání bota na server
-Použitím pozvánky https://discord.com/oauth2/authorize?client_id=ID-APLIKACE&permissions=274878221376&scope=bot%20applications.commands s oprávněními:
+Použitím pozvánky https://discord.com/oauth2/authorize?client_id=ID-APLIKACE&permissions=309640612928&scope=bot%20applications.commands s oprávněními:
+- [x] Upravovat role *(přiřazování role hodnosti)*
+- [x] Upravovat přezdívky *(přiřazování volačky do přezdívky)*
 - [x] Číst zprávy a zobrazovat kanály *(odesílání a úprava zpráv)*
 - [x] Odesílání zpráv *(odesílání a úprava zpráv)*
+- [x] Vytvářet veřejná vlákna *(vytváření diskuzí)*
 - [x] Odesílání zpráv ve vláknech *(odesílání a úprava zpráv)*
 - [x] Vkládat odkazy *(embeds)*
-- [x] Přikládat soubory *(pro zobrazení jednotlivých záznamů v DB)*
+- [x] Přikládat soubory *(nahrávání příliš velkého obsahu)*
 - [x] Používání externích emoji *(pro zpestření zpráv)*
 - [x] Přidávat reakce *(označení složky za správnou nebo chybnou)*
 

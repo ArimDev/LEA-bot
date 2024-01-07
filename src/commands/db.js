@@ -38,6 +38,7 @@ export default async function run(bot, i) {
     if (!passed) return i.reply({ content: "> 🛑 **K tomuhle má přístup jen admin.**", ephemeral: true });
 
     if (choice === "p") {
+        if (await checkDB(user.id)) return i.reply({ content: "> 🛑 <@" + user.id + "> **už je v DB.**", ephemeral: true });
         const modal = new ModalBuilder()
             .setCustomId("loginModal")
             .setTitle("SAHP | Přihlášení");
@@ -89,7 +90,7 @@ export default async function run(bot, i) {
 
         await i.showModal(modal);
     } else if (choice === "z") {
-        if (!(await checkDB(user.id, i))) return i.reply({ content: "> 🛑 <@" + user.id + "> **není v DB.**", ephemeral: true });
+        if (!(await checkDB(user.id))) return i.reply({ content: "> 🛑 <@" + user.id + "> **není v DB.**", ephemeral: true });
 
         let log;
         if (bot.LEA.g.SAHP.includes(i.guild.id)) log = path.resolve("./db/SAHP") + "/" + user.id + ".json";
@@ -100,7 +101,7 @@ export default async function run(bot, i) {
 
         i.reply({ files: [log], ephemeral: true });
     } else if (choice === "r") {
-        if (!(await checkDB(user.id, i))) return i.reply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
+        if (!(await checkDB(user.id))) return i.reply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
         const modal = new ModalBuilder()
             .setCustomId("rankUpModal")
             .setTitle("SAHP | Povýšení");
@@ -152,7 +153,7 @@ export default async function run(bot, i) {
 
         await i.showModal(modal);
     } else if (choice === "s") {
-        if (!(await checkDB(user.id, i))) return i.reply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
+        if (!(await checkDB(user.id))) return i.reply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
 
         let loc;
         if (bot.LEA.g.SAHP.includes(i.guild.id)) loc = path.resolve("./db/SAHP") + "/" + user.id + ".json";

@@ -1,5 +1,5 @@
 import { ActionRowBuilder, ModalBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
-import { checkDB } from "../../src/functions/db.js";
+import { checkDB, getServer } from "../../src/functions/db.js";
 
 export const slash = new SlashCommandBuilder()
     .setName("duty")
@@ -8,11 +8,15 @@ export const slash = new SlashCommandBuilder()
     .setNSFW(false);
 
 export default async function run(bot, i) {
-    if (!(await checkDB(i.user.id, i))) return i.reply({ content: "> 🛑 **Před zadáváním __duties__ a __omluvenek__ tě musí admin přilásit do DB.**\nZalož si vlastní složku a počkej na správce DB.", ephemeral: true });
+    if (!(await checkDB(i.user.id))) return i.reply({ content: "> 🛑 **Před zadáváním __duties__ a __omluvenek__ tě musí admin přilásit do DB.**\nZalož si vlastní složku a počkej na správce DB.", ephemeral: true });
 
-    const folders = ["1188146028440997948", "1178098611733667880"];
-    if (!i.channel.isThread()) return i.reply({ content: "> 🛑 **Zápis __duties__ a __omluvenek__ je povolen pouze ve své složce, v <#1188146028440997948>.**", ephemeral: true });
-    if (!folders.includes(i.channel.parentId)) return i.reply({ content: "> 🛑 **Zápis __duties__ a __omluvenek__ je povolen pouze ve své složce, v <#1188146028440997948>.**", ephemeral: true });
+    const folders = ["1188146028440997948", "1193340608971018382"];
+    let folder;
+    if (getServer(i.guild.id).id === 1) folder = folders[0];
+    else if (getServer(i.guild.id).id === 2) folder = folders[1];
+    else return i.reply({ content: "> 🛑 **Neznámý server!**", ephemeral: true });
+    if (!i.channel.isThread()) return i.reply({ content: `> 🛑 **Zápis __duties__ a __omluvenek__ je povolen pouze ve své složce, ve <#${folder}>.**`, ephemeral: true });
+    if (!folders.includes(i.channel.parentId)) return i.reply({ content: `> 🛑 **Zápis __duties__ a __omluvenek__ je povolen pouze ve své složce, v <#${folder}>.**`, ephemeral: true });
 
     const modal = new ModalBuilder()
         .setCustomId("dutyModal")
