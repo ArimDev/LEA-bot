@@ -13,7 +13,7 @@ export async function checkDB(id) {
 }
 
 export async function getDB(id) {
-    let r = { exists: false, data: {}, id: id, guild: undefined, guildID: undefined };
+    let r = { exists: false, data: {}, id: id, guild: undefined, guildName: undefined, guildEmoji: undefined, guildID: undefined };
     if (await fs.existsSync((path.resolve("./db/SAHP") + "/" + id + ".json"))) {
         r.exists = true;
         r.data = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + id + ".json"), "utf-8"));

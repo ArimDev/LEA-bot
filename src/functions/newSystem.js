@@ -25,6 +25,11 @@ export default async function folders(bot) {
             else if (worker.rank === "Sergeant") roleID = "1139275398295867453", tagID = "1188146467442012160";
             else if (worker.rank === "Lieutenant") roleID = "1139275038877560856", tagID = "1188146485582377051";
             else if (worker.rank === "Captain") roleID = "1139274974683746335", tagID = "1188146485582377051";
+            else if (worker.rank === "A. Chief") roleID = "1139274974683746335", tagID = "1188146485582377051";
+            else if (worker.rank === "Chief") roleID = "1139274974683746335", tagID = "1188146485582377051";
+            else if (worker.rank === "A. Commissioner") roleID = "1139274629547053139", tagID = "1188146485582377051";
+            else if (worker.rank === "D. Commissioner") roleID = "1139274565973983262", tagID = "1188146485582377051";
+            else if (worker.rank === "Commissioner") roleID = "1139274486085058590", tagID = "1188146485582377051";
             else roleID = false, tagID = false;
 
             const rankUpDateArr = worker.rankups[worker.rankups.length - 1].date.split(". ");

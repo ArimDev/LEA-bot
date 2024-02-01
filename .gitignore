@@ -129,3 +129,6 @@ dist
 # Other
 package-lock.json
 .vscode/
+
+# HTML
+*.html

@@ -1,12 +1,14 @@
 {
-    "badge": 2022,
+    "badge": 1050,
     "name": "Will Smith",
-    "radio": "Henry-5",
-    "rank": "Deputy III",
+    "radio": "Ocean-32",
+    "rank": "Commissioner",
     "folder": "0000000000000000001",
     "hours": 4,
     "duties": [
         {
+            "id": "1194666261259501598",
+            "removed": false,
             "date": "31. 12. 2020",
             "start": "13:00",
             "end": "17:00",
@@ -15,6 +17,8 @@
     ],
     "apologies": [
         {
+            "id": "1194666261259501598",
+            "removed": false,
             "shared": "2. 7. 2020",
             "start": "3. 7. 2020",
             "end": "7. 7. 2020",
@@ -22,21 +26,25 @@
             "ic": "Zlomená ruka"
         }
     ],
-    "warns": [
-        {
-            "date": "31. 12. 2020",
-            "boss": "[County-4] Adam Sandler",
-            "reason": "Toxicita"
-        }
-    ],
     "rankups": [
         {
             "date": "5. 11. 2023",
-            "to": "Deputy III",
-            "from": "Deputy II",
-            "boss": "[County-4] Adam Sandler",
+            "to": "Trooper III",
+            "from": "Trooper II",
+            "boss": "[Heaven-4] Adam Sandler",
             "reason": "Úspěšná hodnocená patrola",
             "hours": 0
+        }
+    ],
+    "reputation": [
+        {
+            "id": "1194666261259501598",
+            "removed": false,
+            "positive": true,
+            "date": "5. 11. 2023",
+            "from": "11626125950155898",
+            "boss": "[Heaven-4] Adam Sandler",
+            "description": "Má správné postupy"
         }
     ]
 }

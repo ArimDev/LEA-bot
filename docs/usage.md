@@ -41,8 +41,7 @@ Bot se hlavně zatím používá pomocí jednoduchých příkazů:
 - 👮✅ **`/db`** - Správa databáze zaměstnanců
 - 🫡✅ **`/duty`** - Zápis služby
 - 🫡✅ **`/event`** - Příkaz pro soutěže
-- 🫡❌ **`/hledat`** - Vyhledat zaměstnance podle údaje mimo těch z Discordu
-- 🫡✅ **`/kolega`** - Vyhledat zaměstnance podle Discord člena
+- 🫡✅ **`/profil`** - Vyhledat zaměstnance na základě různých parametrů
 - 🫡✅ **`/menu`** - Základní přehled / pomocné menu bota
 - 🫡✅ **`/omluvenka`** - Zápis omluvenky
 - 🫡✅ **`/online`** - Členi serveru, kteří aktuálně hrají na RefreshRP
@@ -51,6 +50,9 @@ Bot se hlavně zatím používá pomocí jednoduchých příkazů:
 - 👮 značí příkaz pro **adminy**
 - ✅ značí příkaz, který je v téhle verzi **funkční**
 - ❌ značí příkaz, který je v téhle verzi **nefunkční / nedokončený**
+
+Zároveň nově hostuje stránky s **SAHP, LSSD tabulkami a jejich divizemi** na bázi Express.js, HTML+CSS+JS.
+Ty se aktualizují **přímo z databáze a Discord serverů** po každém načtení stránky.
 
 #### 1. Zapsání duty
 1. Použij příkaz **`/duty`**.

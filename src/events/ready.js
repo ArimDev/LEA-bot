@@ -1,6 +1,10 @@
 import { ActionRowBuilder, ActivityType, ButtonBuilder, ButtonStyle, EmbedBuilder } from "discord.js";
 import { checkApologies } from "../../src/functions/outdated.js";
 import newSystem from "../../src/functions/newSystem.js";
+import { update, updateDiv } from "../../web/script.js";
+import express from "express";
+import path from "path";
+import { config as secret } from "dotenv";
 
 export default async function (bot) {
     console.log(` < [DC/Invite] >  https://discord.com/oauth2/authorize?client_id=${bot.user.id}&permissions=309640612928&scope=bot%20applications.commands`);
@@ -70,4 +74,36 @@ export default async function (bot) {
     await vlakno.send({ embeds: [navodEmbed], components: [row] });*/
 
     console.log(" < [PS/Info] >  Discord bot operational!");
+
+    const tApp = express();
+    const tPort = secret().port;
+
+    tApp.get('/', (req, res) => {
+        res.sendFile(path.resolve("./web/main.html"));
+    });
+
+    tApp.get('/sahp', async function (req, res) {
+        await update(bot, 1);
+        res.sendFile(path.resolve("./web/SAHP.html"));
+    });
+
+    tApp.get('/lssd', async function (req, res) {
+        await update(bot, 2);
+        res.sendFile(path.resolve("./web/LSSD.html"));
+    });
+
+    tApp.get('/divize', async function (req, res) {
+        await updateDiv(bot);
+        res.sendFile(path.resolve("./web/div.html"));
+    });
+
+    tApp.get('/div', (req, res) => {
+        res.redirect('/divize');
+    });
+
+    tApp.listen(tPort, () => {
+        console.log(` < [PS/Web] >  LEA Bot tables are now available at IP:${tPort}!`);
+    });
+
+    update(bot);
 }

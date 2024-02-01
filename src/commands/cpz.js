@@ -12,11 +12,20 @@ export default async function run(bot, i) {
     let passed = false;
     await i.guild.fetch();
     const admin = await i.member;
-    if (admin.roles.cache.has("1145344761402765343")) passed = true; //Staff team Refresh
-    if (admin.roles.cache.has("1139266408681844887")) passed = true; //.
-    if (admin.id === "607915400604286997") passed = true; //Samus
-    if (admin.id === "436180906533715969") passed = true; //Mičut
-    if (admin.id === "411436203330502658") passed = true; //PetyXbron
+    if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
+    if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1145344761402765343")) passed = true; //Staff team Refresh
+        if (admin.roles.cache.has("1139266408681844887")) passed = true; //.
+        if (admin.id === "607915400604286997") passed = true; //Samus
+        if (admin.id === "436180906533715969") passed = true; //Mičut
+    } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1167182546904293481")) passed = true; //Staff team Refresh
+        if (admin.roles.cache.has("1167182546904293482")) passed = true; //*
+        if (admin.roles.cache.has("1190825815596875829")) passed = true; //.
+        if (admin.id === "798644986215661589") passed = true; //Smouky
+        if (admin.id === "829978476701941781") passed = true; //Frexik
+    }
+
     if (!passed) {
         const ch = ["1139268053213917235", "1139268119391645756"];
         if (!ch.includes(i.channel.id)) return i.reply({ content: "> 🛑 **Zápis __CPZ__ je povolen pouze v <#1139268053213917235>.**", ephemeral: true });

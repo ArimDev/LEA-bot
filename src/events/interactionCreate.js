@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import { checkDB, checkEVENT, getServer } from "../../src/functions/db.js";
 import { dg } from "../../src/functions/logSystem.js";
+import { update } from "../../web/script.js";
 
 export default async function (bot, i) {
     if (i.type === InteractionType.ApplicationCommand) {
@@ -14,16 +15,23 @@ export default async function (bot, i) {
     }
 
     if (i.type === InteractionType.MessageComponent) {
-
         if (i.customId === "edit") {
             let passed = false;
             await i.guild.fetch();
             const admin = await i.member;
-            if (admin.roles.cache.has("1145344761402765343")) passed = true; //Staff team Refresh
-            if (admin.roles.cache.has("1139266408681844887")) passed = true; //.
-            if (admin.id === "607915400604286997") passed = true; //Samus
-            if (admin.id === "436180906533715969") passed = true; //Mičut
-            if (admin.id === "411436203330502658") passed = true; //PetyXbron
+            if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
+            if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
+                if (admin.roles.cache.has("1145344761402765343")) passed = true; //Staff team Refresh
+                if (admin.roles.cache.has("1139266408681844887")) passed = true; //.
+                if (admin.id === "607915400604286997") passed = true; //Samus
+                if (admin.id === "436180906533715969") passed = true; //Mičut
+            } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
+                if (admin.roles.cache.has("1167182546904293481")) passed = true; //Staff team Refresh
+                if (admin.roles.cache.has("1167182546904293482")) passed = true; //*
+                if (admin.roles.cache.has("1190825815596875829")) passed = true; //.
+                if (admin.id === "798644986215661589") passed = true; //Smouky
+                if (admin.id === "829978476701941781") passed = true; //Frexik
+            }
             if (admin.id === i.message.interaction.user.id) passed = true; //Owner
             if (!passed) {
                 return i.reply({ content: "> 🛑 **Nemůžeš přepisovat cizí záznamy!**", ephemeral: true });
@@ -214,7 +222,7 @@ export default async function (bot, i) {
             const summEmbed = new EmbedBuilder()
                 .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
                 .setTitle("Souhrn zaměstnance")
-                .setDescription("Pro zjištění dalších informací,\npoužij </kolega:1171119036730449975>.")
+                .setDescription("Pro zjištění dalších informací,\npoužij </profil:1195506010970931260>.")
                 .addFields([
                     {
                         name: `Omluvenky`, inline: false,
@@ -557,6 +565,11 @@ export default async function (bot, i) {
                 else if (rank === "Sergeant") roleID = "1139275398295867453", tagID = "1188146467442012160";
                 else if (rank === "Lieutenant") roleID = "1139275038877560856", tagID = "1188146485582377051";
                 else if (rank === "Captain") roleID = "1139274974683746335", tagID = "1188146485582377051";
+                else if (rank === "A. Chief") roleID = "1139274974683746335", tagID = "1188146485582377051";
+                else if (rank === "Chief") roleID = "1139274974683746335", tagID = "1188146485582377051";
+                else if (rank === "A. Commissioner") roleID = "1139274629547053139", tagID = "1188146485582377051";
+                else if (rank === "D. Commissioner") roleID = "1139274565973983262", tagID = "1188146485582377051";
+                else if (rank === "Commissioner") roleID = "1139274486085058590", tagID = "1188146485582377051";
                 else roleID = false, tagID = false;
 
                 if (!roleID) await i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${rank}\`)**`, ephemeral: true });
@@ -679,7 +692,7 @@ export default async function (bot, i) {
                 else if (newRank === "Sergeant") roleID = "1167182546887520381", tagID = "1193350409138487427";
                 else if (newRank === "Lieutenant") roleID = "1167182546887520384", tagID = "1193350438947397642";
                 else roleID = false, tagID = false;
-                if (!roleID) await i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${newRank}\`)**`, ephemeral: true });
+                if (!roleID) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${newRank}\`)**`, ephemeral: true });
 
                 content = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
                 if (!(await i.guild.channels.fetch(content.folder))) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
@@ -699,8 +712,13 @@ export default async function (bot, i) {
                 else if (newRank === "Sergeant") roleID = "1139275398295867453", tagID = "1188146467442012160";
                 else if (newRank === "Lieutenant") roleID = "1139275038877560856", tagID = "1188146485582377051";
                 else if (newRank === "Captain") roleID = "1139274974683746335", tagID = "1188146485582377051";
+                else if (newRank === "A. Chief") roleID = "1139274974683746335", tagID = "1188146485582377051";
+                else if (newRank === "Chief") roleID = "1139274974683746335", tagID = "1188146485582377051";
+                else if (newRank === "A. Commissioner") roleID = "1139274629547053139", tagID = "1188146485582377051";
+                else if (newRank === "D. Commissioner") roleID = "1139274565973983262", tagID = "1188146485582377051";
+                else if (newRank === "Commissioner") roleID = "1139274486085058590", tagID = "1188146485582377051";
                 else roleID = false, tagID = false;
-                if (!roleID) await i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${newRank}\`)**`, ephemeral: true });
+                if (!roleID) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${newRank}\`)**`, ephemeral: true });
 
                 content = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
                 if (!(await i.guild.channels.fetch(content.folder))) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
@@ -712,6 +730,11 @@ export default async function (bot, i) {
                 else if (content.rank === "Sergeant") oldRoleID = "1139275398295867453";
                 else if (content.rank === "Lieutenant") oldRoleID = "1139275038877560856";
                 else if (content.rank === "Captain") oldRoleID = "1139274974683746335";
+                else if (content.rank === "A. Chief") roleID = "1139274974683746335";
+                else if (content.rank === "Chief") roleID = "1139274974683746335";
+                else if (content.rank === "A. Commissioner") roleID = "1139274629547053139";
+                else if (content.rank === "D. Commissioner") roleID = "1139274565973983262";
+                else if (content.rank === "Commissioner") roleID = "1139274486085058590";
             }
 
             await i.deferReply();
@@ -795,7 +818,7 @@ export default async function (bot, i) {
                                 name: `Aktualizace`, inline: true,
                                 value:
                                     `> **Popis složky:** ${start ? "✅" : "❌"}\n`
-                                    + `> **Název složky:** ✅"\n`
+                                    + `> **Název složky:** ✅\n`
                                     + `> **Přezdívka:** ${gotNick ? "✅" : "❌"}\n`
                                     + `> **Role:** ${gotRole ? "✅" : "❌"}`
                             },
@@ -819,7 +842,7 @@ export default async function (bot, i) {
                         .setDescription(
                             `<@${i.fields.getTextInputValue("id")}> byl(a) povýšen(a)!`
                             + `> **Popis složky:** ${start ? "✅" : "❌"}\n`
-                            + `> **Název složky:** ✅"\n`
+                            + `> **Název složky:** ✅\n`
                             + `> **Přezdívka:** ${gotNick ? "✅" : "❌"}\n`
                             + `> **Role:** ${gotRole ? "✅" : "❌"}`)
                         .setColor(getServer(i.guild.id).color)

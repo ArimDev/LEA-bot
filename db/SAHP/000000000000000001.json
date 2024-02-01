@@ -5,8 +5,11 @@
     "rank": "Commissioner",
     "folder": "0000000000000000001",
     "hours": 4,
+    "lastRep": "11/24/2023 22:00",
     "duties": [
         {
+            "id": "1194666261259501598",
+            "removed": false,
             "date": "31. 12. 2020",
             "start": "13:00",
             "end": "17:00",
@@ -15,18 +18,13 @@
     ],
     "apologies": [
         {
+            "id": "1194666261259501598",
+            "removed": false,
             "shared": "2. 7. 2020",
             "start": "3. 7. 2020",
             "end": "7. 7. 2020",
             "ooc": "Rodinná akce",
             "ic": "Zlomená ruka"
-        }
-    ],
-    "warns": [
-        {
-            "date": "31. 12. 2020",
-            "boss": "[Heaven-4] Adam Sandler",
-            "reason": "Toxicita"
         }
     ],
     "rankups": [
@@ -37,6 +35,17 @@
             "boss": "[Heaven-4] Adam Sandler",
             "reason": "Úspěšná hodnocená patrola",
             "hours": 0
+        }
+    ],
+    "reputation": [
+        {
+            "id": "1194666261259501598",
+            "removed": false,
+            "positive": true,
+            "date": "5. 11. 2023",
+            "from": "11626125950155898",
+            "boss": "[Heaven-4] Adam Sandler",
+            "description": "Má správné postupy"
         }
     ]
 }
