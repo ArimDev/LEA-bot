@@ -73,7 +73,19 @@ export async function dcLog(bot, guildID, member, options = {}) {
         description = options.description,
         color = options.color,
         file = options.file;
-    if (gotServer.id === 2) {
+    if (gotServer.id === 1) {
+        guild = await bot.guilds.fetch("1154446248934387828");
+        channel = await guild.channels.fetch("1241761034906107904");
+        let files = [];
+        if (!!file) files = [file];
+        const logEmbed = new EmbedBuilder()
+            .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
+            .setTitle(title)
+            .setDescription(description)
+            .setColor(color)
+            .setFooter({ text: "LSPD | Vytvořil b1ngo ✌️", iconURL: bot.LEA.i.LSPD });
+        await channel.send({ embeds: [logEmbed], files: files });
+    } else if (gotServer.id === 2) {
         guild = await bot.guilds.fetch("1139266097921675345");
         channel = await guild.channels.fetch("1204181260688167012");
         let files = [];

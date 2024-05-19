@@ -33,7 +33,6 @@ bot.LEA = {
         duty: "#5245c0",
         apology: "#c05245",
         summary: "#25be5c",
-        cpz: "#bea925",
         event: "#Be25ab"
     },
     i: {

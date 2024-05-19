@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import { checkDB, getServer } from "../../src/functions/db.js";
 import { dcLog } from "../../src/functions/logSystem.js";
+import { findWorker } from "../../src/functions/profiles.js";
 
 export default async function (bot, i) {
     if (
@@ -53,7 +54,6 @@ export default async function (bot, i) {
             let type;
             if (i.message.embeds[0] && i.message.embeds[0].title === "Záznam služby") type = 0;
             if (i.message.embeds[0] && i.message.embeds[0].title === "Omluvenka") type = 1;
-            if (i.message.embeds[0] && i.message.embeds[0].fields[0].name === "CPZ záznam") type = 2;
 
             if (type === 0) {
                 const modal = new ModalBuilder()
@@ -150,57 +150,6 @@ export default async function (bot, i) {
                 const actionRow2 = new ActionRowBuilder().addComponents(endInput);
                 const actionRow3 = new ActionRowBuilder().addComponents(oocInput);
                 const actionRow4 = new ActionRowBuilder().addComponents(icInput);
-
-                modal.addComponents(actionRow0, actionRow1, actionRow2, actionRow3, actionRow4);
-
-                await i.showModal(modal);
-            } else if (type === 2) {
-                const modal = new ModalBuilder()
-                    .setCustomId("cpzOWModal")
-                    .setTitle("LEA | Přepis CPZ");
-
-                const nameInput = new TextInputBuilder()
-                    .setCustomId("name")
-                    .setLabel("Jméno občana")
-                    .setStyle(TextInputStyle.Short)
-                    .setPlaceholder("Will Smith")
-                    .setRequired(true);
-
-                const birthInput = new TextInputBuilder()
-                    .setCustomId("birth")
-                    .setLabel("Narození občana")
-                    .setStyle(TextInputStyle.Short)
-                    .setPlaceholder("12/31/1990")
-                    .setMinLength(10)
-                    .setMaxLength(10)
-                    .setRequired(true);
-
-                const reasonInput = new TextInputBuilder()
-                    .setCustomId("reason")
-                    .setLabel("Důvod zadržení")
-                    .setStyle(TextInputStyle.Paragraph)
-                    .setPlaceholder("Nelegální akce")
-                    .setRequired(true);
-
-                const moneyInput = new TextInputBuilder()
-                    .setCustomId("money")
-                    .setLabel("Výpis trestu / pokut")
-                    .setStyle(TextInputStyle.Paragraph)
-                    .setPlaceholder("15 000 $ + 1 rok odnětí svobody")
-                    .setRequired(true);
-
-                const pdInput = new TextInputBuilder()
-                    .setCustomId("pd")
-                    .setLabel("Řešili")
-                    .setStyle(TextInputStyle.Short)
-                    .setPlaceholder("Chris Evans, Addam Sandler")
-                    .setRequired(true);
-
-                const actionRow0 = new ActionRowBuilder().addComponents(nameInput);
-                const actionRow1 = new ActionRowBuilder().addComponents(birthInput);
-                const actionRow2 = new ActionRowBuilder().addComponents(reasonInput);
-                const actionRow3 = new ActionRowBuilder().addComponents(moneyInput);
-                const actionRow4 = new ActionRowBuilder().addComponents(pdInput);
 
                 modal.addComponents(actionRow0, actionRow1, actionRow2, actionRow3, actionRow4);
 
@@ -449,42 +398,31 @@ export default async function (bot, i) {
             );
 
             console.log(" < [DB/Apology] >  " + i.member.displayName + " zapsal(a) omluvenku trvající do " + i.fields.getTextInputValue("end"));
-        } else if (i.customId === "cpzModal") {
-            await i.deferReply();
-
-            const row = new ActionRowBuilder()
-                .addComponents(
-                    new ButtonBuilder()
-                        .setCustomId("edit")
-                        .setLabel("Přepsat")
-                        .setDisabled()
-                        .setStyle(ButtonStyle.Primary)
-                        .setEmoji("📝"),
-                );
-
-            const cpzEmbed = new EmbedBuilder()
-                .setAuthor({ name: i.member.displayName, iconURL: i.member.displayAvatarURL() })
-                .setTitle(i.fields.getTextInputValue("name"))
-                .addFields([
-                    {
-                        name: "CPZ záznam", inline: false,
-                        value:
-                            `**Jméno:** \`${i.fields.getTextInputValue("name")}\`\n`
-                            + `**Narozen(a):** \`${i.fields.getTextInputValue("birth")}\`\n`
-                            + `**Důvod:** \`\`\`${i.fields.getTextInputValue("reason")}\`\`\`\n`
-                            + `**Tresty:** \`${i.fields.getTextInputValue("money")}\`\n`
-                            + `**Řešili:** \`${i.fields.getTextInputValue("pd")}\``
-                    }
-                ])
-                .setThumbnail("https://i.imgur.com/31WU5cn.png")
-                .setColor(bot.LEA.c.cpz)
-                .setFooter(getServer(i.guild.id).footer);
-
-            console.log(" < [CMD/CPZ] >  " + i.member.displayName + " zapsal(a) CPZ občana " + i.fields.getTextInputValue("name"));
-
-            await i.editReply({ embeds: [cpzEmbed], components: [row] });
         } else if (i.customId === "loginModal") {
-            if (await checkDB(i.fields.getTextInputValue("id"), i)) return i.reply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **už je v DB.**", ephemeral: true });
+            const rank = i.fields.getTextInputValue("rank"),
+                name = i.fields.getTextInputValue("name"),
+                radio = i.fields.getTextInputValue("call"),
+                badge = i.fields.getTextInputValue("badge");
+            const bl = JSON.parse(fs.readFileSync(path.resolve("./db/blacklist.json"), "utf-8"));
+
+            //Checks
+            if (await checkDB(i.fields.getTextInputValue("id"), i))
+                return i.reply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **už je v DB.**", ephemeral: true });
+            if (await findWorker("badge", badge))
+                return i.reply({ content: `> 🛑 **Číslo odznaku \`${badge}\` už je obsazené!**`, ephemeral: true });
+            if (await findWorker("radio", radio))
+                return i.reply({ content: `> 🛑 **Volací znak \`${radio}\` už je obsazený!**`, ephemeral: true });
+            if (!radio.includes("-") || !/^\p{Lu}/u.test(radio))
+                return i.reply({
+                    content:
+                        `> 🛑 **Formát volacího znaku (\`${radio}\`) není správný!**`
+                        + "\nPravidla:"
+                        + "\n- Musí obsahovat `-`"
+                        + "\n- Musí začínat velkým písmenem",
+                    ephemeral: true
+                });
+            if (bl.some(e => e.id === i.fields.getTextInputValue("id")))
+                return i.reply({ content: `> 🛑 <@${i.fields.getTextInputValue("id")}> **je na blacklistu!**`, ephemeral: true });
 
             let post = false, gotNick = true, gotRole = true, folders;
             const today = new Date();
@@ -493,10 +431,6 @@ export default async function (bot, i) {
                 try { var member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
                 catch (e) { await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true }); return console.log(e); }
 
-                const rank = i.fields.getTextInputValue("rank"),
-                    name = i.fields.getTextInputValue("name"),
-                    radio = i.fields.getTextInputValue("call"),
-                    badge = i.fields.getTextInputValue("badge");
                 let rolesIDs, tagID;
                 if (rank === "Chief of Police") rolesIDs = ["1154446249005690910"], tagID = "1213985427724308490";
                 else if (rank === "Assistant Chief of Police") rolesIDs = ["1154446248967938187"], tagID = "1213985427724308490";
@@ -579,10 +513,6 @@ export default async function (bot, i) {
                 try { var member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
                 catch (e) { await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true }); console.log(e); }
 
-                const rank = i.fields.getTextInputValue("rank"),
-                    name = i.fields.getTextInputValue("name"),
-                    radio = i.fields.getTextInputValue("call"),
-                    badge = i.fields.getTextInputValue("badge");
                 let rolesIDs, tagID;
                 if (rank === "Sheriff") rolesIDs = ["1139274486085058590"], tagID = "1203829217167409192";
                 else if (rank === "Undersheriff") rolesIDs = ["1139274565973983262"], tagID = "1203829217167409192";
@@ -668,6 +598,7 @@ export default async function (bot, i) {
                 "hours": 0,
                 "duties": [],
                 "apologies": [],
+                "reputations": [],
                 "rankups": [
                     {
                         "date": today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear(),
@@ -1329,49 +1260,6 @@ export default async function (bot, i) {
             );
 
             console.log(" < [DB/OW/Apology] >  " + i.member.displayName + ` přepsal(a) omluvenku [${content.radio}] ${content.name} (${index})`);
-
-            i.editReply({ content: "✅ **Přepsáno!**", ephemeral: true });
-        } else if (i.customId === "cpzOWModal") {
-            await i.deferReply({ ephemeral: true });
-
-            const member = await i.guild.members.fetch(i.message.interaction.user.id);
-
-            const row = new ActionRowBuilder()
-                .addComponents(
-                    new ButtonBuilder()
-                        .setCustomId("edit")
-                        .setLabel("Přepsat")
-                        .setDisabled()
-                        .setStyle(ButtonStyle.Primary)
-                        .setEmoji("📝"),
-                );
-
-            const cpzEmbed = new EmbedBuilder()
-                .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
-                .setTitle(i.fields.getTextInputValue("name"))
-                .addFields([
-                    {
-                        name: "CPZ záznam", inline: false,
-                        value:
-                            `**Jméno:** \`${i.fields.getTextInputValue("name")}\`\n`
-                            + `**Narozen(a):** \`${i.fields.getTextInputValue("birth")}\`\n`
-                            + `**Důvod:** \`\`\`${i.fields.getTextInputValue("reason")}\`\`\`\n`
-                            + `**Tresty:** \`${i.fields.getTextInputValue("money")}\`\n`
-                            + `**Řešili:** \`${i.fields.getTextInputValue("pd")}\``
-                    }
-                ])
-                .setThumbnail("https://i.imgur.com/31WU5cn.png")
-                .setColor(bot.LEA.c.cpz)
-                .setFooter(getServer(i.guild.id).footer);
-
-            try {
-                await i.message.edit({ embeds: [cpzEmbed], components: [row] });
-            } catch (e) {
-                console.error(e);
-                return await i.editReply({ content: "> 🛑 **Chyba! Zpráva nešla upravit.**```" + e + "```" });
-            }
-
-            console.log(" < [OW/CPZ] >  " + i.member.displayName + ` přepsal(a) CPZ zápis ${i.fields.getTextInputValue("name")} (${i.fields.getTextInputValue("birth")}) od ${i.fields.getTextInputValue("pd")}`);
 
             i.editReply({ content: "✅ **Přepsáno!**", ephemeral: true });
         }

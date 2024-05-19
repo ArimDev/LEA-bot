@@ -28,18 +28,7 @@
             "ic": "Zlomená ruka"
         }
     ],
-    "cpz": [],
-    "rankups": [
-        {
-            "date": "5. 11. 2023",
-            "to": "Trooper III",
-            "from": "Trooper II",
-            "boss": "[Heaven-4] Adam Sandler",
-            "reason": "Úspěšná hodnocená patrola",
-            "hours": 0
-        }
-    ],
-    "reputation": [
+    "reputations": [
         {
             "id": "1194666261259501598",
             "removed": false,
@@ -48,6 +37,16 @@
             "from": "11626125950155898",
             "boss": "[Heaven-4] Adam Sandler",
             "description": "Má správné postupy"
+        }
+    ],
+    "rankups": [
+        {
+            "date": "5. 11. 2023",
+            "to": "Trooper III",
+            "from": "Trooper II",
+            "boss": "[Heaven-4] Adam Sandler",
+            "reason": "Úspěšná hodnocená patrola",
+            "hours": 0
         }
     ]
 }
