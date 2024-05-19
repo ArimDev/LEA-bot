@@ -10,7 +10,7 @@ export const slash = new SlashCommandBuilder()
 export default async function run(bot, i) {
     if (!(await checkDB(i.user.id))) return i.reply({ content: "> 🛑 **Před zadáváním __duties__ a __omluvenek__ tě musí admin přilásit do DB.**\nZalož si vlastní složku a počkej na správce DB.", ephemeral: true });
 
-    const folders = ["1188146028440997948", "1193340608971018382"];
+    const folders = ["1203743211000963082", "1213984576100241419"];
     let folder;
     if (getServer(i.guild.id).id === 1) folder = folders[0];
     else if (getServer(i.guild.id).id === 2) folder = folders[1];
@@ -20,7 +20,7 @@ export default async function run(bot, i) {
 
     const modal = new ModalBuilder()
         .setCustomId("dutyModal")
-        .setTitle("SAHP | Zápis služby");
+        .setTitle("LEA | Zápis služby");
 
     const today = new Date();
 

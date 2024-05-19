@@ -2,6 +2,7 @@ import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, SlashComman
 import fs from "fs";
 import path from "path";
 import { checkDB, getDB } from "../../src/functions/db.js";
+import { dcLog } from "../../src/functions/logSystem.js";
 
 export const slash = new SlashCommandBuilder()
     .setName("db")
@@ -14,6 +15,7 @@ export const slash = new SlashCommandBuilder()
                 { name: "Registrovat", value: "p" },
                 { name: "Zkontrolovat", value: "z" },
                 { name: "Povýšit", value: "r" },
+                { name: "Upravit", value: "u" },
                 { name: "Smazat", value: "s" }
             ))
     .addUserOption(option =>
@@ -31,26 +33,27 @@ export default async function run(bot, i) {
     await i.guild.fetch();
     const admin = await i.member;
     if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
-    if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("1145344761402765343")) passed = true; //Staff team Refresh
-        if (admin.roles.cache.has("1139266408681844887")) passed = true; //.
-        if (admin.id === "607915400604286997") passed = true; //Samus
-        if (admin.id === "436180906533715969") passed = true; //Mičut
+    if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1154446249005690917")) passed = true; //Staff team Refresh
+        if (admin.roles.cache.has("1201813866548580443")) passed = true; //.
+        if (admin.roles.cache.has("1154446249005690916")) passed = true; //*
+        if (admin.id === "846451292388851722") passed = true; //aldix_eu
+        if (admin.id === "644571265725628437") passed = true; //griffin0s
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("1167182546904293481")) passed = true; //Staff team Refresh
-        if (admin.roles.cache.has("1167182546904293482")) passed = true; //*
-        if (admin.roles.cache.has("1190825815596875829")) passed = true; //.
-        if (admin.id === "798644986215661589") passed = true; //Smouky
-        if (admin.id === "829978476701941781") passed = true; //Frexik
+        if (admin.roles.cache.has("1139267137651884072")) passed = true; //Leadership
+        if (admin.roles.cache.has("1139295201282764882")) passed = true; //FTO Commander
     }
 
     if (!passed) return i.reply({ content: "> 🛑 **K tomuhle má přístup jen admin.**", ephemeral: true });
 
     if (choice === "p") {
-        if (await checkDB(user.id)) return i.reply({ content: "> 🛑 <@" + user.id + "> **už je v DB.**", ephemeral: true });
+        if (await checkDB(user.id)) {
+            const gotDB = await getDB(user.id);
+            return i.reply({ content: `> 🛑 <@${user.id}> **už je v DB. (Členem ${gotDB.guildName}.)**`, ephemeral: true });
+        }
         const modal = new ModalBuilder()
             .setCustomId("loginModal")
-            .setTitle("SAHP | Přihlášení");
+            .setTitle("LEA | Přihlášení");
 
         const idInput = new TextInputBuilder()
             .setCustomId("id")
@@ -102,13 +105,13 @@ export default async function run(bot, i) {
         if (!(await checkDB(user.id))) return i.reply({ content: "> 🛑 <@" + user.id + "> **není v DB.**", ephemeral: true });
 
         let log, sbor;
-        if (bot.LEA.g.SAHP.includes(i.guild.id)) log = path.resolve("./db/SAHP") + "/" + user.id + ".json", sbor = "SAHP";
+        if (bot.LEA.g.LSPD.includes(i.guild.id)) log = path.resolve("./db/LSPD") + "/" + user.id + ".json", sbor = "LSPD";
         else if (bot.LEA.g.LSSD.includes(i.guild.id)) log = path.resolve("./db/LSSD") + "/" + user.id + ".json", sbor = "LSSD";
         else return i.reply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
         if (!fs.existsSync(log)) {
-            if (bot.LEA.g.SAHP.includes(i.guild.id)) log = path.resolve("./db/LSSD") + "/" + user.id + ".json", sbor = "LSSD";
-            else if (bot.LEA.g.LSSD.includes(i.guild.id)) log = path.resolve("./db/SAHP") + "/" + user.id + ".json", sbor = "SAHP";
+            if (bot.LEA.g.LSPD.includes(i.guild.id)) log = path.resolve("./db/LSSD") + "/" + user.id + ".json", sbor = "LSSD";
+            else if (bot.LEA.g.LSSD.includes(i.guild.id)) log = path.resolve("./db/LSPD") + "/" + user.id + ".json", sbor = "LSPD";
         }
 
         console.log(" < [CMD/DB] >  " + i.member.displayName + ` zobrazil(a) DB záznam ${user.id}.json`);
@@ -122,7 +125,7 @@ export default async function run(bot, i) {
 
         const modal = new ModalBuilder()
             .setCustomId("rankUpModal")
-            .setTitle("SAHP | Povýšení");
+            .setTitle("LEA | Povýšení");
 
         const idInput = new TextInputBuilder()
             .setCustomId("id")
@@ -154,18 +157,72 @@ export default async function run(bot, i) {
             .setPlaceholder("Trooper II")
             .setRequired(true);
 
-        const reasonInput = new TextInputBuilder()
-            .setCustomId("reason")
-            .setLabel("Důvod")
-            .setStyle(TextInputStyle.Paragraph)
-            .setPlaceholder("Úspěšná hodnocená patrola")
-            .setRequired(true);
-
         const actionRow0 = new ActionRowBuilder().addComponents(idInput);
         const actionRow1 = new ActionRowBuilder().addComponents(callInput);
         const actionRow2 = new ActionRowBuilder().addComponents(badgeInput);
         const actionRow3 = new ActionRowBuilder().addComponents(rankInput);
-        const actionRow4 = new ActionRowBuilder().addComponents(reasonInput);
+
+        modal.addComponents(actionRow0, actionRow1, actionRow2, actionRow3);
+
+        await i.showModal(modal);
+    } else if (choice === "u") {
+        if (!(await checkDB(user.id))) return i.reply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
+
+        const gotDB = await getDB(user.id);
+        const data = gotDB.data;
+        if (!bot.LEA.g[gotDB.guildName].includes(i.guild.id)) return i.reply({ content: `> 🛑 **<@${user.id}> je členem \`${gotDB.guildName}\`!** (Nemůžeš ho upravit)`, ephemeral: true });
+
+        const modal = new ModalBuilder()
+            .setCustomId("editModal")
+            .setTitle("LEA | Úprava DB");
+
+        const idInput = new TextInputBuilder()
+            .setCustomId("id")
+            .setLabel("ID Discord člena")
+            .setStyle(TextInputStyle.Short)
+            .setPlaceholder(user.id)
+            .setValue(user.id)
+            .setRequired(true);
+
+        const nameInput = new TextInputBuilder()
+            .setCustomId("name")
+            .setLabel("Jméno")
+            .setStyle(TextInputStyle.Short)
+            .setPlaceholder(data.name)
+            .setValue(data.name)
+            .setRequired(true);
+
+        const callInput = new TextInputBuilder()
+            .setCustomId("call")
+            .setLabel("Volačka")
+            .setStyle(TextInputStyle.Short)
+            .setPlaceholder(data.radio)
+            .setValue(data.radio)
+            .setRequired(true);
+
+        const badgeInput = new TextInputBuilder()
+            .setCustomId("badge")
+            .setLabel("Číslo odznaku")
+            .setStyle(TextInputStyle.Short)
+            .setPlaceholder(data.badge === 0 ? "0000" : data.badge.toString())
+            .setValue(data.badge === 0 ? "0000" : data.badge.toString())
+            .setMinLength(4)
+            .setMaxLength(4)
+            .setRequired(true);
+
+        const rankInput = new TextInputBuilder()
+            .setCustomId("rank")
+            .setLabel("Hodnost")
+            .setStyle(TextInputStyle.Short)
+            .setPlaceholder(data.rank)
+            .setValue(data.rank)
+            .setRequired(true);
+
+        const actionRow0 = new ActionRowBuilder().addComponents(idInput);
+        const actionRow1 = new ActionRowBuilder().addComponents(nameInput);
+        const actionRow2 = new ActionRowBuilder().addComponents(callInput);
+        const actionRow3 = new ActionRowBuilder().addComponents(badgeInput);
+        const actionRow4 = new ActionRowBuilder().addComponents(rankInput);
 
         modal.addComponents(actionRow0, actionRow1, actionRow2, actionRow3, actionRow4);
 
@@ -173,14 +230,14 @@ export default async function run(bot, i) {
     } else if (choice === "s") {
         if (!(await checkDB(user.id))) return i.reply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
 
-        let loc;
-        if (bot.LEA.g.SAHP.includes(i.guild.id)) loc = path.resolve("./db/SAHP") + "/" + user.id + ".json";
+        let loc, worker;
+        if (bot.LEA.g.LSPD.includes(i.guild.id)) loc = path.resolve("./db/LSPD") + "/" + user.id + ".json";
         else if (bot.LEA.g.LSSD.includes(i.guild.id)) loc = path.resolve("./db/LSSD") + "/" + user.id + ".json";
         else return i.reply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
         const admins = [
-            "411436203330502658"/*b1ngo*/, "607915400604286997"/*samus*/, "436180906533715969",/*micut*/
-            "829978476701941781"/*frexikk*/, "798644986215661589"/*smouky*/
+            "411436203330502658"/*b1ngo*/, "607915400604286997"/*samus*/, "436180906533715969"/*micut*/,
+            "846451292388851722"/*aldix_eu*/, "644571265725628437"/*griffin0s*/
         ];
 
         if (!fs.existsSync(loc)) {
@@ -203,17 +260,29 @@ export default async function run(bot, i) {
             });
 
             collector.on('collect', async i => {
-                if (bot.LEA.g.SAHP.includes(i.guild.id)) loc = path.resolve("./db/LSSD") + "/" + user.id + ".json";
-                else if (bot.LEA.g.LSSD.includes(i.guild.id)) loc = path.resolve("./db/SAHP") + "/" + user.id + ".json";
+                if (bot.LEA.g.LSPD.includes(i.guild.id)) loc = path.resolve("./db/LSSD") + "/" + user.id + ".json", worker = JSON.parse(fs.readFileSync(loc, "utf-8"));
+                else if (bot.LEA.g.LSSD.includes(i.guild.id)) loc = path.resolve("./db/LSPD") + "/" + user.id + ".json", worker = JSON.parse(fs.readFileSync(loc, "utf-8"));
+
+                await rpl.edit({ content: `**Tenhle záznam (<@${user.id}>) byl vymazán z DB!**`, files: [loc], components: [] });
+
+                await dcLog(bot, i.guild.id, i.member,
+                    {
+                        title: "Smazání z DB",
+                        description:
+                            `**<@${i.user.id}> smazal <@${user.id}> z DB.**`
+                            + `\n> **Jméno:** \`${worker.name}\``
+                            + `\n> **Volačka:** \`${worker.radio}\``
+                            + `\n> **Odznak:** \`${worker.badge}\``,
+                        color: "#ff0000",
+                        file: loc
+                    }
+                );
 
                 fs.unlinkSync(loc);
-                console.log(" < [CMD/DB] >  " + i.member.displayName + ` smazal(a) DB záznam ${user.id}.json`);
-
-                return await rpl.edit({ content: `**Tenhle záznam (<@${user.id}>) byl vymazán z DB!**`, files: [loc], components: [] });
+                return console.log(" < [CMD/DB] >  " + i.member.displayName + ` smazal(a) DB záznam ${user.id}.json`);
             });
 
             collector.on('error', async () => {
-
                 return await rpl.edit({ content: "> 🛑 **Čas vypršel. Záznam nebyl smazán.**", components: [] });
             });
 
@@ -221,8 +290,25 @@ export default async function run(bot, i) {
                 if (collected.size === 0) return await rpl.edit({ content: "> 🛑 **Čas vypršel. Záznam nebyl smazán.**", components: [] });
             });
         } else {
-            i.reply({ content: `**Tenhle záznam (<@${user.id}>) byl vymazán z DB!**`, files: [loc], ephemeral: true });
+            worker = JSON.parse(fs.readFileSync(loc, "utf-8"));
+            if (bot.LEA.g.LSPD.includes(i.guild.id)) {
+                const oldFolder = await i.guild.channels.fetch(worker.folder);
+                await oldFolder.delete();
+            }
+            await i.reply({ content: `**Tenhle záznam (<@${user.id}>) byl vymazán z DB!**`, files: [loc], ephemeral: true });
             console.log(" < [CMD/DB] >  " + i.member.displayName + ` smazal(a) DB záznam ${user.id}.json`);
+            await dcLog(bot, i.guild.id, i.member,
+                {
+                    title: "Smazání z DB",
+                    description:
+                        `**<@${i.user.id}> smazal <@${user.id}> z DB.**`
+                        + `\n> **Jméno:** \`${worker.name}\``
+                        + `\n> **Volačka:** \`${worker.radio}\``
+                        + `\n> **Odznak:** \`${worker.badge}\``,
+                    color: "#ff0000",
+                    file: loc
+                }
+            );
             return fs.unlinkSync(loc);
         }
     }

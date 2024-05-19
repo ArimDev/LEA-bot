@@ -1,7 +1,7 @@
 # LEA Bot | JAK POUŽÍVAT
 - Vytvořil **[@PetyXbron aka b1ngo](https://github.com/PetyXbron/)**
 - Veřejně dostupné na platformě GitHub.
-- LEA Bot primárně slouží pouze **San Andreas Highway Patrol** a **Los Santos Sheriff Department** na FiveM serveru **RefreshRP**. Jeho jiné používání není doporučeno a je nutné se řídit podmínkami.
+- LEA Bot primárně slouží pouze pro smyšlené policejní sbory **Los Santos Police Department** a **Los Santos Sheriff Department** na FiveM serveru **NoLimit | RefreshRP**. Jeho jiné používání není doporučeno a je nutné se řídit podmínkami.
 - Zkontroluj **[licenci](/LICENSE.md)** před používáním
 
 [![Creative Commons License](https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-nd/4.0/)
@@ -12,12 +12,10 @@
 3. [Používání funkcí](#3-používání-funkcí)
     1. [Zápis duty](#1-zapsání-duty)
     2. [Zápis omluvenky](#2-zapsání-omluvenky)
-    3. [Zápis CPZ](#3-zapsání-cpz)
-    4. [Event](#4-event)
 
 
 ### 1. Spuštění procesu
-Před spuštěním nezapomeň použít `npm install` pro instalaci balíčků (`discord.js`, `dotenv`, `fs`).
+Před spuštěním nezapomeň použít `npm install` pro instalaci balíčků (`discord.js`, `dotenv`, `express`, `node-fetch`).
 - `npm start` pro zapnutí na dobu neurčitou
 - `npm test` pro kontrolu bezproblémového zapnutí
 
@@ -36,22 +34,21 @@ Použitím pozvánky https://discord.com/oauth2/authorize?client_id=ID-APLIKACE&
 
 ### 3. Používání funkcí
 Bot se hlavně zatím používá pomocí jednoduchých příkazů:
-- 👮✅ **`/admin`** - Obecná správa
-- 🫡✅ **`/cpz`** - Zápis CPZ
 - 👮✅ **`/db`** - Správa databáze zaměstnanců
 - 🫡✅ **`/duty`** - Zápis služby
-- 🫡✅ **`/event`** - Příkaz pro soutěže
-- 🫡✅ **`/profil`** - Vyhledat zaměstnance na základě různých parametrů
+- 👮✅ **`/leader`** - Obecná admin správa
 - 🫡✅ **`/menu`** - Základní přehled / pomocné menu bota
 - 🫡✅ **`/omluvenka`** - Zápis omluvenky
 - 🫡✅ **`/online`** - Členi serveru, kteří aktuálně hrají na RefreshRP
+- 🫡✅ **`/profil`** - Vyhledat zaměstnance na základě různých parametrů
+- 🫡❌ **`/rep`** - Hodnocení, přidání reputace kolegům
 ####
 - 🫡 značí příkaz pro **všechny / zaměstnance**
 - 👮 značí příkaz pro **adminy**
 - ✅ značí příkaz, který je v téhle verzi **funkční**
 - ❌ značí příkaz, který je v téhle verzi **nefunkční / nedokončený**
 
-Zároveň nově hostuje stránky s **SAHP, LSSD tabulkami a jejich divizemi** na bázi Express.js, HTML+CSS+JS.
+Zároveň nově hostuje stránky s **LSPD, LSSD tabulkami, jejich divizemi a blacklistem** na bázi Express.js, HTML+CSS+JS.
 Ty se aktualizují **přímo z databáze a Discord serverů** po každém načtení stránky.
 
 #### 1. Zapsání duty
@@ -73,29 +70,5 @@ Ty se aktualizují **přímo z databáze a Discord serverů** po každém načte
 3. **Potvrď odeslání** a zkontroluj výsledek.
 
 ![Omluvenka embed ukázka](/assets/apology-embed.png)
-
-#### 3. Zapsání CPZ
-1. Použij příkaz **`/cpz`**.
-
-![CPZ pop-up ukázka](/assets/cpz-modal.png)
-
-2. **Vyplň údaje** v tzv. pop-upu.
-3. **Potvrď odeslání** a zkontroluj výsledek.
-
-![CPZ embed ukázka](/assets/cpz-embed.png)
-
-#### 4. Event
-Konání, průběh, a další určuje samotný server (jeho správci).
-Aktuálně je možné vyhodnotit event dle zadaých faktur.
-Jednotlivé příkazy:
-- **`/event faktura`** - samotný zápis faktury
-- **`/event souhrn`** - výpis faktur
-- **`/event žebříček`** - žebříček top soutěžících
-
-Zápis faktury:
-
-![Event faktura ukázka](/assets/event-faktura-modal.png)
-
-![Event faktura ukázka](/assets/event-faktura-embed.png)
 
 Použivání každé funkce je omezené a tím pádem je nepochopení, či špatné použití skoro nemožné.

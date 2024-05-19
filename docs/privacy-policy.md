@@ -1,7 +1,7 @@
 # LEA Bot | Zásady Ochrany Osobních Údajů
 - Vytvořil **[@PetyXbron aka b1ngo](https://github.com/PetyXbron/)**
 - Veřejně dostupné na platformě GitHub.
-- LEA Bot primárně slouží pouze **San Andreas Highway Patrol** a **Los Santos Sheriff Department** na FiveM serveru **RefreshRP**. Jeho jiné používání není doporučeno a je nutné se řídit podmínkami.
+- LEA Bot primárně slouží pouze pro smyšlené policejní sbory **Los Santos Police Department** a **Los Santos Sheriff Department** na FiveM serveru **NoLimit | RefreshRP**. Jeho jiné používání není doporučeno a je nutné se řídit podmínkami.
 - Zkontroluj **[licenci](/LICENSE.md)** před používáním
 
 [![Creative Commons License](https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-nd/4.0/)

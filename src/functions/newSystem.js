@@ -6,10 +6,10 @@ export default async function folders(bot) {
     return;
     try {
         const guild = await bot.guilds.fetch("1139266097921675345");
-        const folders = await guild.channels.fetch("1188146028440997948");
-        const db = fs.readdirSync(path.resolve("./db/SAHP")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
+        const folders = await guild.channels.fetch("1203743211000963082");
+        const db = fs.readdirSync(path.resolve("./db/LSPD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
         for (const file of db) {
-            let worker = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + file), "utf-8"));
+            let worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + file), "utf-8"));
             try {
                 var member = await guild.members.fetch(file.slice(0, -5));
             } catch (e) {
@@ -77,6 +77,7 @@ export default async function folders(bot) {
                         new ButtonBuilder()
                             .setCustomId("edit")
                             .setLabel("Přepsat")
+                            .setDisabled()
                             .setStyle(ButtonStyle.Primary)
                             .setEmoji("📝")
                             .setDisabled(),
@@ -110,6 +111,7 @@ export default async function folders(bot) {
                         new ButtonBuilder()
                             .setCustomId("edit")
                             .setLabel("Přepsat")
+                            .setDisabled()
                             .setStyle(ButtonStyle.Primary)
                             .setEmoji("📝")
                             .setDisabled(),
@@ -144,7 +146,7 @@ export default async function folders(bot) {
             }
 
             fs.writeFileSync(
-                path.resolve("./db/SAHP") + "/" + file,
+                path.resolve("./db/LSPD") + "/" + file,
                 JSON.stringify(worker, null, 4)
             );
 

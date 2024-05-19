@@ -26,6 +26,7 @@ let bot = new Client({
 bot.slashes = new Collection();
 bot.LEA = {
     c: {
+        LEAbot: "#3a9a97",
         LSPD: "#000c1e",
         SAHP: "#457cc0",
         LSSD: "#bd8131",
@@ -36,6 +37,7 @@ bot.LEA = {
         event: "#Be25ab"
     },
     i: {
+        LEAbot: "https://i.imgur.com/EnZErOi.png",
         LSPD: "https://i.imgur.com/gfL0fGf.png",
         SAHP: "https://i.imgur.com/xgFoKuX.png",
         LSSD: "https://i.imgur.com/X3cH2iu.png",
@@ -51,11 +53,11 @@ bot.LEA = {
         LSSD: "<:LSSD:1178106303198011412>"
     },
     g: {
-        SAHP: [
-            "1139266097921675345", "1174843772446703718", "714147774299373629"
+        LSPD: [
+            "1154446248934387828", "1203275468544151583"
         ],
         LSSD: [
-            "1167182546853961860"
+            "1139266097921675345", "1174843772446703718", "714147774299373629"
         ]
     }
 };
@@ -64,6 +66,6 @@ import { events, commands } from "./src/functions/register.js";
 events(bot);
 commands(bot);
 
-bot.login(secret().parsed.token);
+bot.login(secret().parsed.botToken);
 
 export { bot };

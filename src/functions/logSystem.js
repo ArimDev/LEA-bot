@@ -1,6 +1,8 @@
 import fs from "fs";
 import path from "path";
 import util from "util";
+import { getServer } from "./db.js";
+import { EmbedBuilder } from "discord.js";
 
 export function dg(date, option) {
     let r;
@@ -62,4 +64,26 @@ export async function setup() {
         logStream.write(`[${day} | ${time} WAR] ${util.format(d)}` + "\n");
         logStdout.write(`[${day} | ${time} WAR] ${util.format(d)}` + "\n");
     };
+}
+
+export async function dcLog(bot, guildID, member, options = {}) {
+    const gotServer = getServer(guildID);
+    let guild, channel,
+        title = options.title,
+        description = options.description,
+        color = options.color,
+        file = options.file;
+    if (gotServer.id === 2) {
+        guild = await bot.guilds.fetch("1139266097921675345");
+        channel = await guild.channels.fetch("1204181260688167012");
+        let files = [];
+        if (!!file) files = [file];
+        const logEmbed = new EmbedBuilder()
+            .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
+            .setTitle(title)
+            .setDescription(description)
+            .setColor(color)
+            .setFooter({ text: "LSSD | Vytvořil b1ngo ✌️", iconURL: bot.LEA.i.LSSD });
+        await channel.send({ embeds: [logEmbed], files: files });
+    }
 }

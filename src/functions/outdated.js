@@ -3,13 +3,13 @@ import path from "path";
 
 export async function checkApologies(bot) {
     /* FIX
-    let workers = (await fs.promises.readdir(path.resolve("./db/SAHP"))).concat(await fs.promises.readdir(path.resolve("./db/LSSD")));
+    let workers = (await fs.promises.readdir(path.resolve("./db/LSPD"))).concat(await fs.promises.readdir(path.resolve("./db/LSSD")));
 
     for (const fileName of workers.filter(f => f !== "000000000000000001.json")) {
         const workerID = fileName.split(".json")[0];
 
         let sbor;
-        let worker = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + workerID + ".json"), "utf-8"));
+        let worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + workerID + ".json"), "utf-8"));
         if (!worker) { worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + workerID + ".json"), "utf-8")); sbor = "LSSD"; }
         else sbor = "SAHP";
 
@@ -37,7 +37,7 @@ export async function checkApologies(bot) {
 
         if (sbor === "SAHP") {
             await fs.writeFileSync(
-                (path.resolve("./db/SAHP") + "/" + workerID + ".json"),
+                (path.resolve("./db/LSPD") + "/" + workerID + ".json"),
                 JSON.stringify(worker, null, 4)
             );
         } else {

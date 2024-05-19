@@ -30,9 +30,12 @@ export async function commands(bot) {
         const command = file.split(".")[0];
         function registerCommand(cmd, cmdFile) {
             bot.slashes.set(cmd, cmdFile);
-            slashCommands.push(cmdFile.slash.toJSON());
+            if (cmdFile.slash) slashCommands.push(cmdFile.slash.toJSON());
+            else if (cmdFile.context) slashCommands.push(cmdFile.context.toJSON());
         }
-        registerCommand(command, commandFile);
+        let cmdName = command
+        if (commandFile.context) cmdName = command.split("_")[1].toLowerCase()
+        registerCommand(cmdName, commandFile);
     };;
 
     bot.once("ready", async (bot) => {

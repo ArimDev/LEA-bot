@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Will Smith",
+        "displayName": "William",
+        "username": "smith01",
+        "id": "0000000000000000001",
+        "from": {
+            "dep": "LSSD",
+            "name": "Dwayne Johnson",
+            "username": "dwayne02",
+            "displayName": "TheRock",
+            "id": "0000000000000000002",
+            "timestamp": "31. 12. 2020",
+            "reason": "corruption"
+        }
+    }
+]

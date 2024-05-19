@@ -109,7 +109,7 @@ dist
 
 # FuseBox cache
 .fusebox/
-
+    
 # DynamoDB Local files
 .dynamodb/
 
@@ -129,6 +129,7 @@ dist
 # Other
 package-lock.json
 .vscode/
+db/backup/
 
-# HTML
-*.html
+# Web
+web/

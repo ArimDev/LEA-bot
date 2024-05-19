@@ -49,7 +49,6 @@ export default async function run(bot, i) {
     console.log(" < [CMD/Menu] >  " + (i.member.displayName || i.user.displayName) + ` zobrazil(a) menu`);
 
     const commands = fs.readdirSync(path.resolve("./src/commands")).filter(file => file.endsWith(".js"));
-    const events = fs.readdirSync(path.resolve("./src/events")).filter(file => file.endsWith(".js"));
     let helpEmbed = new EmbedBuilder()
         .setTitle("Bot Menu")
         .setFields([
@@ -63,14 +62,13 @@ export default async function run(bot, i) {
                 name: `Analytika`, inline: true,
                 value:
                     `> **Příkazů**: \`${commands.length}\``
-                    + `\n> **Eventů**: \`${events.length}\``
             },
             {
                 name: `Info`, inline: false,
                 value:
                     `> **Autor:** <@411436203330502658> ([web](https://petyxbron.cz/cs/p))
-                    > **Sloužím:** SAHP <:SAHP:1174876044570931210> a LSSD <:LSSD:1178106303198011412>
-                    > **FiveM:** RefreshRP 🌴
+                    > **Sloužím:** LSPD <:LSPD:1178108366514565181> a LSSD <:LSSD:1178106303198011412>
+                    > **FiveM:** NoLimit | RefreshRP 🌴
                     > **GitHub**: [petyxbron.cz/lea-bot](https://petyxbron.cz/lea-bot)`
             },
             {
@@ -81,12 +79,12 @@ export default async function run(bot, i) {
                     > **Jak Používat:** [/docs/usage.md](https://github.com/Azator-Entertainment/LEA-bot/blob/master/docs/usage.md)`
             }
         ])
-        .setColor(bot.LEA.c.LSPD)
-        .setThumbnail(bot.LEA.i.LSPD)
+        .setColor(bot.LEA.c.LEAbot)
+        .setThumbnail(bot.user.avatarURL())
         .setFooter({ text: `LEA Bot v${process.env.version} | Vytvořil b1ngo ✌️`, iconURL: bot.user.avatarURL() });
 
     let group;
-    if (bot.LEA.g.SAHP.includes(i.guild.id)) group = "**SAHP** " + bot.LEA.e.SAHP;
+    if (bot.LEA.g.LSPD.includes(i.guild.id)) group = "**LSPD** " + bot.LEA.e.LSPD;
     else if (bot.LEA.g.LSSD.includes(i.guild.id)) group = "**LSSD** " + bot.LEA.e.LSSD;
     else group = false;
 
