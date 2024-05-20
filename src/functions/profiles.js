@@ -8,10 +8,10 @@ export async function getProfile(bot, id) {
     const rep = await getRep(id);
     if (!db.exists) return false;
     //IF LEFT CHECK
-    /*const guild = await bot.guilds.fetch(db.guildID);
+    const guild = await bot.guilds.fetch(db.guildID);
     if (!guild) return false;
     const member = await guild.members.fetch(id);
-    if (!member) return false;*/
+    if (!member) return false;
     const worker = db.data;
     let profileEmbed = new EmbedBuilder()
         .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })

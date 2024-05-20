@@ -292,8 +292,10 @@ export default async function run(bot, i) {
         } else {
             worker = JSON.parse(fs.readFileSync(loc, "utf-8"));
             if (bot.LEA.g.LSPD.includes(i.guild.id)) {
-                const oldFolder = await i.guild.channels.fetch(worker.folder);
-                await oldFolder.delete();
+                try {
+                    const oldFolder = await i.guild.channels.fetch(worker.folder);
+                    await oldFolder.delete();
+                } catch { }
             }
             await i.reply({ content: `**Tenhle záznam (<@${user.id}>) byl vymazán z DB!**`, files: [loc], ephemeral: true });
             console.log(" < [CMD/DB] >  " + i.member.displayName + ` smazal(a) DB záznam ${user.id}.json`);

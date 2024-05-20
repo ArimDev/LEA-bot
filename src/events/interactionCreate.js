@@ -218,7 +218,7 @@ export default async function (bot, i) {
             else if (bot.LEA.g.LSSD.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.user.id + ".json"), "utf-8"));
             else return i.reply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
-            await i.deferReply();
+            try { await i.deferReply(); } catch { return; }
 
             const index = content.duties.length + 1;
 
@@ -408,10 +408,8 @@ export default async function (bot, i) {
             //Checks
             if (await checkDB(i.fields.getTextInputValue("id"), i))
                 return i.reply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **už je v DB.**", ephemeral: true });
-            if (await findWorker("badge", badge))
-                return i.reply({ content: `> 🛑 **Číslo odznaku \`${badge}\` už je obsazené!**`, ephemeral: true });
-            if (await findWorker("radio", radio))
-                return i.reply({ content: `> 🛑 **Volací znak \`${radio}\` už je obsazený!**`, ephemeral: true });
+            if (bl.some(e => e.id === i.fields.getTextInputValue("id")))
+                return i.reply({ content: `> 🛑 <@${i.fields.getTextInputValue("id")}> **je na blacklistu!**`, ephemeral: true });
             if (!radio.includes("-") || !/^\p{Lu}/u.test(radio))
                 return i.reply({
                     content:
@@ -421,8 +419,10 @@ export default async function (bot, i) {
                         + "\n- Musí začínat velkým písmenem",
                     ephemeral: true
                 });
-            if (bl.some(e => e.id === i.fields.getTextInputValue("id")))
-                return i.reply({ content: `> 🛑 <@${i.fields.getTextInputValue("id")}> **je na blacklistu!**`, ephemeral: true });
+            if (await findWorker("badge", badge))
+                return i.reply({ content: `> 🛑 **Číslo odznaku \`${badge}\` už je obsazené!**`, ephemeral: true });
+            if (await findWorker("radio", radio))
+                return i.reply({ content: `> 🛑 **Volací znak \`${radio}\` už je obsazený!**`, ephemeral: true });
 
             let post = false, gotNick = true, gotRole = true, folders;
             const today = new Date();
@@ -775,6 +775,7 @@ export default async function (bot, i) {
                     const folder = await i.guild.channels.fetch(content.folder);
                     const start = await folder.fetchStarterMessage({ force: true });
 
+                    if (folder.archived) folder.setArchived(false, "otevření složky");
                     await folder.setAppliedTags([tagID]);
 
                     if (start) {

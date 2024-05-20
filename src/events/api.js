@@ -161,7 +161,7 @@ export default async function api(bot, app) {
             if (!me.ok) {
                 console.log(" < [PS/Login] > Verify: " + "XXX" + " has not been verified");
                 return res.json({ passed: false, username: undefined, id: undefined, displayName: undefined, avatar: undefined });
-            } else meR = await me.json();
+            } else if (me.ok) meR = await me.json();
         }
 
         if (!passed) {

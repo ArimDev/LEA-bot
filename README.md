@@ -47,3 +47,9 @@ Funkce:
 
 Toto dílo je licencováno pod [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](http://creativecommons.org/licenses/by-nc-nd/4.0/).
 Kód můžete volně kopírovat a dále distribuovat na jakémkoli médiu nebo formátu. Při sdílení musíte poskytnout náležitý kredit. Materiál nemůžete použít pro komerční účely. Pokud materiál remixujete, modifikujete, transformujete nebo na něm zakládáte další práci, nesmíte upravený materiál dále distribuovat.
+<div align="center">
+<img src="https://i.imgur.com/0OfsGcj.png" width="100" height="100"/>
+
+*Vlastněno a spravováno organizací [Azator Entertainment](https://github.com/Azator-Entertainment).*
+© 2023 - 2024
+</div>
