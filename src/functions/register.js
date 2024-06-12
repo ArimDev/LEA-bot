@@ -23,7 +23,7 @@ export async function events(bot) {
 }
 
 export async function commands(bot) {
-    let slashCommands = [];
+    let slashCommands = [], contextCommands = 0;
     const commandsFolder = fs.readdirSync(path.resolve("./src/commands")).filter(file => file.endsWith(".js"));
     for (const file of commandsFolder) {
         const commandFile = await import(`../commands/${file}`);
@@ -33,8 +33,8 @@ export async function commands(bot) {
             if (cmdFile.slash) slashCommands.push(cmdFile.slash.toJSON());
             else if (cmdFile.context) slashCommands.push(cmdFile.context.toJSON());
         }
-        let cmdName = command
-        if (commandFile.context) cmdName = command.split("_")[1].toLowerCase()
+        let cmdName = command;
+        if (commandFile.context) { cmdName = command.split("_")[1].toLowerCase(); contextCommands++; }
         registerCommand(cmdName, commandFile);
     };;
 
@@ -46,7 +46,8 @@ export async function commands(bot) {
                 Routes.applicationCommands(bot.user.id),
                 { body: slashCommands },
             ).then(() => {
-                console.log(" < [DC] >  Úspěšně zaregstrováno " + slashCommands.length + " slash příkazů!");
+                console.log(" < [DC] >  Úspěšně zaregstrováno " + (slashCommands.length - contextCommands) + " slash příkazů!");
+                console.log(" < [DC] >  Úspěšně zaregstrováno " + contextCommands + " context menu příkazů!");
                 if (runType === 1) {
                     console.log("");
                     console.log("                               test úspěšný                               ");

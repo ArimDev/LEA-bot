@@ -5,7 +5,7 @@ import { checkDB, getDB } from "../functions/db.js";
 import { dcLog } from "../functions/logSystem.js";
 
 export const context = new ContextMenuCommandBuilder()
-    .setName('Registrovat do DB')
+    .setName('DB Registrovat')
     .setType(ApplicationCommandType.User)
     .setDMPermission(false);
 
@@ -17,11 +17,7 @@ export default async function run(bot, i) {
     const admin = await i.member;
     if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
     if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("1154446249005690917")) passed = true; //Staff team Refresh
-        if (admin.roles.cache.has("1201813866548580443")) passed = true; //.
-        if (admin.roles.cache.has("1154446249005690916")) passed = true; //*
         if (admin.id === "846451292388851722") passed = true; //aldix_eu
-        if (admin.id === "644571265725628437") passed = true; //griffin0s
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1139267137651884072")) passed = true; //Leadership
         if (admin.roles.cache.has("1139295201282764882")) passed = true; //FTO Commander

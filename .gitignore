@@ -109,7 +109,7 @@ dist
 
 # FuseBox cache
 .fusebox/
-    
+
 # DynamoDB Local files
 .dynamodb/
 
@@ -127,6 +127,7 @@ dist
 .pnp.*
 
 # Other
+pm2.config.cjs
 package-lock.json
 .vscode/
 db/backup/

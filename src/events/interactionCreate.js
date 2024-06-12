@@ -213,6 +213,33 @@ export default async function (bot, i) {
 
     if (i.type === InteractionType.ModalSubmit) {
         if (i.customId === "dutyModal") {
+            if (
+                (i.fields.getTextInputValue("datum").split(" ").length - 1) !== 2
+                || (i.fields.getTextInputValue("datum").split(" ").length - 1) !== 2
+            ) {
+                return await i.reply({
+                    content:
+                        "### Nalezena chyba - datum!"
+                        + "\n- Formát data je špatně. Napiš např. `24. 12. 2023` (tečky a mezery)"
+                        + "\nZadal(a) jsi:\n"
+                        + `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
+                        + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
+                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\``,
+                    ephemeral: true
+                });
+            } else if (!i.fields.getTextInputValue("start").includes(":") || !i.fields.getTextInputValue("end").includes(":")) {
+                return await i.reply({
+                    content:
+                        "### Nalezena chyba - čas!"
+                        + "\n- V některém z časů se neobjevila `:`."
+                        + "\nZadal(a) jsi:\n"
+                        + `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
+                        + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
+                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\``,
+                    ephemeral: true
+                });
+            }
+
             let content;
             if (bot.LEA.g.LSPD.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + i.user.id + ".json"), "utf-8"));
             else if (bot.LEA.g.LSSD.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.user.id + ".json"), "utf-8"));
@@ -238,33 +265,6 @@ export default async function (bot, i) {
                         .setStyle(ButtonStyle.Success)
                         .setEmoji("👀"),
                 );
-
-            if (
-                (i.fields.getTextInputValue("datum").split(" ").length - 1) !== 2
-                || (i.fields.getTextInputValue("datum").split(" ").length - 1) !== 2
-            ) {
-                return await i.editReply({
-                    content:
-                        "### Nalezena chyba - datum!"
-                        + "\n- Formát data je špatně. Napiš např. `24. 12. 2023` (tečky a mezery)"
-                        + "\nZadal(a) jsi:\n"
-                        + `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
-                        + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
-                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\``,
-                    ephemeral: true
-                });
-            } else if (!i.fields.getTextInputValue("start").includes(":") || !i.fields.getTextInputValue("end").includes(":")) {
-                return await i.editReply({
-                    content:
-                        "### Nalezena chyba - čas!"
-                        + "\n- V některém z časů se neobjevila `:`."
-                        + "\nZadal(a) jsi:\n"
-                        + `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
-                        + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
-                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\``,
-                    ephemeral: true
-                });
-            }
 
             let hours,
                 h1 = parseInt(i.fields.getTextInputValue("start").split(":")[0]),
@@ -451,7 +451,7 @@ export default async function (bot, i) {
                 else rolesIDs = false, tagID = false;
 
                 if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${rank}\`)**`, ephemeral: true });
-                rolesIDs.push("1167182546874945703"); //LSPD role
+                rolesIDs.push("1154446248946978953"); //LSPD role
 
                 await i.deferReply();
 
@@ -1045,6 +1045,33 @@ export default async function (bot, i) {
             }
 
         } else if (i.customId === "dutyOWModal") {
+            if (
+                (i.fields.getTextInputValue("datum").split(" ").length - 1) !== 2
+                || (i.fields.getTextInputValue("datum").split(".").length - 1) !== 2
+            ) {
+                return await i.reply({
+                    content:
+                        "### Nalezena chyba - datum!"
+                        + "\n- Formát data je špatně. Napiš např. `24. 12. 2023` (tečky a mezery)"
+                        + "\nZadal(a) jsi:\n"
+                        + `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
+                        + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
+                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\``,
+                    ephemeral: true
+                });
+            } else if (!i.fields.getTextInputValue("start").includes(":") || !i.fields.getTextInputValue("end").includes(":")) {
+                return await i.reply({
+                    content:
+                        "### Nalezena chyba - čas!"
+                        + "\n- V některém z časů se neobjevila `:`."
+                        + "\nZadal(a) jsi:\n"
+                        + `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
+                        + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
+                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\``,
+                    ephemeral: true
+                });
+            }
+
             await i.deferReply({ ephemeral: true });
 
             if (!(await checkDB(i.message.interaction.user.id))) return i.editReply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
@@ -1072,33 +1099,6 @@ export default async function (bot, i) {
                         .setStyle(ButtonStyle.Success)
                         .setEmoji("👀"),
                 );
-
-            if (
-                (i.fields.getTextInputValue("datum").split(" ").length - 1) !== 2
-                || (i.fields.getTextInputValue("datum").split(".").length - 1) !== 2
-            ) {
-                return await i.editReply({
-                    content:
-                        "### Nalezena chyba - datum!"
-                        + "\n- Formát data je špatně. Napiš např. `24. 12. 2023` (tečky a mezery)"
-                        + "\nZadal(a) jsi:\n"
-                        + `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
-                        + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
-                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\``,
-                    ephemeral: true
-                });
-            } else if (!i.fields.getTextInputValue("start").includes(":") || !i.fields.getTextInputValue("end").includes(":")) {
-                return await i.editReply({
-                    content:
-                        "### Nalezena chyba - čas!"
-                        + "\n- V některém z časů se neobjevila `:`."
-                        + "\nZadal(a) jsi:\n"
-                        + `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
-                        + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
-                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\``,
-                    ephemeral: true
-                });
-            }
 
             const hoursBefore = parseFloat(i.message.embeds[0].fields[0].value.split("`")[7]);
             let hoursAfter,

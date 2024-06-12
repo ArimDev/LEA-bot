@@ -3,7 +3,7 @@ import { checkDB } from "../functions/db.js";
 import { getProfile } from "../functions/profiles.js";
 
 export const context = new ContextMenuCommandBuilder()
-    .setName('Profil z DB')
+    .setName('Profil')
     .setType(ApplicationCommandType.User)
     .setDMPermission(false);
 
@@ -13,7 +13,7 @@ export default async function run(bot, i) {
     let found = false, db = [], worker = { id: undefined, name: undefined, radio: undefined, badge: undefined };
 
     if (await checkDB(discord.id)) found = true, worker.id = discord.id;
-    if (!found) return i.reply({ content: "> 🛑 **Nikdo ze zadaných parametrů nebyl nalezen.**", ephemeral: true });
+    if (!found) return i.reply({ content: `> 🛑 **<@${discord.id}> není členem LEA.**`, ephemeral: true });
 
     const profile = await getProfile(bot, worker.id);
 

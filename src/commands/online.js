@@ -16,19 +16,19 @@ export default async function run(bot, i) {
         ms = await ms.filter(m => !m.user.bot && m.presence);
         let n = 0, on = [];
         ms.forEach(m => {
-            if (m.presence.activities.find(a => a.name.includes("Nolimit RefreshRP"))) {
+            if (m.presence.activities.find(a => a.name.includes("Refresh by Nolimit"))) {
                 n++;
                 on.push(`<@${m.id}>`);
             }
         });
         const onlineEmbed = new EmbedBuilder()
             .setAuthor({ name: "Právě ve službě", iconURL: "https://servers-live.fivem.net/servers/icon/994ldb/-1386532708.png" })
-            .setDescription(`Členi **${getServer(i.guild.id).name}** hrající **NoLimit | RefreshRP** právě teď.`)
+            .setDescription(`Členi **${getServer(i.guild.id).name}** hrající **Refresh by Nolimit** právě teď.`)
             .addFields([
                 {
                     name: `Seznam`, inline: false,
                     value:
-                        `> ${on.join(", ")}`
+                        on.length > 0 ? `> ${on.join(", ")}` : "> **Nikdo není online.**"
                 },
                 {
                     name: `Počet`, inline: false,

@@ -3,6 +3,7 @@ import { checkApologies } from "../../src/functions/outdated.js";
 import newSystem from "../../src/functions/newSystem.js";
 import web from "./web.js";
 import api from "./api.js";
+import ws from "./ws.js";
 import tools from "./oneTime.js";
 
 export default async function (bot) {
@@ -15,7 +16,8 @@ export default async function (bot) {
 
     console.log(" < [PS/Info] >  Discord bot operational!");
 
-    const app = await web(bot)
-    await api(bot, app)
-    tools(bot)
+    const app = await web(bot);
+    const { newApp, server, wss } = await ws(bot, app);
+    await api(bot, app, server, wss);
+    tools(bot);
 }

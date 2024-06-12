@@ -1,11 +1,11 @@
 import { ActionRowBuilder, ApplicationCommandType, ButtonBuilder, ButtonStyle, ContextMenuCommandBuilder, ModalBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
 import fs from "fs";
 import path from "path";
-import { checkDB, getDB } from "../../src/functions/db.js";
-import { dcLog } from "../../src/functions/logSystem.js";
+import { checkDB, getDB } from "../functions/db.js";
+import { dcLog } from "../functions/logSystem.js";
 
 export const context = new ContextMenuCommandBuilder()
-    .setName('Upravit v DB')
+    .setName('DB Povýšit')
     .setType(ApplicationCommandType.User)
     .setDMPermission(false);
 
@@ -17,11 +17,7 @@ export default async function run(bot, i) {
     const admin = await i.member;
     if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
     if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("1154446249005690917")) passed = true; //Staff team Refresh
-        if (admin.roles.cache.has("1201813866548580443")) passed = true; //.
-        if (admin.roles.cache.has("1154446249005690916")) passed = true; //*
         if (admin.id === "846451292388851722") passed = true; //aldix_eu
-        if (admin.id === "644571265725628437") passed = true; //griffin0s
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1139267137651884072")) passed = true; //Leadership
         if (admin.roles.cache.has("1139295201282764882")) passed = true; //FTO Commander
@@ -32,43 +28,31 @@ export default async function run(bot, i) {
     if (!(await checkDB(user.id))) return i.reply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
 
     const gotDB = await getDB(user.id);
-    const data = gotDB.data;
     if (!bot.LEA.g[gotDB.guildName].includes(i.guild.id)) return i.reply({ content: `> 🛑 **<@${user.id}> je členem \`${gotDB.guildName}\`!** (Nemůžeš ho upravit)`, ephemeral: true });
 
     const modal = new ModalBuilder()
-        .setCustomId("editModal")
-        .setTitle("LEA | Úprava DB");
+        .setCustomId("rankUpModal")
+        .setTitle("LEA | Povýšení");
 
     const idInput = new TextInputBuilder()
         .setCustomId("id")
         .setLabel("ID Discord člena")
         .setStyle(TextInputStyle.Short)
-        .setPlaceholder(user.id)
-        .setValue(user.id)
-        .setRequired(true);
-
-    const nameInput = new TextInputBuilder()
-        .setCustomId("name")
-        .setLabel("Jméno")
-        .setStyle(TextInputStyle.Short)
-        .setPlaceholder(data.name)
-        .setValue(data.name)
+        .setValue(user.id.toString())
         .setRequired(true);
 
     const callInput = new TextInputBuilder()
         .setCustomId("call")
         .setLabel("Volačka")
         .setStyle(TextInputStyle.Short)
-        .setPlaceholder(data.radio)
-        .setValue(data.radio)
+        .setPlaceholder("Heaven-2")
         .setRequired(true);
 
     const badgeInput = new TextInputBuilder()
         .setCustomId("badge")
         .setLabel("Číslo odznaku")
         .setStyle(TextInputStyle.Short)
-        .setPlaceholder(data.badge.toString())
-        .setValue(data.badge.toString())
+        .setPlaceholder("1033")
         .setMinLength(4)
         .setMaxLength(4)
         .setRequired(true);
@@ -77,17 +61,15 @@ export default async function run(bot, i) {
         .setCustomId("rank")
         .setLabel("Hodnost")
         .setStyle(TextInputStyle.Short)
-        .setPlaceholder(data.rank)
-        .setValue(data.rank)
+        .setPlaceholder("Trooper II")
         .setRequired(true);
 
     const actionRow0 = new ActionRowBuilder().addComponents(idInput);
-    const actionRow1 = new ActionRowBuilder().addComponents(nameInput);
-    const actionRow2 = new ActionRowBuilder().addComponents(callInput);
-    const actionRow3 = new ActionRowBuilder().addComponents(badgeInput);
-    const actionRow4 = new ActionRowBuilder().addComponents(rankInput);
+    const actionRow1 = new ActionRowBuilder().addComponents(callInput);
+    const actionRow2 = new ActionRowBuilder().addComponents(badgeInput);
+    const actionRow3 = new ActionRowBuilder().addComponents(rankInput);
 
-    modal.addComponents(actionRow0, actionRow1, actionRow2, actionRow3, actionRow4);
+    modal.addComponents(actionRow0, actionRow1, actionRow2, actionRow3);
 
     await i.showModal(modal);
 };
