@@ -13,20 +13,20 @@ export default async function run(bot, i) {
     const user = i.targetUser;
 
     let passed = false;
-    await i.guild.fetch();
-    const admin = await i.member;
+    i.guild.fetch();
+    const admin = i.member;
     if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
     if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
-        if (admin.id === "846451292388851722") passed = true; //aldix_eu
-    } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1267541873451339806")) passed = true; //Leadership
+    } else if (bot.LEA.g.LSCSO.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1139267137651884072")) passed = true; //Leadership
         if (admin.roles.cache.has("1139295201282764882")) passed = true; //FTO Commander
     }
 
     if (!passed) return i.reply({ content: "> 🛑 **K tomuhle má přístup jen admin.**", ephemeral: true });
 
-    if (await checkDB(user.id)) {
-        const gotDB = await getDB(user.id);
+    if (checkDB(user.id)) {
+        const gotDB = getDB(user.id);
         return i.reply({ content: `> 🛑 <@${user.id}> **už je v DB. (Členem ${gotDB.guildName}.)**`, ephemeral: true });
     }
 
@@ -79,5 +79,5 @@ export default async function run(bot, i) {
 
     modal.addComponents(actionRow0, actionRow1, actionRow2, actionRow3, actionRow4);
 
-    await i.showModal(modal);
+    i.showModal(modal);
 };

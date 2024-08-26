@@ -1,11 +1,12 @@
 [
     {
+        "removed": false,
         "name": "Will Smith",
         "displayName": "William",
         "username": "smith01",
         "id": "0000000000000000001",
         "from": {
-            "dep": "LSSD",
+            "dep": "LSCSO",
             "name": "Dwayne Johnson",
             "username": "dwayne02",
             "displayName": "TheRock",

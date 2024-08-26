@@ -2,8 +2,6 @@ import { ActionRowBuilder, AttachmentBuilder, EmbedBuilder, ModalBuilder, SlashC
 import fs from "fs";
 import path from "path";
 import { checkDB, getServer } from "../functions/db.js";
-import bl from "../../db/blacklist.json" assert { type: "json" };
-import { dcLog } from "../../src/functions/logSystem.js";
 
 export const slash = new SlashCommandBuilder()
     .setName("leader")
@@ -33,12 +31,12 @@ export default async function run(bot, i) {
     const sub = i.options._subcommand;
 
     let passed = false;
-    await i.guild.fetch();
-    const admin = await i.member;
+    i.guild.fetch();
+    const admin = i.member;
     if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
     if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
-        if (admin.id === "846451292388851722") passed = true; //aldix_eu
-    } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1267541873451339806")) passed = true; //Leadership
+    } else if (bot.LEA.g.LSCSO.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1139267137651884072")) passed = true; //Leadership
         if (admin.roles.cache.has("1139295201282764882")) passed = true; //FTO Commander
     }
@@ -82,14 +80,14 @@ export default async function run(bot, i) {
 
         modal.addComponents(actionRow0, actionRow1, actionRow2);
 
-        await i.showModal(modal);
+        i.showModal(modal);
 
         let submit = await i.awaitModalSubmit({ filter: int => int.user.id === i.user.id, time: 600000 }).catch(e => {
             return null;
         });
 
         if (submit) {
-            await submit.deferReply({ ephemeral: true });
+            submit.deferReply({ ephemeral: true });
 
             const id = parseInt(submit.fields.getTextInputValue("eventID"));
             const ignored = submit.fields.getTextInputValue("ignore").split(", ");
@@ -98,11 +96,11 @@ export default async function run(bot, i) {
 
             let users = [], db;
             if (bot.LEA.g.LSPD.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/LSPD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
-            else if (bot.LEA.g.LSSD.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/LSSD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
+            else if (bot.LEA.g.LSCSO.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/LSCSO")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
             for (const file of db) {
                 let worker;
                 if (bot.LEA.g.LSPD.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + file), "utf-8"));
-                else if (bot.LEA.g.LSSD.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + file), "utf-8"));
+                else if (bot.LEA.g.LSCSO.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSCSO") + "/" + file), "utf-8"));
 
                 let m;
                 try {
@@ -155,141 +153,5 @@ export default async function run(bot, i) {
                 ephemeral: true
             });
         }
-    }
-
-    if (sub === "blacklist") {
-        let record, blUser, blMember, blReason, blDate;
-        blUser = i.options.getUser("discord"),
-            blReason = i.options.getString("reason"),
-            blDate = new Date();
-
-        if (blUser) {
-            await i.deferReply();
-            blMember = await i.guild.members.fetch(blUser.id).then(() => true).catch(() => false);
-            record = {
-                "name": blMember?.displayName || "",
-                "displayName": blUser.displayName,
-                "username": blUser.username,
-                "id": blUser.id,
-                "from": {
-                    "dep": getServer(i.guild.id).name,
-                    "name": i.member.displayName,
-                    "username": i.user.username,
-                    "displayName": i.user.displayName,
-                    "id": i.user.id,
-                    "timestamp": (blDate.getDate() + ". " + (parseInt(blDate.getMonth()) + 1) + ". " + blDate.getFullYear()),
-                    "reason": blReason
-                }
-            };
-        } else {
-            const modal = new ModalBuilder()
-                .setCustomId("blModal")
-                .setTitle("LEA | Blacklist");
-
-            /*const idInput = new TextInputBuilder()
-                .setCustomId("discordID")
-                .setLabel("Discord ID pachatele")
-                .setStyle(TextInputStyle.Short)
-                .setPlaceholder("83886770768314368")
-                .setMinLength(15)
-                .setRequired(false);*/
-
-            const usernameInput = new TextInputBuilder()
-                .setCustomId("discordUsername")
-                .setLabel("Discord username pachatele")
-                .setStyle(TextInputStyle.Short)
-                .setPlaceholder("petyxbron")
-                .setMinLength(3)
-                .setRequired(false);
-
-            const displaynameInput = new TextInputBuilder()
-                .setCustomId("discordDisplayname")
-                .setLabel("Discord displayname pachatele")
-                .setStyle(TextInputStyle.Short)
-                .setPlaceholder("PetyXbron")
-                .setMinLength(3)
-                .setRequired(false);
-
-            const ICnameInput = new TextInputBuilder()
-                .setCustomId("ICname")
-                .setLabel("IC jméno pachatele")
-                .setStyle(TextInputStyle.Short)
-                .setPlaceholder("Tyler Pierce")
-                .setRequired(false);
-
-            const dateInput = new TextInputBuilder()
-                .setCustomId("date")
-                .setLabel("Datum blacklistu")
-                .setStyle(TextInputStyle.Short)
-                .setPlaceholder("24. 12. 2024")
-                .setMinLength(10)
-                .setMaxLength(12)
-                .setRequired(false);
-
-            /*const actionRow0 = new ActionRowBuilder().addComponents(idInput);*/
-            const actionRow0 = new ActionRowBuilder().addComponents(usernameInput);
-            const actionRow1 = new ActionRowBuilder().addComponents(displaynameInput);
-            const actionRow2 = new ActionRowBuilder().addComponents(ICnameInput);
-            const actionRow3 = new ActionRowBuilder().addComponents(dateInput);
-
-            modal.addComponents(actionRow0, actionRow1, actionRow2, actionRow3);
-
-            await i.showModal(modal);
-
-            var submit = await i.awaitModalSubmit({ filter: int => int.user.id === i.user.id, time: 600000 }).catch(e => {
-                return null;
-            });
-
-            if (submit) {
-                await submit.deferReply();
-                var /*bl_discordID = submit.fields.getTextInputValue("discordID"),*/
-                    bl_discordUsername = submit.fields.getTextInputValue("discordUsername"),
-                    bl_discordDisplayname = submit.fields.getTextInputValue("discordDisplayname"),
-                    bl_ICname = submit.fields.getTextInputValue("ICname");
-
-                var bl_date = submit.fields.getTextInputValue("date")
-
-                record = {
-                    "name": bl_ICname,
-                    "displayName": bl_discordDisplayname,
-                    "username": bl_discordUsername,
-                    "id": "",
-                    "from": {
-                        "dep": getServer(i.guild.id).name,
-                        "name": i.member.displayName,
-                        "username": i.user.username,
-                        "displayName": i.user.displayName,
-                        "id": i.user.id,
-                        "timestamp": bl_date,
-                        "reason": blReason
-                    }
-                };
-            }
-        }
-
-        bl.push(record);
-
-        fs.writeFileSync(path.resolve("./db/blacklist.json"), JSON.stringify(bl, null, 4), "utf-8");
-
-        const blEmbed = new EmbedBuilder()
-            .setTitle("Blacklist upraven!")
-            .setDescription(
-                `${blUser ? `<@${blUser.id}>` : `\`${bl_discordUsername}\``} byl(a) přidán(a) na blacklist.`
-            )
-            .setColor(getServer(i.guild.id).color)
-            .setFooter(getServer(i.guild.id).footer);
-
-        await dcLog(bot, i.guild.id, i.member,
-            {
-                title: "Úprava blacklistu",
-                description:
-                    `**<@${i.user.id}> přidal(a) ${blUser ? `<@${blUser.id}>` : `\`${bl_discordUsername}\``} na BL.**`
-                    + `\`\`\`json\n${JSON.stringify(record, null, 4)}\`\`\``,
-                color: "#000000"
-            }
-        );
-
-        if (submit) return await submit.editReply({ embeds: [blEmbed] });
-        else return await i.editReply({ embeds: [blEmbed] });
     }
 };

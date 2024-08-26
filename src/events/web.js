@@ -35,9 +35,9 @@ export default async function web(bot) {
         res.status(200).sendFile(path.resolve("./web/LSPD/LSPD.html"));
     });
 
-    app.get('/lssd', async function (req, res) {
+    app.get('/lscso', async function (req, res) {
         console.log(` < [PS/Web] >  Got ${req.path} ${req.method} request!`);
-        res.status(200).sendFile(path.resolve("./web/LSSD/LSSD.html"));
+        res.status(200).sendFile(path.resolve("./web/LSCSO/LSCSO.html"));
     });
 
     app.get('/divize', async function (req, res) {
@@ -69,6 +69,10 @@ export default async function web(bot) {
         res.redirect('/divize');
     });
 
+    app.get('/lssd', (req, res) => {
+        res.redirect('/lscso');
+    });
+
     function giveStatic(req, res) {
         const filePath = path.resolve(`./web${req.path}`);
         res.status(200).sendFile(filePath);
@@ -87,8 +91,8 @@ export default async function web(bot) {
     app.use('/index/assets', express.static(path.resolve(`./web/index/assets`)));
     app.get('/index/script.js', giveStatic);
     app.get('/index/style.css', giveStatic);
-    app.get('/LSSD/script.js', giveStatic);
-    app.get('/LSSD/style.css', giveStatic);
+    app.get('/LSCSO/script.js', giveStatic);
+    app.get('/LSCSO/style.css', giveStatic);
     app.get('/LSPD/script.js', giveStatic);
     app.get('/LSPD/style.css', giveStatic);
 

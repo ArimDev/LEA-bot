@@ -17,9 +17,13 @@ import { Client, GatewayIntentBits, Collection } from "discord.js";
 
 let bot = new Client({
     intents: [
+        GatewayIntentBits.DirectMessages,
+        GatewayIntentBits.DirectMessageReactions,
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMembers,
         GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.GuildMessageReactions,
+        GatewayIntentBits.GuildPresences,
         GatewayIntentBits.MessageContent
     ]
 });
@@ -31,6 +35,7 @@ bot.LEA = {
         LSPD: "#000c1e",
         SAHP: "#457cc0",
         LSSD: "#bd8131",
+        LSCSO: "#b68f68",
         duty: "#5245c0",
         apology: "#c05245",
         summary: "#25be5c",
@@ -41,6 +46,7 @@ bot.LEA = {
         LSPD: "https://i.imgur.com/gfL0fGf.png",
         SAHP: "https://i.imgur.com/xgFoKuX.png",
         LSSD: "https://i.imgur.com/X3cH2iu.png",
+        LSCSO: "https://i.imgur.com/Hex0MQF.png",
         event: [
             "https://i.imgur.com/pkEErJp.png",
             "https://i.imgur.com/Dj4dvsr.png",
@@ -50,13 +56,14 @@ bot.LEA = {
     e: {
         LSPD: "<:LSPD:1178108366514565181>",
         SAHP: "<:SAHP:1174876044570931210>",
-        LSSD: "<:LSSD:1178106303198011412>"
+        LSSD: "<:LSSD:1178106303198011412>",
+        LSCSO: "<:LSCSO:1266078681479254176>"
     },
     g: {
         LSPD: [
             "1154446248934387828", "1203275468544151583"
         ],
-        LSSD: [
+        LSCSO: [
             "1139266097921675345", "1174843772446703718", "714147774299373629"
         ]
     }

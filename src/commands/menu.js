@@ -67,25 +67,25 @@ export default async function run(bot, i) {
                 name: `Info`, inline: false,
                 value:
                     `> **Autor:** <@411436203330502658> ([web](https://petyxbron.cz/cs/p))
-                    > **Sloužím:** LSPD <:LSPD:1178108366514565181> a LSSD <:LSSD:1178106303198011412>
-                    > **FiveM:** NoLimit | RefreshRP 🌴
+                    > **Sloužím:** LSPD ${bot.LEA.e.LSPD} a LSCSO ${bot.LEA.e.LSCSO}
+                    > **FiveM:** RefreshRP by Nolimit 🌴
                     > **GitHub**: [petyxbron.cz/lea-bot](https://petyxbron.cz/lea-bot)`
             },
             {
                 name: `Další`, inline: true,
                 value:
-                    `> **Podmínky Použití (TOS):** [/docs/terms-of-use.md](https://github.com/Azator-Entertainment/LEA-bot/blob/master/docs/terms-of-use.md)
-                    > **Zásady Ochrany Osobních Údajů:** [/docs/privacy-policy.md](https://github.com/Azator-Entertainment/LEA-bot/blob/master/docs/privacy-policy.md)
-                    > **Jak Používat:** [/docs/usage.md](https://github.com/Azator-Entertainment/LEA-bot/blob/master/docs/usage.md)`
+                    `> **Podmínky Použití (TOS):** [/docs/terms-of-use.md](https://github.com/ArimDev/LEA-bot/blob/master/docs/terms-of-use.md)
+                    > **Zásady Ochrany Osobních Údajů:** [/docs/privacy-policy.md](https://github.com/ArimDev/LEA-bot/blob/master/docs/privacy-policy.md)
+                    > **Jak Používat:** [/docs/usage.md](https://github.com/ArimDev/LEA-bot/blob/master/docs/usage.md)`
             }
         ])
         .setColor(bot.LEA.c.LEAbot)
         .setThumbnail(bot.user.avatarURL())
-        .setFooter({ text: `LEA Bot v${process.env.version} | Vytvořil b1ngo ✌️`, iconURL: bot.user.avatarURL() });
+        .setFooter({ text: `LEA Bot v${process.env.version} | Vytvořil b1ngo 🚀`, iconURL: bot.user.avatarURL() });
 
     let group;
     if (bot.LEA.g.LSPD.includes(i.guild.id)) group = "**LSPD** " + bot.LEA.e.LSPD;
-    else if (bot.LEA.g.LSSD.includes(i.guild.id)) group = "**LSSD** " + bot.LEA.e.LSSD;
+    else if (bot.LEA.g.LSCSO.includes(i.guild.id)) group = "**LSCSO** " + bot.LEA.e.LSCSO;
     else group = false;
 
     if (group) helpEmbed.setDescription(`> ✅ Server **${i.guild.name}** je součástí sboru ${group}`);

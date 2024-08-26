@@ -1,5 +1,6 @@
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import { getServer } from "../../src/functions/db.js";
+import { checkDB, getDB } from "../../src/functions/db.js";
 
 export const slash = new SlashCommandBuilder()
     .setName("online")
@@ -11,24 +12,34 @@ export default async function run(bot, i) {
 
     await i.deferReply({ ephemeral: true });
     try {
-        let ms;
-        ms = await i.guild.members.fetch({ withPresences: true });
-        ms = await ms.filter(m => !m.user.bot && m.presence);
-        let n = 0, on = [];
-        ms.forEach(m => {
-            if (m.presence.activities.find(a => a.name.includes("Refresh by Nolimit"))) {
+        let ms = await i.guild.members.fetch({ withPresences: true });
+
+        ms = ms.filter(m => !m.user.bot && m.presence);
+
+        let n = 0, onNotSorted = [], onSorted = [];
+
+        for (const m of ms.values()) {
+            if (m.presence && m.presence.activities && m.presence.activities.find(a => a.name.includes("Refresh by Nolimit"))) {
+                if (!(checkDB(m.id))) continue;
+                const { data } = getDB(m.id);
                 n++;
-                on.push(`<@${m.id}>`);
+                onNotSorted.push({ m, data });
             }
-        });
+        }
+
+        onNotSorted.sort((a, b) => a.data.badge - b.data.badge);
+        for (const o of onNotSorted) {
+            onSorted.push(`<@${o.m.id}>`);
+        };
+
         const onlineEmbed = new EmbedBuilder()
-            .setAuthor({ name: "Právě ve službě", iconURL: "https://servers-live.fivem.net/servers/icon/994ldb/-1386532708.png" })
+            .setAuthor({ name: "Právě ve službě", iconURL: "https://servers-live.fivem.net/servers/icon/994ldb/686935286.png" })
             .setDescription(`Členi **${getServer(i.guild.id).name}** hrající **Refresh by Nolimit** právě teď.`)
             .addFields([
                 {
                     name: `Seznam`, inline: false,
                     value:
-                        on.length > 0 ? `> ${on.join(", ")}` : "> **Nikdo není online.**"
+                        onSorted.length > 0 ? `> - ${onSorted.join(",\n> - ")}` : "> **Nikdo není online.**"
                 },
                 {
                     name: `Počet`, inline: false,
@@ -36,7 +47,7 @@ export default async function run(bot, i) {
                         `> **Dohromady online:** \`${n}\``
                 }
             ])
-            .setThumbnail(i.guild.iconURL())
+            .setThumbnail(getServer(i.guild.id).footer.iconURL)
             .setColor(getServer(i.guild.id).color)
             .setFooter(getServer(i.guild.id).footer);
 

@@ -8,11 +8,11 @@ export const context = new ContextMenuCommandBuilder()
     .setDMPermission(false);
 
 export default async function run(bot, i) {
-    const discord = i.targetUser;
+    const discord = await i.targetUser;
 
     let found = false, db = [], worker = { id: undefined, name: undefined, radio: undefined, badge: undefined };
 
-    if (await checkDB(discord.id)) found = true, worker.id = discord.id;
+    if (checkDB(discord.id)) found = true, worker.id = discord.id;
     if (!found) return i.reply({ content: `> 🛑 **<@${discord.id}> není členem LEA.**`, ephemeral: true });
 
     const profile = await getProfile(bot, worker.id);

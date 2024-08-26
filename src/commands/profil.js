@@ -39,13 +39,13 @@ export default async function run(bot, i) {
     if (!discord && !radio && !badge && !name) found = true, worker.id = i.user.id;
 
     if (discord && !found) {
-        if (await checkDB(discord.id)) found = true, worker.id = discord.id;
+        if (checkDB(discord.id)) found = true, worker.id = discord.id;
     }
     if (!found) {
         db = fs.readdirSync(path.resolve("./db/LSPD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
-        db = db.concat(fs.readdirSync(path.resolve("./db/LSSD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json"));
+        db = db.concat(fs.readdirSync(path.resolve("./db/LSCSO")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json"));
         for (const log of db) {
-            const gotDB = await getDB(log.split(".")[0]);
+            const gotDB = getDB(log.split(".")[0]);
             if (!gotDB.exists) continue;
             const content = gotDB.data;
             if (radio) {

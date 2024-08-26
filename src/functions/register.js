@@ -34,9 +34,9 @@ export async function commands(bot) {
             else if (cmdFile.context) slashCommands.push(cmdFile.context.toJSON());
         }
         let cmdName = command;
-        if (commandFile.context) { cmdName = command.split("_")[1].toLowerCase(); contextCommands++; }
+        if (commandFile.context) { /*cmdName = command.split("_")[1].toLowerCase(); */contextCommands++; }
         registerCommand(cmdName, commandFile);
-    };;
+    };
 
     bot.once("ready", async (bot) => {
         const rest = new REST().setToken(bot.token);

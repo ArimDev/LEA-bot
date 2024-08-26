@@ -1,6 +1,6 @@
 {
   "name": "lea-bot",
-  "version": "4.3",
+  "version": "4.9",
   "description": "RefreshRP (FiveM GTA V roleplay) Discord bot for LEA - making internal police department actions easier.",
   "type": "module",
   "main": "index.js",
@@ -22,17 +22,17 @@
   "author": "PetyXbron",
   "license": "CC-BY-NC-ND-4.0",
   "bugs": {
-    "url": "https://github.com/Azator-Entertainment/LEA-bot/issues"
+    "url": "https://github.com/ArimDev/LEA-bot/issues"
   },
-  "homepage": "https://github.com/Azator-Entertainment/LEA-bot",
+  "homepage": "https://github.com/ArimDev/LEA-bot",
   "engines": {
     "node": ">=16.11.0"
   },
   "dependencies": {
-    "discord.js": "^14.15.2",
+    "discord.js": "^14.15.3",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "node-fetch": "^3.3.2",
-    "ws": "^8.17.0"
+    "ws": "^8.18.0"
   }
 }

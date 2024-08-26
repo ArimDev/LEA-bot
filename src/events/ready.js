@@ -4,7 +4,6 @@ import newSystem from "../../src/functions/newSystem.js";
 import web from "./web.js";
 import api from "./api.js";
 import ws from "./ws.js";
-import tools from "./oneTime.js";
 
 export default async function (bot) {
     console.log(` < [DC/Invite] >  https://discord.com/oauth2/authorize?client_id=${bot.user.id}&permissions=309640612928&scope=bot%20applications.commands`);
@@ -19,5 +18,4 @@ export default async function (bot) {
     const app = await web(bot);
     const { newApp, server, wss } = await ws(bot, app);
     await api(bot, app, server, wss);
-    tools(bot);
 }

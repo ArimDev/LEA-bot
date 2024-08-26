@@ -1,5 +1,5 @@
 import { ActionRowBuilder, ModalBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
-import { checkDB, getServer } from "../../src/functions/db.js";;
+import { checkDB, getServer } from "../../src/functions/db.js";
 
 export const slash = new SlashCommandBuilder()
     .setName("omluvenka")
@@ -8,7 +8,7 @@ export const slash = new SlashCommandBuilder()
     .setNSFW(false);
 
 export default async function run(bot, i) {
-    if (!(await checkDB(i.user.id))) return i.reply({ content: "> 🛑 **Před zadáváním __duties__ a __omluvenek__ tě musí admin přilásit do DB.**\nZalož si vlastní složku a počkej na správce DB.", ephemeral: true });
+    if (!(checkDB(i.user.id))) return i.reply({ content: "> 🛑 **Před zadáváním __duties__ a __omluvenek__ tě musí admin přilásit do DB.**\nZalož si vlastní složku a počkej na správce DB.", ephemeral: true });
 
     const folders = ["1213984576100241419", "1203743211000963082"];
     let folder;
@@ -73,5 +73,5 @@ export default async function run(bot, i) {
 
     modal.addComponents(actionRow0, actionRow1, actionRow2, actionRow3, actionRow4);
 
-    await i.showModal(modal);
+    i.showModal(modal);
 };

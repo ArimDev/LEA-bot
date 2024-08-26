@@ -2,9 +2,10 @@ import { getDB } from "../../src/functions/db.js";
 import { EmbedBuilder } from "discord.js";
 import fs from "fs";
 import path from "path";
+import { generateFooter } from "../../src/functions/other.js";
 
 export async function getProfile(bot, id) {
-    const db = await getDB(id);
+    const db = getDB(id);
     const rep = await getRep(id);
     if (!db.exists) return false;
     //IF LEFT CHECK
@@ -26,7 +27,7 @@ export async function getProfile(bot, id) {
         )
         .setColor(bot.LEA.c[db.guildName])
         .setThumbnail(bot.LEA.i[db.guildName])
-        .setFooter({ text: `${db.guildName} | Vytvořil b1ngo ✌️`, iconURL: bot.LEA.i[db.guildName] });
+        .setFooter({ text: `${db.guildName} | Vytvořil b1ngo 🚀`, iconURL: bot.LEA.i[db.guildName] });
     return profileEmbed;
 }
 
@@ -35,12 +36,12 @@ export async function findWorker(type, input) {
     const types = ["id", "radio", "badge", "name"];
     if (!types.includes(type)) return false;
 
-    if (type === "id") return await getDB(input);
+    if (type === "id") return getDB(input);
 
     workers = fs.readdirSync(path.resolve("./db/LSPD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
-    workers = workers.concat(fs.readdirSync(path.resolve("./db/LSSD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json"));
+    workers = workers.concat(fs.readdirSync(path.resolve("./db/LSCSO")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json"));
     for (const log of workers) {
-        const gotDB = await getDB(log.split(".")[0]);
+        const gotDB = getDB(log.split(".")[0]);
         if (!gotDB.exists) continue;
         const worker = gotDB.data;
         if (type === "radio") {
@@ -65,7 +66,7 @@ export async function findWorker(type, input) {
 }
 
 export async function getRep(id) {
-    const db = await getDB(id);
+    const db = getDB(id);
     if (!db) return false;
     let r = { id: id, p: 0, n: 0 };
     if (!db.data.reputations) return r;

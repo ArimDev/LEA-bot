@@ -11,9 +11,9 @@
 
 ## POPIS
 
-*Český Discord bot pro Law Enforcement Agencies na GTA V FiveM roleplay serveru [NoLimit | RefreshRP](https://nlmt.cc/).*
+*Český Discord bot pro Law Enforcement Agencies na GTA V FiveM roleplay serveru [RefreshRP by Nolimit](https://nlmt.cc/).*
 
-*Aktuálně podporuje sbory LSPD <img src="https://i.imgur.com/gfL0fGf.png" width="15" height="15"/> a LSSD <img src="https://i.imgur.com/X3cH2iu.png" width="15" height="15"/>.*
+*Aktuálně podporuje sbory LSPD <img src="https://i.imgur.com/gfL0fGf.png" width="15" height="15"/> a LSCSO <img src="https://i.imgur.com/X3cH2iu.png" width="15" height="15"/>.*
 
 Funkce:
 - zápis služeb zaměstnanců
@@ -21,7 +21,7 @@ Funkce:
 - kontrola absence při událostech
 - zápis do blacklistu
 - webové tabulky *(HTML+JS+CSS s Express.js a API)*
-    - LSSD tabulky
+    - LSCSO tabulky
     - LSPD tabulky
     - blacklist (ze seznamu v DB)
     - divize (z rolí na Discord serverech)
@@ -35,7 +35,7 @@ Funkce:
 
 ##### GITHUB:
 
-[![Repo stars](https://img.shields.io/github/stars/Azator-Entertainment/LEA-bot?style=flat&logo=github&labelColor=232121&color=457cc0&label=Hvězdy)](https://github.com/Azator-Entertainment/LEA-bot/stargazers) [![Latest master version](https://img.shields.io/github/package-json/version/Azator-Entertainment/LEA-bot?color=457cc0&label=Verze&labelColor=232121&logo=github&sort=semver&style=flat)](https://github.com/Azator-Entertainment/LEA-bot/tree/master/) [![Repo licence](https://img.shields.io/badge/CC_BY_NC_ND_4.0-457cc0?style=flat&logo=github&labelColor=232121&label=Licence)](https://github.com/Azator-Entertainment/LEA-bot/blob/master/LICENSE.md)
+[![Repo stars](https://img.shields.io/github/stars/ArimDev/LEA-bot?style=flat&logo=github&labelColor=232121&color=457cc0&label=Hvězdy)](https://github.com/ArimDev/LEA-bot/stargazers) [![Latest master version](https://img.shields.io/github/package-json/version/ArimDev/LEA-bot?color=457cc0&label=Verze&labelColor=232121&logo=github&sort=semver&style=flat)](https://github.com/ArimDev/LEA-bot/tree/master/) [![Repo licence](https://img.shields.io/badge/CC_BY_NC_ND_4.0-457cc0?style=flat&logo=github&labelColor=232121&label=Licence)](https://github.com/ArimDev/LEA-bot/blob/master/LICENSE.md)
 
 ##### VYTVOŘENO POMOCÍ:
 
@@ -50,7 +50,7 @@ Kód můžete volně kopírovat a dále distribuovat na jakémkoli médiu nebo f
 <div align="center">
 <img src="https://i.imgur.com/0OfsGcj.png" width="100" height="100"/>
 
-*Vlastněno a spravováno organizací [Azator Entertainment](https://github.com/Azator-Entertainment).*
+*Vlastněno a spravováno organizací [ArimDev](https://github.com/ArimDev).*
 
 © 2023 - 2024
 </div>

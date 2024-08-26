@@ -23,7 +23,7 @@ export async function setup() {
     const date = new Date();
 
     async function getWriteStream() {
-        let files = await fs.readdirSync(path.resolve("./logs/"));
+        let files = await fs.readdirSync(path.resolve("./logs"));
 
         files = await files.filter((d) => d.includes((dg(date, "FullYear") + "-" + dg(date, "Month") + "-" + dg(date, "Date"))));
 
@@ -74,28 +74,51 @@ export async function dcLog(bot, guildID, member, options = {}) {
         color = options.color,
         file = options.file;
     if (gotServer.id === 1) {
+        let files = [];
+        if (!!file) files = [file];
+
         guild = await bot.guilds.fetch("1154446248934387828");
         channel = await guild.channels.fetch("1241761034906107904");
-        let files = [];
-        if (!!file) files = [file];
         const logEmbed = new EmbedBuilder()
             .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
             .setTitle(title)
             .setDescription(description)
             .setColor(color)
-            .setFooter({ text: "LSPD | Vytvořil b1ngo ✌️", iconURL: bot.LEA.i.LSPD });
+            .setFooter({ text: "LSPD | Vytvořil b1ngo 🚀", iconURL: bot.LEA.i.LSPD });
         await channel.send({ embeds: [logEmbed], files: files });
     } else if (gotServer.id === 2) {
-        guild = await bot.guilds.fetch("1139266097921675345");
-        channel = await guild.channels.fetch("1204181260688167012");
         let files = [];
         if (!!file) files = [file];
+
+        guild = await bot.guilds.fetch("1139266097921675345");
+        channel = await guild.channels.fetch("1204181260688167012");
         const logEmbed = new EmbedBuilder()
             .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
             .setTitle(title)
             .setDescription(description)
             .setColor(color)
-            .setFooter({ text: "LSSD | Vytvořil b1ngo ✌️", iconURL: bot.LEA.i.LSSD });
+            .setFooter({ text: "LSCSO | Vytvořil b1ngo 🚀", iconURL: bot.LEA.i.LSCSO });
         await channel.send({ embeds: [logEmbed], files: files });
     }
+}
+
+export async function simpleLog(bot, guildID, options) {
+    const gotServer = getServer(guildID);
+
+    let guild, channel;
+    if (gotServer.id === 1) {
+        guild = await bot.guilds.fetch("1154446248934387828");
+        channel = await guild.channels.fetch("1269400178415112283");
+    } else if (gotServer.id === 2) {
+        guild = await bot.guilds.fetch("1139266097921675345");
+        channel = await guild.channels.fetch("1266109055135383693");
+    }
+
+    const logEmbed = new EmbedBuilder()
+        .setAuthor(options.author)
+        .setTitle(options.title)
+        .setColor(options.color)
+        .setFooter(options.footer);
+    if (options.description) logEmbed.setDescription(options.description);
+    await channel.send({ embeds: [logEmbed] });
 }

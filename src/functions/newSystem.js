@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { ActionRowBuilder, ActivityType, ButtonBuilder, ButtonStyle, EmbedBuilder, time } from "discord.js";
+import { generateFooter } from "../../src/functions/other.js";
 
 export default async function folders(bot) {
     return;
@@ -50,14 +51,14 @@ export default async function folders(bot) {
                 )
                 .setThumbnail(bot.LEA.i.SAHP)
                 .setColor(bot.LEA.c.SAHP)
-                .setFooter({ text: "SAHP | Vytvořil b1ngo ✌️", iconURL: bot.LEA.i.SAHP });
+                .setFooter({ text: `SAHP | Vytvořil b1ngo 🚀`, iconURL: bot.LEA.i.SAHP });
             const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
                         .setCustomId("summary_" + file.slice(0, -5))
-                        .setLabel("Souhrn")
                         .setStyle(ButtonStyle.Success)
-                        .setEmoji("👀"),
+                        .setLabel("Souhrn")
+                        .setEmoji("📑"),
                 );
             const folder = await folders.threads.create({
                 name: `[${worker.radio}] ${worker.name}`,
@@ -72,16 +73,16 @@ export default async function folders(bot) {
             worker.folder = folder.id;
             for (const apology of worker.apologies) {
                 const index = worker.apologies.indexOf(apology);
-                const row = new ActionRowBuilder()
+                /*const row = new ActionRowBuilder()
                     .addComponents(
                         new ButtonBuilder()
-                            .setCustomId("edit")
+                            .setCustomId("editButton")
                             .setLabel("Přepsat")
                             .setDisabled()
                             .setStyle(ButtonStyle.Primary)
                             .setEmoji("📝")
                             .setDisabled(),
-                    );
+                    );*/
 
                 const apologyEmbed = new EmbedBuilder()
                     .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
@@ -99,9 +100,9 @@ export default async function folders(bot) {
                     ])
                     .setThumbnail("https://i.imgur.com/YQb9mPm.png")
                     .setColor(bot.LEA.c.apology)
-                    .setFooter({ text: "SAHP | Vytvořil b1ngo ✌️", iconURL: bot.LEA.i.SAHP });
+                    .setFooter({ text: `SAHP | Vytvořil b1ngo 🚀`, iconURL: bot.LEA.i.SAHP });
 
-                const msg = await folder.send({ embeds: [apologyEmbed], components: [row] });
+                const msg = await folder.send({ embeds: [apologyEmbed]/*, components: [row]*/ });
                 worker.apologies[index].id = msg.id;
             }
             for (const duty of worker.duties) {
@@ -109,19 +110,21 @@ export default async function folders(bot) {
                 const row = new ActionRowBuilder()
                     .addComponents(
                         new ButtonBuilder()
-                            .setCustomId("edit")
-                            .setLabel("Přepsat")
-                            .setDisabled()
-                            .setStyle(ButtonStyle.Primary)
-                            .setEmoji("📝")
-                            .setDisabled(),
-                    )
-                    .addComponents(
-                        new ButtonBuilder()
                             .setCustomId("summary_" + file.slice(0, -5))
-                            .setLabel("Souhrn")
                             .setStyle(ButtonStyle.Success)
-                            .setEmoji("👀"),
+                            .setEmoji("📑"),
+                    ).addComponents(
+                        new ButtonBuilder()
+                            .setCustomId("editButton")
+                            .setStyle(ButtonStyle.Primary)
+                            .setEmoji("✏️")
+                            .setDisabled(),
+                    ).addComponents(
+                        new ButtonBuilder()
+                            .setCustomId("deleteButton")
+                            .setStyle(ButtonStyle.Danger)
+                            .setEmoji("🗑️")
+                            .setDisabled(),
                     );
 
                 const dutyEmbed = new EmbedBuilder()
@@ -139,7 +142,7 @@ export default async function folders(bot) {
                     ])
                     .setThumbnail("https://i.imgur.com/fhif3Xj.png")
                     .setColor(bot.LEA.c.duty)
-                    .setFooter({ text: "SAHP | Vytvořil b1ngo ✌️", iconURL: bot.LEA.i.SAHP });
+                    .setFooter({ text: `SAHP | Vytvořil b1ngo 🚀`, iconURL: bot.LEA.i.SAHP });
 
                 const msg = await folder.send({ embeds: [dutyEmbed], components: [row] });
                 worker.duties[index].id = msg.id;
