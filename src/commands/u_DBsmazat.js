@@ -34,7 +34,7 @@ export default async function run(bot, i) {
 
     const admins = [
         "411436203330502658"/*b1ngo*/, "607915400604286997"/*samus*/,
-        "846451292388851722"/*aldix_eu*/, "794238724446879754"/*tondahehe*/, "644571265725628437"/*griffin0s*/
+        "846451292388851722"/*aldix_eu*/, "794238724446879754"/*tondahehe*/, "343386988000444417"/*cenovka*/
     ];
 
     if (!fs.existsSync(loc)) {

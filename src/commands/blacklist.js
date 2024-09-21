@@ -48,8 +48,6 @@ export default async function run(bot, i) {
     await i.guild.fetch();
     const admin = await i.member;
     if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
-    if (admin.id === "644571265725628437") passed = true; //griffin0s
-    if (admin.id === "885611486758719498") passed = true; //ceffel
     if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1267541873451339806")) passed = true; //Leadership
     } else if (bot.LEA.g.LSCSO.includes(i.guild.id) && !passed) {
@@ -329,8 +327,6 @@ export default async function run(bot, i) {
     if (sub === "remove") {
         let passed = false;
         if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
-        if (admin.id === "644571265725628437") passed = true; //griffin0s
-        if (admin.id === "885611486758719498") passed = true; //ceffel
 
         const blacklist = JSON.parse(fs.readFileSync(path.resolve("./db/blacklist.json"), "utf-8"));
         const blID = i.options.getInteger("id");

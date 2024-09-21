@@ -1,5 +1,5 @@
 export function generateFooter() {
-    return `LEA Bot v${process.env.version} | Vytvořil b1ngo 🚀`
+    return `LEA Bot v${process.env.version} | Vytvořil b1ngo 🎈`
     /*const footers = [
         "3 roky fungovali zbory bez toho...",
         "dá sa nahradiť za 27 sekúnd...",

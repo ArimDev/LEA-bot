@@ -27,7 +27,7 @@ export async function getProfile(bot, id) {
         )
         .setColor(bot.LEA.c[db.guildName])
         .setThumbnail(bot.LEA.i[db.guildName])
-        .setFooter({ text: `${db.guildName} | Vytvořil b1ngo 🚀`, iconURL: bot.LEA.i[db.guildName] });
+        .setFooter({ text: `${db.guildName} | Vytvořil b1ngo 🎈`, iconURL: bot.LEA.i[db.guildName] });
     return profileEmbed;
 }
 

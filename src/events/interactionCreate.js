@@ -1,7 +1,7 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, EmbedBuilder, InteractionType, ModalBuilder, TextInputBuilder, TextInputStyle, time } from "discord.js";
 import fs from "fs";
 import path from "path";
-import { checkDB, getServer } from "../../src/functions/db.js";
+import { getDB, checkDB, getServer } from "../../src/functions/db.js";
 import { dcLog, simpleLog } from "../../src/functions/logSystem.js";
 import { findWorker } from "../../src/functions/profiles.js";
 import { live } from "../../src/functions/liveTables.js";
@@ -50,7 +50,6 @@ export default async function (bot, i) {
             if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
                 if (admin.roles.cache.has("1201813866548580443")) passed = true; //.
                 if (admin.roles.cache.has("1267541873451339806")) passed = true; //Leadership
-                if (admin.id === "644571265725628437") passed = true; //griffin0s
             } else if (bot.LEA.g.LSCSO.includes(i.guild.id) && !passed) {
                 if (admin.roles.cache.has("1139267137651884072")) passed = true; //Leadership
                 if (admin.roles.cache.has("1139295201282764882")) passed = true; //FTO Commander
@@ -491,7 +490,7 @@ export default async function (bot, i) {
                     )
                     .setThumbnail(bot.LEA.i.LSPD)
                     .setColor(bot.LEA.c.LSPD)
-                    .setFooter({ text: `LSPD | Vytvořil b1ngo 🚀`, iconURL: bot.LEA.i.LSPD });
+                    .setFooter({ text: `LSPD | Vytvořil b1ngo 🎈`, iconURL: bot.LEA.i.LSPD });
                 const row = new ActionRowBuilder()
                     .addComponents(
                         new ButtonBuilder()
@@ -514,20 +513,18 @@ export default async function (bot, i) {
                 try { await member.setNickname(`[${radio}] ${name}`); } catch { gotNick = false; }
                 try { await member.roles.add(rolesIDs); } catch { gotRole = false; }
 
-                const b1ngo = await i.guild.members.fetch("411436203330502658");
                 const slozkaEmbed = new EmbedBuilder()
-                    .setAuthor({ name: b1ngo.displayName, iconURL: b1ngo.displayAvatarURL() })
                     .setTitle("Vítejte ve Vaší složce!")
                     .setDescription(
-                        `Zdravím <@${member.id}>, gratuluji Vám k úspěšnému přijetí na hodnost <@&${rolesIDs[0]}>.`
-                        + "\n**Zde si povinně zapisujete časy služeb a případné omluvenky.**"
-                        + "\n\n**Službu si zapisujete pomocí </duty:1170376396678377595> a omluvenku přes </omluvenka:1170382276492800131>.**"
-                        + "\nVe skutečnosti je to prosté. Systém Vás navede při použití příkazů."
-                        + "\nV případě dotazů, neváhejte mě (<@411436203330502658>) označit. Ovšem, nepište DMs."
+                        `<@${member.id}>, gratulujeme Vám k úspěšnému přijetí na hodnost <@&${rolesIDs[0]}>.`
+                        + "\n\n**Zde si povinně zapisujete časy služeb a případné omluvenky.**"
+                        + "\n\nZápis probíhá pomocí bota **LEA-Bot**."
+                        + "\n**Službu si zapisujete pomocí </duty:1170376396678377595> a omluvenku přes </omluvenka:1170382276492800131>.**"
+                        + "\n\nV případě problémů, použijte <#1139284046388674610> nebo kontaktujte <@411436203330502658>."
                     )
                     .setThumbnail(bot.LEA.i.LSPD)
                     .setColor(getServer(i.guild.id).color)
-                    .setFooter(getServer(i.guild.id).footer);
+                    .setFooter({ text: `LEA Bot | Vytvořil b1ngo 🎈`, iconURL: bot.user.avatarURL() });
                 await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
             } else if (i.guild.id === "1139266097921675345") { //LSCSO
                 folders = await i.guild.channels.fetch("1203743211000963082");
@@ -569,7 +566,7 @@ export default async function (bot, i) {
                     )
                     .setThumbnail(bot.LEA.i.LSCSO)
                     .setColor(bot.LEA.c.LSCSO)
-                    .setFooter({ text: `LSCSO | Vytvořil b1ngo 🚀`, iconURL: bot.LEA.i.LSCSO });
+                    .setFooter({ text: `LSCSO | Vytvořil b1ngo 🎈`, iconURL: bot.LEA.i.LSCSO });
                 const row = new ActionRowBuilder()
                     .addComponents(
                         new ButtonBuilder()
@@ -592,20 +589,18 @@ export default async function (bot, i) {
                 try { await member.setNickname(`[${radio}] ${name}`); } catch { gotNick = false; }
                 try { await member.roles.add(rolesIDs); } catch { gotRole = false; }
 
-                const b1ngo = await i.guild.members.fetch("411436203330502658");
                 const slozkaEmbed = new EmbedBuilder()
-                    .setAuthor({ name: b1ngo.displayName, iconURL: b1ngo.displayAvatarURL() })
                     .setTitle("Vítejte ve Vaší složce!")
                     .setDescription(
-                        `Zdravím <@${member.id}>, gratuluji Vám k úspěšnému přijetí na hodnost <@&${rolesIDs[0]}>.`
-                        + "\n**Zde si povinně zapisujete časy služeb a případné omluvenky.**"
-                        + "\n\n**Službu si zapisujete pomocí </duty:1170376396678377595> a omluvenku přes </omluvenka:1170382276492800131>.**"
-                        + "\nVe skutečnosti je to prosté. Systém Vás navede při použití příkazů."
-                        + "\nV případě dotazů, neváhejte mě (<@411436203330502658>) označit. Ovšem, nepište DMs."
+                        `<@${member.id}>, gratulujeme Vám k úspěšnému přijetí na hodnost <@&${rolesIDs[0]}>.`
+                        + "\n\n**Zde si povinně zapisujete časy služeb a případné omluvenky.**"
+                        + "\n\nZápis probíhá pomocí bota **LEA-Bot**."
+                        + "\n**Službu si zapisujete pomocí </duty:1170376396678377595> a omluvenku přes </omluvenka:1170382276492800131>.**"
+                        + "\n\nV případě problémů, použijte <#1139284046388674610> nebo kontaktujte <@411436203330502658>."
                     )
                     .setThumbnail(bot.LEA.i.LSCSO)
                     .setColor(getServer(i.guild.id).color)
-                    .setFooter(getServer(i.guild.id).footer);
+                    .setFooter({ text: `LEA Bot | Vytvořil b1ngo 🎈`, iconURL: bot.user.avatarURL() });
                 await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
             }
 
@@ -704,7 +699,14 @@ export default async function (bot, i) {
                 if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${newRank}\`)**`, ephemeral: true });
 
                 content = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
-                if (!(await i.guild.channels.fetch(content.folder))) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
+
+                let folderCh;
+                try {
+                    folderCh = await i.guild.channels.fetch(content.folder);
+                } catch {
+                    return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
+                }
+                if (!folderCh) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
 
                 if (content.rank === "Chief of Police") oldRolesIDs = ["1154446249005690910"], oldGrade = 15;
                 else if (content.rank === "Assistant Chief of Police") oldRolesIDs = ["1154446248967938187"], oldGrade = 14;
@@ -739,7 +741,14 @@ export default async function (bot, i) {
                 if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${newRank}\`)**`, ephemeral: true });
 
                 content = JSON.parse(fs.readFileSync((path.resolve("./db/LSCSO") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
-                if (!(await i.guild.channels.fetch(content.folder))) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
+
+                let folderCh;
+                try {
+                    folderCh = await i.guild.channels.fetch(content.folder);
+                } catch {
+                    return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
+                }
+                if (!folderCh) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
 
                 if (content.rank === "Sheriff") oldRolesIDs = ["1139274486085058590", "1139267137651884072"], oldGrade = 11;
                 else if (content.rank === "Undersheriff") oldRolesIDs = ["1139274565973983262", "1139267137651884072"], oldGrade = 10;
@@ -817,7 +826,7 @@ export default async function (bot, i) {
                     const folder = await i.guild.channels.fetch(content.folder);
                     const start = await folder.fetchStarterMessage({ force: true });
 
-                    if (folder.archived) folder.setArchived(false, "otevření složky");
+                    if (folder.archived) folder.setArchived(false, "otevření složky z neaktivity");
                     await folder.setAppliedTags([tagID]);
 
                     if (start) {
@@ -829,7 +838,7 @@ export default async function (bot, i) {
                             .setDescription(
                                 `> **App:** <@${i.fields.getTextInputValue("id")}>`
                                 + `\n> **Jméno:** \`${content.name}\``
-                                + `\n> **Hodnost:** ${rolesIDs ? `<@&${rolesIDs}>` : `\`${content.rank}\``}`
+                                + `\n> **Hodnost:** ${rolesIDs ? `<@&${rolesIDs[0]}>` : `\`${content.rank}\``}`
                                 + `\n> **Odznak:** \`${content.badge}\``
                                 + `\n> **Volačka:** \`${content.radio}\``
                                 + "\n\n"
@@ -902,8 +911,7 @@ export default async function (bot, i) {
 
         } else if (i.customId === "editModal") {
             if (!(checkDB(i.fields.getTextInputValue("id"), i))) return i.reply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **není v DB.**", ephemeral: true });
-            const gotDB = getDB(user.id);
-            const data = gotDB.data;
+            const gotDB = getDB(i.fields.getTextInputValue("id"));
             if (!bot.LEA.g[gotDB.guildName].includes(i.guild.id)) return i.reply({ content: `> 🛑 **<@${user.id}> je členem \`${gotDB.guildName}\`!** (Nemůžeš ho upravit)`, ephemeral: true });
             const member = await i.guild.members.fetch(i.fields.getTextInputValue("id"));
             if (!member) return i.reply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **není v DB.**", ephemeral: true });
@@ -1045,7 +1053,7 @@ export default async function (bot, i) {
                             .setDescription(
                                 `> **App:** <@${i.fields.getTextInputValue("id")}>`
                                 + `\n> **Jméno:** \`${content.name}\``
-                                + `\n> **Hodnost:** ${rolesIDs ? `<@&${rolesIDs}>` : `\`${content.rank}\``}`
+                                + `\n> **Hodnost:** ${rolesIDs ? `<@&${rolesIDs[0]}>` : `\`${content.rank}\``}`
                                 + `\n> **Odznak:** \`${content.badge}\``
                                 + `\n> **Volačka:** \`${content.radio}\``
                                 + "\n\n"
@@ -1064,6 +1072,7 @@ export default async function (bot, i) {
                                     .setLabel("Souhrn")
                                     .setEmoji("📑"),
                             );
+                        if (folder.archived) folder.setArchived(false, "otevření složky z neaktivity");
                         await start.edit({ message: `<@${i.fields.getTextInputValue("id")}>`, embeds: [workerEmbed], components: [row] });
                     }
 
