@@ -46,12 +46,7 @@ bot.LEA = {
         LSPD: "https://i.imgur.com/gfL0fGf.png",
         SAHP: "https://i.imgur.com/xgFoKuX.png",
         LSSD: "https://i.imgur.com/X3cH2iu.png",
-        LSCSO: "https://i.imgur.com/Hex0MQF.png",
-        event: [
-            "https://i.imgur.com/pkEErJp.png",
-            "https://i.imgur.com/Dj4dvsr.png",
-            "https://imgur.com/NARTJhy.png"
-        ]
+        LSCSO: "https://i.imgur.com/Hex0MQF.png"
     },
     e: {
         LSPD: "<:LSPD:1178108366514565181>",
@@ -61,10 +56,10 @@ bot.LEA = {
     },
     g: {
         LSPD: [
-            "1154446248934387828", "1203275468544151583"
+            "1154446248934387828"
         ],
         LSCSO: [
-            "1139266097921675345", "1174843772446703718", "714147774299373629"
+            "1139266097921675345"
         ]
     }
 };

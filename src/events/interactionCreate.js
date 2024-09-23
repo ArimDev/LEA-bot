@@ -1,11 +1,12 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, EmbedBuilder, InteractionType, ModalBuilder, TextInputBuilder, TextInputStyle, time } from "discord.js";
 import fs from "fs";
 import path from "path";
-import { getDB, checkDB, getServer } from "../../src/functions/db.js";
+import { checkDB, checkEVENT, getDB, getServer } from "../../src/functions/db.js";
 import { dcLog, simpleLog } from "../../src/functions/logSystem.js";
 import { findWorker } from "../../src/functions/profiles.js";
 import { live } from "../../src/functions/liveTables.js";
 import { generateFooter } from "../../src/functions/other.js";
+import { dg } from "../../src/functions/logSystem.js";
 
 export default async function (bot, i) {
     if (
@@ -1324,6 +1325,75 @@ export default async function (bot, i) {
             console.log(" < [DB/OW/Apology] >  " + i.member.displayName + ` přepsal(a) omluvenku [${content.radio}] ${content.name} (${index})`);
 
             i.editReply({ content: "✅ **Přepsáno!**", ephemeral: true });
+        } else if (i.customId === "fakturaModal") {
+            if (!checkDB(i.user.id))
+                return i.reply({ content: "> 🛑 **Před zapsáním __faktury__ tě musí admin přilásit do DB.**\nZalož si vlastní složku v <#1139311793555116172> a počkej na správce DB.", ephemeral: true });
+
+            if (!checkEVENT(i.user.id)) {
+                const worker = getDB(i.user.id).data;
+
+                const content = {
+                    name: worker.name,
+                    stats: {
+                        value: 0,
+                        invoices: 0
+                    },
+                    invoices: []
+                };
+
+                fs.writeFileSync(
+                    (path.resolve("./db/event") + "/" + i.user.id + ".json"),
+                    JSON.stringify(content, null, 4)
+                );
+            }
+
+            const user = JSON.parse(fs.readFileSync((path.resolve("./db/event") + "/" + i.user.id + ".json"), "utf-8"));
+
+            const idFile = fs.readdirSync(path.resolve("./db/event")).filter(f => f.endsWith(".txt"))[0];
+            const id = parseInt(idFile.split(".")[0]) + 1;
+
+            const invoiceEmbed = new EmbedBuilder()
+                .setAuthor({ name: i.member.displayName, iconURL: i.member.displayAvatarURL() })
+                .setTitle("EVENT | Zápis faktury")
+                .setDescription("Faktura byla zapsána do soutěže!")
+                .addFields([
+                    {
+                        name: `Faktura #` + id.toString(), inline: false,
+                        value:
+                            `> **Jméno:** \`${i.fields.getTextInputValue("name")}\`\n`
+                            + `> **Důvod:** \`\`\`${i.fields.getTextInputValue("reason")}\`\`\`\n`
+                            + `> **Částka:** \`${parseInt(i.fields.getTextInputValue("money").split(" ").join("")).toLocaleString()} $\``
+                    }
+                ])
+                .setThumbnail("https://i.imgur.com/bGCFY6I.png")
+                .setColor(bot.LEA.c.event)
+                .setFooter(getServer(i).footer);
+
+            const today = new Date();
+
+            const day = dg(today, "Date") + ". " + dg(today, "Month") + ". " + dg(today, "FullYear");
+            const time = dg(today, "Hours") + ":" + dg(today, "Minutes") + ":" + dg(today, "Seconds");
+
+            user.invoices.push({
+                "value": parseInt(i.fields.getTextInputValue("money").split(" ").join("")),
+                "shared": day + " " + time,
+                "reason": i.fields.getTextInputValue("reason"),
+                "name": i.fields.getTextInputValue("name"),
+                "id": id
+            });
+            user.stats.value = user.stats.value + parseInt(i.fields.getTextInputValue("money").split(" ").join(""));
+            user.stats.invoices = user.invoices.length;
+
+            fs.writeFileSync(
+                (path.resolve("./db/event") + "/" + i.user.id + ".json"),
+                JSON.stringify(user, null, 4)
+            );
+
+            fs.renameSync(path.resolve("./db/event") + "/" + idFile, path.resolve("./db/event") + "/" + id.toString() + ".txt");
+
+            console.log(" < [EVE/Faktura] >  " + i.member.displayName + " si zapsal fakturu s ID " + id);
+
+            return i.reply({ embeds: [invoiceEmbed], ephemeral: true });
         }
     }
 }

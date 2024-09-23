@@ -1,6 +1,6 @@
 {
   "name": "lea-bot",
-  "version": "4.9.1",
+  "version": "4.9.2",
   "description": "RefreshRP (FiveM GTA V roleplay) Discord bot for LEA - making internal police department actions easier.",
   "type": "module",
   "main": "index.js",
@@ -29,9 +29,9 @@
     "node": ">=16.11.0"
   },
   "dependencies": {
-    "discord.js": "^14.15.3",
+    "discord.js": "^14.16.2",
     "dotenv": "^16.4.5",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "node-fetch": "^3.3.2",
     "ws": "^8.18.0"
   }
