@@ -81,7 +81,7 @@ export default async function run(bot, i) {
         ])
         .setColor(bot.LEA.c.LEAbot)
         .setThumbnail(bot.user.avatarURL())
-        .setFooter({ text: `LEA Bot v${process.env.version} | Vytvořil b1ngo 🎈`, iconURL: bot.user.avatarURL() });
+        .setFooter({ text: `LEA Bot v${process.env.version} | Vytvořil b1ngo ✏️`, iconURL: bot.user.avatarURL() });
 
     let group;
     if (bot.LEA.g.LSPD.includes(i.guild.id)) group = "**LSPD** " + bot.LEA.e.LSPD;

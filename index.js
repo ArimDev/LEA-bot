@@ -39,7 +39,8 @@ bot.LEA = {
         duty: "#5245c0",
         apology: "#c05245",
         summary: "#25be5c",
-        event: "#Be25ab"
+        event: "#Be25ab",
+        deleted: "#c43136"
     },
     i: {
         LEAbot: "https://i.imgur.com/EnZErOi.png",

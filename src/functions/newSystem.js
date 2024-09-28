@@ -51,7 +51,7 @@ export default async function folders(bot) {
                 )
                 .setThumbnail(bot.LEA.i.SAHP)
                 .setColor(bot.LEA.c.SAHP)
-                .setFooter({ text: `SAHP | Vytvořil b1ngo 🎈`, iconURL: bot.LEA.i.SAHP });
+                .setFooter({ text: `SAHP | LEA-Bot v${process.env.version} by b1ngo ✏️`, iconURL: bot.LEA.i.SAHP });
             const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
@@ -73,16 +73,6 @@ export default async function folders(bot) {
             worker.folder = folder.id;
             for (const apology of worker.apologies) {
                 const index = worker.apologies.indexOf(apology);
-                /*const row = new ActionRowBuilder()
-                    .addComponents(
-                        new ButtonBuilder()
-                            .setCustomId("editButton")
-                            .setLabel("Přepsat")
-                            .setDisabled()
-                            .setStyle(ButtonStyle.Primary)
-                            .setEmoji("📝")
-                            .setDisabled(),
-                    );*/
 
                 const apologyEmbed = new EmbedBuilder()
                     .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
@@ -100,7 +90,7 @@ export default async function folders(bot) {
                     ])
                     .setThumbnail("https://i.imgur.com/YQb9mPm.png")
                     .setColor(bot.LEA.c.apology)
-                    .setFooter({ text: `SAHP | Vytvořil b1ngo 🎈`, iconURL: bot.LEA.i.SAHP });
+                    .setFooter({ text: `SAHP | LEA-Bot v${process.env.version} by b1ngo ✏️`, iconURL: bot.LEA.i.SAHP });
 
                 const msg = await folder.send({ embeds: [apologyEmbed]/*, components: [row]*/ });
                 worker.apologies[index].id = msg.id;
@@ -115,16 +105,14 @@ export default async function folders(bot) {
                             .setEmoji("📑"),
                     ).addComponents(
                         new ButtonBuilder()
-                            .setCustomId("editButton")
+                            .setCustomId("editButton_apology")
                             .setStyle(ButtonStyle.Primary)
-                            .setEmoji("✏️")
-                            .setDisabled(),
+                            .setEmoji("✏️"),
                     ).addComponents(
                         new ButtonBuilder()
-                            .setCustomId("deleteButton")
+                            .setCustomId("deleteButton_apology")
                             .setStyle(ButtonStyle.Danger)
                             .setEmoji("🗑️")
-                            .setDisabled(),
                     );
 
                 const dutyEmbed = new EmbedBuilder()
@@ -132,7 +120,7 @@ export default async function folders(bot) {
                     .setTitle("Záznam služby")
                     .addFields([
                         {
-                            name: `Duty #` + (index + 1), inline: false,
+                            name: `Služba #` + (index + 1), inline: false,
                             value:
                                 `> **Datum:** \`${duty.date}\`\n`
                                 + `> **Od:** \`${duty.start}\`\n`
@@ -142,7 +130,7 @@ export default async function folders(bot) {
                     ])
                     .setThumbnail("https://i.imgur.com/fhif3Xj.png")
                     .setColor(bot.LEA.c.duty)
-                    .setFooter({ text: `SAHP | Vytvořil b1ngo 🎈`, iconURL: bot.LEA.i.SAHP });
+                    .setFooter({ text: `SAHP | LEA-Bot v${process.env.version} by b1ngo ✏️`, iconURL: bot.LEA.i.SAHP });
 
                 const msg = await folder.send({ embeds: [dutyEmbed], components: [row] });
                 worker.duties[index].id = msg.id;

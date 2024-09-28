@@ -43,129 +43,6 @@ export default async function (bot, i) {
     }
 
     if (i.type === InteractionType.MessageComponent) {
-        if (i.customId === "edit") {
-            let passed = false;
-            await i.guild.fetch();
-            const admin = await i.member;
-            if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
-            if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
-                if (admin.roles.cache.has("1201813866548580443")) passed = true; //.
-                if (admin.roles.cache.has("1267541873451339806")) passed = true; //Leadership
-            } else if (bot.LEA.g.LSCSO.includes(i.guild.id) && !passed) {
-                if (admin.roles.cache.has("1139267137651884072")) passed = true; //Leadership
-                if (admin.roles.cache.has("1139295201282764882")) passed = true; //FTO Commander
-            }
-            if (admin.id === i.message.interaction.user.id) passed = true; //Owner
-            if (!passed) {
-                return i.reply({ content: "> 🛑 **Nemůžeš přepisovat cizí záznamy!**", ephemeral: true });
-            }
-
-            let type;
-            if (i.message.embeds[0] && i.message.embeds[0].title === "Záznam služby") type = 0;
-            if (i.message.embeds[0] && i.message.embeds[0].title === "Omluvenka") type = 1;
-
-            if (type === 0) {
-                const modal = new ModalBuilder()
-                    .setCustomId("dutyOWModal")
-                    .setTitle("LEA | Přepis služby");
-
-                const today = new Date();
-
-                const dateInput = new TextInputBuilder()
-                    .setCustomId("datum")
-                    .setLabel("Datum služby")
-                    .setStyle(TextInputStyle.Short)
-                    .setValue(today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear())
-                    .setPlaceholder(today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear())
-                    .setMinLength(10)
-                    .setMaxLength(12)
-                    .setRequired(true);
-
-                const startInput = new TextInputBuilder()
-                    .setCustomId("start")
-                    .setLabel("Začátek služby")
-                    .setStyle(TextInputStyle.Short)
-                    .setPlaceholder("13:00")
-                    .setMinLength(5)
-                    .setMaxLength(5)
-                    .setRequired(true);
-
-                const endInput = new TextInputBuilder()
-                    .setCustomId("end")
-                    .setLabel("Konec služby")
-                    .setStyle(TextInputStyle.Short)
-                    .setPlaceholder("17:00")
-                    .setMinLength(5)
-                    .setMaxLength(5)
-                    .setRequired(true);
-
-                const actionRow0 = new ActionRowBuilder().addComponents(dateInput);
-                const actionRow1 = new ActionRowBuilder().addComponents(startInput);
-                const actionRow2 = new ActionRowBuilder().addComponents(endInput);
-
-                modal.addComponents(actionRow0, actionRow1, actionRow2);
-
-                await i.showModal(modal);
-            } else if (type === 1) {
-                const modal = new ModalBuilder()
-                    .setCustomId("apologyOWModal")
-                    .setTitle("LEA | Přepis omluvenky");
-
-                const today = new Date();
-
-                const eventIDInput = new TextInputBuilder()
-                    .setCustomId("eventID")
-                    .setLabel("ID Události (nepovinné)")
-                    .setStyle(TextInputStyle.Short)
-                    .setPlaceholder("1")
-                    .setMaxLength(5)
-                    .setRequired(false);
-
-                const startInput = new TextInputBuilder()
-                    .setCustomId("start")
-                    .setLabel("Od kdy")
-                    .setStyle(TextInputStyle.Short)
-                    .setValue(today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear())
-                    .setPlaceholder(today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear())
-                    .setMinLength(10)
-                    .setMaxLength(12)
-                    .setRequired(true);
-
-                const endInput = new TextInputBuilder()
-                    .setCustomId("end")
-                    .setLabel("Do kdy")
-                    .setStyle(TextInputStyle.Short)
-                    .setPlaceholder("5. 1. 2024")
-                    .setMinLength(10)
-                    .setMaxLength(12)
-                    .setRequired(true);
-
-                const oocInput = new TextInputBuilder()
-                    .setCustomId("ooc")
-                    .setLabel("OOC důvod")
-                    .setStyle(TextInputStyle.Paragraph)
-                    .setPlaceholder("Rodinna akce")
-                    .setRequired(true);
-
-                const icInput = new TextInputBuilder()
-                    .setCustomId("ic")
-                    .setLabel("IC důvod")
-                    .setStyle(TextInputStyle.Paragraph)
-                    .setPlaceholder("Zlomená ruka")
-                    .setRequired(true);
-
-                const actionRow0 = new ActionRowBuilder().addComponents(eventIDInput);
-                const actionRow1 = new ActionRowBuilder().addComponents(startInput);
-                const actionRow2 = new ActionRowBuilder().addComponents(endInput);
-                const actionRow3 = new ActionRowBuilder().addComponents(oocInput);
-                const actionRow4 = new ActionRowBuilder().addComponents(icInput);
-
-                modal.addComponents(actionRow0, actionRow1, actionRow2, actionRow3, actionRow4);
-
-                await i.showModal(modal);
-            }
-        }
-
         if (i.customId.includes("summary")) {
             let worker = {};
             if (i.customId.includes("_")) worker.id = i.customId.split("_")[1];
@@ -193,19 +70,18 @@ export default async function (bot, i) {
             const summEmbed = new EmbedBuilder()
                 .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
                 .setTitle("Souhrn zaměstnance")
-                .setDescription("Pro zjištění dalších informací,\npoužij </profil:1195506010970931260>.")
                 .addFields([
                     {
                         name: `Omluvenky`, inline: false,
                         value:
                             `> **Počet omluvenek:** \`${log.apologies.filter(d => !d.removed).length}\`\n`
-                            + `> **Omluvenek za posledních 30 dnů:** \`${log.apologies.filter(a => !a.removed).length}\``
+                        //+ `> **Omluvenek za posledních 30 dnů:** \`${log.apologies.filter(a => !a.removed).length}\``
                     },
                     {
                         name: `Služby`, inline: false,
                         value:
                             `> **Počet vykonanných služeb:** \`${log.duties.filter(d => !d.removed).length}\`\n`
-                            + `> **Hodin celkem:** \`${Math.round((log.hours + Number.EPSILON) * 100) / 100}\`\n`
+                            + `> **Hodin celkem:** \`${Math.round((log.hours + Number.EPSILON) * 100) / 100}\`\n` //TODO SOUČET NOT REMOVED DUTIES
                             + `> **Hodin od povýšení:** \`${Math.round(((log.hours - log.rankups.slice(-1)[0].hours) + Number.EPSILON) * 100) / 100}\`\n`
                             + `> **Hodin za posledních 30 dnů:** \`${Math.round(((await moHours) + Number.EPSILON) * 100) / 100}\``
                     }
@@ -217,6 +93,364 @@ export default async function (bot, i) {
             console.log(" < [DB/Souhrn] >  " + i.member.displayName + " zobrazil(a) souhrn " + member.displayName);
 
             await i.editReply({ embeds: [summEmbed], ephemeral: true });
+        } else if (i.customId.includes("editButton")) {
+            let authorID;
+            if (i.customId.includes("_")) authorID = i.customId.split("_")[2];
+            else authorID = i.message.interaction.user.id;
+
+            let passed = false;
+            if (i.user.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
+            if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
+                if (i.member.roles.cache.has("1267541873451339806")) passed = true; //Leadership
+            } else if (bot.LEA.g.LSCSO.includes(i.guild.id) && !passed) {
+                if (i.member.roles.cache.has("1139267137651884072")) passed = true; //Leadership
+            }
+            if (i.user.id === authorID) passed = true;
+
+            if (!passed) return i.reply({ content: "> 🛑 **Tenhle zápis nemáš právo upravovat.**", ephemeral: true });
+
+            const worker = getDB(authorID).data;
+            const embed = i.message.embeds[0];
+            const type = i.customId.split("_")[1];
+            const recordID = parseInt(embed.fields[0].name.split("#")[1]);
+            const record = type === "duty" ? worker.duties[recordID - 1] : worker.apologies[recordID - 1];
+
+            if (type === "duty") {
+                const modal = new ModalBuilder()
+                    .setCustomId("dutyOwModal")
+                    .setTitle("LEA | Přepis služby");
+
+                const dateInput = new TextInputBuilder()
+                    .setCustomId("datum")
+                    .setLabel("Datum služby")
+                    .setStyle(TextInputStyle.Short)
+                    .setValue(record.date)
+                    .setPlaceholder(record.date)
+                    .setMinLength(10)
+                    .setMaxLength(12)
+                    .setRequired(true);
+
+                const startInput = new TextInputBuilder()
+                    .setCustomId("start")
+                    .setLabel("Začátek služby")
+                    .setStyle(TextInputStyle.Short)
+                    .setValue(record.start)
+                    .setPlaceholder(record.start)
+                    .setMinLength(5)
+                    .setMaxLength(5)
+                    .setRequired(true);
+
+                const endInput = new TextInputBuilder()
+                    .setCustomId("end")
+                    .setLabel("Konec služby")
+                    .setStyle(TextInputStyle.Short)
+                    .setValue(record.end)
+                    .setPlaceholder(record.end)
+                    .setMinLength(5)
+                    .setMaxLength(5)
+                    .setRequired(true);
+
+                const actionRow0 = new ActionRowBuilder().addComponents(dateInput);
+                const actionRow1 = new ActionRowBuilder().addComponents(startInput);
+                const actionRow2 = new ActionRowBuilder().addComponents(endInput);
+
+                modal.addComponents(actionRow0, actionRow1, actionRow2);
+
+                i.showModal(modal);
+
+                await i.awaitModalSubmit({ filter: int => int.user.id === i.user.id, time: 600000 })
+                    .then(async (submit) => {
+                        if ((submit.fields.getTextInputValue("datum").split(" ").length - 1) !== 2) {
+                            return submit.reply({
+                                content:
+                                    "### Nalezena chyba - datum!"
+                                    + "\n- Formát data je špatně. Napiš např. `24. 12. 2023` (tečky a mezery)"
+                                    + "\nZadal(a) jsi:\n"
+                                    + `> **Datum:** \`${submit.fields.getTextInputValue("datum")}\`\n`
+                                    + `> **Od:** \`${submit.fields.getTextInputValue("start")}\`\n`
+                                    + `> **Do:** \`${submit.fields.getTextInputValue("end")}\``,
+                                ephemeral: true
+                            });
+                        } else if (!submit.fields.getTextInputValue("start").includes(":") || !submit.fields.getTextInputValue("end").includes(":")) {
+                            return submit.reply({
+                                content:
+                                    "### Nalezena chyba - čas!"
+                                    + "\n- V některém z časů se neobjevila `:`."
+                                    + "\nZadal(a) jsi:\n"
+                                    + `> **Datum:** \`${submit.fields.getTextInputValue("datum")}\`\n`
+                                    + `> **Od:** \`${submit.fields.getTextInputValue("start")}\`\n`
+                                    + `> **Do:** \`${submit.fields.getTextInputValue("end")}\``,
+                                ephemeral: true
+                            });
+                        }
+
+                        await submit.deferReply({ ephemeral: true });
+
+                        const row = new ActionRowBuilder()
+                            .addComponents(
+                                new ButtonBuilder()
+                                    .setCustomId("summary_" + authorID)
+                                    .setStyle(ButtonStyle.Success)
+                                    .setEmoji("📑"),
+                            ).addComponents(
+                                new ButtonBuilder()
+                                    .setCustomId("editButton_duty_" + authorID)
+                                    .setStyle(ButtonStyle.Primary)
+                                    .setEmoji("✏️"),
+                            ).addComponents(
+                                new ButtonBuilder()
+                                    .setCustomId("deleteButton_duty_" + authorID)
+                                    .setStyle(ButtonStyle.Danger)
+                                    .setEmoji("🗑️"),
+                            );
+
+                        let hours,
+                            h1 = parseInt(submit.fields.getTextInputValue("start").split(":")[0]),
+                            h2 = parseInt(submit.fields.getTextInputValue("end").split(":")[0]),
+                            m1 = parseInt(submit.fields.getTextInputValue("start").split(":")[1]),
+                            m2 = parseInt(submit.fields.getTextInputValue("end").split(":")[1]),
+                            min1 = h1 * 60 + m1,
+                            min2 = h2 * 60 + m2;
+                        hours = (min2 - min1) / 60;
+                        if (hours < 0) hours = hours + 24;
+                        hours = Math.round((hours + Number.EPSILON) * 100) / 100;
+
+                        worker.hours = worker.hours - record.hours;
+                        record.date = submit.fields.getTextInputValue("datum");
+                        record.start = submit.fields.getTextInputValue("start");
+                        record.end = submit.fields.getTextInputValue("end");
+                        record.hours = hours;
+                        worker.hours = (Math.round((parseFloat(worker.hours) + Number.EPSILON) * 100) / 100) + hours;
+
+                        const dutyEmbed = new EmbedBuilder(embed)
+                            .setFields([
+                                {
+                                    name: `Služba #` + recordID, inline: false,
+                                    value:
+                                        `> **Datum:** \`${submit.fields.getTextInputValue("datum")}\`\n`
+                                        + `> **Od:** \`${submit.fields.getTextInputValue("start")}\`\n`
+                                        + `> **Do:** \`${submit.fields.getTextInputValue("end")}\`\n`
+                                        + `> **Hodin:**  \`${hours}\`\n`
+                                        + `Upravil(a) <@${i.user.id}>.`
+                                }
+                            ]);
+
+                        await i.message.edit({ embeds: [dutyEmbed], components: [row] });
+
+                        let workersPath;
+                        if (bot.LEA.g.LSPD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSPD") + "/" + authorID + ".json");
+                        else if (bot.LEA.g.LSCSO.includes(i.guild.id)) workersPath = (path.resolve("./db/LSCSO") + "/" + authorID + ".json");
+
+                        fs.writeFileSync(
+                            workersPath,
+                            JSON.stringify(worker, null, 4)
+                        );
+
+                        console.log(" < [DB/Duty] >  " + i.member.displayName + " přepsala(a) duty o délce " + hours.toString() + " hodin");
+                        return submit.editReply({ content: "> ✅ **Zápis byl upraven.**" });
+                    })
+                    .catch(e => null);
+            } else {
+                const modal = new ModalBuilder()
+                    .setCustomId("apologyOwModal")
+                    .setTitle("LEA | Přepis omluvenky");
+
+                const eventIDInput = new TextInputBuilder()
+                    .setCustomId("eventID")
+                    .setLabel("ID Události (nepovinné)")
+                    .setStyle(TextInputStyle.Short)
+                    .setValue(record.eventID.toString())
+                    .setPlaceholder(record.eventID.toString())
+                    .setMaxLength(5)
+                    .setRequired(false);
+
+                const startInput = new TextInputBuilder()
+                    .setCustomId("start")
+                    .setLabel("Od kdy")
+                    .setStyle(TextInputStyle.Short)
+                    .setValue(record.start)
+                    .setPlaceholder(record.start)
+                    .setMinLength(10)
+                    .setMaxLength(12)
+                    .setRequired(true);
+
+                const endInput = new TextInputBuilder()
+                    .setCustomId("end")
+                    .setLabel("Do kdy")
+                    .setStyle(TextInputStyle.Short)
+                    .setValue(record.end)
+                    .setPlaceholder(record.end)
+                    .setMinLength(10)
+                    .setMaxLength(12)
+                    .setRequired(true);
+
+                const oocInput = new TextInputBuilder()
+                    .setCustomId("ooc")
+                    .setLabel("OOC důvod")
+                    .setStyle(TextInputStyle.Paragraph)
+                    .setValue(record.ooc)
+                    .setPlaceholder(record.ooc)
+                    .setRequired(true);
+
+                const icInput = new TextInputBuilder()
+                    .setCustomId("ic")
+                    .setLabel("IC důvod")
+                    .setStyle(TextInputStyle.Paragraph)
+                    .setValue(record.ic)
+                    .setPlaceholder(record.ic)
+                    .setRequired(true);
+
+                const actionRow0 = new ActionRowBuilder().addComponents(eventIDInput);
+                const actionRow1 = new ActionRowBuilder().addComponents(startInput);
+                const actionRow2 = new ActionRowBuilder().addComponents(endInput);
+                const actionRow3 = new ActionRowBuilder().addComponents(oocInput);
+                const actionRow4 = new ActionRowBuilder().addComponents(icInput);
+
+                modal.addComponents(actionRow0, actionRow1, actionRow2, actionRow3, actionRow4);
+
+                i.showModal(modal);
+
+                await i.awaitModalSubmit({ filter: int => int.user.id === i.user.id, time: 600000 })
+                    .then(async (submit) => {
+                        if (
+                            (submit.fields.getTextInputValue("start").split(" ").length) !== 3
+                            || (submit.fields.getTextInputValue("end").split(" ").length) !== 3
+                        ) {
+                            return submit.reply({
+                                content:
+                                    "### Nalezena chyba - datum!"
+                                    + "\n- Formát data je špatně. Napiš např. `24. 12. 2023` (tečky a mezery)"
+                                    + "\nZadal(a) jsi:\n"
+                                    + (submit.fields.getTextInputValue("eventID") ? `> **ID Události:** \`${submit.fields.getTextInputValue("eventID")}\`\n` : "")
+                                    + `> **Začátek:** \`${submit.fields.getTextInputValue("start")}\`\n`
+                                    + `> **Konec:** \`${submit.fields.getTextInputValue("end")}\`\n`
+                                    + `> **OOC Důvod:** \`${submit.fields.getTextInputValue("ooc")}\`\n`
+                                    + `> **IC Důvod:** \`${submit.fields.getTextInputValue("ic")}\``,
+                                ephemeral: true
+                            });
+                        }
+
+                        await submit.deferReply({ ephemeral: true });
+
+                        const row = new ActionRowBuilder()
+                            .addComponents(
+                                new ButtonBuilder()
+                                    .setCustomId("summary_" + authorID)
+                                    .setStyle(ButtonStyle.Success)
+                                    .setEmoji("📑"),
+                            ).addComponents(
+                                new ButtonBuilder()
+                                    .setCustomId("editButton_apology_" + authorID)
+                                    .setStyle(ButtonStyle.Primary)
+                                    .setEmoji("✏️"),
+                            ).addComponents(
+                                new ButtonBuilder()
+                                    .setCustomId("deleteButton_apology_" + authorID)
+                                    .setStyle(ButtonStyle.Danger)
+                                    .setEmoji("🗑️"),
+                            );
+
+                        record.start = submit.fields.getTextInputValue("start");
+                        record.end = submit.fields.getTextInputValue("end");
+                        record.ooc = submit.fields.getTextInputValue("ooc");
+                        record.ic = submit.fields.getTextInputValue("ic");
+
+                        const apologyEmbed = new EmbedBuilder(embed)
+                            .setFields([
+                                {
+                                    name: `Omluvenka #` + recordID, inline: false,
+                                    value:
+                                        `> **ID Události:** \`${submit.fields.getTextInputValue("eventID") || "0"}\`\n`
+                                        + `> **Začátek:** \`${submit.fields.getTextInputValue("start")}\`\n`
+                                        + `> **Konec:** \`${submit.fields.getTextInputValue("end")}\`\n`
+                                        + `> **OOC Důvod:** \`${submit.fields.getTextInputValue("ooc")}\`\n`
+                                        + `> **IC Důvod:** \`${submit.fields.getTextInputValue("ic")}\`\n`
+                                        + `Upravil(a) <@${i.user.id}>.`
+                                }
+                            ]);
+
+                        await i.message.edit({ embeds: [apologyEmbed], components: [row] });
+
+                        let workersPath;
+                        if (bot.LEA.g.LSPD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSPD") + "/" + authorID + ".json");
+                        else if (bot.LEA.g.LSCSO.includes(i.guild.id)) workersPath = (path.resolve("./db/LSCSO") + "/" + authorID + ".json");
+
+                        fs.writeFileSync(
+                            workersPath,
+                            JSON.stringify(worker, null, 4)
+                        );
+
+                        console.log(" < [DB/Duty] >  " + i.member.displayName + " přepsala(a) duty o délce " + hours.toString() + " hodin");
+                        return submit.editReply({ content: "> ✅ **Zápis byl upraven.**" });
+                    })
+                    .catch(e => null);
+            }
+        } else if (i.customId.includes("deleteButton")) {
+            let authorID;
+            if (i.customId.includes("_")) authorID = i.customId.split("_")[2];
+            else authorID = i.message.interaction.user.id;
+
+            let passed = false;
+            if (i.user.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
+            if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
+                if (i.member.roles.cache.has("1267541873451339806")) passed = true; //Leadership
+            } else if (bot.LEA.g.LSCSO.includes(i.guild.id) && !passed) {
+                if (i.member.roles.cache.has("1139267137651884072")) passed = true; //Leadership
+            }
+            if (i.user.id === authorID) passed = true;
+
+            if (!passed) return i.reply({ content: "> 🛑 **Tenhle zápis nemáš právo smazat.**", ephemeral: true });;
+
+            await i.deferUpdate();
+
+            const worker = getDB(authorID).data;
+            const embed = i.message.embeds[0];
+            const type = i.customId.split("_")[1];
+            const recordID = parseInt(embed.fields[0].name.split("#")[1]);
+            const record = type === "duty" ? worker.duties[recordID - 1] : worker.apologies[recordID - 1];
+
+            if (record.removed) return i.reply({ content: "> 🛑 **Zápis je již smazán!**", ephemeral: true });;
+            record.removed = true;
+
+            const deletedDutyEmbed = new EmbedBuilder(embed)
+                .setFields([
+                    {
+                        name: `${type === "duty" ? "Služba" : "Omluvenka"} #` + recordID, inline: false,
+                        value:
+                            `Smazal(a) <@${i.user.id}>.`
+                    }
+                ])
+                .setThumbnail("https://i.imgur.com/ZERRfb0.png")
+                .setColor(bot.LEA.c.deleted);
+            const row = new ActionRowBuilder()
+                .addComponents(
+                    new ButtonBuilder()
+                        .setCustomId("summary_" + authorID)
+                        .setStyle(ButtonStyle.Success)
+                        .setEmoji("📑"),
+                ).addComponents(
+                    new ButtonBuilder()
+                        .setCustomId("editButton_duty_" + authorID)
+                        .setStyle(ButtonStyle.Primary)
+                        .setEmoji("✏️")
+                        .setDisabled(),
+                ).addComponents(
+                    new ButtonBuilder()
+                        .setCustomId("deleteButton_duty_" + authorID)
+                        .setStyle(ButtonStyle.Danger)
+                        .setEmoji("🗑️")
+                        .setDisabled(),
+                );
+
+            let workersPath;
+            if (bot.LEA.g.LSPD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSPD") + "/" + authorID + ".json");
+            else if (bot.LEA.g.LSCSO.includes(i.guild.id)) workersPath = (path.resolve("./db/LSCSO") + "/" + authorID + ".json");
+            fs.writeFileSync(
+                workersPath,
+                JSON.stringify(worker, null, 4)
+            );
+
+            await i.message.edit({ embeds: [deletedDutyEmbed], components: [row] });
         }
     }
 
@@ -224,10 +458,7 @@ export default async function (bot, i) {
         if (i.customId === "dutyModal") {
             if (!(checkDB(i.user.id))) return i.reply({ content: "> 🛑 **Před zadáváním __duties__ a __omluvenek__ tě musí admin přilásit do DB.**\nZalož si vlastní složku a počkej na správce DB.", ephemeral: true });
 
-            if (
-                (i.fields.getTextInputValue("datum").split(" ").length - 1) !== 2
-                || (i.fields.getTextInputValue("datum").split(" ").length - 1) !== 2
-            ) {
+            if ((i.fields.getTextInputValue("datum").split(" ").length - 1) !== 2) {
                 return await i.reply({
                     content:
                         "### Nalezena chyba - datum!"
@@ -251,33 +482,34 @@ export default async function (bot, i) {
                 });
             }
 
-            let content;
+            let content, inFolder;
             if (bot.LEA.g.LSPD.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + i.user.id + ".json"), "utf-8"));
             else if (bot.LEA.g.LSCSO.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSCSO") + "/" + i.user.id + ".json"), "utf-8"));
             else return i.reply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
-            try { await i.deferReply(); } catch { return; }
+            if (i.channel.id === content.folder) inFolder = true;
+            else inFolder = false;
+
+            try { await i.deferReply({ ephemeral: inFolder ? false : true }); } catch { return; }
 
             const index = content.duties.length + 1;
 
-            const row = new ActionRowBuilder()
+            let row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
-                        .setCustomId("summary")
+                        .setCustomId("summary_" + i.user.id)
                         .setStyle(ButtonStyle.Success)
                         .setEmoji("📑"),
                 ).addComponents(
                     new ButtonBuilder()
-                        .setCustomId("editButton")
+                        .setCustomId("editButton_duty_" + i.user.id)
                         .setStyle(ButtonStyle.Primary)
-                        .setEmoji("✏️")
-                        .setDisabled(),
+                        .setEmoji("✏️"),
                 ).addComponents(
                     new ButtonBuilder()
-                        .setCustomId("deleteButton")
+                        .setCustomId("deleteButton_duty_" + i.user.id)
                         .setStyle(ButtonStyle.Danger)
-                        .setEmoji("🗑️")
-                        .setDisabled(),
+                        .setEmoji("🗑️"),
                 );
 
             let hours,
@@ -296,7 +528,7 @@ export default async function (bot, i) {
                 .setTitle("Záznam služby")
                 .addFields([
                     {
-                        name: `Duty #` + index, inline: false,
+                        name: `Služba #` + index, inline: false,
                         value:
                             `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
                             + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
@@ -308,7 +540,15 @@ export default async function (bot, i) {
                 .setColor(bot.LEA.c.duty)
                 .setFooter(getServer(i.guild.id).footer);
 
-            const msg = await i.editReply({ embeds: [dutyEmbed], components: [row] });
+            let msg;
+            if (i.channel.id === content.folder)
+                msg = await i.editReply({ embeds: [dutyEmbed], components: [row] });
+            else {
+                const ch = await i.guild.channels.fetch(content.folder);
+                if (ch.archived) await ch.setArchived(false, "otevření složky z neaktivity");
+                msg = await ch.send({ embeds: [dutyEmbed], components: [row] });
+                await i.editReply({ content: `> ✅ **Služba byla zapsána: ${msg.url}**`, ephemeral: true });
+            }
 
             content.duties.push({
                 "id": msg.id,
@@ -319,7 +559,6 @@ export default async function (bot, i) {
                 "hours": hours
             });
             content.hours = (Math.round((parseFloat(content.hours) + Number.EPSILON) * 100) / 100) + hours;
-            content.folder = i.channelId;
 
             let workersPath;
             if (bot.LEA.g.LSPD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSPD") + "/" + i.user.id + ".json");
@@ -332,31 +571,34 @@ export default async function (bot, i) {
 
             console.log(" < [DB/Duty] >  " + i.member.displayName + " zapsal(a) duty o délce " + hours.toString() + " hodin");
         } else if (i.customId === "apologyModal") {
-            let content;
+            let content, inFolder;
             if (bot.LEA.g.LSPD.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + i.user.id + ".json"), "utf-8"));
             else if (bot.LEA.g.LSCSO.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSCSO") + "/" + i.user.id + ".json"), "utf-8"));
             else return i.reply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
+
+            if (i.channel.id === content.folder) inFolder = true;
+            else inFolder = false;
+
+            try { await i.deferReply({ ephemeral: inFolder ? false : true }); } catch { return; }
 
             const index = content.apologies.length + 1;
 
             const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
-                        .setCustomId("summary")
+                        .setCustomId("summary_" + i.user.id)
                         .setStyle(ButtonStyle.Success)
                         .setEmoji("📑"),
                 ).addComponents(
                     new ButtonBuilder()
-                        .setCustomId("editButton")
+                        .setCustomId("editButton_apology_" + i.user.id)
                         .setStyle(ButtonStyle.Primary)
-                        .setEmoji("✏️")
-                        .setDisabled(),
+                        .setEmoji("✏️"),
                 ).addComponents(
                     new ButtonBuilder()
-                        .setCustomId("deleteButton")
+                        .setCustomId("deleteButton_apology_" + i.user.id)
                         .setStyle(ButtonStyle.Danger)
-                        .setEmoji("🗑️")
-                        .setDisabled(),
+                        .setEmoji("🗑️"),
                 );
 
             if (
@@ -397,7 +639,15 @@ export default async function (bot, i) {
                 .setColor(bot.LEA.c.apology)
                 .setFooter(getServer(i.guild.id).footer);
 
-            const msg = await i.editReply({ embeds: [dutyEmbed], components: [row] });
+            let msg;
+            if (i.channel.id === content.folder)
+                msg = await i.editReply({ embeds: [dutyEmbed], components: [row] });
+            else {
+                const ch = await i.guild.channels.fetch(content.folder);
+                if (ch.archived) await ch.setArchived(false, "otevření složky z neaktivity");
+                msg = await ch.send({ embeds: [dutyEmbed], components: [row] });
+                await i.editReply({ content: `> ✅ **Omluvenka byla zapsána: ${msg.url}**`, ephemeral: true });
+            }
 
             const today = new Date();
             content.apologies.push({
@@ -410,7 +660,6 @@ export default async function (bot, i) {
                 "ooc": i.fields.getTextInputValue("ooc"),
                 "ic": i.fields.getTextInputValue("ic")
             });
-            content.folder = i.channelId;
 
             let workersPath;
             if (bot.LEA.g.LSPD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSPD") + "/" + i.user.id + ".json");
@@ -491,7 +740,7 @@ export default async function (bot, i) {
                     )
                     .setThumbnail(bot.LEA.i.LSPD)
                     .setColor(bot.LEA.c.LSPD)
-                    .setFooter({ text: `LSPD | Vytvořil b1ngo 🎈`, iconURL: bot.LEA.i.LSPD });
+                    .setFooter({ text: `LSPD | LEA-Bot v${process.env.version} by b1ngo ✏️`, iconURL: bot.LEA.i.LSPD });
                 const row = new ActionRowBuilder()
                     .addComponents(
                         new ButtonBuilder()
@@ -525,7 +774,7 @@ export default async function (bot, i) {
                     )
                     .setThumbnail(bot.LEA.i.LSPD)
                     .setColor(getServer(i.guild.id).color)
-                    .setFooter({ text: `LEA Bot | Vytvořil b1ngo 🎈`, iconURL: bot.user.avatarURL() });
+                    .setFooter({ text: `LEA-Bot v${process.env.version} by b1ngo ✏️`, iconURL: bot.user.avatarURL() });
                 await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
             } else if (i.guild.id === "1139266097921675345") { //LSCSO
                 folders = await i.guild.channels.fetch("1203743211000963082");
@@ -567,7 +816,7 @@ export default async function (bot, i) {
                     )
                     .setThumbnail(bot.LEA.i.LSCSO)
                     .setColor(bot.LEA.c.LSCSO)
-                    .setFooter({ text: `LSCSO | Vytvořil b1ngo 🎈`, iconURL: bot.LEA.i.LSCSO });
+                    .setFooter({ text: `LSCSO | LEA-Bot v${process.env.version} by b1ngo ✏️`, iconURL: bot.LEA.i.LSCSO });
                 const row = new ActionRowBuilder()
                     .addComponents(
                         new ButtonBuilder()
@@ -601,7 +850,7 @@ export default async function (bot, i) {
                     )
                     .setThumbnail(bot.LEA.i.LSCSO)
                     .setColor(getServer(i.guild.id).color)
-                    .setFooter({ text: `LEA Bot | Vytvořil b1ngo 🎈`, iconURL: bot.user.avatarURL() });
+                    .setFooter({ text: `LEA-Bot v${process.env.version} by b1ngo ✏️`, iconURL: bot.user.avatarURL() });
                 await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
             }
 
@@ -1103,228 +1352,6 @@ export default async function (bot, i) {
                 }
             }
 
-        } else if (i.customId === "dutyOWModal") {
-            if (
-                (i.fields.getTextInputValue("datum").split(" ").length - 1) !== 2
-                || (i.fields.getTextInputValue("datum").split(".").length - 1) !== 2
-            ) {
-                return await i.reply({
-                    content:
-                        "### Nalezena chyba - datum!"
-                        + "\n- Formát data je špatně. Napiš např. `24. 12. 2023` (tečky a mezery)"
-                        + "\nZadal(a) jsi:\n"
-                        + `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
-                        + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
-                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\``,
-                    ephemeral: true
-                });
-            } else if (!i.fields.getTextInputValue("start").includes(":") || !i.fields.getTextInputValue("end").includes(":")) {
-                return await i.reply({
-                    content:
-                        "### Nalezena chyba - čas!"
-                        + "\n- V některém z časů se neobjevila `:`."
-                        + "\nZadal(a) jsi:\n"
-                        + `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
-                        + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
-                        + `> **Do:** \`${i.fields.getTextInputValue("end")}\``,
-                    ephemeral: true
-                });
-            }
-
-            await i.deferReply({ ephemeral: true });
-
-            if (!(checkDB(i.message.interaction.user.id))) return i.editReply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
-
-            let content;
-            if (bot.LEA.g.LSPD.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + i.message.interaction.user.id + ".json"), "utf-8"));
-            else if (bot.LEA.g.LSCSO.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSCSO") + "/" + i.message.interaction.user.id + ".json"), "utf-8"));
-
-            const index = parseInt(i.message.embeds[0].fields[0].name.slice(-1)) - 1;
-            const member = await i.guild.members.fetch(i.message.interaction.user.id);
-
-            const row = new ActionRowBuilder()
-                .addComponents(
-                    new ButtonBuilder()
-                        .setCustomId("summary")
-                        .setStyle(ButtonStyle.Success)
-                        .setEmoji("📑"),
-                ).addComponents(
-                    new ButtonBuilder()
-                        .setCustomId("editButton")
-                        .setStyle(ButtonStyle.Primary)
-                        .setEmoji("✏️")
-                        .setDisabled(),
-                ).addComponents(
-                    new ButtonBuilder()
-                        .setCustomId("deleteButton")
-                        .setStyle(ButtonStyle.Danger)
-                        .setEmoji("🗑️")
-                        .setDisabled(),
-                );
-
-            const hoursBefore = parseFloat(i.message.embeds[0].fields[0].value.split("`")[7]);
-            let hoursAfter,
-                h1 = parseInt(i.fields.getTextInputValue("start").split(":")[0]),
-                h2 = parseInt(i.fields.getTextInputValue("end").split(":")[0]),
-                m1 = parseInt(i.fields.getTextInputValue("start").split(":")[1]),
-                m2 = parseInt(i.fields.getTextInputValue("end").split(":")[1]),
-                min1 = h1 * 60 + m1,
-                min2 = h2 * 60 + m2;
-            hoursAfter = (min2 - min1) / 60;
-            if (hoursAfter < 0) hoursAfter = hoursAfter + 24;
-            hoursAfter = Math.round((hoursAfter + Number.EPSILON) * 100) / 100;
-
-
-            const dutyEmbed = new EmbedBuilder()
-                .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
-                .setTitle("Záznam služby")
-                .addFields([
-                    {
-                        name: `Duty #` + (index + 1), inline: false,
-                        value:
-                            `> **Datum:** \`${i.fields.getTextInputValue("datum")}\`\n`
-                            + `> **Od:** \`${i.fields.getTextInputValue("start")}\`\n`
-                            + `> **Do:** \`${i.fields.getTextInputValue("end")}\`\n`
-                            + `> **Hodin:**  \`${hoursAfter}\``
-                    }
-                ])
-                .setThumbnail("https://i.imgur.com/fhif3Xj.png")
-                .setColor(bot.LEA.c.duty)
-                .setFooter(getServer(i.guild.id).footer);
-
-            try {
-                await i.message.edit({ embeds: [dutyEmbed], components: [row] });
-            } catch (e) {
-                console.error(e);
-                return await i.editReply({ content: "> 🛑 **Chyba! Zpráva nešla upravit.**```" + e + "```" });
-            }
-
-            content.duties[index] = {
-                "id": i.message.id,
-                "removed": false,
-                "date": i.fields.getTextInputValue("datum"),
-                "start": i.fields.getTextInputValue("start"),
-                "end": i.fields.getTextInputValue("end"),
-                "hours": hoursAfter
-            };
-
-            content.hours = parseFloat(content.hours) - parseFloat(hoursBefore);
-            content.hours = (Math.round((parseFloat(content.hours) + Number.EPSILON) * 100) / 100) + parseFloat(hoursAfter);
-
-            let workersPath;
-            if (bot.LEA.g.LSPD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSPD") + "/" + i.message.interaction.user.id + ".json");
-            else if (bot.LEA.g.LSCSO.includes(i.guild.id)) workersPath = (path.resolve("./db/LSCSO") + "/" + i.message.interaction.user.id + ".json");
-
-            fs.writeFileSync(
-                workersPath,
-                JSON.stringify(content, null, 4)
-            );
-
-            console.log(" < [DB/OW/Duty] >  " + i.member.displayName + ` přepsal(a) duty [${content.radio}] ${content.name} (${index}) z ${i.fields.getTextInputValue("datum")}`);
-
-            i.editReply({ content: "✅ **Přepsáno!**", ephemeral: true });
-        } else if (i.customId === "apologyOWModal") {
-            await i.deferReply({ ephemeral: true });
-
-            if (!(checkDB(i.message.interaction.user.id))) return i.editReply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
-
-            let content;
-            if (bot.LEA.g.LSPD.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + i.message.interaction.user.id + ".json"), "utf-8"));
-            else if (bot.LEA.g.LSCSO.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSCSO") + "/" + i.message.interaction.user.id + ".json"), "utf-8"));
-
-            const index = parseInt(i.message.embeds[0].fields[0].name.slice(-1)) - 1;
-            const member = await i.guild.members.fetch(i.message.interaction.user.id);
-
-            /*const row = new ActionRowBuilder()
-                .addComponents(
-                    new ButtonBuilder()
-                        .setCustomId("editButton")
-                        .setLabel("Přepsat")
-                        .setDisabled()
-                        .setStyle(ButtonStyle.Primary)
-                        .setEmoji("📝"),
-                );*/
-
-            if (
-                (i.fields.getTextInputValue("start").split(" ").length) !== 3
-                || (i.fields.getTextInputValue("end").split(" ").length) !== 3
-            ) {
-                return await i.editReply({
-                    content:
-                        "### Nalezena chyba - datum!"
-                        + "\n- Formát data je špatně. Napiš např. `24. 12. 2023` (tečky a mezery)"
-                        + "\nZadal(a) jsi:\n"
-                        + (i.fields.getTextInputValue("eventID") ? `> **ID Události:** \`${i.fields.getTextInputValue("eventID")}\`\n` : "")
-                        + `> **Začátek:** \`${i.fields.getTextInputValue("start")}\`\n`
-                        + `> **Konec:** \`${i.fields.getTextInputValue("end")}\`\n`
-                        + `> **OOC Důvod:** \`${i.fields.getTextInputValue("ooc")}\`\n`
-                        + `> **IC Důvod:** \`${i.fields.getTextInputValue("ic")}\``,
-                    ephemeral: true
-                });
-            }
-
-            const apologyEmbed = new EmbedBuilder()
-                .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
-                .setTitle("Omluvenka")
-                .addFields([
-                    {
-                        name: `Omluvenka #` + (index + 1), inline: false,
-                        value:
-                            `> **ID Události:** \`${i.fields.getTextInputValue("eventID") || "0"}\`\n`
-                            + `> **Začátek:** \`${i.fields.getTextInputValue("start")}\`\n`
-                            + `> **Konec:** \`${i.fields.getTextInputValue("end")}\`\n`
-                            + `> **OOC Důvod:** \`${i.fields.getTextInputValue("ooc")}\`\n`
-                            + `> **IC Důvod:** \`${i.fields.getTextInputValue("ic")}\``
-                    }
-                ])
-                .setThumbnail("https://i.imgur.com/YQb9mPm.png")
-                .setColor(bot.LEA.c.apology)
-                .setFooter(getServer(i.guild.id).footer);
-
-            try {
-                await i.message.edit({ embeds: [apologyEmbed]/*, components: [row]*/ });
-            } catch (e) {
-                console.error(e);
-                return await i.editReply({ content: "> 🛑 **Chyba! Zpráva nešla upravit.**```" + e + "```" });
-            }
-
-            const today = new Date();
-            if (content.apologies[index]) {
-                content.apologies[index] = {
-                    "id": i.message.id,
-                    "removed": false,
-                    "shared": content.apologies[index].shared ? content.apologies[index].shared : today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear(),
-                    "eventID": parseInt(i.fields.getTextInputValue("eventID")) || 0,
-                    "start": i.fields.getTextInputValue("start"),
-                    "end": i.fields.getTextInputValue("end"),
-                    "ooc": i.fields.getTextInputValue("ooc"),
-                    "ic": i.fields.getTextInputValue("ic")
-                };
-            } else {
-                content.apologies.push({
-                    "id": i.message.id,
-                    "removed": false,
-                    "shared": today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear(),
-                    "eventID": parseInt(i.fields.getTextInputValue("eventID")) || 0,
-                    "start": i.fields.getTextInputValue("start"),
-                    "end": i.fields.getTextInputValue("end"),
-                    "ooc": i.fields.getTextInputValue("ooc"),
-                    "ic": i.fields.getTextInputValue("ic")
-                });
-            }
-
-            let workersPath;
-            if (bot.LEA.g.LSPD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSPD") + "/" + i.message.interaction.user.id + ".json");
-            else if (bot.LEA.g.LSCSO.includes(i.guild.id)) workersPath = (path.resolve("./db/LSCSO") + "/" + i.message.interaction.user.id + ".json");
-
-            fs.writeFileSync(
-                workersPath,
-                JSON.stringify(content, null, 4)
-            );
-
-            console.log(" < [DB/OW/Apology] >  " + i.member.displayName + ` přepsal(a) omluvenku [${content.radio}] ${content.name} (${index})`);
-
-            i.editReply({ content: "✅ **Přepsáno!**", ephemeral: true });
         } else if (i.customId === "fakturaModal") {
             if (!checkDB(i.user.id))
                 return i.reply({ content: "> 🛑 **Před zapsáním __faktury__ tě musí admin přilásit do DB.**\nZalož si vlastní složku v <#1139311793555116172> a počkej na správce DB.", ephemeral: true });
@@ -1367,7 +1394,7 @@ export default async function (bot, i) {
                 ])
                 .setThumbnail("https://i.imgur.com/bGCFY6I.png")
                 .setColor(bot.LEA.c.event)
-                .setFooter(getServer(i).footer);
+                .setFooter(getServer(i.guild.id).footer);
 
             const today = new Date();
 
@@ -1393,7 +1420,20 @@ export default async function (bot, i) {
 
             console.log(" < [EVE/Faktura] >  " + i.member.displayName + " si zapsal fakturu s ID " + id);
 
-            return i.reply({ embeds: [invoiceEmbed], ephemeral: true });
+            i.reply({ embeds: [invoiceEmbed], ephemeral: true });
+
+            const ch = await i.guild.channels.fetch("1287863043883008010");
+            const invoiceEmbedPublic = new EmbedBuilder()
+                .setAuthor({ name: i.member.displayName, iconURL: i.member.displayAvatarURL() })
+                .setTitle("Faktura #" + id.toString())
+                .setDescription(
+                    `> **Jméno:** \`${i.fields.getTextInputValue("name")}\``
+                    + `\n> **Důvod:** \`\`\`${i.fields.getTextInputValue("reason")}\`\`\``
+                    + `\n> **Částka:** \`${parseInt(i.fields.getTextInputValue("money").split(" ").join("")).toLocaleString()} $\``
+                )
+                .setColor(bot.LEA.c.event)
+                .setFooter(getServer(i.guild.id).footer);
+            return ch.send({ embeds: [invoiceEmbedPublic] });
         }
     }
 }

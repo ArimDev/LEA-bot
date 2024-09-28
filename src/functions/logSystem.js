@@ -84,7 +84,7 @@ export async function dcLog(bot, guildID, member, options = {}) {
             .setTitle(title)
             .setDescription(description)
             .setColor(color)
-            .setFooter({ text: "LSPD | Vytvořil b1ngo 🎈", iconURL: bot.LEA.i.LSPD });
+            .setFooter({ text: "LSPD | LEA-Bot v${process.env.version} by b1ngo ✏️", iconURL: bot.LEA.i.LSPD });
         await channel.send({ embeds: [logEmbed], files: files });
     } else if (gotServer.id === 2) {
         let files = [];
@@ -97,7 +97,7 @@ export async function dcLog(bot, guildID, member, options = {}) {
             .setTitle(title)
             .setDescription(description)
             .setColor(color)
-            .setFooter({ text: "LSCSO | Vytvořil b1ngo 🎈", iconURL: bot.LEA.i.LSCSO });
+            .setFooter({ text: "LSCSO | LEA-Bot v${process.env.version} by b1ngo ✏️", iconURL: bot.LEA.i.LSCSO });
         await channel.send({ embeds: [logEmbed], files: files });
     }
 }

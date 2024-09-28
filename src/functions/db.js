@@ -44,17 +44,17 @@ export function getServer(guildID) {
 
     if (bot.LEA.g.LSPD.includes(guildID)) {
         r.name = "LSPD"
-        r.footer = { text: `LSPD | Vytvořil b1ngo 🎈`, iconURL: bot.LEA.i.LSPD };
+        r.footer = { text: `LSPD | LEA-Bot v${process.env.version} by b1ngo ✏️`, iconURL: bot.LEA.i.LSPD };
         r.color = bot.LEA.c.LSPD;
         r.id = 1;
     } else if (bot.LEA.g.LSCSO.includes(guildID)) {
         r.name = "LSCSO"
-        r.footer = { text: `LSCSO | Vytvořil b1ngo 🎈`, iconURL: bot.LEA.i.LSCSO };
+        r.footer = { text: `LSCSO | LEA-Bot v${process.env.version} by b1ngo ✏️`, iconURL: bot.LEA.i.LSCSO };
         r.color = bot.LEA.c.LSCSO;
         r.id = 2;
     } else {
         r.name = "XXXX"
-        r.footer = { text: `LEA-Bot | Vytvořil b1ngo 🎈`, iconURL: bot.LEA.i.LEAbot };
+        r.footer = { text: `LEA-Bot v${process.env.version} by b1ngo ✏️`, iconURL: bot.LEA.i.LEAbot };
         r.color = bot.LEA.c.LEAbot;
         r.id = 0;
     }
