@@ -24,7 +24,8 @@ export const slash = new SlashCommandBuilder()
                     .setDescription("Přidat Discord uživatele")
                     .setRequired(false))
     )
-    .setDMPermission(false)
+    .setContexts([0])
+    .setIntegrationTypes([0])
     .setNSFW(false);
 
 export default async function run(bot, i) {
@@ -87,7 +88,7 @@ export default async function run(bot, i) {
         });
 
         if (submit) {
-            submit.deferReply({ ephemeral: true });
+            await submit.deferReply({ ephemeral: true });
 
             const id = parseInt(submit.fields.getTextInputValue("eventID"));
             const ignored = submit.fields.getTextInputValue("ignore").split(", ");
@@ -148,7 +149,7 @@ export default async function run(bot, i) {
             }
             const listAtt = new AttachmentBuilder(Buffer.from(list.join("\n")), { name: "list.txt" });
 
-            await submit.editReply({
+            return submit.editReply({
                 files: [listAtt, mentionsAtt],
                 ephemeral: true
             });

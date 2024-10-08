@@ -5,7 +5,8 @@ import path from "path";
 export const slash = new SlashCommandBuilder()
     .setName("menu")
     .setDescription(`Otevře pomocné menu bota`)
-    .setDMPermission(true)
+    .setContexts([0, 1, 2])
+    .setIntegrationTypes([0, 1])
     .setNSFW(false);
 
 export default async function run(bot, i) {
@@ -46,11 +47,11 @@ export default async function run(bot, i) {
         return tPassed.join(" a ");
     }
 
-    console.log(" < [CMD/Menu] >  " + (i.member.displayName || i.user.displayName) + ` zobrazil(a) menu`);
+    console.log(" < [CMD/Menu] >  " + (i.member?.displayName || i.user.displayName) + ` zobrazil(a) menu`);
 
     const commands = fs.readdirSync(path.resolve("./src/commands")).filter(file => file.endsWith(".js"));
     let helpEmbed = new EmbedBuilder()
-        .setTitle("Bot Menu")
+        .setTitle("ADVANCED REACTIONS")
         .setFields([
             {
                 name: `Stav`, inline: true,
@@ -83,13 +84,15 @@ export default async function run(bot, i) {
         .setThumbnail(bot.user.avatarURL())
         .setFooter({ text: `LEA Bot v${process.env.version} | Vytvořil b1ngo ✏️`, iconURL: bot.user.avatarURL() });
 
-    let group;
-    if (bot.LEA.g.LSPD.includes(i.guild.id)) group = "**LSPD** " + bot.LEA.e.LSPD;
-    else if (bot.LEA.g.LSCSO.includes(i.guild.id)) group = "**LSCSO** " + bot.LEA.e.LSCSO;
-    else group = false;
+    if (i.guild) {
+        let group;
+        if (bot.LEA.g.LSPD.includes(i.guild.id)) group = "**LSPD** " + bot.LEA.e.LSPD;
+        else if (bot.LEA.g.LSCSO.includes(i.guild.id)) group = "**LSCSO** " + bot.LEA.e.LSCSO;
+        else group = false;
 
-    if (group) helpEmbed.setDescription(`> ✅ Server **${i.guild.name}** je součástí sboru ${group}`);
-    else helpEmbed.setDescription(`> ❎ Server **${i.guild.name}** není součásti žádného sboru.`);
+        if (group) helpEmbed.setDescription(`> ✅ Server **${i.guild.name}** je součástí sboru ${group}`);
+        else helpEmbed.setDescription(`> ❎ Server **${i.guild.name}** není součásti žádného sboru.`);
+    }
 
     return i.reply({ embeds: [helpEmbed], ephemeral: true });
 };

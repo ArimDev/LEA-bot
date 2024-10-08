@@ -541,7 +541,7 @@ export default async function (bot, i) {
                 .setFooter(getServer(i.guild.id).footer);
 
             let msg;
-            if (i.channel.id === content.folder)
+            if (inFolder)
                 msg = await i.editReply({ embeds: [dutyEmbed], components: [row] });
             else {
                 const ch = await i.guild.channels.fetch(content.folder);
@@ -578,8 +578,6 @@ export default async function (bot, i) {
 
             if (i.channel.id === content.folder) inFolder = true;
             else inFolder = false;
-
-            try { await i.deferReply({ ephemeral: inFolder ? false : true }); } catch { return; }
 
             const index = content.apologies.length + 1;
 
@@ -619,7 +617,7 @@ export default async function (bot, i) {
                 });
             }
 
-            await i.deferReply();
+            try { await i.deferReply({ ephemeral: inFolder ? false : true }); } catch { return; }
 
             const dutyEmbed = new EmbedBuilder()
                 .setAuthor({ name: i.member.displayName, iconURL: i.member.displayAvatarURL() })
@@ -640,7 +638,7 @@ export default async function (bot, i) {
                 .setFooter(getServer(i.guild.id).footer);
 
             let msg;
-            if (i.channel.id === content.folder)
+            if (inFolder)
                 msg = await i.editReply({ embeds: [dutyEmbed], components: [row] });
             else {
                 const ch = await i.guild.channels.fetch(content.folder);
@@ -671,12 +669,14 @@ export default async function (bot, i) {
             );
 
             console.log(" < [DB/Apology] >  " + i.member.displayName + " zapsal(a) omluvenku trvající do " + i.fields.getTextInputValue("end"));
-        } else if (i.customId === "loginModal") {
+        } else if (i.customId.includes("loginModal")) {
             const rank = i.fields.getTextInputValue("rank"),
                 name = i.fields.getTextInputValue("name"),
                 radio = i.fields.getTextInputValue("call"),
                 badge = i.fields.getTextInputValue("badge");
             const bl = JSON.parse(fs.readFileSync(path.resolve("./db/blacklist.json"), "utf-8"));
+
+            const visible = i.customId.includes("_") ? (/true/).test(i.customId.split("_")[1]) : false;
 
             //Checks
             if (checkDB(i.fields.getTextInputValue("id"), i))
@@ -700,7 +700,7 @@ export default async function (bot, i) {
             let post = false, gotNick = true, gotRole = true, folders;
             const today = new Date();
             if (i.guild.id === "1154446248934387828") { //LSPD
-                folders = await i.guild.channels.fetch("1213984576100241419");
+                folders = await i.guild.channels.fetch("1290050353793994814");
                 try { var member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
                 catch (e) { await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true }); return console.log(e); }
 
@@ -723,7 +723,7 @@ export default async function (bot, i) {
                 if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${rank}\`)**`, ephemeral: true });
                 rolesIDs.push("1267590027496652961"); //LSPD role
 
-                await i.deferReply();
+                await i.deferReply({ ephemeral: !visible });
 
                 const workerEmbed = new EmbedBuilder()
                     .setAuthor({ name: `[${radio}] ${name}`, iconURL: member.displayAvatarURL() })
@@ -740,7 +740,7 @@ export default async function (bot, i) {
                     )
                     .setThumbnail(bot.LEA.i.LSPD)
                     .setColor(bot.LEA.c.LSPD)
-                    .setFooter({ text: `LSPD | LEA-Bot v${process.env.version} by b1ngo ✏️`, iconURL: bot.LEA.i.LSPD });
+                    .setFooter({ text: `LSPD | LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.LSPD });
                 const row = new ActionRowBuilder()
                     .addComponents(
                         new ButtonBuilder()
@@ -770,11 +770,11 @@ export default async function (bot, i) {
                         + "\n\n**Zde si povinně zapisujete časy služeb a případné omluvenky.**"
                         + "\n\nZápis probíhá pomocí bota **LEA-Bot**."
                         + "\n**Službu si zapisujete pomocí </duty:1170376396678377595> a omluvenku přes </omluvenka:1170382276492800131>.**"
-                        + "\n\nV případě problémů, použijte <#1139284046388674610> nebo kontaktujte <@411436203330502658>."
+                        + "\n\nV případě problémů, použijte <#1203634831284772864> nebo kontaktujte <@411436203330502658>."
                     )
                     .setThumbnail(bot.LEA.i.LSPD)
                     .setColor(getServer(i.guild.id).color)
-                    .setFooter({ text: `LEA-Bot v${process.env.version} by b1ngo ✏️`, iconURL: bot.user.avatarURL() });
+                    .setFooter({ text: `LEA-Bot v${process.env.version} ✏️`, iconURL: bot.user.avatarURL() });
                 await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
             } else if (i.guild.id === "1139266097921675345") { //LSCSO
                 folders = await i.guild.channels.fetch("1203743211000963082");
@@ -799,7 +799,7 @@ export default async function (bot, i) {
                 if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${rank}\`)**`, ephemeral: true });
                 rolesIDs.push("1139276300188647444"); //LSCSO role
 
-                await i.deferReply();
+                await i.deferReply({ ephemeral: !visible });
 
                 const workerEmbed = new EmbedBuilder()
                     .setAuthor({ name: `[${radio}] ${name}`, iconURL: member.displayAvatarURL() })
@@ -816,7 +816,7 @@ export default async function (bot, i) {
                     )
                     .setThumbnail(bot.LEA.i.LSCSO)
                     .setColor(bot.LEA.c.LSCSO)
-                    .setFooter({ text: `LSCSO | LEA-Bot v${process.env.version} by b1ngo ✏️`, iconURL: bot.LEA.i.LSCSO });
+                    .setFooter({ text: `LSCSO | LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.LSCSO });
                 const row = new ActionRowBuilder()
                     .addComponents(
                         new ButtonBuilder()
@@ -850,7 +850,7 @@ export default async function (bot, i) {
                     )
                     .setThumbnail(bot.LEA.i.LSCSO)
                     .setColor(getServer(i.guild.id).color)
-                    .setFooter({ text: `LEA-Bot v${process.env.version} by b1ngo ✏️`, iconURL: bot.user.avatarURL() });
+                    .setFooter({ text: `LEA-Bot v${process.env.version} ✏️`, iconURL: bot.user.avatarURL() });
                 await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
             }
 
@@ -923,11 +923,15 @@ export default async function (bot, i) {
 
             console.log(" < [DB/Login] >  " + i.member.displayName + " zaregistroval(a) [" + i.fields.getTextInputValue("call") + "] " + i.fields.getTextInputValue("name") + " do DB");
 
-            await i.editReply({ embeds: [loginEmbed] });
-        } else if (i.customId === "rankUpModal") {
+            await i.editReply({ embeds: [loginEmbed], ephemeral: visible });
+        } else if (i.customId.includes("rankUpModal")) {
             if (!(checkDB(i.fields.getTextInputValue("id"), i))) return i.reply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **není v DB.**", ephemeral: true });
             const member = await i.guild.members.fetch(i.fields.getTextInputValue("id"));
             if (!member) return i.reply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **není v DB.**", ephemeral: true });
+
+            console.log(i.customId.split("_")[1]);
+            console.log((/true/).test(i.customId.split("_")[1]));
+            const visible = i.customId.includes("_") ? (/true/).test(i.customId.split("_")[1]) : false;
 
             let content, oldRolesIDs, rolesIDs, tagID, gotNick = true, gotRole = true, newRank = i.fields.getTextInputValue("rank"),
                 oldGrade, newGrade;
@@ -1014,7 +1018,7 @@ export default async function (bot, i) {
                 else if (content.rank === "Deputy Trainee") oldRolesIDs = ["1139276175819157646"], oldGrade = 0;
             }
 
-            await i.deferReply();
+            await i.deferReply({ ephemeral: !visible });
 
             const today = new Date();
 
@@ -1153,18 +1157,22 @@ export default async function (bot, i) {
                         .setColor(getServer(i.guild.id).color)
                         .setFooter(getServer(i.guild.id).footer);
 
-                    await i.editReply({ embeds: [rankupEmbed], ephemeral: true });
+                    await i.editReply({ embeds: [rankupEmbed], ephemeral: visible });
                 } catch (e) {
                     console.error(e);
                 }
             }
 
-        } else if (i.customId === "editModal") {
+        } else if (i.customId.includes("editModal")) {
             if (!(checkDB(i.fields.getTextInputValue("id"), i))) return i.reply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **není v DB.**", ephemeral: true });
             const gotDB = getDB(i.fields.getTextInputValue("id"));
             if (!bot.LEA.g[gotDB.guildName].includes(i.guild.id)) return i.reply({ content: `> 🛑 **<@${user.id}> je členem \`${gotDB.guildName}\`!** (Nemůžeš ho upravit)`, ephemeral: true });
             const member = await i.guild.members.fetch(i.fields.getTextInputValue("id"));
             if (!member) return i.reply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **není v DB.**", ephemeral: true });
+
+            console.log(i.customId.split("_")[1]);
+            console.log((/true/).test(i.customId.split("_")[1]));
+            const visible = i.customId.includes("_") ? (/true/).test(i.customId.split("_")[1]) : false;
 
             let content, oldRolesIDs, rolesIDs, tagID, gotNick = true, gotRole = true, newRank = i.fields.getTextInputValue("rank");
             if (i.guild.id === "1154446248934387828") { //LSPD
@@ -1243,7 +1251,7 @@ export default async function (bot, i) {
                 }
             }
 
-            await i.deferReply();
+            await i.deferReply({ ephemeral: !visible });
 
             let changed = { name: false, badge: false, radio: false, rank: false },
                 old = { name: content.name, badge: content.badge, radio: content.radio, rank: content.rank };
@@ -1346,7 +1354,7 @@ export default async function (bot, i) {
                         .setColor(getServer(i.guild.id).color)
                         .setFooter(getServer(i.guild.id).footer);
 
-                    await i.editReply({ embeds: [rankupEmbed], ephemeral: true });
+                    await i.editReply({ embeds: [rankupEmbed], ephemeral: visible });
                 } catch (e) {
                     console.error(e);
                 }
@@ -1390,6 +1398,8 @@ export default async function (bot, i) {
                             `> **Jméno:** \`${i.fields.getTextInputValue("name")}\`\n`
                             + `> **Důvod:** \`\`\`${i.fields.getTextInputValue("reason")}\`\`\`\n`
                             + `> **Částka:** \`${parseInt(i.fields.getTextInputValue("money").split(" ").join("")).toLocaleString()} $\``
+                            + `\nPro žebříček použij </event žebříček:1287846346715431117>`
+                            + `\nPro osobní souhrn </event souhrn:1287846346715431117>`
                     }
                 ])
                 .setThumbnail("https://i.imgur.com/bGCFY6I.png")

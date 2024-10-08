@@ -26,7 +26,8 @@ export const slash = new SlashCommandBuilder()
             .setName('žebříček')
             .setDescription("Žěbříček účastníků eventu")
     )
-    .setDMPermission(false)
+    .setContexts([0])
+    .setIntegrationTypes([0])
     .setNSFW(false);
 
 export default async function run(bot, i) {
@@ -104,9 +105,9 @@ export default async function run(bot, i) {
                 {
                     name: "Statistika", inline: false,
                     value:
-                        `> **Dohromady faktur:** \`${eventer.invoices.length}\`\n`
-                        + `> **Dohromady zadáno:** \`${eventer.stats.value} $\`\n`
-                        + `> **Průměrně zadáno:** \`${values.reduce((a, c) => a + c, 0) / values.length} $\``
+                        `> **Dohromady faktur:** \`${eventer.invoices.length.toLocaleString()}\`\n`
+                        + `> **Dohromady zadáno:** \`${eventer.stats.value.toLocaleString()} $\`\n`
+                        + `> **Průměr faktury:** \`${(values.reduce((a, c) => a + c, 0) / values.length).toLocaleString()} $\``
                 }
             ])
             .setThumbnail("https://i.imgur.com/bGCFY6I.png")

@@ -4,7 +4,8 @@ import { getServer } from "../../src/functions/db.js";
 export const slash = new SlashCommandBuilder()
     .setName("rep")
     .setDescription(`Přidat reputaci členovi LEA`)
-    .setDMPermission(false)
+    .setContexts([0])
+    .setIntegrationTypes([0])
     .setNSFW(false);
 
 //TODO:

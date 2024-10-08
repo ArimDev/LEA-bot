@@ -25,7 +25,8 @@ export const slash = new SlashCommandBuilder()
         option.setName("jméno")
             .setDescription("Hledat na základě jména")
             .setRequired(false))
-    .setDMPermission(false)
+    .setContexts([0, 1, 2])
+    .setIntegrationTypes([0, 1])
     .setNSFW(false);
 
 export default async function run(bot, i) {

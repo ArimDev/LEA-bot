@@ -6,8 +6,9 @@ import { dcLog } from "../functions/logSystem.js";
 
 export const context = new ContextMenuCommandBuilder()
     .setName('DB Registrovat')
-    .setType(ApplicationCommandType.User)
-    .setDMPermission(false);
+    .setContexts([0])
+    .setIntegrationTypes([0])
+    .setType(ApplicationCommandType.User);
 
 export default async function run(bot, i) {
     const user = i.targetUser;

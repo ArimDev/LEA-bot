@@ -78,13 +78,13 @@ export async function dcLog(bot, guildID, member, options = {}) {
         if (!!file) files = [file];
 
         guild = await bot.guilds.fetch("1154446248934387828");
-        channel = await guild.channels.fetch("1241761034906107904");
+        channel = await guild.channels.fetch("1290052054273757249");
         const logEmbed = new EmbedBuilder()
             .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
             .setTitle(title)
             .setDescription(description)
             .setColor(color)
-            .setFooter({ text: "LSPD | LEA-Bot v${process.env.version} by b1ngo ✏️", iconURL: bot.LEA.i.LSPD });
+            .setFooter({ text: `LSPD | LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.LSPD });
         await channel.send({ embeds: [logEmbed], files: files });
     } else if (gotServer.id === 2) {
         let files = [];
@@ -97,7 +97,7 @@ export async function dcLog(bot, guildID, member, options = {}) {
             .setTitle(title)
             .setDescription(description)
             .setColor(color)
-            .setFooter({ text: "LSCSO | LEA-Bot v${process.env.version} by b1ngo ✏️", iconURL: bot.LEA.i.LSCSO });
+            .setFooter({ text: `LSCSO | LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.LSCSO });
         await channel.send({ embeds: [logEmbed], files: files });
     }
 }

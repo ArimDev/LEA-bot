@@ -38,7 +38,8 @@ export const slash = new SlashCommandBuilder()
                     .setDescription("ID blacklist záznamu")
                     .setRequired(true))
     )
-    .setDMPermission(false)
+    .setContexts([0])
+    .setIntegrationTypes([0])
     .setNSFW(false);
 
 export default async function run(bot, i) {
@@ -333,7 +334,7 @@ export default async function run(bot, i) {
         let bl = blacklist[blID - 1];
         if (!bl) return i.reply({ content: `> 🛑 **Záznam s tímto ID (\`${blID}\`) nebyl nalezen.**`, ephemeral: true });
         if (!passed) {
-            if (record.from.id !== i.user.id)
+            if (bl.from.id !== i.user.id)
                 return i.reply({ content: "> 🛑 **Tenhle záznam jsi nevytvořil, proto ho nemůžeš smazat!**", ephemeral: true });
         }
 

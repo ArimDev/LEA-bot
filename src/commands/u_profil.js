@@ -4,8 +4,9 @@ import { getProfile } from "../functions/profiles.js";
 
 export const context = new ContextMenuCommandBuilder()
     .setName('Profil')
-    .setType(ApplicationCommandType.User)
-    .setDMPermission(false);
+    .setContexts([0, 1, 2])
+    .setIntegrationTypes([0, 1])
+    .setType(ApplicationCommandType.User);
 
 export default async function run(bot, i) {
     const discord = await i.targetUser;

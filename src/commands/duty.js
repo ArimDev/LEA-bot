@@ -4,7 +4,8 @@ import { checkDB, getServer } from "../../src/functions/db.js";
 export const slash = new SlashCommandBuilder()
     .setName("duty")
     .setDescription(`Zapíše službu`)
-    .setDMPermission(false)
+    .setContexts([0])
+    .setIntegrationTypes([0])
     .setNSFW(false);
 
 export default async function run(bot, i) {
