@@ -1,9 +1,9 @@
 <script setup>
-import TableLSCSO from '../components/TableLSCSO.vue';
+import TableLSSD from '../components/TableLSSD.vue';
 </script>
 
 <template>
-	<TableLSCSO />
+	<TableLSSD />
 </template>
 
 <style>

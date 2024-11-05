@@ -37,7 +37,7 @@ export default async function run(bot, i) {
     if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
     if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1267541873451339806")) passed = true; //Leadership
-    } else if (bot.LEA.g.LSCSO.includes(i.guild.id) && !passed) {
+    } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1139267137651884072")) passed = true; //Leadership
         if (admin.roles.cache.has("1139295201282764882")) passed = true; //FTO Commander
     }
@@ -97,11 +97,11 @@ export default async function run(bot, i) {
 
             let users = [], db;
             if (bot.LEA.g.LSPD.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/LSPD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
-            else if (bot.LEA.g.LSCSO.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/LSCSO")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
+            else if (bot.LEA.g.LSSD.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/LSSD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
             for (const file of db) {
                 let worker;
                 if (bot.LEA.g.LSPD.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + file), "utf-8"));
-                else if (bot.LEA.g.LSCSO.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSCSO") + "/" + file), "utf-8"));
+                else if (bot.LEA.g.LSSD.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + file), "utf-8"));
 
                 let m;
                 try {

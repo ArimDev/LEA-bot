@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import viewsHome from "../views/Home.vue";
 import viewsLSPD from "../views/LSPD.vue";
-import viewsLSCSO from "../views/LSCSO.vue";
+import viewsLSSD from "../views/LSSD.vue";
 import viewsBlacklist from "../views/Blacklist.vue";
 import views404 from "../views/404.vue";
 
@@ -18,8 +18,8 @@ const router = createRouter({
       },
     },
     {
-      path: "/lscso", name: "LSCSO", component: viewsLSCSO, meta: {
-        title: "LSCSO"
+      path: "/lssd", name: "LSSD", component: viewsLSSD, meta: {
+        title: "LSSD"
       },
     },
     {

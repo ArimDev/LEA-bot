@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th scope="col" rowspan="2" style="text-align: center;">
-                    <img src="../assets/logo/LSCSO.png" width="65" height="65" alt="Odznak LSPD" />
+                    <img src="../assets/logo/LSSD.png" width="65" height="65" alt="Odznak LSPD" />
                 </th>
                 <th scope="col" rowspan="2">Jméno</th>
                 <th scope="col" rowspan="2">Odznak</th>
@@ -122,7 +122,7 @@ function checkLogin() {
 
 async function fetchWorkers() {
     try {
-        const response = await axios.get("/api/v1/db/getTable/LSCSO", {
+        const response = await axios.get("/api/v1/db/getTable/LSSD", {
             headers: { authorization: `${window.localStorage.getItem("token_type")} ${window.localStorage.getItem("access_token")}` }
         });
 
@@ -150,7 +150,7 @@ async function fetchWorkers() {
 
 async function fetchPositions() {
     try {
-        const response = await axios.get("/api/v2/db/LSCSO/positions");
+        const response = await axios.get("/api/v2/db/LSSD/positions");
 
         const pos = response.data;
 
@@ -268,17 +268,17 @@ td {
 }
 
 th {
-    color: #b79069;
+    color: #bd8131;
     border: 1px solid black;
 }
 
 th[scope="row"] {
-    color: #b79069;
+    color: #bd8131;
     background: #191919;
 }
 
 th[scope="col"] {
-    color: #b79069;
+    color: #bd8131;
     background: #191919;
 }
 </style>
