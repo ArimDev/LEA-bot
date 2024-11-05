@@ -1,0 +1,93 @@
+[
+    {
+        "rank": "Chief of Police",
+        "slots": 1,
+        "firstBadge": 4001,
+        "firstCallsign": "Staff-1",
+        "title": "HIGH COMMAND STAFF"
+    },
+    {
+        "rank": "Assistant Chief of Police",
+        "slots": 1,
+        "firstBadge": 4002,
+        "firstCallsign": "Staff-2",
+        "title": false
+    },
+    {
+        "rank": "Deputy Chief of Police",
+        "slots": 1,
+        "firstBadge": 4003,
+        "firstCallsign": "Staff-3",
+        "title": false
+    },
+    {
+        "rank": "Commander",
+        "slots": 2,
+        "firstBadge": 4004,
+        "firstCallsign": "Staff-4",
+        "title": false
+    },
+    {
+        "rank": "Captain",
+        "slots": 4,
+        "firstBadge": 4006,
+        "firstCallsign": "King-1",
+        "title": "COMMAND STAFF - CAPTAIN"
+    },
+    {
+        "rank": "Lieutenant",
+        "slots": 8,
+        "firstBadge": 4010,
+        "firstCallsign": "Henry-1",
+        "title": "COMMAND STAFF - LIEUTENANT"
+    },
+    {
+        "rank": "Sergeant II",
+        "slots": 4,
+        "firstBadge": 4018,
+        "firstCallsign": "John-1",
+        "title": "SERGEANT"
+    },
+    {
+        "rank": "Sergeant I",
+        "slots": 6,
+        "firstBadge": 4022,
+        "firstCallsign": "John-5",
+        "title": false
+    },
+    {
+        "rank": "Police Officer III+I",
+        "slots": 30,
+        "firstBadge": 4030,
+        "firstCallsign": "William-1",
+        "title": "Police Officer III+I"
+    },
+    {
+        "rank": "Police Officer III",
+        "slots": 35,
+        "firstBadge": 4060,
+        "firstCallsign": "Victor-1",
+        "title": "Police Officer III"
+    },
+    {
+        "rank": "Police Officer II",
+        "slots": 35,
+        "firstBadge": 4095,
+        "firstCallsign": "Lincoln-1",
+        "title": "Police Officer II"
+    },
+    {
+        "rank": "Police Officer I",
+        "slots": 40,
+        "firstBadge": 4130,
+        "firstCallsign": "Queen-1",
+        "title": "Police Officer I"
+    },
+    {
+        "rank": "Cadet",
+        "slots": 30,
+        "firstBadge": 4200,
+        "firstCallsign": "Tom-1",
+        "title": "CADET"
+    }
+]
