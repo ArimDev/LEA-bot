@@ -1,0 +1,171 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Anton', sans-serif;
+}
+
+body {
+    height: 100dvh;
+    width: 100%;
+    margin: 0;
+
+    background-position: center;
+    background-size: cover;
+    transition: background-image 1s ease-in-out;
+    background-color: #000000;
+
+    overflow: hidden;
+}
+
+main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+    color: white;
+    opacity: 80%;
+}
+
+a {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #000000;
+    background-color: #ffffff;
+}
+
+.cards-0 {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.cards-1 {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.cards-2 {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+.card-0 {
+    width: fit-content;
+    /*height: 280px;*/
+    width: 420px;
+    padding: 1rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    border: 2px solid white;
+}
+
+.card {
+    width: fit-content;
+    height: 280px;
+    width: 200px;
+    padding: 1rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    border: 2px solid white;
+}
+
+.card-2 {
+    width: fit-content;
+    height: 160px;
+    width: 420px;
+    padding: 1rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    border: 2px solid white;
+}
+
+.card img {
+    width: auto;
+    height: 150px;
+    display: block;
+    margin: auto;
+}
+
+button {
+    border: none;
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    opacity: 100%;
+}
+
+.lspd button:hover {
+    background: linear-gradient(to bottom right, #000000, #191919);
+    color: white;
+    opacity: 100%;
+}
+
+.lscso button:hover {
+    background: linear-gradient(to right, #000000, #000c1e);
+    color: white;
+    opacity: 100%;
+}
+
+.div button:hover {
+    background: #29224d;
+    color: white;
+    opacity: 100%;
+}
+
+.bl button:hover {
+    background: #29224d;
+    color: white;
+    opacity: 100%;
+}
+
+#ofo {
+    border: none;
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    opacity: 100%;
+    background: gray;
+}
+
+#ofo:hover {
+    background: gray;
+    color: black;
+    opacity: 100%;
+    cursor: not-allowed;
+}
