@@ -54,7 +54,7 @@ export default async function (bot, i) {
 
             let log;
             if (bot.LEA.g.LSPD.includes(i.guild.id)) log = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + worker.id + ".json"), "utf-8"));
-            else if (bot.LEA.g.LSCSO.includes(i.guild.id)) log = JSON.parse(fs.readFileSync((path.resolve("./db/LSCSO") + "/" + worker.id + ".json"), "utf-8"));
+            else if (bot.LEA.g.LSSD.includes(i.guild.id)) log = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + worker.id + ".json"), "utf-8"));
             else return i.editReply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
             let moHours = 0;
@@ -102,7 +102,7 @@ export default async function (bot, i) {
             if (i.user.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
             if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
                 if (i.member.roles.cache.has("1267541873451339806")) passed = true; //Leadership
-            } else if (bot.LEA.g.LSCSO.includes(i.guild.id) && !passed) {
+            } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
                 if (i.member.roles.cache.has("1139267137651884072")) passed = true; //Leadership
             }
             if (i.user.id === authorID) passed = true;
@@ -239,7 +239,7 @@ export default async function (bot, i) {
 
                         let workersPath;
                         if (bot.LEA.g.LSPD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSPD") + "/" + authorID + ".json");
-                        else if (bot.LEA.g.LSCSO.includes(i.guild.id)) workersPath = (path.resolve("./db/LSCSO") + "/" + authorID + ".json");
+                        else if (bot.LEA.g.LSSD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSSD") + "/" + authorID + ".json");
 
                         fs.writeFileSync(
                             workersPath,
@@ -373,7 +373,7 @@ export default async function (bot, i) {
 
                         let workersPath;
                         if (bot.LEA.g.LSPD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSPD") + "/" + authorID + ".json");
-                        else if (bot.LEA.g.LSCSO.includes(i.guild.id)) workersPath = (path.resolve("./db/LSCSO") + "/" + authorID + ".json");
+                        else if (bot.LEA.g.LSSD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSSD") + "/" + authorID + ".json");
 
                         fs.writeFileSync(
                             workersPath,
@@ -394,7 +394,7 @@ export default async function (bot, i) {
             if (i.user.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
             if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
                 if (i.member.roles.cache.has("1267541873451339806")) passed = true; //Leadership
-            } else if (bot.LEA.g.LSCSO.includes(i.guild.id) && !passed) {
+            } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
                 if (i.member.roles.cache.has("1139267137651884072")) passed = true; //Leadership
             }
             if (i.user.id === authorID) passed = true;
@@ -444,7 +444,7 @@ export default async function (bot, i) {
 
             let workersPath;
             if (bot.LEA.g.LSPD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSPD") + "/" + authorID + ".json");
-            else if (bot.LEA.g.LSCSO.includes(i.guild.id)) workersPath = (path.resolve("./db/LSCSO") + "/" + authorID + ".json");
+            else if (bot.LEA.g.LSSD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSSD") + "/" + authorID + ".json");
             fs.writeFileSync(
                 workersPath,
                 JSON.stringify(worker, null, 4)
@@ -484,7 +484,7 @@ export default async function (bot, i) {
 
             let content, inFolder;
             if (bot.LEA.g.LSPD.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + i.user.id + ".json"), "utf-8"));
-            else if (bot.LEA.g.LSCSO.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSCSO") + "/" + i.user.id + ".json"), "utf-8"));
+            else if (bot.LEA.g.LSSD.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.user.id + ".json"), "utf-8"));
             else return i.reply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
             if (i.channel.id === content.folder) inFolder = true;
@@ -562,7 +562,7 @@ export default async function (bot, i) {
 
             let workersPath;
             if (bot.LEA.g.LSPD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSPD") + "/" + i.user.id + ".json");
-            else if (bot.LEA.g.LSCSO.includes(i.guild.id)) workersPath = (path.resolve("./db/LSCSO") + "/" + i.user.id + ".json");
+            else if (bot.LEA.g.LSSD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSSD") + "/" + i.user.id + ".json");
 
             fs.writeFileSync(
                 workersPath,
@@ -573,7 +573,7 @@ export default async function (bot, i) {
         } else if (i.customId === "apologyModal") {
             let content, inFolder;
             if (bot.LEA.g.LSPD.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + i.user.id + ".json"), "utf-8"));
-            else if (bot.LEA.g.LSCSO.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSCSO") + "/" + i.user.id + ".json"), "utf-8"));
+            else if (bot.LEA.g.LSSD.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.user.id + ".json"), "utf-8"));
             else return i.reply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
             if (i.channel.id === content.folder) inFolder = true;
@@ -661,7 +661,7 @@ export default async function (bot, i) {
 
             let workersPath;
             if (bot.LEA.g.LSPD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSPD") + "/" + i.user.id + ".json");
-            else if (bot.LEA.g.LSCSO.includes(i.guild.id)) workersPath = (path.resolve("./db/LSCSO") + "/" + i.user.id + ".json");
+            else if (bot.LEA.g.LSSD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSSD") + "/" + i.user.id + ".json");
 
             fs.writeFileSync(
                 workersPath,
@@ -776,7 +776,7 @@ export default async function (bot, i) {
                     .setColor(getServer(i.guild.id).color)
                     .setFooter({ text: `LEA-Bot v${process.env.version} ✏️`, iconURL: bot.user.avatarURL() });
                 await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
-            } else if (i.guild.id === "1139266097921675345") { //LSCSO
+            } else if (i.guild.id === "1139266097921675345") { //LSSD
                 folders = await i.guild.channels.fetch("1203743211000963082");
                 try { var member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
                 catch (e) { await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true }); console.log(e); }
@@ -797,7 +797,7 @@ export default async function (bot, i) {
                 else rolesIDs = false, tagID = false;
 
                 if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${rank}\`)**`, ephemeral: true });
-                rolesIDs.push("1139276300188647444"); //LSCSO role
+                rolesIDs.push("1139276300188647444"); //LSSD role
 
                 await i.deferReply({ ephemeral: !visible });
 
@@ -814,9 +814,9 @@ export default async function (bot, i) {
                         + `\n> **Omluvenek:** \`0\``
                         + `\n> **Povýšení:** ${time(today, "R")}`
                     )
-                    .setThumbnail(bot.LEA.i.LSCSO)
-                    .setColor(bot.LEA.c.LSCSO)
-                    .setFooter({ text: `LSCSO | LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.LSCSO });
+                    .setThumbnail(bot.LEA.i.LSSD)
+                    .setColor(bot.LEA.c.LSSD)
+                    .setFooter({ text: `LSSD | LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.LSSD });
                 const row = new ActionRowBuilder()
                     .addComponents(
                         new ButtonBuilder()
@@ -848,7 +848,7 @@ export default async function (bot, i) {
                         + "\n**Službu si zapisujete pomocí </duty:1170376396678377595> a omluvenku přes </omluvenka:1170382276492800131>.**"
                         + "\n\nV případě problémů, použijte <#1139284046388674610> nebo kontaktujte <@411436203330502658>."
                     )
-                    .setThumbnail(bot.LEA.i.LSCSO)
+                    .setThumbnail(bot.LEA.i.LSSD)
                     .setColor(getServer(i.guild.id).color)
                     .setFooter({ text: `LEA-Bot v${process.env.version} ✏️`, iconURL: bot.user.avatarURL() });
                 await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
@@ -878,7 +878,7 @@ export default async function (bot, i) {
 
             let workersPath;
             if (bot.LEA.g.LSPD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSPD") + "/" + i.fields.getTextInputValue("id") + ".json");
-            else if (bot.LEA.g.LSCSO.includes(i.guild.id)) workersPath = (path.resolve("./db/LSCSO") + "/" + i.fields.getTextInputValue("id") + ".json");
+            else if (bot.LEA.g.LSSD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSSD") + "/" + i.fields.getTextInputValue("id") + ".json");
             else return i.editReply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
             fs.writeFileSync(
@@ -978,7 +978,7 @@ export default async function (bot, i) {
                 else if (content.rank === "Police Officer II") oldRolesIDs = ["1267589547462754385"], oldGrade = 2;
                 else if (content.rank === "Police Officer") oldRolesIDs = ["1267589491405754369"], oldGrade = 1;
                 else if (content.rank === "Cadet") oldRolesIDs = ["1267589609378812129"], oldGrade = 0;
-            } else if (i.guild.id === "1139266097921675345") { //LSCSO
+            } else if (i.guild.id === "1139266097921675345") { //LSSD
                 if (newRank === "Sheriff") rolesIDs = ["1139274486085058590", "1139267137651884072"], tagID = "1203829217167409192", newGrade = 11;
                 else if (newRank === "Undersheriff") rolesIDs = ["1139274565973983262", "1139267137651884072"], tagID = "1203829217167409192", newGrade = 10;
                 else if (newRank === "Assistant Sheriff") rolesIDs = ["1139274629547053139", "1139267137651884072"], tagID = "1203829217167409192", newGrade = 9;
@@ -994,7 +994,7 @@ export default async function (bot, i) {
                 else rolesIDs = false, tagID = false;
                 if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${newRank}\`)**`, ephemeral: true });
 
-                content = JSON.parse(fs.readFileSync((path.resolve("./db/LSCSO") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
+                content = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
 
                 let folderCh;
                 try {
@@ -1064,7 +1064,7 @@ export default async function (bot, i) {
 
             let workersPath;
             if (bot.LEA.g.LSPD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSPD") + "/" + i.fields.getTextInputValue("id") + ".json");
-            else if (bot.LEA.g.LSCSO.includes(i.guild.id)) workersPath = (path.resolve("./db/LSCSO") + "/" + i.fields.getTextInputValue("id") + ".json");
+            else if (bot.LEA.g.LSSD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSSD") + "/" + i.fields.getTextInputValue("id") + ".json");
 
             fs.writeFileSync(
                 workersPath,
@@ -1216,8 +1216,8 @@ export default async function (bot, i) {
                     else if (content.rank === "Police Officer") oldRolesIDs = ["1267589491405754369"];
                     else if (content.rank === "Cadet") oldRolesIDs = ["1267589609378812129"];
                 }
-            } else if (i.guild.id === "1139266097921675345") { //LSCSO
-                content = JSON.parse(fs.readFileSync((path.resolve("./db/LSCSO") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
+            } else if (i.guild.id === "1139266097921675345") { //LSSD
+                content = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
                 if (!(await i.guild.channels.fetch(content.folder))) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
 
                 if (newRank !== content.rank) {
@@ -1284,7 +1284,7 @@ export default async function (bot, i) {
 
             let workersPath;
             if (bot.LEA.g.LSPD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSPD") + "/" + i.fields.getTextInputValue("id") + ".json");
-            else if (bot.LEA.g.LSCSO.includes(i.guild.id)) workersPath = (path.resolve("./db/LSCSO") + "/" + i.fields.getTextInputValue("id") + ".json");
+            else if (bot.LEA.g.LSSD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSSD") + "/" + i.fields.getTextInputValue("id") + ".json");
 
             fs.writeFileSync(
                 workersPath,

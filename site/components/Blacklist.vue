@@ -99,8 +99,8 @@ function getBadge(dep) {
     if (!dep) return "";
     else if (dep === "LSPD") {
         return "../assets/logo/LSPD.png";
-    } else if (dep === "LSCSO") {
-        return "../assets/logo/LSCSO.png";
+    } else if (dep === "LSSD") {
+        return "../assets/logo/LSSD.png";
     } else return "";
 }
 </script>

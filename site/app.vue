@@ -15,8 +15,8 @@
 				<li class="LSPD">
 					<RouterLink to="/lspd">LSPD</RouterLink>
 				</li>
-				<li class="LSCSO">
-					<RouterLink to="/lscso">LSCSO</RouterLink>
+				<li class="LSSD">
+					<RouterLink to="/lssd">LSSD</RouterLink>
 				</li>
 				<li>
 					<RouterLink to="/blacklist">BLACKLIST</RouterLink>

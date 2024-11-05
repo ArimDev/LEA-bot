@@ -6,7 +6,7 @@ import { generateFooter } from "../../src/functions/other.js";
 export function checkDB(id) {
     let exists;
     exists =
-        fs.existsSync((path.resolve("./db/LSCSO") + "/" + id + ".json"))
+        fs.existsSync((path.resolve("./db/LSSD") + "/" + id + ".json"))
         ||
         fs.existsSync((path.resolve("./db/LSPD") + "/" + id + ".json"));
 
@@ -22,12 +22,12 @@ export function getDB(id) {
         r.guildName = "LSPD";
         r.guildEmoji = "<:LSPD:1178108366514565181>";
         r.guildID = "1154446248934387828";
-    } else if (fs.existsSync((path.resolve("./db/LSCSO") + "/" + id + ".json"))) {
+    } else if (fs.existsSync((path.resolve("./db/LSSD") + "/" + id + ".json"))) {
         r.exists = true;
-        r.data = JSON.parse(fs.readFileSync((path.resolve("./db/LSCSO") + "/" + id + ".json"), "utf-8"));
+        r.data = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + id + ".json"), "utf-8"));
         r.guild = 2;
-        r.guildName = "LSCSO";
-        r.guildEmoji = "<:LSCSO:1178106303198011412>";
+        r.guildName = "LSSD";
+        r.guildEmoji = "<:LSSD:1178106303198011412>";
         r.guildID = "1139266097921675345";
     }
 
@@ -47,10 +47,10 @@ export function getServer(guildID) {
         r.footer = { text: `LSPD | LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.LSPD };
         r.color = bot.LEA.c.LSPD;
         r.id = 1;
-    } else if (bot.LEA.g.LSCSO.includes(guildID)) {
-        r.name = "LSCSO"
-        r.footer = { text: `LSCSO | LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.LSCSO };
-        r.color = bot.LEA.c.LSCSO;
+    } else if (bot.LEA.g.LSSD.includes(guildID)) {
+        r.name = "LSSD"
+        r.footer = { text: `LSSD | LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.LSSD };
+        r.color = bot.LEA.c.LSSD;
         r.id = 2;
     } else {
         r.name = "XXXX"
