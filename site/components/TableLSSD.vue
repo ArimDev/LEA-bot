@@ -273,12 +273,12 @@ th {
 }
 
 th[scope="row"] {
-    color: #bd8131;
-    background: #191919;
+    color: black;
+    background: #bd8131;
 }
 
 th[scope="col"] {
-    color: #bd8131;
-    background: #191919;
+    color: black;
+    background: #bd8131;
 }
 </style>
