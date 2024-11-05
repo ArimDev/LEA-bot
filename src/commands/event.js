@@ -1,5 +1,5 @@
 import { SlashCommandBuilder } from "discord.js";
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, InteractionType, ModalBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
+import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, InteractionType, ModalBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
 import fs from "fs";
 import path from "path";
 import { checkEVENT, getServer } from "../../src/functions/db.js";
@@ -88,35 +88,47 @@ export default async function run(bot, i) {
         const eventer = JSON.parse(fs.readFileSync((path.resolve("./db/event") + "/" + user.id + ".json"), "utf-8"));
         const member = await i.guild.members.fetch(user.id);
 
-        let invoices = [], values = [];
+        let invoices = [], values = [], att = [];
         for (const inv of eventer.invoices) {
             invoices.push(`> **ID** \`${inv.id}\` (${inv.shared})\n> \`${inv.value} $\``);
             values.push(inv.value);
         }
+        const invoicesString = invoices.join("\n\n");
 
         const summaryEmbed = new EmbedBuilder()
             .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
             .setTitle("EVENT | Souhrn " + eventer.name)
             .addFields([
                 {
-                    name: "Faktury", inline: false,
-                    value: invoices.join("\n\n")
-                },
-                {
                     name: "Statistika", inline: false,
                     value:
                         `> **Dohromady faktur:** \`${eventer.invoices.length.toLocaleString()}\`\n`
                         + `> **Dohromady zadáno:** \`${eventer.stats.value.toLocaleString()} $\`\n`
-                        + `> **Průměr faktury:** \`${(values.reduce((a, c) => a + c, 0) / values.length).toLocaleString()} $\``
+                        + `> **Průměr faktury:** \`${(Math.round(values.reduce((a, c) => a + c, 0) / values.length)).toLocaleString()} $\``
                 }
             ])
             .setThumbnail("https://i.imgur.com/bGCFY6I.png")
             .setColor(bot.LEA.c.event)
             .setFooter(getServer(i).footer);
 
-        console.log(" < [EVE/Souhrn] >  " + i.member.displayName + " zobrazil(a) souhrn " + member.displayName);
+        if (invoicesString.length <= 1024) {
+            summaryEmbed.addFields([
+                {
+                    name: "Faktury", inline: false,
+                    value: invoices.join("\n\n")
+                }
+            ]);
+        } else {
+            const fileLines = [`${eventer.name} Faktury:`, ""];
+            for (const inv of eventer.invoices) {
+                fileLines.push(`#${inv.id} > ${inv.value.toLocaleString()} $ (${inv.shared})`);
+            }
+            att = [new AttachmentBuilder(Buffer.from(fileLines.join("\n")), { name: `LEA-Bot v${process.env.version}_faktury_${eventer.name}.txt` })];
+        }
 
-        return i.reply({ embeds: [summaryEmbed], ephemeral: true });
+        i.reply({ embeds: [summaryEmbed], files: att, ephemeral: true });
+
+        return console.log(" < [EVE/Souhrn] >  " + i.member.displayName + " zobrazil(a) souhrn " + member.displayName);
     } else if (sub === "žebříček") { //Žěbříček
         //if (!passed) return i.reply({ content: "> 🛑 **Žebříček je už skrytý! To je napětí...**", ephemeral: true });
 
