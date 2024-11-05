@@ -1,0 +1,136 @@
+.loader {
+    width: 40px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    animation: l5 1s infinite linear alternate;
+}
+
+@keyframes l5 {
+    0% {
+        box-shadow: 60px 0 #000, -60px 0 #0002;
+        background: #000
+    }
+
+    33% {
+        box-shadow: 60px 0 #000, -60px 0 #0002;
+        background: #0002
+    }
+
+    66% {
+        box-shadow: 60px 0 #0002, -60px 0 #000;
+        background: #0002
+    }
+
+    100% {
+        box-shadow: 60px 0 #0002, -60px 0 #000;
+        background: #000
+    }
+}
+
+.errorMessage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+    height: 100vh;
+    position: relative;
+}
+
+.loadingMessage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.errorMessage h1 {
+    font-size: 35px;
+}
+
+.errorMessage p {
+    font-size: 16px;
+}
+
+.errorMessage img {
+    filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.2));
+}
+
+tbody tr:hover {
+    background: #ffc935;
+}
+
+table {
+    text-align: left;
+    position: relative;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    background-color: #ffffff;
+    width: 100%;
+}
+
+td {
+    padding: 14px 14px;
+    font-size: 12px;
+}
+
+.tdRankTitle {
+    text-align: center;
+    vertical-align: text-bottom;
+    margin-top: 50px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.tdLeft {
+    text-align: left;
+}
+
+.tdCenter {
+    text-align: center;
+}
+
+th {
+    font-family: 'Arial', sans-serif;
+    top: 0;
+    font-size: 15px;
+}
+
+th[scope="row"] {
+    padding: 12px;
+}
+
+th[scope="col"] {
+    text-transform: uppercase;
+    text-align: center;
+    padding: 6px;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+}
+
+th:first-child {
+    border-left: none;
+}
+
+th:last-child {
+    border-right: none;
+}
+
+thead th {
+    border-top: none;
+}
+
+thead th:last-child {
+    border-bottom: none;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: not-allowed;
+}

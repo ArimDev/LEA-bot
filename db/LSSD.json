@@ -1,0 +1,86 @@
+[
+    {
+        "rank": "Sheriff",
+        "slots": 1,
+        "firstBadge": 1000,
+        "firstCallsign": "County-1",
+        "title": false
+    },
+    {
+        "rank": "Undersheriff",
+        "slots": 1,
+        "firstBadge": 1001,
+        "firstCallsign": "County-2",
+        "title": false
+    },
+    {
+        "rank": "Assistant Sheriff",
+        "slots": 1,
+        "firstBadge": 1002,
+        "firstCallsign": "County-3",
+        "title": false
+    },
+    {
+        "rank": "Division Chief",
+        "slots": 1,
+        "firstBadge": 1003,
+        "firstCallsign": "County-4",
+        "title": false
+    },
+    {
+        "rank": "Area Commander",
+        "slots": 1,
+        "firstBadge": 1004,
+        "firstCallsign": "County-5",
+        "title": false
+    },
+    {
+        "rank": "Captain",
+        "slots": 5,
+        "firstBadge": 1005,
+        "firstCallsign": "County-6",
+        "title": ""
+    },
+    {
+        "rank": "Lieutenant",
+        "slots": 5,
+        "firstBadge": 1010,
+        "firstCallsign": "Shock-1",
+        "title": ""
+    },
+    {
+        "rank": "Sergeant",
+        "slots": 8,
+        "firstBadge": 1015,
+        "firstCallsign": "Nora-1",
+        "title": "SERGEANT"
+    },
+    {
+        "rank": "Deputy III",
+        "slots": 29,
+        "firstBadge": 1037,
+        "firstCallsign": "Sam-1",
+        "title": "Deputy III"
+    },
+    {
+        "rank": "Deputy II",
+        "slots": 34,
+        "firstBadge": 1066,
+        "firstCallsign": "Sam-30",
+        "title": "Deputy II"
+    },
+    {
+        "rank": "Deputy I",
+        "slots": 65,
+        "firstBadge": 1101,
+        "firstCallsign": "Charlie-1",
+        "title": "Deputy I"
+    },
+    {
+        "rank": "Deputy Trainee",
+        "slots": 60,
+        "firstBadge": 1200,
+        "firstCallsign": "Green-1",
+        "title": "Deputy Trainee"
+    }
+]

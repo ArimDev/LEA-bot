@@ -1,0 +1,236 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+    padding-left: 20px;
+}
+
+a,
+span,
+.loginButton {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.header .routerMenu {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+    flex: 1;
+}
+
+.header a {
+    text-decoration: none;
+    color: black;
+    border-radius: 25px;
+    border: 2px solid black;
+    cursor: pointer;
+    padding: 10px 15px;
+    background-color: transparent;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.header span.disabled {
+    text-decoration: none;
+    color: grey;
+    border-radius: 25px;
+    border: 2px solid grey;
+    cursor: not-allowed;
+    padding: 10px 15px;
+    background-color: transparent;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.header span.disabled:hover {
+    background-color: transparent;
+    color: grey;
+}
+
+.header a:hover {
+    background-color: black;
+    color: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.header .LSPD a:hover {
+    border: 2px solid #ffc935;
+    background-color: #ffc935;
+    color: black;
+    box-shadow: 0 4px 20px rgba(255, 201, 53, 0.6);
+}
+
+.header .LSSD a:hover {
+    border: 2px solid #bd8131;
+    background-color: #bd8131;
+    color: black;
+    box-shadow: 0 4px 20px rgba(189, 129, 49, 0.6);
+}
+
+.header a.router-link-active {
+    color: white;
+    background-color: black;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.header .LSPD a.router-link-active {
+    border: 2px solid #ffc935;
+    background-color: #ffc935;
+    color: black;
+    box-shadow: 0 4px 20px rgba(255, 201, 53, 0.6);
+}
+
+.header .LSSD a.router-link-active {
+    border: 2px solid #bd8131;
+    background-color: #bd8131;
+    color: black;
+    box-shadow: 0 4px 20px rgba(189, 129, 49, 0.6);
+}
+
+.header .homeLink {
+    text-decoration: none;
+    color: transparent;
+    border-radius: none;
+    border: none;
+    cursor: pointer;
+    padding: none;
+    background-color: transparent;
+}
+
+.header .homeLink:hover {
+    background-color: transparent;
+    color: transparent;
+}
+
+.header .centerMenu {
+    flex: 0;
+    text-align: center;
+}
+
+header .rightMenu {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 20px;
+    gap: 5px;
+}
+
+.rightMenu .loginButton {
+    background-color: black;
+    color: #fff;
+    border: 2px black;
+    border-radius: 25px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+
+.rightMenu .loginAvatar {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+    border: 2px black;
+    border-radius: 25px;
+    padding: 7px 7px;
+    cursor: default;
+    transition: background-color 0.5s;
+}
+
+.rightMenu .loginAvatar.loggedIn {
+    width: 44px;
+    height: 44px;
+    background-color: transparent;
+    /*background-image: SCRIPT*/
+    background-size: cover;
+    background-position: center;
+}
+
+.rightMenu .loginButton.loggedOff:hover,
+.rightMenu .loginButton.loggedOff:hover~.loginAvatar.loggedOff {
+    color: black;
+    background-color: #57f287;
+    box-shadow: 0 4px 20px rgba(87, 242, 135, 0.6);
+}
+
+.rightMenu .loginButton.loggedIn:hover,
+.rightMenu .loginButton.loggedIn:hover~.loginAvatar.loggedIn {
+    color: black;
+    background-color: #ed4245;
+    box-shadow: 0 4px 20px rgba(237, 66, 69, 0.6);
+}
+
+.rightMenu .loginButton:hover~.loginAvatar img {
+    filter: invert(1);
+}
+
+#loginAvatarImage.loggedIn {
+    display: none;
+}
+
+.content {
+    display: flex;
+    background: rgb(237, 235, 233);
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 80vh;
+    margin: 10px auto;
+    padding: 20px;
+    border-radius: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+
+.footer {
+    font-size: 13px;
+    text-align: center;
+}
+
+.footer a {
+    color: inherit;
+}
+
+.footer a:hover {
+    background-color: black;
+    border-radius: 5px;
+    color: white;
+}
+
+.footer a:visited {
+    color: black;
+}
+
+.footer a:visited:hover {
+    background-color: black;
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .header {
+        flex-direction: column;
+    }
+}
