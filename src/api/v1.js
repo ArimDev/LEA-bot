@@ -2,13 +2,15 @@ import path from "path";
 import fetch from "node-fetch";
 import fs from "fs";
 import { config as secret } from "dotenv";
-import { getProfile } from "../../src/functions/profiles.js";
+import { getProfile } from "../functions/profiles.js";
 import WebSocket from "ws";
 const cachePath = path.resolve("./db/cache.json");
 
+const apiPath = "/api/v1"
+
 export default async function api(bot, app, server, wss) {
     //Login feature
-    app.post('/api/v1/login/getToken', async (req, res) => {
+    app.post(apiPath + '/login/getToken', async (req, res) => {
         const tokenResponseData = await fetch('https://discord.com/api/oauth2/token', {
             signal: AbortSignal.timeout(5000),
             method: 'POST',
@@ -34,7 +36,7 @@ export default async function api(bot, app, server, wss) {
         }
     });
 
-    app.post('/api/v1/login/revokeToken', async (req, res) => {
+    app.post(apiPath + '/login/revokeToken', async (req, res) => {
         const authString = req.headers.authorization;
         const tokenResponseData = await fetch('https://discord.com/api/oauth2/token/revoke', {
             signal: AbortSignal.timeout(5000),
@@ -54,13 +56,13 @@ export default async function api(bot, app, server, wss) {
 
         if (tokenResponseData.ok) {
             console.log(` < [PS/API ${tokenResponseData.status}] > Discord token byl smazán!`);
-            return res.json({ code: tokenResponseData.status });
+            return res.status(200).json({ code: tokenResponseData.status });
         } else {
-            return res.json({ code: tokenResponseData.status });
+            return res.status(tokenResponseData.status).json({ code: tokenResponseData.status });
         }
     });
 
-    app.post("/api/v1/bot/msg", async (req, res) => {
+    app.post(apiPath + "/bot/msg", async (req, res) => {
         const authString = req.headers.authorization;
         const { workerID, folderID, guildID } = req.body;
         const me = await fetch('https://discord.com/api/users/@me', {
@@ -93,7 +95,7 @@ export default async function api(bot, app, server, wss) {
         }
     });
 
-    app.get("/api/v1/login/getMe", async (req, res) => {
+    app.get(apiPath + "/login/getMe", async (req, res) => {
         const authString = req.headers.authorization;
         const me = await fetch('https://discord.com/api/users/@me', {
             signal: AbortSignal.timeout(5000),
@@ -109,27 +111,28 @@ export default async function api(bot, app, server, wss) {
         res.status(200).json({ code: me.status, passed: true, user: response });
     });
 
-    app.get("/api/v1/db/getTable/:dep(LSCSO|LSPD)", async (req, res) => {
+    app.get(apiPath + "/db/getTable/:dep(LSSD|LSPD)", async (req, res) => {
         const origin = req.headers.host;
         if (!origin.includes(secret().parsed.domain)) {
             return res.status(403).json({});
         }
-        const dep = req.params.dep || "LSCSO";
+        const dep = req.params.dep || "LSSD";
         const authString = req.headers.authorization;
+        let verifyResponse = false;
         try {
-            var verifyResponse = await fetch(secret().parsed.web + "/api/v1/login/verifyMe/" + dep, {
+            verifyResponse = await fetch(secret().parsed.web + apiPath + "/login/verifyMe/" + dep, {
                 method: 'GET',
                 headers: {
                     authorization: authString,
                 }
             });
-        } catch (err) { console.error("xdd: " + err); }
+        } catch (e) { }
         if (!verifyResponse.ok) return res.status(500).json({ passed: false, guildID: false, user: {}, member: {}, workers: [] });
         const verRep = await verifyResponse.json();
         const { passed } = verRep;
         if (!passed) return res.status(403).json({ passed: false, guildID: verRep.guildID, user: verRep.user, member: verRep.member, workers: [] });
 
-        const guild = await bot.guilds.fetch(dep === "LSCSO" ? "1139266097921675345" : "1154446248934387828");
+        const guild = await bot.guilds.fetch(dep === "LSSD" ? "1139266097921675345" : "1154446248934387828");
         await guild.members.fetch();
 
         let final = [], workers = 0;
@@ -163,7 +166,7 @@ export default async function api(bot, app, server, wss) {
                 }
             }
 
-            if (dep === "LSCSO" && worker.m) { //ONLY LSCSO!
+            if (dep === "LSSD" && worker.m) { //ONLY LSSD!
                 worker.roles.warn = worker.m.roles.cache.has("1139379787324997722");
                 worker.roles.suspend = worker.m.roles.cache.has("1139379875610898522");
                 if (worker.m.roles.cache.has("1139275625740370001")) worker.div.push("SRT");
@@ -225,12 +228,12 @@ export default async function api(bot, app, server, wss) {
         res.status(200).json({ passed: true, guildID: verRep.guildID, user: verRep.user, member: verRep.member, workers: final });
     });
 
-    app.get("/api/v1/login/verifyMe/:dep(LSCSO|LSPD)", async (req, res) => {
+    app.get(apiPath + "/login/verifyMe/:dep(LSSD|LSPD)", async (req, res) => {
         const origin = req.headers.host;
         if (!origin.includes(secret().parsed.domain)) {
             return res.status(403).json({});
         }
-        const dep = req.params.dep?.toLowerCase() || "LSCSO";
+        const dep = req.params.dep?.toLowerCase() || "LSSD";
         const authString = req.headers.authorization;
         let passed = false;
 
@@ -253,9 +256,9 @@ export default async function api(bot, app, server, wss) {
             });
         }
 
-        const deps = { LSCSO: "1139266097921675345", lspd: "1154446248934387828" };
-        const roles = { LSCSO: "1139267137651884072", lspd: "1267541873451339806" };
-        const dojRoles = { LSCSO: "1139278117983223818", lspd: "1267592715500257343" };
+        const deps = { LSSD: "1139266097921675345", lspd: "1154446248934387828" };
+        const roles = { LSSD: "1139267137651884072", lspd: "1267541873451339806" };
+        const dojRoles = { LSSD: "1139278117983223818", lspd: "1267592715500257343" };
 
         const first = await fetch(`https://discord.com/api/users/@me/guilds/${deps[dep]}/member`, {
             headers: { authorization: authString }
@@ -263,7 +266,7 @@ export default async function api(bot, app, server, wss) {
 
         if (first.ok) {
             const firstRes = await first.json();
-            passed = firstRes.roles.includes(roles[dep]) || firstRes.roles.includes(dojRoles[dep])
+            passed = firstRes.roles.includes(roles[dep]) || firstRes.roles.includes(dojRoles[dep]);
             if (firstRes.user.id === "411436203330502658") passed = true; //b1ngo access
             if (passed) {
                 console.log(` < [PS/Login ${first.status}] > Verify: ${firstRes.user.username} verified from ${req.params.dep}`);
@@ -309,21 +312,21 @@ export default async function api(bot, app, server, wss) {
         }
 
         if (!first.ok || !passed) {
-            const second = await fetch(`https://discord.com/api/users/@me/guilds/${deps[dep === "LSCSO" ? "lspd" : "LSCSO"]}/member`, {
+            const second = await fetch(`https://discord.com/api/users/@me/guilds/${deps[dep === "LSSD" ? "lspd" : "LSSD"]}/member`, {
                 headers: { authorization: authString }
             });
 
             if (second.ok) {
                 const secondRes = await second.json();
-                passed = secondRes.roles.includes(roles[dep === "LSCSO" ? "lspd" : "LSCSO"])
+                passed = secondRes.roles.includes(roles[dep === "LSSD" ? "lspd" : "LSSD"]);
                 if (secondRes.user.id === "411436203330502658") passed = true; //b1ngo access
                 if (passed) {
-                    console.log(` < [PS/Login ${second.status}] > Verify: ${secondRes.user.username} verified from ${dep === "LSCSO" ? "LSPD" : "LSCSO"}`);
+                    console.log(` < [PS/Login ${second.status}] > Verify: ${secondRes.user.username} verified from ${dep === "LSSD" ? "LSPD" : "LSSD"}`);
                     cache.push({
                         expiry: Date.now() + 3 * 60 * 1000,
-                        from: dep === "LSCSO" ? "LSPD" : "LSCSO",
+                        from: dep === "LSSD" ? "LSPD" : "LSSD",
                         authorization: authString,
-                        guildID: deps[dep === "LSCSO" ? "lspd" : "LSCSO"],
+                        guildID: deps[dep === "LSSD" ? "lspd" : "LSSD"],
                         user: {
                             id: secondRes.user.id,
                             username: secondRes.user.username,
@@ -342,7 +345,7 @@ export default async function api(bot, app, server, wss) {
                     return res.status(200).json({
                         code: second.status,
                         passed,
-                        guildID: deps[dep === "LSCSO" ? "lspd" : "LSCSO"],
+                        guildID: deps[dep === "LSSD" ? "lspd" : "LSSD"],
                         user: {
                             id: secondRes.user.id,
                             username: secondRes.user.username,
@@ -362,7 +365,7 @@ export default async function api(bot, app, server, wss) {
                     return res.status(200).json({
                         code: second.status,
                         passed,
-                        guildID: deps[dep === "LSCSO" ? "lspd" : "LSCSO"],
+                        guildID: deps[dep === "LSSD" ? "lspd" : "LSSD"],
                         user: {
                             id: secondRes.user.id,
                             username: secondRes.user.username,
@@ -379,34 +382,26 @@ export default async function api(bot, app, server, wss) {
                     });
                 }
             } else {
-                console.log(` < [PS/Login ${first.status}] > Verify: ` + "XXX" + " has not been verified (LSCSO verify check failed)");
-                return res.status(500).json({ code: first.status, passed: false, user: {}, member: {} });
+                console.log(` < [PS/Login ${second.status}] > Verify: ` + "XXX" + " has not been verified (LSSD verify check failed)");
+                return res.status(second.status).json({ code: second.status, passed: false, user: {}, member: {} });
             }
         }
     });
 
-    app.post('/api/v1/bot/updateTable', async (req, res) => {
+    app.post(apiPath + '/bot/updateTable', async (req, res) => {
         const { client_id, client_secret, dep } = req.body;
         if (
             client_id === secret().parsed.botClientID
             && client_secret === secret().parsed.botClientSecret
-            && ["LSCSO", "LSPD"].includes(dep)
+            && ["LSSD", "LSPD"].includes(dep)
         ) {
             await wss[dep].clients.forEach((client) => {
                 if (client.readyState === WebSocket.OPEN) client.send("update");
             });
             return res.status(200);
         } else {
-            if (["LSCSO", "LSPD"].includes(dep)) return res.status(403);
+            if (["LSSD", "LSPD"].includes(dep)) return res.status(403);
             else return res.status(400);
         }
-    });
-
-    app.use((req, res) => {
-        res.status(404).sendFile(secret().parsed.errorPath + "/nginx404.html");
-    });
-
-    server.listen(secret().parsed.webPort, () => {
-        console.log(` < [PS/Web] >  LEA Bot tables are now available at IP:${secret().parsed.webPort}!`);
     });
 }
