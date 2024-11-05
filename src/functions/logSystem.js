@@ -97,7 +97,7 @@ export async function dcLog(bot, guildID, member, options = {}) {
             .setTitle(title)
             .setDescription(description)
             .setColor(color)
-            .setFooter({ text: `LSCSO | LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.LSCSO });
+            .setFooter({ text: `LSSD | LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.LSSD });
         await channel.send({ embeds: [logEmbed], files: files });
     }
 }

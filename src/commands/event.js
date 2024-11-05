@@ -38,11 +38,11 @@ export default async function run(bot, i) {
     i.guild.fetch();
     const admin = i.member;
     if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
-    if (bot.LEA.g.LSCSO.includes(i.guild.id) && !passed) {
+    if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1139267137651884072")) passed = true; //Leadership
     }
 
-    if (!bot.LEA.g.LSCSO.includes(i.guild.id)) return i.reply({
+    if (!bot.LEA.g.LSSD.includes(i.guild.id)) return i.reply({
         content: "> 🛑 **Příkazy /event nejsou aktuálně dostupné pro " + i.guild.name + ".**",
         ephemeral: true
     });

@@ -41,7 +41,7 @@ export default async function run(bot, i) {
     if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
     if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1267541873451339806")) passed = true; //Leadership
-    } else if (bot.LEA.g.LSCSO.includes(i.guild.id) && !passed) {
+    } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1139267137651884072")) passed = true; //Leadership
         if (admin.roles.cache.has("1139295201282764882")) passed = true; //FTO Commander
     }
@@ -102,12 +102,12 @@ export default async function run(bot, i) {
     } else if (choice === "z") {
         let log, sbor;
         if (bot.LEA.g.LSPD.includes(i.guild.id)) log = path.resolve("./db/LSPD") + "/" + user.id + ".json", sbor = "LSPD";
-        else if (bot.LEA.g.LSCSO.includes(i.guild.id)) log = path.resolve("./db/LSCSO") + "/" + user.id + ".json", sbor = "LSCSO";
+        else if (bot.LEA.g.LSSD.includes(i.guild.id)) log = path.resolve("./db/LSSD") + "/" + user.id + ".json", sbor = "LSSD";
         else return i.reply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
         if (!fs.existsSync(log)) {
-            if (bot.LEA.g.LSPD.includes(i.guild.id)) log = path.resolve("./db/LSCSO") + "/" + user.id + ".json", sbor = "LSCSO";
-            else if (bot.LEA.g.LSCSO.includes(i.guild.id)) log = path.resolve("./db/LSPD") + "/" + user.id + ".json", sbor = "LSPD";
+            if (bot.LEA.g.LSPD.includes(i.guild.id)) log = path.resolve("./db/LSSD") + "/" + user.id + ".json", sbor = "LSSD";
+            else if (bot.LEA.g.LSSD.includes(i.guild.id)) log = path.resolve("./db/LSPD") + "/" + user.id + ".json", sbor = "LSPD";
         }
 
         console.log(" < [CMD/DB] >  " + i.member.displayName + ` zobrazil(a) DB záznam ${user.id}.json`);
@@ -225,7 +225,7 @@ export default async function run(bot, i) {
 
         let loc, worker, workerGuildID;
         if (bot.LEA.g.LSPD.includes(i.guild.id)) loc = path.resolve("./db/LSPD") + "/" + user.id + ".json";
-        else if (bot.LEA.g.LSCSO.includes(i.guild.id)) loc = path.resolve("./db/LSCSO") + "/" + user.id + ".json";
+        else if (bot.LEA.g.LSSD.includes(i.guild.id)) loc = path.resolve("./db/LSSD") + "/" + user.id + ".json";
         else return i.reply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
         const admins = [
@@ -256,11 +256,11 @@ export default async function run(bot, i) {
 
             collector.on('collect', async c => {
                 if (bot.LEA.g.LSPD.includes(c.guild.id))
-                    loc = path.resolve("./db/LSCSO") + "/" + user.id + ".json", worker = JSON.parse(fs.readFileSync(loc, "utf-8")),
+                    loc = path.resolve("./db/LSSD") + "/" + user.id + ".json", worker = JSON.parse(fs.readFileSync(loc, "utf-8")),
                         workerGuildID = bot.LEA.g.LSPD[0];
-                else if (bot.LEA.g.LSCSO.includes(c.guild.id))
+                else if (bot.LEA.g.LSSD.includes(c.guild.id))
                     loc = path.resolve("./db/LSPD") + "/" + user.id + ".json", worker = JSON.parse(fs.readFileSync(loc, "utf-8")),
-                        workerGuildID = bot.LEA.g.LSCSO[0];
+                        workerGuildID = bot.LEA.g.LSSD[0];
 
                 i.editReply({ content: `**Tenhle záznam (<@${user.id}>) byl vymazán z DB!**\n-# *Pozor, bot neodebral role!*`, files: [loc], components: [] });
 

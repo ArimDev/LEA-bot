@@ -39,7 +39,7 @@ export async function findWorker(type, input) {
     if (type === "id") return getDB(input);
 
     workers = fs.readdirSync(path.resolve("./db/LSPD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
-    workers = workers.concat(fs.readdirSync(path.resolve("./db/LSCSO")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json"));
+    workers = workers.concat(fs.readdirSync(path.resolve("./db/LSSD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json"));
     for (const log of workers) {
         const gotDB = getDB(log.split(".")[0]);
         if (!gotDB.exists) continue;
