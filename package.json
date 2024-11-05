@@ -1,7 +1,7 @@
 {
   "name": "lea-bot",
-  "version": "5.2",
-  "description": "RefreshRP (FiveM GTA V roleplay) Discord bot for LEA - making internal police department actions easier.",
+  "version": "5.3",
+  "description": "VegasRP (FiveM GTA V roleplay) Discord bot for LEA - making internal police department actions easier.",
   "type": "module",
   "main": "index.js",
   "scripts": {
