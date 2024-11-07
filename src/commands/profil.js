@@ -43,8 +43,10 @@ export default async function run(bot, i) {
         if (checkDB(discord.id)) found = true, worker.id = discord.id;
     }
     if (!found) {
-        db = fs.readdirSync(path.resolve("./db/LSPD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
-        db = db.concat(fs.readdirSync(path.resolve("./db/LSSD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json"));
+        db = fs.readdirSync(path.resolve("./db/LSPD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json")
+            .concat(fs.readdirSync(path.resolve("./db/LSSD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json"))
+            .concat(fs.readdirSync(path.resolve("./db/SAHP")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json"));
+
         for (const log of db) {
             const gotDB = getDB(log.split(".")[0]);
             if (!gotDB.exists) continue;

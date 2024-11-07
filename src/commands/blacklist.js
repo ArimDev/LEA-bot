@@ -53,6 +53,9 @@ export default async function run(bot, i) {
         if (admin.roles.cache.has("1267541873451339806")) passed = true; //Leadership
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1139267137651884072")) passed = true; //Leadership
+        if (admin.roles.cache.has("1139295201282764882")) passed = true; //FTO Commander
+    } else if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1301163398557339686")) passed = true; //Leadership
     }
 
     if (!passed) return i.reply({ content: "> 🛑 **K tomuhle má přístup jen admin.**", ephemeral: true });

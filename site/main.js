@@ -1,11 +1,16 @@
-import './assets/style/main.css'
+import './assets/style/main.css';
+import icon from "./assets/logo/leabot.png";
 
-import { createApp } from 'vue'
-import App from './app.vue'
-import router from './router'
+import { createApp } from 'vue';
+import App from './app.vue';
+import router from './router';
 
-const app = createApp(App)
+const app = createApp(App);
 
-app.use(router)
+document.getElementById("favicon").setAttribute("href", icon);
+document.getElementById("ogImage").setAttribute("content", icon);
+document.getElementById("twitterImage").setAttribute("content", icon);
 
-app.mount('#app')
+app.use(router);
+
+app.mount('#app');

@@ -34,8 +34,10 @@ Použitím pozvánky https://discord.com/oauth2/authorize?client_id=ID-APLIKACE&
 
 ### 3. Používání funkcí
 Bot se hlavně zatím používá pomocí jednoduchých příkazů:
+- 👮✅ **`/blacklist`** - Správa blacklistu
 - 👮✅ **`/db`** - Správa databáze zaměstnanců
 - 🫡✅ **`/duty`** - Zápis služby
+- 🫡✅ **`/event`** - Zápis faktury v rámci eventu
 - 👮✅ **`/leader`** - Obecná admin správa
 - 🫡✅ **`/menu`** - Základní přehled / pomocné menu bota
 - 🫡✅ **`/omluvenka`** - Zápis omluvenky
@@ -48,7 +50,7 @@ Bot se hlavně zatím používá pomocí jednoduchých příkazů:
 - ✅ značí příkaz, který je v téhle verzi **funkční**
 - ❌ značí příkaz, který je v téhle verzi **nefunkční / nedokončený**
 
-Zároveň nově hostuje stránky s **LSPD, LSSD tabulkami, jejich divizemi a blacklistem** na bázi Express.js, HTML+CSS+JS.
+Zároveň nově hostuje stránky s **LSPD, LSSD, SAHP tabulkami a blacklistem** na bázi Express.js, Vue.js a API.
 Ty se aktualizují **přímo z databáze a Discord serverů** po každém načtení stránky.
 
 #### 1. Zapsání duty

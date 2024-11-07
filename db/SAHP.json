@@ -1,0 +1,93 @@
+[
+    {
+        "rank": "Commissioner",
+        "slots": 1,
+        "firstBadge": 100,
+        "firstCallsign": "Heaven-1",
+        "title": false
+    },
+    {
+        "rank": "Deputy Commissioner",
+        "slots": 1,
+        "firstBadge": 101,
+        "firstCallsign": "Heaven-2",
+        "title": false
+    },
+    {
+        "rank": "Assistant Commissioner",
+        "slots": 1,
+        "firstBadge": 102,
+        "firstCallsign": "Heaven-3",
+        "title": false
+    },
+    {
+        "rank": "Chief",
+        "slots": 1,
+        "firstBadge": 103,
+        "firstCallsign": "Heaven-4",
+        "title": false
+    },
+    {
+        "rank": "Assistant Chief",
+        "slots": 1,
+        "firstBadge": 104,
+        "firstCallsign": "Heaven-5",
+        "title": false
+    },
+    {
+        "rank": "Captain",
+        "slots": 4,
+        "firstBadge": 105,
+        "firstCallsign": "Frost-1",
+        "title": " "
+    },
+    {
+        "rank": "Lieutenant",
+        "slots": 9,
+        "firstBadge": 110,
+        "firstCallsign": "Mike-1",
+        "title": " "
+    },
+    {
+        "rank": "Sergeant II",
+        "slots": 1,
+        "firstBadge": 120,
+        "firstCallsign": "Tango-1",
+        "title": "SERGEANT"
+    },
+    {
+        "rank": "Sergeant I",
+        "slots": 9,
+        "firstBadge": 130,
+        "firstCallsign": "Tango-2",
+        "title": false
+    },
+    {
+        "rank": "Trooper III",
+        "slots": 30,
+        "firstBadge": 200,
+        "firstCallsign": "Ocean-1",
+        "title": "Trooper III"
+    },
+    {
+        "rank": "Trooper II",
+        "slots": 30,
+        "firstBadge": 300,
+        "firstCallsign": "Comet-1",
+        "title": "Deputy I"
+    },
+    {
+        "rank": "Trooper I",
+        "slots": 30,
+        "firstBadge": 400,
+        "firstCallsign": "Nova-1",
+        "title": "Trooper I"
+    },
+    {
+        "rank": "Trooper Trainee",
+        "slots": 45,
+        "firstBadge": 500,
+        "firstCallsign": "Golf-1",
+        "title": "Trooper Trainee"
+    }
+]

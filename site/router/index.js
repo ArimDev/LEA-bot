@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import viewsHome from "../views/Home.vue";
 import viewsLSPD from "../views/LSPD.vue";
 import viewsLSSD from "../views/LSSD.vue";
+import viewsSAHP from "../views/SAHP.vue";
 import viewsBlacklist from "../views/Blacklist.vue";
 import views404 from "../views/404.vue";
 
@@ -20,6 +21,11 @@ const router = createRouter({
     {
       path: "/lssd", name: "LSSD", component: viewsLSSD, meta: {
         title: "LSSD"
+      },
+    },
+    {
+      path: "/sahp", name: "SAHP", component: viewsSAHP, meta: {
+        title: "SAHP"
       },
     },
     {

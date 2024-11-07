@@ -22,6 +22,8 @@ export default async function run(bot, i) {
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1139267137651884072")) passed = true; //Leadership
         if (admin.roles.cache.has("1139295201282764882")) passed = true; //FTO Commander
+    } else if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1301163398557339686")) passed = true; //Leadership
     }
 
     if (!passed) return i.reply({ content: "> 🛑 **K tomuhle má přístup jen admin.**", ephemeral: true });
@@ -61,7 +63,7 @@ export default async function run(bot, i) {
         .setLabel("Číslo odznaku")
         .setStyle(TextInputStyle.Short)
         .setPlaceholder("1033")
-        .setMinLength(4)
+        .setMinLength(3)
         .setMaxLength(4)
         .setRequired(true);
 

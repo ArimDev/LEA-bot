@@ -5,7 +5,7 @@ import { config as secret } from "dotenv";
 
 const apiPath = "/api/v2";
 
-export default async function api(bot, app, server, wss) {
+export default async function api(bot, app) {
 
     //LOGIN
     app.post(apiPath + '/login/getToken', async (req, res) => {
@@ -38,7 +38,7 @@ export default async function api(bot, app, server, wss) {
     });
 
     //DATABASE
-    app.get(apiPath + "/db/:dep(LSSD|LSPD)/positions", async (req, res) => {
+    app.get(apiPath + "/db/:dep(LSSD|LSPD|SAHP)/positions", async (req, res) => {
         const dep = req.params.dep || "LSSD";
         try {
             const pos = await fs.readFileSync((path.resolve("./db/" + dep) + ".json"), "utf-8");

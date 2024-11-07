@@ -1,5 +1,5 @@
 <template>
-    <table class="otherTables">
+    <table v-if="loaded && !fetchError" class="otherTables">
         <thead>
             <tr>
                 <th scope="col" rowspan="2" style="text-align: center;">
@@ -95,13 +95,16 @@ async function fetchBL() {
     }
 }
 
+import LEA from "../assets/logo/leabot.png";
+import LSPD from "../assets/logo/LSPD.png";
+import LSCSO from "../assets/logo/LSCSO.png";
+import LSSD from "../assets/logo/LSSD.png";
+import SAHP from "../assets/logo/SAHP.png";
+const deps = { LSPD, LSCSO, LSSD, SAHP };
+
 function getBadge(dep) {
-    if (!dep) return "";
-    else if (dep === "LSPD") {
-        return "../assets/logo/LSPD.png";
-    } else if (dep === "LSSD") {
-        return "../assets/logo/LSSD.png";
-    } else return "";
+    if (!dep) return LEA;
+    else return deps[dep.toUpperCase()];
 }
 </script>
 

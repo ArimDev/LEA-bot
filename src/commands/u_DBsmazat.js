@@ -22,6 +22,8 @@ export default async function run(bot, i) {
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1139267137651884072")) passed = true; //Leadership
         if (admin.roles.cache.has("1139295201282764882")) passed = true; //FTO Commander
+    } else if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1301163398557339686")) passed = true; //Leadership
     }
 
     if (!passed) return i.reply({ content: "> 🛑 **K tomuhle má přístup jen admin.**", ephemeral: true });
@@ -31,11 +33,12 @@ export default async function run(bot, i) {
     let loc, worker, workerGuildID;
     if (bot.LEA.g.LSPD.includes(i.guild.id)) loc = path.resolve("./db/LSPD") + "/" + user.id + ".json";
     else if (bot.LEA.g.LSSD.includes(i.guild.id)) loc = path.resolve("./db/LSSD") + "/" + user.id + ".json";
+    else if (bot.LEA.g.SAHP.includes(i.guild.id)) loc = path.resolve("./db/SAHP") + "/" + user.id + ".json";
     else return i.reply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
     const admins = [
-        "411436203330502658"/*b1ngo*/, "607915400604286997"/*samus*/,
-        "846451292388851722"/*aldix_eu*/, "794238724446879754"/*tondahehe*/, "343386988000444417"/*cenovka*/
+        "411436203330502658"/*b1ngo*/, "607915400604286997"/*samus*/, "801373399564681236"/*daviiid_.*/,
+        "846451292388851722"/*aldix_eu*/, "343386988000444417"/*cenovka*/
     ];
 
     await i.deferReply({ ephemeral: true });
@@ -66,6 +69,9 @@ export default async function run(bot, i) {
             else if (bot.LEA.g.LSSD.includes(c.guild.id))
                 loc = path.resolve("./db/LSPD") + "/" + user.id + ".json", worker = JSON.parse(fs.readFileSync(loc, "utf-8")),
                     workerGuildID = bot.LEA.g.LSSD[0];
+            else if (bot.LEA.g.SAHP.includes(c.guild.id))
+                loc = path.resolve("./db/SAHP") + "/" + user.id + ".json", worker = JSON.parse(fs.readFileSync(loc, "utf-8")),
+                    workerGuildID = bot.LEA.g.SAHP[0];
 
             i.editReply({ content: `**Tenhle záznam (<@${user.id}>) byl vymazán z DB!**\n-# *Pozor, bot neodebral role!*`, files: [loc], components: [] });
 

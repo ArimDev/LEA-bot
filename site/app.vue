@@ -18,6 +18,9 @@
 				<li class="LSSD">
 					<RouterLink to="/lssd">LSSD</RouterLink>
 				</li>
+				<li class="SAHP">
+					<RouterLink to="/sahp">SAHP</RouterLink>
+				</li>
 				<li>
 					<RouterLink to="/blacklist">BLACKLIST</RouterLink>
 				</li>

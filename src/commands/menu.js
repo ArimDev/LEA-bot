@@ -51,7 +51,7 @@ export default async function run(bot, i) {
 
     const commands = fs.readdirSync(path.resolve("./src/commands")).filter(file => file.endsWith(".js"));
     let helpEmbed = new EmbedBuilder()
-        .setTitle("ADVANCED REACTIONS")
+        .setTitle("Law Enforcement Agencies - Bot")
         .setFields([
             {
                 name: `Stav`, inline: true,
@@ -68,8 +68,8 @@ export default async function run(bot, i) {
                 name: `Info`, inline: false,
                 value:
                     `> **Autor:** <@411436203330502658> ([web](https://petyxbron.cz/cs/p))
-                    > **Sloužím:** LSPD ${bot.LEA.e.LSPD} a LSSD ${bot.LEA.e.LSSD}
-                    > **FiveM:** RefreshRP by Nolimit 🌴
+                    > **Sloužím:** LSPD ${bot.LEA.e.LSPD} LSSD ${bot.LEA.e.LSSD} SAHP ${bot.LEA.e.SAHP}
+                    > **FiveM:** VegasRP by Nolimit 🌴
                     > **GitHub**: [petyxbron.cz/lea-bot](https://petyxbron.cz/lea-bot)`
             },
             {
@@ -88,6 +88,7 @@ export default async function run(bot, i) {
         let group;
         if (bot.LEA.g.LSPD.includes(i.guild.id)) group = "**LSPD** " + bot.LEA.e.LSPD;
         else if (bot.LEA.g.LSSD.includes(i.guild.id)) group = "**LSSD** " + bot.LEA.e.LSSD;
+        else if (bot.LEA.g.SAHP.includes(i.guild.id)) group = "**SAHP** " + bot.LEA.e.SAHP;
         else group = false;
 
         if (group) helpEmbed.setDescription(`> ✅ Server **${i.guild.name}** je součástí sboru ${group}`);

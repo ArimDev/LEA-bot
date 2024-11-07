@@ -4,7 +4,7 @@ import { checkDB, getDB } from "../../src/functions/db.js";
 
 export const slash = new SlashCommandBuilder()
     .setName("online")
-    .setDescription(`Zobrazí kolik členů hraje RefreshRP`)
+    .setDescription(`Zobrazí kolik členů hraje VegasRP`)
     .setContexts([0])
     .setIntegrationTypes([0])
     .setNSFW(false);
@@ -20,7 +20,7 @@ export default async function run(bot, i) {
         let n = 0, onNotSorted = [], onSorted = [];
 
         for (const m of ms.values()) {
-            if (m.presence && m.presence.activities && m.presence.activities.find(a => a.name.includes("Refresh by Nolimit"))) {
+            if (m.presence && m.presence.activities && m.presence.activities.find(a => a.name.includes("VegasRP"))) {
                 if (!(checkDB(m.id))) continue;
                 const { data } = getDB(m.id);
                 n++;
@@ -34,8 +34,8 @@ export default async function run(bot, i) {
         };
 
         const onlineEmbed = new EmbedBuilder()
-            .setAuthor({ name: "Právě ve službě", iconURL: "https://servers-live.fivem.net/servers/icon/994ldb/686935286.png" })
-            .setDescription(`Členi **${getServer(i.guild.id).name}** hrající **Refresh by Nolimit** právě teď.`)
+            .setAuthor({ name: "Právě ve službě", iconURL: getServer(i.guild.id).footer.iconURL })
+            .setDescription(`Členi **${getServer(i.guild.id).name}** hrající **VegasRP** právě teď.`)
             .addFields([
                 {
                     name: `Seznam`, inline: false,
@@ -48,9 +48,9 @@ export default async function run(bot, i) {
                         `> **Dohromady online:** \`${n}\``
                 }
             ])
-            .setThumbnail(getServer(i.guild.id).footer.iconURL)
-            .setColor(getServer(i.guild.id).color)
-            .setFooter(getServer(i.guild.id).footer);
+            .setThumbnail("https://servers-live.fivem.net/servers/icon/994ldb/-892566759.png")
+            .setColor("#6a371c")
+            .setFooter({ text: `VegasRP by Nolimit | nlmt.cc`, iconURL: "https://nlmt.cc/src/imgs/logo.png" });
 
         await i.editReply({ embeds: [onlineEmbed], ephemeral: true });
     } catch (e) {

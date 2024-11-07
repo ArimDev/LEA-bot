@@ -11,19 +11,6 @@ export const slash = new SlashCommandBuilder()
             .setName('docházka')
             .setDescription("Kontrola absence")
     )
-    .addSubcommand(subcommand =>
-        subcommand
-            .setName('blacklist')
-            .setDescription("Správa blacklistu")
-            .addStringOption(option =>
-                option.setName("reason")
-                    .setDescription("Důvod přidání na blacklist")
-                    .setRequired(true))
-            .addUserOption(option =>
-                option.setName("discord")
-                    .setDescription("Přidat Discord uživatele")
-                    .setRequired(false))
-    )
     .setContexts([0])
     .setIntegrationTypes([0])
     .setNSFW(false);
@@ -40,6 +27,8 @@ export default async function run(bot, i) {
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1139267137651884072")) passed = true; //Leadership
         if (admin.roles.cache.has("1139295201282764882")) passed = true; //FTO Commander
+    } else if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1301163398557339686")) passed = true; //Leadership
     }
 
     if (!passed) return i.reply({ content: "> 🛑 **K tomuhle má přístup jen admin.**", ephemeral: true });
@@ -98,10 +87,12 @@ export default async function run(bot, i) {
             let users = [], db;
             if (bot.LEA.g.LSPD.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/LSPD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
             else if (bot.LEA.g.LSSD.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/LSSD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
+            else if (bot.LEA.g.SAHP.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/SAHP")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
             for (const file of db) {
                 let worker;
                 if (bot.LEA.g.LSPD.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + file), "utf-8"));
                 else if (bot.LEA.g.LSSD.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + file), "utf-8"));
+                else if (bot.LEA.g.SAHP.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + file), "utf-8"));
 
                 let m;
                 try {

@@ -42,4 +42,4 @@ dist
 pm2.config.cjs
 package-lock.json
 .vscode/
-db/backup/
+.archive/

@@ -85,6 +85,13 @@ span,
     box-shadow: 0 4px 20px rgba(189, 129, 49, 0.6);
 }
 
+.header .SAHP a:hover {
+    border: 2px solid #294a73;
+    background-color: #294a73;
+    color: white;
+    box-shadow: 0 4px 20px rgba(41, 74, 115, 0.6);
+}
+
 .header a.router-link-active {
     color: white;
     background-color: black;
@@ -103,6 +110,13 @@ span,
     background-color: #bd8131;
     color: black;
     box-shadow: 0 4px 20px rgba(189, 129, 49, 0.6);
+}
+
+.header .SAHP a.router-link-active {
+    border: 2px solid #294a73;
+    background-color: #294a73;
+    color: white;
+    box-shadow: 0 4px 20px rgba(41, 74, 115, 0.6);
 }
 
 .header .homeLink {

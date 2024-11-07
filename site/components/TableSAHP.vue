@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th scope="col" rowspan="2" style="text-align: center;">
-                    <img src="../assets/logo/LSSD.png" width="65" height="65" alt="Odznak LSSD" />
+                    <img src="../assets/logo/SAHP.png" width="65" height="65" alt="Odznak SAHP" />
                 </th>
                 <th scope="col" rowspan="2">Jméno</th>
                 <th scope="col" rowspan="2">Odznak</th>
@@ -122,7 +122,7 @@ function checkLogin() {
 
 async function fetchWorkers() {
     try {
-        const response = await axios.get("/api/v1/db/getTable/LSSD", {
+        const response = await axios.get("/api/v1/db/getTable/SAHP", {
             headers: { authorization: `${window.localStorage.getItem("token_type")} ${window.localStorage.getItem("access_token")}` }
         });
 
@@ -150,7 +150,7 @@ async function fetchWorkers() {
 
 async function fetchPositions() {
     try {
-        const response = await axios.get("/api/v2/db/LSSD/positions");
+        const response = await axios.get("/api/v2/db/SAHP/positions");
 
         const pos = response.data;
 
@@ -255,7 +255,7 @@ function calcCheckbox(workerData, method) {
 
 <style scoped>
 tbody tr:hover {
-    background: #3655c3;
+    background: #b79e49;
     color: white;
 }
 
@@ -268,17 +268,17 @@ td {
 }
 
 th {
-    color: #bd8131;
+    color: #294a73;
     border: 1px solid black;
 }
 
 th[scope="row"] {
-    color: black;
-    background: #bd8131;
+    color: white;
+    background: #294a73;
 }
 
 th[scope="col"] {
-    color: black;
-    background: #bd8131;
+    color: white;
+    background: #294a73;
 }
 </style>

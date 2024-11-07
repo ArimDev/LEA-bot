@@ -3,12 +3,11 @@ import fetch from "node-fetch";
 import fs from "fs";
 import { config as secret } from "dotenv";
 import { getProfile } from "../functions/profiles.js";
-import WebSocket from "ws";
 const cachePath = path.resolve("./db/cache.json");
 
-const apiPath = "/api/v1"
+const apiPath = "/api/v1";
 
-export default async function api(bot, app, server, wss) {
+export default async function api(bot, app) {
     //Login feature
     app.post(apiPath + '/login/getToken', async (req, res) => {
         const tokenResponseData = await fetch('https://discord.com/api/oauth2/token', {
@@ -111,7 +110,7 @@ export default async function api(bot, app, server, wss) {
         res.status(200).json({ code: me.status, passed: true, user: response });
     });
 
-    app.get(apiPath + "/db/getTable/:dep(LSSD|LSPD)", async (req, res) => {
+    app.get(apiPath + "/db/getTable/:dep(LSSD|LSPD|SAHP)", async (req, res) => {
         const origin = req.headers.host;
         if (!origin.includes(secret().parsed.domain)) {
             return res.status(403).json({});
@@ -132,7 +131,7 @@ export default async function api(bot, app, server, wss) {
         const { passed } = verRep;
         if (!passed) return res.status(403).json({ passed: false, guildID: verRep.guildID, user: verRep.user, member: verRep.member, workers: [] });
 
-        const guild = await bot.guilds.fetch(dep === "LSSD" ? "1139266097921675345" : "1154446248934387828");
+        const guild = await bot.guilds.fetch(bot.LEA.g[dep][0]);
         await guild.members.fetch();
 
         let final = [], workers = 0;
@@ -147,7 +146,7 @@ export default async function api(bot, app, server, wss) {
                 leadership = false,
                 moHours = 0;
 
-            worker.m = await guild.members.cache.get(worker.discordID);
+            worker.m = guild.members.cache.get(worker.discordID);
             worker.u = worker.m?.user || false;
             if (!worker.m) worker.header.red = true, worker.m = false;
 
@@ -166,7 +165,7 @@ export default async function api(bot, app, server, wss) {
                 }
             }
 
-            if (dep === "LSSD" && worker.m) { //ONLY LSSD!
+            if (dep === "LSSD" && worker.m) {
                 worker.roles.warn = worker.m.roles.cache.has("1139379787324997722");
                 worker.roles.suspend = worker.m.roles.cache.has("1139379875610898522");
                 if (worker.m.roles.cache.has("1139275625740370001")) worker.div.push("SRT");
@@ -178,10 +177,10 @@ export default async function api(bot, app, server, wss) {
                 if (worker.m.roles.cache.has("1139295387266580652")) worker.div.push("FTO");
                 if (worker.m.roles.cache.has("1139297368450277376")) worker.div.push("CID");
 
-                if (
-                    worker.m.roles.cache.has("1139267137651884072") //leadership
-                    && !worker.m.roles.cache.has("1139275038877560856") //lieutenant
-                    && !worker.m.roles.cache.has("1139274974683746335") //captain
+                if ( //ACCESS TO THE TABLES - Discord roles
+                    worker.m.roles.cache.has("1139267137651884072") //Leadership
+                    && !worker.m.roles.cache.has("1139274974683746335") //Captain
+                    && !worker.m.roles.cache.has("1139275038877560856") //Lieutenant
                 ) leadership = true;
                 if (
                     !leadership
@@ -190,15 +189,36 @@ export default async function api(bot, app, server, wss) {
                 ) hours0 = true;
             } else if (dep === "LSPD" && worker.m) {
                 worker.roles.warn = worker.m.roles.cache.has("1154446248934387830");
-                worker.roles.suspend = worker.m.roles.cache.has("1154446248934387831");
-                if (worker.m.roles.cache.has("1205534460733296700")) worker.div.push("METRO");
-                if (worker.m.roles.cache.has("1154446248934387836")) worker.div.push("SWAT");
-                if (worker.m.roles.cache.has("1154446248946978950")) worker.div.push("MBU");
-                if (worker.m.roles.cache.has("1154446248946978948")) worker.div.push("AU");
-                if (worker.m.roles.cache.has("1156133057393336331")) worker.div.push("FTO");
-                if (worker.m.roles.cache.has("1154446248934387832")) worker.div.push("ST");
+                worker.roles.suspend = worker.m.roles.cache.has("1267600894069964911");
+                if (worker.m.roles.cache.has("1240021849518112808")) worker.div.push("CID");
+                if (worker.m.roles.cache.has("1290357614039007294")) worker.div.push("SWAT");
+                if (worker.m.roles.cache.has("1252175791966523444")) worker.div.push("ST");
+                if (worker.m.roles.cache.has("1251504241768529971")) worker.div.push("FTO");
+                if (worker.m.roles.cache.has("1154446248946978950")) worker.div.push("TEU");
+                if (worker.m.roles.cache.has("1242926544574349343")) worker.div.push("AU");
+                if (worker.m.roles.cache.has("1290357614039007294")) worker.div.push("SWAT");
+                if (worker.m.roles.cache.has("1290357614039007294")) worker.div.push("SWAT");
+                if (worker.m.roles.cache.has("1290357614039007294")) worker.div.push("SWAT");
+                if (worker.m.roles.cache.has("1290357614039007294")) worker.div.push("SWAT");
+                if (worker.m.roles.cache.has("1290357614039007294")) worker.div.push("SWAT");
 
+                //ACCESS TO THE TABLES - Discord role
                 if (worker.m.roles.cache.has("1267541873451339806")) leadership = true;
+                if (
+                    !leadership
+                    && !worker.roles.omluvenka
+                    && (Math.round((worker.hours + Number.EPSILON) * 100) / 100) === 0
+                ) hours0 = true;
+            } else if (dep === "SAHP" && worker.m) {
+                worker.roles.warn = worker.m.roles.cache.has("1301163398515396674");
+                worker.roles.suspend = worker.m.roles.cache.has("1301163398515396672");
+                if (worker.m.roles.cache.has("1301163398540689489")) worker.div.push("CID");
+                if (worker.m.roles.cache.has("1301163398528241692")) worker.div.push("TRU");
+                if (worker.m.roles.cache.has("1301163398528241687")) worker.div.push("FTO");
+                if (worker.m.roles.cache.has("1301163398515396675")) worker.div.push("AU");
+
+                //ACCESS TO THE TABLES - Discord role
+                if (worker.m.roles.cache.has("1301163398557339686")) leadership = true;
                 if (
                     !leadership
                     && !worker.roles.omluvenka
@@ -228,12 +248,12 @@ export default async function api(bot, app, server, wss) {
         res.status(200).json({ passed: true, guildID: verRep.guildID, user: verRep.user, member: verRep.member, workers: final });
     });
 
-    app.get(apiPath + "/login/verifyMe/:dep(LSSD|LSPD)", async (req, res) => {
+    app.get(apiPath + "/login/verifyMe/:dep(LSSD|LSPD|SAHP)", async (req, res) => {
         const origin = req.headers.host;
         if (!origin.includes(secret().parsed.domain)) {
             return res.status(403).json({});
         }
-        const dep = req.params.dep?.toLowerCase() || "LSSD";
+        const dep = req.params.dep || "LSSD";
         const authString = req.headers.authorization;
         let passed = false;
 
@@ -256,11 +276,23 @@ export default async function api(bot, app, server, wss) {
             });
         }
 
-        const deps = { LSSD: "1139266097921675345", lspd: "1154446248934387828" };
-        const roles = { LSSD: "1139267137651884072", lspd: "1267541873451339806" };
-        const dojRoles = { LSSD: "1139278117983223818", lspd: "1267592715500257343" };
+        function getNextDep(dep, index) {
+            if (dep === "LSPD") {
+                if (!index || index === 1) return "LSSD";
+                else if (index === 2) return "SAHP";
+            } else if (dep === "LSSD") {
+                if (!index || index === 1) return "LSPD";
+                else if (index === 2) return "SAHP";
+            } else if (dep === "SAHP") {
+                if (!index || index === 1) return "LSPD";
+                else if (index === 2) return "LSSD";
+            }
+        }
 
-        const first = await fetch(`https://discord.com/api/users/@me/guilds/${deps[dep]}/member`, {
+        const roles = { LSSD: "1139267137651884072", LSPD: "1267541873451339806", SAHP: "1301163398540689494" };
+        const dojRoles = { LSSD: "1139278117983223818", LSPD: "1267592715500257343", SAHP: "1301163398557339686" };
+
+        const first = await fetch(`https://discord.com/api/users/@me/guilds/${bot.LEA.g[dep][0]}/member`, {
             headers: { authorization: authString }
         });
 
@@ -269,12 +301,12 @@ export default async function api(bot, app, server, wss) {
             passed = firstRes.roles.includes(roles[dep]) || firstRes.roles.includes(dojRoles[dep]);
             if (firstRes.user.id === "411436203330502658") passed = true; //b1ngo access
             if (passed) {
-                console.log(` < [PS/Login ${first.status}] > Verify: ${firstRes.user.username} verified from ${req.params.dep}`);
+                console.log(` < [PS/Login ${first.status}] > Verify: ${firstRes.user.username} verified from ${dep}`);
                 cache.push({
-                    from: dep.toUpperCase(),
+                    from: dep,
                     expiry: Date.now() + 3 * 60 * 1000,
                     authorization: authString,
-                    guildID: deps[dep],
+                    guildID: bot.LEA.g[dep][0],
                     user: {
                         id: firstRes.user.id,
                         username: firstRes.user.username,
@@ -293,7 +325,7 @@ export default async function api(bot, app, server, wss) {
                 return res.status(200).json({
                     code: first.status,
                     passed,
-                    guildID: deps[dep],
+                    guildID: bot.LEA.g[dep][0],
                     user: {
                         id: firstRes.user.id,
                         username: firstRes.user.username,
@@ -309,24 +341,21 @@ export default async function api(bot, app, server, wss) {
                     }
                 });
             }
-        }
-
-        if (!first.ok || !passed) {
-            const second = await fetch(`https://discord.com/api/users/@me/guilds/${deps[dep === "LSSD" ? "lspd" : "LSSD"]}/member`, {
+        } else {
+            const second = await fetch(`https://discord.com/api/users/@me/guilds/${bot.LEA.g[getNextDep(dep, 1)][0]}/member`, {
                 headers: { authorization: authString }
             });
 
             if (second.ok) {
                 const secondRes = await second.json();
-                passed = secondRes.roles.includes(roles[dep === "LSSD" ? "lspd" : "LSSD"]);
-                if (secondRes.user.id === "411436203330502658") passed = true; //b1ngo access
+                passed = secondRes.roles.includes(roles[getNextDep(dep, 1)]) || secondRes.roles.includes(dojRoles[getNextDep(dep, 1)]);
                 if (passed) {
-                    console.log(` < [PS/Login ${second.status}] > Verify: ${secondRes.user.username} verified from ${dep === "LSSD" ? "LSPD" : "LSSD"}`);
+                    console.log(` < [PS/Login ${second.status}] > Verify: ${secondRes.user.username} verified from ${getNextDep(dep, 1)}`);
                     cache.push({
                         expiry: Date.now() + 3 * 60 * 1000,
-                        from: dep === "LSSD" ? "LSPD" : "LSSD",
+                        from: getNextDep(dep, 1),
                         authorization: authString,
-                        guildID: deps[dep === "LSSD" ? "lspd" : "LSSD"],
+                        guildID: bot.LEA.g[getNextDep(dep, 1)][0],
                         user: {
                             id: secondRes.user.id,
                             username: secondRes.user.username,
@@ -345,7 +374,7 @@ export default async function api(bot, app, server, wss) {
                     return res.status(200).json({
                         code: second.status,
                         passed,
-                        guildID: deps[dep === "LSSD" ? "lspd" : "LSSD"],
+                        guildID: bot.LEA.g[getNextDep(dep, 1)][0],
                         user: {
                             id: secondRes.user.id,
                             username: secondRes.user.username,
@@ -361,47 +390,80 @@ export default async function api(bot, app, server, wss) {
                         }
                     });
                 } else {
-                    console.log(` < [PS/Login ${second.status}] > Verify: ${secondRes.user.username} has not been verified (not leadership).`);
-                    return res.status(200).json({
-                        code: second.status,
-                        passed,
-                        guildID: deps[dep === "LSSD" ? "lspd" : "LSSD"],
-                        user: {
-                            id: secondRes.user.id,
-                            username: secondRes.user.username,
-                            displayName: secondRes.user.global_name,
-                            avatar: secondRes.user.avatar,
-                            banner: secondRes.user.banner
-                        },
-                        member: {
-                            nickname: secondRes.nick,
-                            avatar: secondRes.avatar,
-                            banner: secondRes.banner,
-                            bio: secondRes.bio
-                        }
+                    const third = await fetch(`https://discord.com/api/users/@me/guilds/${bot.LEA.g[getNextDep(dep, 2)][0]}/member`, {
+                        headers: { authorization: authString }
                     });
-                }
-            } else {
-                console.log(` < [PS/Login ${second.status}] > Verify: ` + "XXX" + " has not been verified (LSSD verify check failed)");
-                return res.status(second.status).json({ code: second.status, passed: false, user: {}, member: {} });
-            }
-        }
-    });
 
-    app.post(apiPath + '/bot/updateTable', async (req, res) => {
-        const { client_id, client_secret, dep } = req.body;
-        if (
-            client_id === secret().parsed.botClientID
-            && client_secret === secret().parsed.botClientSecret
-            && ["LSSD", "LSPD"].includes(dep)
-        ) {
-            await wss[dep].clients.forEach((client) => {
-                if (client.readyState === WebSocket.OPEN) client.send("update");
-            });
-            return res.status(200);
-        } else {
-            if (["LSSD", "LSPD"].includes(dep)) return res.status(403);
-            else return res.status(400);
+                    if (third.ok) {
+                        const thirdRes = await third.json();
+                        passed = thirdRes.roles.includes(roles[getNextDep(dep, 2)]) || thirdRes.roles.includes(dojRoles[getNextDep(dep, 2)]);
+                        if (passed) {
+                            console.log(` < [PS/Login ${third.status}] > Verify: ${thirdRes.user.username} verified from ${getNextDep(dep, 2)}`);
+                            cache.push({
+                                from: dep.toUpperCase(),
+                                expiry: Date.now() + 3 * 60 * 1000,
+                                authorization: authString,
+                                guildID: bot.LEA.g[dep][0],
+                                user: {
+                                    id: thirdRes.user.id,
+                                    username: thirdRes.user.username,
+                                    displayName: thirdRes.user.global_name,
+                                    avatar: thirdRes.user.avatar,
+                                    banner: thirdRes.user.banner
+                                },
+                                member: {
+                                    nickname: thirdRes.nick,
+                                    avatar: thirdRes.avatar,
+                                    banner: thirdRes.banner,
+                                    bio: thirdRes.bio
+                                }
+                            });
+                            fs.writeFileSync(path.resolve("./db/cache.json"), JSON.stringify(cache, null, 4), "utf-8");
+                            return res.status(200).json({
+                                code: first.status,
+                                passed,
+                                guildID: bot.LEA.g[dep][0],
+                                user: {
+                                    id: thirdRes.user.id,
+                                    username: thirdRes.user.username,
+                                    displayName: thirdRes.user.global_name,
+                                    avatar: thirdRes.user.avatar,
+                                    banner: thirdRes.user.banner
+                                },
+                                member: {
+                                    nickname: thirdRes.nick,
+                                    avatar: thirdRes.avatar,
+                                    banner: thirdRes.banner,
+                                    bio: thirdRes.bio
+                                }
+                            });
+                        } else {
+                            console.log(` < [PS/Login ${third.status}] > Verify: ${thirdRes.user.username} has not been verified (not leadership).`);
+                            return res.status(200).json({
+                                code: third.status,
+                                passed,
+                                guildID: bot.LEA.g[getNextDep(dep, 2)][0],
+                                user: {
+                                    id: thirdRes.user.id,
+                                    username: thirdRes.user.username,
+                                    displayName: thirdRes.user.global_name,
+                                    avatar: thirdRes.user.avatar,
+                                    banner: thirdRes.user.banner
+                                },
+                                member: {
+                                    nickname: thirdRes.nick,
+                                    avatar: thirdRes.avatar,
+                                    banner: thirdRes.banner,
+                                    bio: thirdRes.bio
+                                }
+                            });
+                        }
+                    } else {
+                        console.log(` < [PS/Login ${third.status}] > Verify: ` + "XXX" + ` has not been verified (last [${getNextDep(dep, 2)}] verify check failed)`);
+                        return res.status(third.status).json({ code: third.status, passed: false, user: {}, member: {} });
+                    }
+                }
+            }
         }
     });
 }

@@ -13,18 +13,19 @@
 
 *Český Discord bot pro Law Enforcement Agencies na GTA V FiveM roleplay serveru [VegasRP by Nolimit](https://nlmt.cc/).*
 
-*Aktuálně podporuje sbory LSPD <img src="https://i.imgur.com/gfL0fGf.png" width="15" height="15"/> a LSSD <img src="https://i.imgur.com/X3cH2iu.png" width="15" height="15"/>.*
+*Aktuálně podporuje sbory LSPD <img src="https://i.imgur.com/gfL0fGf.png" width="15" height="15"/>, LSSD <img src="https://i.imgur.com/X3cH2iu.png" width="15" height="15"/> a SAHP <img src="https://i.imgur.com/xgFoKuX.png" width="15" height="15"/>.*
 
 Funkce:
-- zápis služeb zaměstnanců
-- zápis omluvenek zaměstnanců
-- kontrola absence při událostech
-- zápis do blacklistu
-- webové tabulky *(HTML+JS+CSS s Express.js a API)*
+- služby zaměstnanců (zápis, úprava, smazání, přehled)
+- omluveneky zaměstnanců (zápis, úprava, smazání, přehled)
+- absence při událostech (zápis, přehled)
+- blacklistu (zápis, úprava, smazání, přehled)
+- webové tabulky *(Vue.js a Express.js s API)*
     - LSSD tabulky
     - LSPD tabulky
+    - SAHP tabulky
     - blacklist (ze seznamu v DB)
-    - divize (z rolí na Discord serverech)
+    - *a vedlejší informační stránky*
 - a další
 
 ## INFO
@@ -39,8 +40,7 @@ Funkce:
 
 ##### VYTVOŘENO POMOCÍ:
 
-[![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)]() [![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)]() [![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)]() [![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)]()
-![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB) ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white) ![Vue](https://img.shields.io/badge/vue.js-35495e.svg?style=for-the-badge&logo=vuedotjs&logoColor=%41b883) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB) ![Vite](https://img.shields.io/badge/vite-ae34f0.svg?style=for-the-badge&logo=vite&logoColor=f7c423) ![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/Visual%20Studio%20Code-0078d7.svg?logo=vsc&logoColor=white&style=for-the-badge) ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
 
 ## LICENCE
 [![Creative Commons License](https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-nd/4.0/)

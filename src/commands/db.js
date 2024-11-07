@@ -1,7 +1,7 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
 import fs from "fs";
 import path from "path";
-import { checkDB, getDB } from "../../src/functions/db.js";
+import { checkDB, getDB, getServer } from "../../src/functions/db.js";
 import { dcLog, simpleLog } from "../../src/functions/logSystem.js";
 
 export const slash = new SlashCommandBuilder()
@@ -13,7 +13,6 @@ export const slash = new SlashCommandBuilder()
             .setRequired(true)
             .addChoices(
                 { name: "Registrovat", value: "p" },
-                { name: "Zkontrolovat", value: "z" },
                 { name: "Povýšit", value: "r" },
                 { name: "Upravit", value: "u" },
                 { name: "Smazat", value: "s" }
@@ -44,6 +43,8 @@ export default async function run(bot, i) {
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1139267137651884072")) passed = true; //Leadership
         if (admin.roles.cache.has("1139295201282764882")) passed = true; //FTO Commander
+    } else if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1301163398557339686")) passed = true; //Leadership
     }
 
     if (!passed) return i.reply({ content: "> 🛑 **K tomuhle má přístup jen admin.**", ephemeral: true });
@@ -79,7 +80,7 @@ export default async function run(bot, i) {
             .setLabel("Číslo odznaku")
             .setStyle(TextInputStyle.Short)
             .setPlaceholder("1033")
-            .setMinLength(4)
+            .setMinLength(3)
             .setMaxLength(4)
             .setRequired(true);
 
@@ -99,20 +100,6 @@ export default async function run(bot, i) {
         modal.addComponents(actionRow0, actionRow1, actionRow2, actionRow3, actionRow4);
 
         i.showModal(modal);
-    } else if (choice === "z") {
-        let log, sbor;
-        if (bot.LEA.g.LSPD.includes(i.guild.id)) log = path.resolve("./db/LSPD") + "/" + user.id + ".json", sbor = "LSPD";
-        else if (bot.LEA.g.LSSD.includes(i.guild.id)) log = path.resolve("./db/LSSD") + "/" + user.id + ".json", sbor = "LSSD";
-        else return i.reply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
-
-        if (!fs.existsSync(log)) {
-            if (bot.LEA.g.LSPD.includes(i.guild.id)) log = path.resolve("./db/LSSD") + "/" + user.id + ".json", sbor = "LSSD";
-            else if (bot.LEA.g.LSSD.includes(i.guild.id)) log = path.resolve("./db/LSPD") + "/" + user.id + ".json", sbor = "LSPD";
-        }
-
-        console.log(" < [CMD/DB] >  " + i.member.displayName + ` zobrazil(a) DB záznam ${user.id}.json`);
-
-        i.reply({ content: `> ✅ **<@${user.id}>, členem \`${sbor}\`**`, files: [log], ephemeral: visible });
     } else if (choice === "r") {
         if (!(checkDB(user.id))) return i.reply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
 
@@ -142,7 +129,7 @@ export default async function run(bot, i) {
             .setLabel("Číslo odznaku")
             .setStyle(TextInputStyle.Short)
             .setPlaceholder("1033")
-            .setMinLength(4)
+            .setMinLength(3)
             .setMaxLength(4)
             .setRequired(true);
 
@@ -199,7 +186,7 @@ export default async function run(bot, i) {
             .setStyle(TextInputStyle.Short)
             .setPlaceholder(data.badge === 0 ? "0000" : data.badge.toString())
             .setValue(data.badge === 0 ? "0000" : data.badge.toString())
-            .setMinLength(4)
+            .setMinLength(3)
             .setMaxLength(4)
             .setRequired(true);
 
@@ -221,22 +208,23 @@ export default async function run(bot, i) {
 
         i.showModal(modal);
     } else if (choice === "s") {
-        if (!(checkDB(user.id))) return i.reply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
+        const gotDB = getDB(user.id);
+        if (!gotDB.exists) return i.reply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
+        const serverDB = getServer(i.guild.id);
 
         let loc, worker, workerGuildID;
-        if (bot.LEA.g.LSPD.includes(i.guild.id)) loc = path.resolve("./db/LSPD") + "/" + user.id + ".json";
-        else if (bot.LEA.g.LSSD.includes(i.guild.id)) loc = path.resolve("./db/LSSD") + "/" + user.id + ".json";
-        else return i.reply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
+        loc = path.resolve(`./db/${gotDB.guildName}`) + "/" + user.id + ".json";
 
         const admins = [
-            "411436203330502658"/*b1ngo*/, "607915400604286997"/*samus*/,
-            "846451292388851722"/*aldix_eu*/, "794238724446879754"/*tondahehe*/, "343386988000444417"/*cenovka*/
+            "411436203330502658"/*b1ngo*/, "607915400604286997"/*samus*/, "801373399564681236"/*daviiid_.*/,
+            "846451292388851722"/*aldix_eu*/, "343386988000444417"/*cenovka*/
         ];
 
         await i.deferReply({ ephemeral: true });
 
-        if (!fs.existsSync(loc)) {
-            if (!admins.includes(admin.id)) return i.editReply({ content: "> 🛑 **<@" + user.id + "> je v jiném sboru. Nemůžeš ho odebrat!**", ephemeral: true });
+        if (serverDB.name !== gotDB.guildName) {
+            if (!admins.includes(admin.id))
+                return i.editReply({ content: "> 🛑 **<@" + user.id + "> je v jiném sboru. Nemůžeš ho odebrat!**", ephemeral: true });
 
             const row = new ActionRowBuilder()
                 .addComponents(
@@ -254,13 +242,11 @@ export default async function run(bot, i) {
                 filter, max: 1, time: 30000
             });
 
-            collector.on('collect', async c => {
-                if (bot.LEA.g.LSPD.includes(c.guild.id))
-                    loc = path.resolve("./db/LSSD") + "/" + user.id + ".json", worker = JSON.parse(fs.readFileSync(loc, "utf-8")),
-                        workerGuildID = bot.LEA.g.LSPD[0];
-                else if (bot.LEA.g.LSSD.includes(c.guild.id))
-                    loc = path.resolve("./db/LSPD") + "/" + user.id + ".json", worker = JSON.parse(fs.readFileSync(loc, "utf-8")),
-                        workerGuildID = bot.LEA.g.LSSD[0];
+            collector.on('collect', c => {
+                worker = gotDB.data
+                workerGuildID = bot.LEA.g[gotDB.guildName][0]
+
+                fs.unlinkSync(loc);
 
                 i.editReply({ content: `**Tenhle záznam (<@${user.id}>) byl vymazán z DB!**\n-# *Pozor, bot neodebral role!*`, files: [loc], components: [] });
 
@@ -277,15 +263,14 @@ export default async function run(bot, i) {
                     }
                 );
 
-                fs.unlinkSync(loc);
                 return console.log(" < [CMD/DB] >  " + c.member.displayName + ` smazal(a) DB záznam ${user.id}.json`);
             });
 
-            collector.on('error', async () => {
+            collector.on('error', () => {
                 return i.editReply({ content: "> 🛑 **Čas vypršel. Záznam nebyl smazán.**", components: [] });
             });
 
-            collector.on('end', async collected => {
+            collector.on('end', collected => {
                 if (collected.size === 0) return i.editReply({ content: "> 🛑 **Čas vypršel. Záznam nebyl smazán.**", components: [] });
             });
         } else {
