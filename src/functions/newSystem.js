@@ -51,7 +51,7 @@ export default async function folders(bot) {
                 )
                 .setThumbnail(bot.LEA.i.SAHP)
                 .setColor(bot.LEA.c.SAHP)
-                .setFooter({ text: `SAHP | LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.SAHP });
+                .setFooter({ text: `SAHP | LEA-Bot v${process.env.version} 💫`, iconURL: bot.LEA.i.SAHP });
             const row = new ActionRowBuilder()
                 .addComponents(
                     new ButtonBuilder()
@@ -90,7 +90,7 @@ export default async function folders(bot) {
                     ])
                     .setThumbnail("https://i.imgur.com/YQb9mPm.png")
                     .setColor(bot.LEA.c.apology)
-                    .setFooter({ text: `SAHP | LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.SAHP });
+                    .setFooter({ text: `SAHP | LEA-Bot v${process.env.version} 💫`, iconURL: bot.LEA.i.SAHP });
 
                 const msg = await folder.send({ embeds: [apologyEmbed]/*, components: [row]*/ });
                 worker.apologies[index].id = msg.id;
@@ -107,7 +107,7 @@ export default async function folders(bot) {
                         new ButtonBuilder()
                             .setCustomId("editButton_apology")
                             .setStyle(ButtonStyle.Primary)
-                            .setEmoji("✏️"),
+                            .setEmoji("💫"),
                     ).addComponents(
                         new ButtonBuilder()
                             .setCustomId("deleteButton_apology")
@@ -130,7 +130,7 @@ export default async function folders(bot) {
                     ])
                     .setThumbnail("https://i.imgur.com/fhif3Xj.png")
                     .setColor(bot.LEA.c.duty)
-                    .setFooter({ text: `SAHP | LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.SAHP });
+                    .setFooter({ text: `SAHP | LEA-Bot v${process.env.version} 💫`, iconURL: bot.LEA.i.SAHP });
 
                 const msg = await folder.send({ embeds: [dutyEmbed], components: [row] });
                 worker.duties[index].id = msg.id;

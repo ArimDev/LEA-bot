@@ -82,7 +82,7 @@ export default async function run(bot, i) {
         ])
         .setColor(bot.LEA.c.LEAbot)
         .setThumbnail(bot.user.avatarURL())
-        .setFooter({ text: `LEA Bot v${process.env.version} | Vytvořil b1ngo ✏️`, iconURL: bot.user.avatarURL() });
+        .setFooter({ text: `LEA Bot v${process.env.version} | Vytvořil b1ngo 💫`, iconURL: bot.user.avatarURL() });
 
     if (i.guild) {
         let group;

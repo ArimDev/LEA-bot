@@ -52,22 +52,22 @@ export function getServer(guildID) {
 
     if (bot.LEA.g.LSPD.includes(guildID)) {
         r.name = "LSPD";
-        r.footer = { text: `LSPD | LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.LSPD };
+        r.footer = { text: `LSPD | LEA-Bot v${process.env.version} 💫`, iconURL: bot.LEA.i.LSPD };
         r.color = bot.LEA.c.LSPD;
         r.id = 1;
     } else if (bot.LEA.g.LSSD.includes(guildID)) {
         r.name = "LSSD";
-        r.footer = { text: `LSSD | LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.LSSD };
+        r.footer = { text: `LSSD | LEA-Bot v${process.env.version} 💫`, iconURL: bot.LEA.i.LSSD };
         r.color = bot.LEA.c.LSSD;
         r.id = 2;
     } else if (bot.LEA.g.SAHP.includes(guildID)) {
         r.name = "SAHP";
-        r.footer = { text: `SAHP | LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.SAHP };
+        r.footer = { text: `SAHP | LEA-Bot v${process.env.version} 💫`, iconURL: bot.LEA.i.SAHP };
         r.color = bot.LEA.c.SAHP;
         r.id = 3;
     } else {
         r.name = "XXXX";
-        r.footer = { text: `LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.LEAbot };
+        r.footer = { text: `LEA-Bot v${process.env.version} 💫`, iconURL: bot.LEA.i.LEAbot };
         r.color = bot.LEA.c.LEAbot;
         r.id = 0;
     }

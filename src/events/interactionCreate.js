@@ -43,10 +43,10 @@ export default async function (bot, i) {
 
     if (i.type === InteractionType.MessageComponent) {
         if (i.customId.includes("summary")) {
+            await i.deferReply({ ephemeral: true });
             let worker = {};
             if (i.customId.includes("_")) worker.id = i.customId.split("_")[1];
             else worker = i.message.interaction.user;
-            i.deferReply({ ephemeral: true });
 
             if (!(checkDB(worker.id))) return i.editReply({ content: "> 🛑 <@" + worker.id + "> **není v DB.**", ephemeral: true });
             const member = await i.guild.members.fetch(worker.id);
@@ -198,7 +198,7 @@ export default async function (bot, i) {
                                 new ButtonBuilder()
                                     .setCustomId("editButton_duty_" + authorID)
                                     .setStyle(ButtonStyle.Primary)
-                                    .setEmoji("✏️"),
+                                    .setEmoji("💫"),
                             ).addComponents(
                                 new ButtonBuilder()
                                     .setCustomId("deleteButton_duty_" + authorID)
@@ -345,7 +345,7 @@ export default async function (bot, i) {
                                 new ButtonBuilder()
                                     .setCustomId("editButton_apology_" + authorID)
                                     .setStyle(ButtonStyle.Primary)
-                                    .setEmoji("✏️"),
+                                    .setEmoji("💫"),
                             ).addComponents(
                                 new ButtonBuilder()
                                     .setCustomId("deleteButton_apology_" + authorID)
@@ -438,7 +438,7 @@ export default async function (bot, i) {
                     new ButtonBuilder()
                         .setCustomId("editButton_duty_" + authorID)
                         .setStyle(ButtonStyle.Primary)
-                        .setEmoji("✏️")
+                        .setEmoji("💫")
                         .setDisabled(),
                 ).addComponents(
                     new ButtonBuilder()
@@ -512,7 +512,7 @@ export default async function (bot, i) {
                     new ButtonBuilder()
                         .setCustomId("editButton_duty_" + i.user.id)
                         .setStyle(ButtonStyle.Primary)
-                        .setEmoji("✏️"),
+                        .setEmoji("💫"),
                 ).addComponents(
                     new ButtonBuilder()
                         .setCustomId("deleteButton_duty_" + i.user.id)
@@ -601,7 +601,7 @@ export default async function (bot, i) {
                     new ButtonBuilder()
                         .setCustomId("editButton_apology_" + i.user.id)
                         .setStyle(ButtonStyle.Primary)
-                        .setEmoji("✏️"),
+                        .setEmoji("💫"),
                 ).addComponents(
                     new ButtonBuilder()
                         .setCustomId("deleteButton_apology_" + i.user.id)
@@ -751,7 +751,7 @@ export default async function (bot, i) {
                     )
                     .setThumbnail(bot.LEA.i.LSPD)
                     .setColor(bot.LEA.c.LSPD)
-                    .setFooter({ text: `LSPD | LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.LSPD });
+                    .setFooter({ text: `LSPD | LEA-Bot v${process.env.version} 💫`, iconURL: bot.LEA.i.LSPD });
                 const row = new ActionRowBuilder()
                     .addComponents(
                         new ButtonBuilder()
@@ -785,7 +785,7 @@ export default async function (bot, i) {
                     )
                     .setThumbnail(bot.LEA.i.LSPD)
                     .setColor(getServer(i.guild.id).color)
-                    .setFooter({ text: `LEA-Bot v${process.env.version} ✏️`, iconURL: bot.user.avatarURL() });
+                    .setFooter({ text: `LEA-Bot v${process.env.version} 💫`, iconURL: bot.user.avatarURL() });
                 await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
             } else if (i.guild.id === "1139266097921675345") { //LSSD
                 folders = await i.guild.channels.fetch("1203743211000963082");
@@ -827,7 +827,7 @@ export default async function (bot, i) {
                     )
                     .setThumbnail(bot.LEA.i.LSSD)
                     .setColor(bot.LEA.c.LSSD)
-                    .setFooter({ text: `LSSD | LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.LSSD });
+                    .setFooter({ text: `LSSD | LEA-Bot v${process.env.version} 💫`, iconURL: bot.LEA.i.LSSD });
                 const row = new ActionRowBuilder()
                     .addComponents(
                         new ButtonBuilder()
@@ -861,7 +861,7 @@ export default async function (bot, i) {
                     )
                     .setThumbnail(bot.LEA.i.LSSD)
                     .setColor(getServer(i.guild.id).color)
-                    .setFooter({ text: `LEA-Bot v${process.env.version} ✏️`, iconURL: bot.user.avatarURL() });
+                    .setFooter({ text: `LEA-Bot v${process.env.version} 💫`, iconURL: bot.user.avatarURL() });
                 await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
             } else if (i.guild.id === "1301163398515396668") { //SAHP
                 folders = await i.guild.channels.fetch("1301228299858481162");
@@ -904,7 +904,7 @@ export default async function (bot, i) {
                     )
                     .setThumbnail(bot.LEA.i.SAHP)
                     .setColor(bot.LEA.c.SAHP)
-                    .setFooter({ text: `SAHP | LEA-Bot v${process.env.version} ✏️`, iconURL: bot.LEA.i.SAHP });
+                    .setFooter({ text: `SAHP | LEA-Bot v${process.env.version} 💫`, iconURL: bot.LEA.i.SAHP });
                 const row = new ActionRowBuilder()
                     .addComponents(
                         new ButtonBuilder()
@@ -937,7 +937,7 @@ export default async function (bot, i) {
                     )
                     .setThumbnail(bot.LEA.i.SAHP)
                     .setColor(getServer(i.guild.id).color)
-                    .setFooter({ text: `LEA-Bot v${process.env.version} ✏️`, iconURL: bot.user.avatarURL() });
+                    .setFooter({ text: `LEA-Bot v${process.env.version} 💫`, iconURL: bot.user.avatarURL() });
                 await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
             }
 
