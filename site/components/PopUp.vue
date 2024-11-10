@@ -23,7 +23,7 @@ defineExpose({ show });
 .popup {
 	position: fixed;
 	z-index: 2;
-	bottom: -7%;
+	bottom: -10%;
 	left: 50%;
 	transform: translateX(-50%);
 	padding: 1px 15px;

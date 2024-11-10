@@ -37,7 +37,7 @@
                 <tr v-if="staff.title">
                     <td colspan="19" class="tdRankTitle">{{ staff.title }}</td>
                 </tr>
-                <tr v-for="slotIndex in staff.slots" :key="`${index}-${slotIndex}`">
+                <tr v-for="slotIndex in staff.slots" :key="`${index}-${slotIndex}`" :id="getCallsign(staff.firstCallsign, slotIndex)">
                     <th scope="row">{{ getCallsign(staff.firstCallsign, slotIndex) }}</th>
                     <td class="tdLeft">
                         <template v-if="(workerData = getWorker(staff.firstBadge + slotIndex - 1))">

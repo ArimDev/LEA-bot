@@ -12,6 +12,16 @@
 				<li>
 					<RouterLink to="/">DOMŮ</RouterLink>
 				</li>
+				<li><span class="disabled">STATISTIKY</span></li>
+				<li>
+					<RouterLink to="/blacklist">BLACKLIST</RouterLink>
+				</li>
+				<li><span class="disabled">GALERIE</span></li>
+			</div>
+			<div class="centerMenu">
+				<a class="homeLink" href="/"><img src="./assets/logo/leabot.png" width="75"></a>
+			</div>
+			<div class="rightMenu">
 				<li class="LSPD">
 					<RouterLink to="/lspd">LSPD</RouterLink>
 				</li>
@@ -21,16 +31,9 @@
 				<li class="SAHP">
 					<RouterLink to="/sahp">SAHP</RouterLink>
 				</li>
-				<li>
-					<RouterLink to="/blacklist">BLACKLIST</RouterLink>
-				</li>
-				<li><span class="disabled">DIVIZE</span></li>
-			</div>
-			<div class="centerMenu">
-				<a class="homeLink" href="/"><img src="./assets/logo/leabot.png" width="75"></a>
-			</div>
-			<div class="rightMenu">
-				<Login @alert="openPopBox" @popup="popup" />
+				<div class="loginSide">
+					<Login @alert="openPopBox" @popup="popup" />
+				</div>
 			</div>
 		</header>
 
@@ -39,7 +42,19 @@
 		</main>
 
 		<footer class="footer">
-			<p>© 2024 <a target="_blank" href="https://github.com/Azator-Entertainment/LEA-bot">LEA-Bot</a> vytvořil <a target="_blank" href="https://petyxbron.cz/p">PetyXbron (b1ngo)</a></p>
+			<div class="left">
+				Exkluzivně pro <a target="_blank" href="https://nlmt.cc/#servers">VegasRP by Nolimit</a>
+			</div>
+			<div class="center">
+				<p>© 2024 <a target="_blank" href="https://github.com/Azator-Entertainment/LEA-bot">LEA-Bot</a> vytvořil <a target="_blank" href="https://petyxbron.cz/p">PetyXbron (b1ngo)</a></p>
+			</div>
+			<div class="right">
+				<a target="_blank" href="https://github.com/ArimDev/LEA-bot/blob/master/docs/usage.md">Jak používat</a>
+				|
+				<a target="_blank" href="https://github.com/ArimDev/LEA-bot/blob/master/docs/terms-of-use.md">Podmínky použití</a>
+				|
+				<a target="_blank" href="https://github.com/ArimDev/LEA-bot/blob/master/docs/privacy-policy.md">Zásady ochrany osobních údajů</a>
+			</div>
 		</footer>
 	</div>
 </template>

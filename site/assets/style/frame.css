@@ -21,7 +21,6 @@
     justify-content: space-between;
     align-items: center;
     padding-top: 8px;
-    padding-left: 20px;
 }
 
 a,
@@ -32,9 +31,10 @@ span,
 }
 
 .header .routerMenu {
+    padding-left: 20px;
     list-style-type: none;
     display: flex;
-    gap: 20px;
+    gap: 15px;
     flex: 1;
 }
 
@@ -60,63 +60,15 @@ span,
     transition: background-color 0.5s, color 0.5s;
 }
 
-.header span.disabled:hover {
+.routerMenu span.disabled:hover {
     background-color: transparent;
     color: grey;
 }
 
-.header a:hover {
+.routerMenu a:hover {
     background-color: black;
     color: white;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-}
-
-.header .LSPD a:hover {
-    border: 2px solid #ffc935;
-    background-color: #ffc935;
-    color: black;
-    box-shadow: 0 4px 20px rgba(255, 201, 53, 0.6);
-}
-
-.header .LSSD a:hover {
-    border: 2px solid #bd8131;
-    background-color: #bd8131;
-    color: black;
-    box-shadow: 0 4px 20px rgba(189, 129, 49, 0.6);
-}
-
-.header .SAHP a:hover {
-    border: 2px solid #294a73;
-    background-color: #294a73;
-    color: white;
-    box-shadow: 0 4px 20px rgba(41, 74, 115, 0.6);
-}
-
-.header a.router-link-active {
-    color: white;
-    background-color: black;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-}
-
-.header .LSPD a.router-link-active {
-    border: 2px solid #ffc935;
-    background-color: #ffc935;
-    color: black;
-    box-shadow: 0 4px 20px rgba(255, 201, 53, 0.6);
-}
-
-.header .LSSD a.router-link-active {
-    border: 2px solid #bd8131;
-    background-color: #bd8131;
-    color: black;
-    box-shadow: 0 4px 20px rgba(189, 129, 49, 0.6);
-}
-
-.header .SAHP a.router-link-active {
-    border: 2px solid #294a73;
-    background-color: #294a73;
-    color: white;
-    box-shadow: 0 4px 20px rgba(41, 74, 115, 0.6);
 }
 
 .header .homeLink {
@@ -139,12 +91,85 @@ span,
     text-align: center;
 }
 
-header .rightMenu {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
+.header .rightMenu {
     padding-right: 20px;
-    gap: 5px;
+    list-style-type: none;
+    display: flex;
+    gap: 15px;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.rightMenu a,
+.rightMenu button {
+    align-items: center;
+    padding: 10px 15px;
+    height: 44px;
+}
+
+.loginSide {
+    display: flex;
+    gap: 3px;
+}
+
+.header .rightMenu a {
+    color: white;
+    background-color: black;
+}
+
+.rightMenu a:hover {
+    background-color: black;
+    color: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.LSPD a:hover {
+    border: 2px solid #ffc935;
+    background-color: #ffc935;
+    color: black;
+    box-shadow: 0 4px 20px rgba(255, 201, 53, 0.6);
+}
+
+.LSSD a:hover {
+    border: 2px solid #bd8131;
+    background-color: #bd8131;
+    color: black;
+    box-shadow: 0 4px 20px rgba(189, 129, 49, 0.6);
+}
+
+.SAHP a:hover {
+    border: 2px solid #294a73;
+    background-color: #294a73;
+    color: white;
+    box-shadow: 0 4px 20px rgba(41, 74, 115, 0.6);
+}
+
+a.router-link-active {
+    color: white;
+    background-color: black;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.LSPD a.router-link-active {
+    border: 2px solid #ffc935;
+    background-color: #ffc935;
+    color: black;
+    box-shadow: 0 4px 20px rgba(255, 201, 53, 0.6);
+}
+
+.LSSD a.router-link-active {
+    border: 2px solid #bd8131;
+    background-color: #bd8131;
+    color: black;
+    box-shadow: 0 4px 20px rgba(189, 129, 49, 0.6);
+}
+
+.SAHP a.router-link-active {
+    border: 2px solid #294a73;
+    background-color: #294a73;
+    color: white;
+    box-shadow: 0 4px 20px rgba(41, 74, 115, 0.6);
 }
 
 .rightMenu .loginButton {
@@ -208,7 +233,7 @@ header .rightMenu {
     background: rgb(237, 235, 233);
     flex-direction: column;
     justify-content: flex-start;
-    height: 80vh;
+    height: 81vh;
     margin: 10px auto;
     padding: 20px;
     border-radius: 20px;
@@ -220,12 +245,38 @@ header .rightMenu {
 }
 
 .footer {
+    display: flex;
+    flex: 1;
     font-size: 13px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer .left {
+    flex: 1;
+    padding-left: 20px;
+    justify-content: flex-start;
+}
+
+.footer .center {
+    display: flex;
+    flex: 1;
     text-align: center;
+    justify-content: center;
+}
+
+.footer .right {
+    display: flex;
+    flex: 1;
+    padding-right: 20px;
+    justify-content: flex-end;
+    font-weight: bold;
+    gap: 5px
 }
 
 .footer a {
     color: inherit;
+    font-size: 14px;
 }
 
 .footer a:hover {

@@ -196,11 +196,6 @@ export default async function api(bot, app) {
                 if (worker.m.roles.cache.has("1251504241768529971")) worker.div.push("FTO");
                 if (worker.m.roles.cache.has("1154446248946978950")) worker.div.push("TEU");
                 if (worker.m.roles.cache.has("1242926544574349343")) worker.div.push("AU");
-                if (worker.m.roles.cache.has("1290357614039007294")) worker.div.push("SWAT");
-                if (worker.m.roles.cache.has("1290357614039007294")) worker.div.push("SWAT");
-                if (worker.m.roles.cache.has("1290357614039007294")) worker.div.push("SWAT");
-                if (worker.m.roles.cache.has("1290357614039007294")) worker.div.push("SWAT");
-                if (worker.m.roles.cache.has("1290357614039007294")) worker.div.push("SWAT");
 
                 //ACCESS TO THE TABLES - Discord role
                 if (worker.m.roles.cache.has("1267541873451339806")) leadership = true;
