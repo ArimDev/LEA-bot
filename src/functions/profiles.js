@@ -2,7 +2,6 @@ import { getDB } from "../../src/functions/db.js";
 import { EmbedBuilder } from "discord.js";
 import fs from "fs";
 import path from "path";
-import { generateFooter } from "../../src/functions/other.js";
 
 export async function getProfile(bot, id) {
     const db = getDB(id);

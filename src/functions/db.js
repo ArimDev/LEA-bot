@@ -22,21 +22,21 @@ export function getDB(id) {
         r.guild = 1;
         r.guildName = "LSPD";
         r.guildEmoji = bot.LEA.e.LSPD;
-        r.guildEmoji = bot.LEA.g.LSPD[0];
+        r.guildID = bot.LEA.g.LSPD[0];
     } else if (fs.existsSync((path.resolve("./db/LSSD") + "/" + id + ".json"))) {
         r.exists = true;
         r.data = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + id + ".json"), "utf-8"));
         r.guild = 2;
         r.guildName = "LSSD";
         r.guildEmoji = bot.LEA.e.LSSD;
-        r.guildEmoji = bot.LEA.g.LSSD[0];
+        r.guildID = bot.LEA.g.LSSD[0];
     } else if (fs.existsSync((path.resolve("./db/SAHP") + "/" + id + ".json"))) {
         r.exists = true;
         r.data = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + id + ".json"), "utf-8"));
         r.guild = 3;
         r.guildName = "SAHP";
         r.guildEmoji = bot.LEA.e.SAHP;
-        r.guildEmoji = bot.LEA.g.SAHP[0];
+        r.guildID = bot.LEA.g.SAHP[0];
     }
 
     return r;

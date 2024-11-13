@@ -243,8 +243,8 @@ export default async function run(bot, i) {
             });
 
             collector.on('collect', c => {
-                worker = gotDB.data
-                workerGuildID = bot.LEA.g[gotDB.guildName][0]
+                worker = gotDB.data;
+                workerGuildID = bot.LEA.g[gotDB.guildName][0];
 
                 fs.unlinkSync(loc);
 
@@ -292,7 +292,7 @@ export default async function run(bot, i) {
             await i.editReply({ content: `**Tenhle záznam (<@${user.id}>) byl vymazán z DB!**\n-# *Pozor, bot neodebral role!*`, files: [loc], ephemeral: true });
 
             console.log(" < [CMD/DB] >  " + i.member.displayName + ` smazal(a) DB záznam ${user.id}.json`);
-            dcLog(bot, i.guild.id, i.member,
+            await dcLog(bot, i.guild.id, i.member,
                 {
                     title: "Smazání z DB",
                     description:
@@ -304,7 +304,7 @@ export default async function run(bot, i) {
                     file: loc
                 }
             );
-            simpleLog(bot, i.guild.id,
+            await simpleLog(bot, i.guild.id,
                 {
                     author: { name: `[${worker.radio}] ${worker.name}`, iconURL: member ? member.displayAvatarURL() : `https://cdn.discordapp.com/embed/avatars/${Math.floor(Math.random() * 6)}.png` },
                     title: "Vyloučení",
@@ -312,6 +312,7 @@ export default async function run(bot, i) {
                     footer: { text: i.member.displayName, iconURL: i.member.displayAvatarURL() }
                 }
             );
+
             return fs.unlinkSync(loc);
         }
     }

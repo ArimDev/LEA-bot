@@ -4,7 +4,6 @@ import path from "path";
 import { checkDB, checkEVENT, getDB, getServer } from "../../src/functions/db.js";
 import { dcLog, simpleLog } from "../../src/functions/logSystem.js";
 import { findWorker } from "../../src/functions/profiles.js";
-import { generateFooter } from "../../src/functions/other.js";
 import { dg } from "../../src/functions/logSystem.js";
 
 export default async function (bot, i) {

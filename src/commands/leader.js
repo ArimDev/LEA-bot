@@ -70,80 +70,78 @@ export default async function run(bot, i) {
 
         modal.addComponents(actionRow0, actionRow1, actionRow2);
 
-        i.showModal(modal);
+        await i.showModal(modal);
 
-        let submit = await i.awaitModalSubmit({ filter: int => int.user.id === i.user.id, time: 600000 }).catch(e => {
-            return null;
-        });
+        i.awaitModalSubmit({ filter: int => int.user.id === i.user.id, time: 600000 })
+            .then(async submit => {
+                await submit.deferReply({ ephemeral: true });
 
-        if (submit) {
-            await submit.deferReply({ ephemeral: true });
+                const id = parseInt(submit.fields.getTextInputValue("eventID"));
+                const ignored = submit.fields.getTextInputValue("ignore").split(", ");
+                const eventDateArr = submit.fields.getTextInputValue("date").split(". ");
+                const eventDate = new Date(eventDateArr[1] + "/" + eventDateArr[0] + "/" + eventDateArr[2]);
 
-            const id = parseInt(submit.fields.getTextInputValue("eventID"));
-            const ignored = submit.fields.getTextInputValue("ignore").split(", ");
-            const eventDateArr = submit.fields.getTextInputValue("date").split(". ");
-            const eventDate = new Date(eventDateArr[1] + "/" + eventDateArr[0] + "/" + eventDateArr[2]);
+                let users = [], db;
+                if (bot.LEA.g.LSPD.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/LSPD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
+                else if (bot.LEA.g.LSSD.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/LSSD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
+                else if (bot.LEA.g.SAHP.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/SAHP")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
+                for (const file of db) {
+                    let worker;
+                    if (bot.LEA.g.LSPD.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + file), "utf-8"));
+                    else if (bot.LEA.g.LSSD.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + file), "utf-8"));
+                    else if (bot.LEA.g.SAHP.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + file), "utf-8"));
 
-            let users = [], db;
-            if (bot.LEA.g.LSPD.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/LSPD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
-            else if (bot.LEA.g.LSSD.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/LSSD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
-            else if (bot.LEA.g.SAHP.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/SAHP")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
-            for (const file of db) {
-                let worker;
-                if (bot.LEA.g.LSPD.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + file), "utf-8"));
-                else if (bot.LEA.g.LSSD.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + file), "utf-8"));
-                else if (bot.LEA.g.SAHP.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + file), "utf-8"));
+                    let m;
+                    try {
+                        m = await i.guild.members.fetch(file.split(".")[0]);
+                    } catch (e) {
+                        m = false;
+                    }
 
-                let m;
-                try {
-                    m = await i.guild.members.fetch(file.split(".")[0]);
-                } catch (e) {
-                    m = false;
-                }
-
-                if (m) {
-                    const ap = worker.apologies;
-                    let apologized = false;
-                    if (worker.badge < 1015) apologized = true;
-                    if (ignored.includes(worker.badge.toString())) apologized = true;
-                    if (m.roles.cache.has("1139267137651884072")) apologized = true;
-                    if (!apologized) for (const a of ap) {
-                        if (a.eventID === id) {
-                            apologized = true;
-                        } else {
-                            const startDateArr = a.start.split(". ");
-                            const startDate = new Date(startDateArr[1] + "/" + startDateArr[0] + "/" + startDateArr[2]);
-                            const endDateArr = a.end.split(". ");
-                            const endDate = new Date(endDateArr[1] + "/" + endDateArr[0] + "/" + endDateArr[2]);
-                            if (eventDate.getTime() >= startDate.getTime() && eventDate <= endDate.getTime()) {
+                    if (m) {
+                        const ap = worker.apologies;
+                        let apologized = false;
+                        if (ignored.includes(worker.badge.toString())) apologized = true;
+                        if (!apologized) for (const a of ap) {
+                            if (a.eventID === id) {
                                 apologized = true;
+                            } else {
+                                const startDateArr = a.start.split(". ");
+                                const startDate = new Date(startDateArr[1] + "/" + startDateArr[0] + "/" + startDateArr[2]);
+                                const endDateArr = a.end.split(". ");
+                                const endDate = new Date(endDateArr[1] + "/" + endDateArr[0] + "/" + endDateArr[2]);
+                                if (eventDate.getTime() >= startDate.getTime() && eventDate <= endDate.getTime()) {
+                                    apologized = true;
+                                }
                             }
                         }
-                    }
 
-                    if (!apologized) {
-                        worker.id = file.split(".")[0];
-                        users.push(worker);
+                        if (!apologized) {
+                            worker.id = file.split(".")[0];
+                            users.push(worker);
+                        }
                     }
                 }
-            }
 
-            users.sort((a, b) => a.badge - b.badge);
-            let mentions = [], list = [];
-            for (const u of users) {
-                mentions.push(`<@${u.id}>`);
-            }
-            const mentionsAtt = new AttachmentBuilder(Buffer.from(mentions.join(", ")), { name: "mentions.txt" });
+                users.sort((a, b) => a.badge - b.badge);
+                let mentions = [], list = [];
+                for (const u of users) {
+                    mentions.push(`<@${u.id}>`);
+                }
+                const mentionsAtt = new AttachmentBuilder(Buffer.from(mentions.join(", ")), { name: "mentions.txt" });
 
-            for (const u of users) {
-                list.push(`[${u.radio}] ${u.name} [${u.badge}] | ${u.id}`);
-            }
-            const listAtt = new AttachmentBuilder(Buffer.from(list.join("\n")), { name: "list.txt" });
+                for (const u of users) {
+                    list.push(`[${u.radio}] ${u.name} [${u.badge}] | ${u.id}`);
+                }
+                const listAtt = new AttachmentBuilder(Buffer.from(list.join("\n")), { name: "list.txt" });
 
-            return submit.editReply({
-                files: [listAtt, mentionsAtt],
-                ephemeral: true
+                return submit.editReply({
+                    files: [listAtt, mentionsAtt],
+                    ephemeral: true
+                });
+            })
+            .catch(e => {
+                return null;
             });
-        }
     }
 };
