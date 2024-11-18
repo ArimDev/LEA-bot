@@ -4,3 +4,28 @@
     font-family: "Noto Sans", sans-serif;
     scrollbar-width: none;
 }
+
+:root {
+    --bgColor: white;
+    --textColor: black;
+    --textColorShadow: rgba(0, 0, 0, 0.6);
+    --btnBgColor: black;
+    --btnTextColor: white;
+    --contentColor: rgb(237, 235, 233);
+    --contentColorShadow: rgb(237, 235, 233, 0.6);
+}
+
+[data-theme="dark"] {
+    --bgColor: black;
+    --textColor: white;
+    --textColorShadow: rgba(255, 255, 255, 0.6);
+    --btnBgColor: white;
+    --btnTextColor: black;
+    --contentColor: #1a1a1a;
+    --contentColorShadow: rgb(26, 26, 26, 0.6);
+}
+
+body {
+    background-color: var(--bgColor);
+    color: var(--textColor);
+}

@@ -2,8 +2,8 @@
     <button class="loginButton" :class="{ loggedOff: !isLoggedIn, loggedIn: isLoggedIn }" @click="login(false)">
         {{ loginButtonValue }}
     </button>
-    <button class="loginAvatar" :class="{ loggedOff: !isLoggedIn, loggedIn: isLoggedIn }" :style="{ backgroundImage: `url(${loginAvatarImageSource})` }">
-        <img id="loginAvatarImage" :class="{ loggedOff: !isLoggedIn, loggedIn: isLoggedIn }" src="../assets/icon/user.png" width="30" height="30">
+    <button class="loginAvatar" :class="{ loggedOff: !isLoggedIn, loggedIn: isLoggedIn, [darkModeClass]: true }" :style="{ backgroundImage: `url(${loginAvatarImageSource})` }">
+        <img id="loginAvatarImage" :class="{ loggedOff: !isLoggedIn, loggedIn: isLoggedIn, [darkModeClass]: true }" src="../assets/icon/user.png">
     </button>
 </template>
 
@@ -12,6 +12,9 @@ import { ref, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 const botid = import.meta.env.VITE_BOT_ID;
 const botredirect = import.meta.env.VITE_BOT_REDIRECT;
+
+const darkModeClass = ref(localStorage.getItem("colorTheme") === "dark" ? "darkMode" : "lightMode")
+console.log(darkModeClass, darkModeClass.value)
 
 const router = useRouter();
 const route = useRoute();
@@ -196,6 +199,10 @@ async function login(type) {
         lsRemItem("token_type");
         lsRemItem("access_token");
         lsRemItem("expiry");
+
+        isLoggedIn.value = false;
+        loginAvatarImageSource.value = false;
+        loginButtonValue.value = "PŘIHLÁSIT";
 
         emit("alert", { h: "Přihlášení vypršelo!", msg: "Tvůj přihlašovací token po týdnu vypršel!\nProsím, přihlaš se znova!" });
     }

@@ -23,9 +23,13 @@
     padding-top: 8px;
 }
 
-a,
-span,
-.loginButton {
+.webLogo {
+    width: 75px;
+}
+
+.header a,
+.header span,
+.header .loginButton {
     font-size: 15px;
     font-weight: bold;
 }
@@ -40,9 +44,9 @@ span,
 
 .header a {
     text-decoration: none;
-    color: black;
+    color: var(--textColor);
     border-radius: 25px;
-    border: 2px solid black;
+    border: 2px solid var(--textColor);
     cursor: pointer;
     padding: 10px 15px;
     background-color: transparent;
@@ -66,9 +70,9 @@ span,
 }
 
 .routerMenu a:hover {
-    background-color: black;
-    color: white;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    background-color: var(--textColor);
+    color: var(--bgColor);
+    box-shadow: 0 4px 20px var(--textColorShadow);
 }
 
 .header .homeLink {
@@ -114,14 +118,8 @@ span,
 }
 
 .header .rightMenu a {
-    color: white;
-    background-color: black;
-}
-
-.rightMenu a:hover {
-    background-color: black;
-    color: white;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    color: var(--bgColor);
+    background-color: var(--textColor);
 }
 
 .LSPD a:hover {
@@ -146,9 +144,9 @@ span,
 }
 
 a.router-link-active {
-    color: white;
-    background-color: black;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    color: var(--bgColor);
+    background-color: var(--textColor);
+    box-shadow: 0 4px 20px var(--textColorShadow);
 }
 
 .LSPD a.router-link-active {
@@ -173,9 +171,9 @@ a.router-link-active {
 }
 
 .rightMenu .loginButton {
-    background-color: black;
-    color: #fff;
-    border: 2px black;
+    background-color: var(--textColor);
+    color: var(--bgColor);
+    border: 2px var(--textColor);
     border-radius: 25px;
     padding: 10px 15px;
     cursor: pointer;
@@ -188,8 +186,8 @@ a.router-link-active {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
-    color: white;
+    background-color: var(--textColor);
+    color: var(--bgColor);
     border: 2px black;
     border-radius: 25px;
     padding: 7px 7px;
@@ -228,9 +226,18 @@ a.router-link-active {
     display: none;
 }
 
+#loginAvatarImage.darkMode {
+    filter: invert(1)
+}
+
+#loginAvatarImage {
+    width: 30px;
+    height: 30px;
+}
+
 .content {
     display: flex;
-    background: rgb(237, 235, 233);
+    background: var(--contentColor);
     flex-direction: column;
     justify-content: flex-start;
     height: 81vh;
@@ -256,6 +263,8 @@ a.router-link-active {
     flex: 1;
     padding-left: 20px;
     justify-content: flex-start;
+    display: flex;
+    gap: 5px;
 }
 
 .footer .center {
@@ -274,28 +283,74 @@ a.router-link-active {
     gap: 5px
 }
 
-.footer a {
-    color: inherit;
+.footer .center a,
+.footer .right a {
+    color: var(--textColor);
     font-size: 14px;
+    font-weight: bold;
 }
 
-.footer a:hover {
-    background-color: black;
+.footer .center a:hover,
+.footer .right a:hover {
+    background-color: var(--textColor);
     border-radius: 5px;
-    color: white;
+    color: var(--bgColor);
 }
 
-.footer a:visited {
-    color: black;
+.footer .center a:visited,
+.footer .right a:visited {
+    color: var(--textColor);
 }
 
-.footer a:visited:hover {
-    background-color: black;
-    color: white;
+.footer .center a:visited:hover,
+.footer .right a:visited:hover {
+    background-color: var(--textColor);
+    color: var(--bgColor);
 }
 
-@media (max-width: 600px) {
-    .header {
-        flex-direction: column;
-    }
+.footer .left button {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--textColor);
+    color: var(--bgColor);
+    border: 2px var(--textColor);
+    border-radius: 25px;
+    padding: 7px 7px;
+    cursor: default;
+    transition: background-color 0.5s;
+}
+
+.footer .left button a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
+    text-decoration: none;
+}
+
+.footer .left button:hover {
+    cursor: pointer;
+    background-color: var(--contentColor);
+    box-shadow: 0 4px 20px var(--contentColorShadow);
+}
+
+.footer .left button img {
+    filter: invert(1);
+}
+
+.footer .left button:hover img {
+    filter: invert(0);
+}
+
+.footer .left button img.darkMode {
+    filter: invert(0);
+}
+
+.footer .left button:hover img.darkMode {
+    filter: invert(1);
 }

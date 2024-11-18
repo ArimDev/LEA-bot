@@ -68,6 +68,7 @@ table {
     border-radius: 10px;
     background-color: #ffffff;
     width: 100%;
+    color: var(--bgColor);
 }
 
 td {

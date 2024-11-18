@@ -255,6 +255,7 @@ function calcCheckbox(workerData, method) {
 
 <style scoped>
 tbody tr:hover {
+    color: black;
     background: #ffc935;
 }
 
@@ -263,8 +264,8 @@ table {
 }
 
 td {
-    border: 1px solid #ffc935;
     color: black;
+    border: 1px solid #ffc935;
 }
 
 th {
@@ -273,10 +274,12 @@ th {
 }
 
 th[scope="row"] {
+    color: #ffc935;
     background: #000c1e
 }
 
 th[scope="col"] {
+    color: #ffc935;
     background: #000c1e;
 }
 </style>
