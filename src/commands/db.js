@@ -242,15 +242,13 @@ export default async function run(bot, i) {
                 filter, max: 1, time: 30000
             });
 
-            collector.on('collect', c => {
+            collector.on('collect', async c => {
                 worker = gotDB.data;
                 workerGuildID = bot.LEA.g[gotDB.guildName][0];
 
-                fs.unlinkSync(loc);
-
                 i.editReply({ content: `**Tenhle záznam (<@${user.id}>) byl vymazán z DB!**\n-# *Pozor, bot neodebral role!*`, files: [loc], components: [] });
 
-                dcLog(bot, workerGuildID, c.member,
+                await dcLog(bot, workerGuildID, c.member,
                     {
                         title: "Smazání z DB",
                         description:
@@ -262,6 +260,8 @@ export default async function run(bot, i) {
                         file: loc
                     }
                 );
+
+                fs.unlinkSync(loc);
 
                 return console.log(" < [CMD/DB] >  " + c.member.displayName + ` smazal(a) DB záznam ${user.id}.json`);
             });
@@ -292,6 +292,7 @@ export default async function run(bot, i) {
             await i.editReply({ content: `**Tenhle záznam (<@${user.id}>) byl vymazán z DB!**\n-# *Pozor, bot neodebral role!*`, files: [loc], ephemeral: true });
 
             console.log(" < [CMD/DB] >  " + i.member.displayName + ` smazal(a) DB záznam ${user.id}.json`);
+
             await dcLog(bot, i.guild.id, i.member,
                 {
                     title: "Smazání z DB",

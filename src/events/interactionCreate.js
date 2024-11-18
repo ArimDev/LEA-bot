@@ -197,7 +197,7 @@ export default async function (bot, i) {
                                 new ButtonBuilder()
                                     .setCustomId("editButton_duty_" + authorID)
                                     .setStyle(ButtonStyle.Primary)
-                                    .setEmoji("💫"),
+                                    .setEmoji("📝"),
                             ).addComponents(
                                 new ButtonBuilder()
                                     .setCustomId("deleteButton_duty_" + authorID)
@@ -344,7 +344,7 @@ export default async function (bot, i) {
                                 new ButtonBuilder()
                                     .setCustomId("editButton_apology_" + authorID)
                                     .setStyle(ButtonStyle.Primary)
-                                    .setEmoji("💫"),
+                                    .setEmoji("📝"),
                             ).addComponents(
                                 new ButtonBuilder()
                                     .setCustomId("deleteButton_apology_" + authorID)
@@ -437,7 +437,7 @@ export default async function (bot, i) {
                     new ButtonBuilder()
                         .setCustomId("editButton_duty_" + authorID)
                         .setStyle(ButtonStyle.Primary)
-                        .setEmoji("💫")
+                        .setEmoji("📝")
                         .setDisabled(),
                 ).addComponents(
                     new ButtonBuilder()
@@ -511,7 +511,7 @@ export default async function (bot, i) {
                     new ButtonBuilder()
                         .setCustomId("editButton_duty_" + i.user.id)
                         .setStyle(ButtonStyle.Primary)
-                        .setEmoji("💫"),
+                        .setEmoji("📝"),
                 ).addComponents(
                     new ButtonBuilder()
                         .setCustomId("deleteButton_duty_" + i.user.id)
@@ -546,6 +546,16 @@ export default async function (bot, i) {
                 .setThumbnail("https://i.imgur.com/fhif3Xj.png")
                 .setColor(bot.LEA.c.duty)
                 .setFooter(getServer(i.guild.id).footer);
+
+            const colleagues = i.fields.getTextInputValue("kolega");
+            if (!!colleagues) {
+                dutyEmbed.addFields([
+                    {
+                        name: `Kolegové`, inline: false,
+                        value: "> " + colleagues
+                    }
+                ]);
+            }
 
             let msg;
             if (inFolder)
@@ -600,7 +610,7 @@ export default async function (bot, i) {
                     new ButtonBuilder()
                         .setCustomId("editButton_apology_" + i.user.id)
                         .setStyle(ButtonStyle.Primary)
-                        .setEmoji("💫"),
+                        .setEmoji("📝"),
                 ).addComponents(
                     new ButtonBuilder()
                         .setCustomId("deleteButton_apology_" + i.user.id)

@@ -49,5 +49,19 @@ export default async function run(bot, i) {
 
     modal.addComponents(actionRow0, actionRow1, actionRow2);
 
+    if (getServer(i.guild.id).name === "SAHP") {
+        if (i.member.roles.cache.has("1301163398540689497")) {
+            const colleaguesInput = new TextInputBuilder()
+                .setCustomId("kolega")
+                .setLabel("Kolegové")
+                .setStyle(TextInputStyle.Short)
+                .setPlaceholder("Tango- 1, Ocean-3")
+                .setRequired(false);
+
+            const actionRow3 = new ActionRowBuilder().addComponents(colleaguesInput);
+            modal.addComponents(actionRow3);
+        }
+    }
+
     i.showModal(modal);
 };
