@@ -547,14 +547,16 @@ export default async function (bot, i) {
                 .setColor(bot.LEA.c.duty)
                 .setFooter(getServer(i.guild.id).footer);
 
-            const colleagues = i.fields.getTextInputValue("kolega");
-            if (!!colleagues) {
-                dutyEmbed.addFields([
-                    {
-                        name: `Kolegové`, inline: false,
-                        value: "> " + colleagues
-                    }
-                ]);
+            if (i.fields.fields.has("kolega")) {
+                const colleagues = i.fields.getTextInputValue("kolega");
+                if (!!colleagues) {
+                    dutyEmbed.addFields([
+                        {
+                            name: `Kolegové`, inline: false,
+                            value: "> " + colleagues
+                        }
+                    ]);
+                }
             }
 
             let msg;
