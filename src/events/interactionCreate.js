@@ -738,7 +738,7 @@ export default async function (bot, i) {
                 else if (rank === "Police Officer III+I") rolesIDs = ["1267588850952437800"], tagID = "1304984607501975614";
                 else if (rank === "Police Officer III") rolesIDs = ["1267542148102750238"], tagID = "1304984625398943836";
                 else if (rank === "Police Officer II") rolesIDs = ["1267589547462754385"], tagID = "1304984638158143589";
-                else if (rank === "Police Officer") rolesIDs = ["1267589491405754369"], tagID = "1304984651991089182";
+                else if (rank === "Police Officer I") rolesIDs = ["1267589491405754369"], tagID = "1304984651991089182";
                 else if (rank === "Cadet") rolesIDs = ["1267589609378812129"], tagID = "1304984664607428770";
                 else rolesIDs = false, tagID = false;
 
@@ -1045,7 +1045,7 @@ export default async function (bot, i) {
                 else if (newRank === "Police Officer III+I") rolesIDs = ["1267588850952437800"], tagID = "1304984607501975614", newGrade = 4;
                 else if (newRank === "Police Officer III") rolesIDs = ["1267542148102750238"], tagID = "1304984625398943836", newGrade = 3;
                 else if (newRank === "Police Officer II") rolesIDs = ["1267589547462754385"], tagID = "1304984638158143589", newGrade = 2;
-                else if (newRank === "Police Officer") rolesIDs = ["1267589491405754369"], tagID = "1304984651991089182", newGrade = 1;
+                else if (newRank === "Police Officer I") rolesIDs = ["1267589491405754369"], tagID = "1304984651991089182", newGrade = 1;
                 else if (newRank === "Cadet") rolesIDs = ["1267589609378812129"], tagID = "1304984664607428770", newGrade = 0;
                 else rolesIDs = false, tagID = false;
                 if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${newRank}\`)**`, ephemeral: true });
@@ -1071,7 +1071,7 @@ export default async function (bot, i) {
                 else if (content.rank === "Police Officer III+I") oldRolesIDs = ["1267588850952437800"], oldGrade = 4;
                 else if (content.rank === "Police Officer III") oldRolesIDs = ["1267542148102750238"], oldGrade = 3;
                 else if (content.rank === "Police Officer II") oldRolesIDs = ["1267589547462754385"], oldGrade = 2;
-                else if (content.rank === "Police Officer") oldRolesIDs = ["1267589491405754369"], oldGrade = 1;
+                else if (content.rank === "Police Officer I") oldRolesIDs = ["1267589491405754369"], oldGrade = 1;
                 else if (content.rank === "Cadet") oldRolesIDs = ["1267589609378812129"], oldGrade = 0;
             } else if (i.guild.id === "1139266097921675345") { //LSSD
                 if (newRank === "Sheriff") rolesIDs = ["1139274486085058590", "1139267137651884072"], tagID = "1203829217167409192", newGrade = 11;
@@ -1324,7 +1324,7 @@ export default async function (bot, i) {
                     else if (newRank === "Police Officer III+I") rolesIDs = ["1267588850952437800"], tagID = "1304984607501975614";
                     else if (newRank === "Police Officer III") rolesIDs = ["1267542148102750238"], tagID = "1304984625398943836";
                     else if (newRank === "Police Officer II") rolesIDs = ["1267589547462754385"], tagID = "1304984638158143589";
-                    else if (newRank === "Police Officer") rolesIDs = ["1267589491405754369"], tagID = "1304984651991089182";
+                    else if (newRank === "Police Officer I") rolesIDs = ["1267589491405754369"], tagID = "1304984651991089182";
                     else if (newRank === "Cadet") rolesIDs = ["1267589609378812129"], tagID = "1304984664607428770";
                     else rolesIDs = false, tagID = false;
                     if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${newRank}\`)**`, ephemeral: true });
@@ -1340,7 +1340,7 @@ export default async function (bot, i) {
                     else if (content.rank === "Police Officer III+I") oldRolesIDs = ["1267588850952437800"];
                     else if (content.rank === "Police Officer III") oldRolesIDs = ["1267542148102750238"];
                     else if (content.rank === "Police Officer II") oldRolesIDs = ["1267589547462754385"];
-                    else if (content.rank === "Police Officer") oldRolesIDs = ["1267589491405754369"];
+                    else if (content.rank === "Police Officer I") oldRolesIDs = ["1267589491405754369"];
                     else if (content.rank === "Cadet") oldRolesIDs = ["1267589609378812129"];
                 }
             } else if (i.guild.id === "1139266097921675345") { //LSSD

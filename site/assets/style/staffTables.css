@@ -134,3 +134,8 @@ input[type="checkbox"] {
     height: 20px;
     cursor: not-allowed;
 }
+
+.tablesBadge {
+    width: 65px;
+    height: 65px;
+}

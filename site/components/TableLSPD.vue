@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th scope="col" rowspan="2" style="text-align: center;">
-                    <img src="../assets/logo/LSPD.png" width="65" height="65" alt="Odznak LSPD" />
+                    <img class="tablesBadge" src="../assets/logo/LSPD.png" alt="Odznak LSPD" />
                 </th>
                 <th scope="col" rowspan="2">Jméno</th>
                 <th scope="col" rowspan="2">Odznak</th>
@@ -92,6 +92,7 @@
 
 <script setup>
 import '../assets/style/staffTables.css';
+import '../assets/style/staffTablesMedia.css';
 import axios from "axios";
 import { ref, onMounted } from "vue";
 
@@ -254,17 +255,17 @@ function calcCheckbox(workerData, method) {
 </script>
 
 <style scoped>
-tbody tr:hover {
+table tbody tr:hover td {
     color: black;
     background: #ffc935;
 }
 
 table {
-    background-color: #ffffff;
+    background-color: var(--contentColor);
 }
 
 td {
-    color: black;
+    color: var(--textColor);
     border: 1px solid #ffc935;
 }
 

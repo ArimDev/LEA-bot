@@ -191,10 +191,10 @@ export default async function api(bot, app) {
                 worker.roles.warn = worker.m.roles.cache.has("1154446248934387830");
                 worker.roles.suspend = worker.m.roles.cache.has("1267600894069964911");
                 if (worker.m.roles.cache.has("1240021849518112808")) worker.div.push("CID");
-                if (worker.m.roles.cache.has("1290357614039007294")) worker.div.push("SWAT");
+                if (worker.m.roles.cache.has("1290357614039007294")) worker.div.push("ETF");
                 if (worker.m.roles.cache.has("1252175791966523444")) worker.div.push("ST");
                 if (worker.m.roles.cache.has("1251504241768529971")) worker.div.push("FTO");
-                if (worker.m.roles.cache.has("1154446248946978950")) worker.div.push("TEU");
+                if (worker.m.roles.cache.has("1154446248946978950")) worker.div.push("RPU");
                 if (worker.m.roles.cache.has("1242926544574349343")) worker.div.push("AU");
 
                 //ACCESS TO THE TABLES - Discord role

@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th scope="col" rowspan="2" style="text-align: center;">
-                    <img src="../assets/logo/SAHP.png" width="65" height="65" alt="Odznak SAHP" />
+                    <img class="tablesBadge" src="../assets/logo/SAHP.png" alt="Odznak SAHP" /> <!-- MĚNIT VELIKOST NA TELEFONU -->
                 </th>
                 <th scope="col" rowspan="2">Jméno</th>
                 <th scope="col" rowspan="2">Odznak</th>
@@ -92,6 +92,7 @@
 
 <script setup>
 import '../assets/style/staffTables.css';
+import '../assets/style/staffTablesMedia.css';
 import axios from "axios";
 import { ref, onMounted } from "vue";
 
@@ -255,15 +256,16 @@ function calcCheckbox(workerData, method) {
 
 <style scoped>
 tbody tr:hover {
-    background: #b79e49;
     color: white;
+    background: #b79e49;
 }
 
 table {
-    background-color: white;
+    background-color: var(--contentColor);
 }
 
 td {
+    color: var(--textColor);
     border: 1px solid black;
 }
 

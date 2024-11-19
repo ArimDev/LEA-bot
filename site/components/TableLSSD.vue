@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th scope="col" rowspan="2" style="text-align: center;">
-                    <img src="../assets/logo/LSSD.png" width="65" height="65" alt="Odznak LSSD" />
+                    <img class="tablesBadge" src="../assets/logo/LSSD.png" alt="Odznak LSSD" />
                 </th>
                 <th scope="col" rowspan="2">Jméno</th>
                 <th scope="col" rowspan="2">Odznak</th>
@@ -92,6 +92,7 @@
 
 <script setup>
 import '../assets/style/staffTables.css';
+import '../assets/style/staffTablesMedia.css';
 import axios from "axios";
 import { ref, onMounted } from "vue";
 
@@ -260,11 +261,11 @@ tbody tr:hover {
 }
 
 table {
-    background-color: white;
+    background-color: var(--contentColor);
 }
 
 td {
-    color: black;
+    color: var(--textColor);
     border: 1px solid black;
 }
 
@@ -274,12 +275,12 @@ th {
 }
 
 th[scope="row"] {
-    color: black;
+    color: var(--textColor);
     background: #bd8131;
 }
 
 th[scope="col"] {
-    color: black;
+    color: var(--textColor);
     background: #bd8131;
 }
 </style>

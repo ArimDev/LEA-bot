@@ -69,10 +69,12 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router';
 import './assets/style/frame.css';
-import './assets/style/frameChanges.css';
+import './assets/style/frameMedia.css';
 import Login from './components/Login.vue';
 import PopBox from './components/PopBox.vue';
 import PopUp from './components/PopUp.vue';
+import darkModePNG from '/icon/darkmode.png';
+import lightModePNG from '/icon/lightmode.png';
 import { onMounted, ref } from "vue";
 
 onMounted(() => {
@@ -82,7 +84,7 @@ onMounted(() => {
 		darkModeState
 	);
 	if (darkModeState === "dark")
-		document.getElementById('darkModeImage').src = "./assets/icon/lightmode.png";
+		document.getElementById('darkModeImage').src = lightModePNG;
 });
 
 const displayPopBox = ref(false);
@@ -120,7 +122,7 @@ function toggleDarkMode() {
 		document.documentElement.setAttribute("data-theme", "light");
 		darkMode.value = false;
 
-		darkModeImage.src = "./assets/icon/darkmode.png";
+		darkModeImage.src = darkModePNG;
 		darkModeImage.classList.toggle('darkMode');
 		githubImage.classList.toggle('darkMode');
 		loginAvatarImage.classList.toggle('darkMode');
@@ -129,7 +131,7 @@ function toggleDarkMode() {
 		document.documentElement.setAttribute("data-theme", "dark");
 		darkMode.value = true;
 
-		darkModeImage.src = "./assets/icon/lightmode.png";
+		darkModeImage.src = lightModePNG;
 		darkModeImage.classList.toggle('darkMode');
 		githubImage.classList.toggle('darkMode');
 		loginAvatarImage.classList.toggle('darkMode');

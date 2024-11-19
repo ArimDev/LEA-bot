@@ -1,0 +1,65 @@
+/* Phones */
+@media (max-width: 800px) {
+    td {
+        padding: 10px 10px;
+        font-size: 10px;
+    }
+
+    .tdRankTitle {
+        margin-top: 20px;
+        font-size: 12px;
+    }
+
+    th {
+        font-size: 10px;
+    }
+
+    th[scope="row"] {
+        padding: 8px;
+    }
+
+    th[scope="col"] {
+        padding: 4px;
+    }
+
+    .tablesBadge {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+/* Tablets */
+@media (min-width: 801px) and (max-width: 1024px) {
+    td {
+        padding: 12px 12px;
+        font-size: 11px;
+    }
+
+    .tdRankTitle {
+        margin-top: 40px;
+        font-size: 13px;
+    }
+
+    th {
+        font-size: 13px;
+    }
+
+    th[scope="row"] {
+        padding: 11px;
+    }
+
+    th[scope="col"] {
+        padding: 5px;
+    }
+
+    .tablesBadge {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* Vertical monitor */
+@media (min-width: 1025px) and (max-width: 1279px) {}
+
+/* Horizontal monitor */
+@media (min-width: 1280px) {}
