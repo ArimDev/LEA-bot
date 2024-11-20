@@ -938,7 +938,13 @@ export default async function (bot, i) {
                 try { await member.setNickname(`[${radio}] ${name}`); } catch { gotNick = false; }
                 try { await member.roles.add(rolesIDs); } catch { gotRole = false; }
                 if (i.guild.id === "1301163398515396668" && rank === "Trooper Trainee") //Odebrat roli Akademika pro SAHP
-                    try { await member.roles.remove(["1302389194836148226"]); } catch { gotRole = false; }
+                    try {
+                        await member.roles.remove([
+                            "1302389194836148226", //Akademik
+                            "1302351904562483200", //1. výcvik
+                            "1302352056727765053", //2. výcvik
+                        ]);
+                    } catch { gotRole = false; }
 
                 const slozkaEmbed = new EmbedBuilder()
                     .setTitle("Vítejte ve Vaší složce!")
