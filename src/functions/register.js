@@ -70,7 +70,7 @@ export async function commands(bot) {
     });
 }
 
-export function interactions(bot) {
+export async function interactions(bot) {
     const folders = fs.readdirSync(path.resolve("./src/interactions"), { withFileTypes: true })
         .filter(dir => dir.isDirectory());
 
@@ -85,7 +85,7 @@ export function interactions(bot) {
             const filePath = path.join(folderPath, file);
             const customID = path.basename(file, ".js");
 
-            const run = import(filePath).then(fn => fn.default);
+            const run = await import(filePath).then(fn => fn.default);
 
             if (!bot.ints.has(folder.name))
                 bot.ints.set(folder.name, new Map());

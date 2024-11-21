@@ -272,7 +272,7 @@ export default async function run(bot, i) {
                 .setColor(getServer(i.guild.id).color)
                 .setFooter(getServer(i.guild.id).footer);
 
-            await i.editReply({ embeds: [rankupEmbed], ephemeral: visible });
+            await i.editReply({ embeds: [rankupEmbed], ephemeral: !visible });
         } catch (e) {
             console.error(e);
         }

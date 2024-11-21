@@ -49,7 +49,15 @@ export default async function run(bot, i) {
 
     console.log(" < [CMD/Menu] >  " + (i.member?.displayName || i.user.displayName) + ` zobrazil(a) menu`);
 
-    const commands = fs.readdirSync(path.resolve("./src/commands")).filter(file => file.endsWith(".js"));
+    const commands = [
+        ...fs
+            .readdirSync(path.resolve("./src/contextMenus"))
+            .filter(file => file.endsWith(".js")),
+        ...fs
+            .readdirSync(path.resolve("./src/slashCommands"))
+            .filter(file => file.endsWith(".js"))
+    ];
+
     let helpEmbed = new EmbedBuilder()
         .setTitle("Law Enforcement Agencies - Bot")
         .setFields([

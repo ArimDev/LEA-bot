@@ -343,5 +343,5 @@ export default async function run(bot, i) {
 
     console.log(" < [DB/Login] >  " + i.member.displayName + " zaregistroval(a) [" + i.fields.getTextInputValue("call") + "] " + i.fields.getTextInputValue("name") + " do DB");
 
-    await i.editReply({ embeds: [loginEmbed], ephemeral: visible });
+    await i.editReply({ embeds: [loginEmbed], ephemeral: !visible });
 }

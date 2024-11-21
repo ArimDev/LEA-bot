@@ -47,9 +47,8 @@ export default async function (bot, i) {
         || i.type === InteractionType.ModalSubmit
     ) {
         let category = "";
-        const name = i.customId;
         if (i.type === InteractionType.MessageComponent) category = "messageComponent";
-        if (i.type === InteractionType.ModalSubmit) category = "modalSubmit";
+        else if (i.type === InteractionType.ModalSubmit) category = "modalSubmit";
 
         const ints = bot.ints.get(category);
 
@@ -61,7 +60,7 @@ export default async function (bot, i) {
             return null;
         }
 
-        const int = findInt(ints, name);
-        if (command) return int(...args);
+        const int = findInt(ints, i.customId.split("_")[0]);
+        if (int) return int(bot, i);
     }
 }
