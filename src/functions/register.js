@@ -23,19 +23,28 @@ export async function events(bot) {
 }
 
 export async function commands(bot) {
-    let slashCommands = [], contextCommands = 0;
-    const commandsFolder = fs.readdirSync(path.resolve("./src/commands")).filter(file => file.endsWith(".js"));
-    for (const file of commandsFolder) {
-        const commandFile = await import(`../commands/${file}`);
-        const command = file.split(".")[0];
-        function registerCommand(cmd, cmdFile) {
-            bot.slashes.set(cmd, cmdFile);
-            if (cmdFile.slash) slashCommands.push(cmdFile.slash.toJSON());
-            else if (cmdFile.context) slashCommands.push(cmdFile.context.toJSON());
+    const slashCommands = fs
+        .readdirSync(path.resolve("./src/slashCommands"))
+        .filter(file => file.endsWith(".js"));
+
+    const contextMenus = fs
+        .readdirSync(path.resolve("./src/contextMenus"))
+        .filter(file => file.endsWith(".js"));
+
+    const summ = [...slashCommands, ...contextMenus];
+    const allCmd = [];
+
+    for (const file of summ) {
+        let commandFile;
+        if (slashCommands.includes(file)) {
+            commandFile = await import(`../slashCommands/${file}`);
+        } else if (contextMenus.includes(file)) {
+            commandFile = await import(`../contextMenus/${file}`);
         }
-        let cmdName = command;
-        if (commandFile.context) { /*cmdName = command.split("_")[1].toLowerCase(); */contextCommands++; }
-        registerCommand(cmdName, commandFile);
+
+        bot.slashes.set(file.split(".")[0], commandFile);
+        if (commandFile.slash) allCmd.push(commandFile.slash.toJSON());
+        else if (commandFile.context) allCmd.push(commandFile.context.toJSON());
     };
 
     bot.once("ready", async (bot) => {
@@ -44,10 +53,10 @@ export async function commands(bot) {
         try {
             await rest.put(
                 Routes.applicationCommands(bot.user.id),
-                { body: slashCommands },
+                { body: allCmd },
             ).then(() => {
-                console.log(" < [DC] >  Úspěšně zaregstrováno " + (slashCommands.length - contextCommands) + " slash příkazů!");
-                console.log(" < [DC] >  Úspěšně zaregstrováno " + contextCommands + " context menu příkazů!");
+                console.log(" < [DC] >  Úspěšně zaregistrováno " + slashCommands.length + " slash příkazů!");
+                console.log(" < [DC] >  Úspěšně zaregistrováno " + contextMenus.length + " context menu příkazů!");
                 if (runType === 1) {
                     console.log("");
                     console.log("                               test úspěšný                               ");
@@ -59,4 +68,32 @@ export async function commands(bot) {
             console.log(err);
         };
     });
+}
+
+export function interactions(bot) {
+    const folders = fs.readdirSync(path.resolve("./src/interactions"), { withFileTypes: true })
+        .filter(dir => dir.isDirectory());
+
+    let stats = {}, interactions = 0;
+
+    for (const folder of folders) {
+        const folderPath = path.join(path.resolve("./src/interactions"), folder.name);
+        const files = fs.readdirSync(folderPath)
+            .filter(file => file.endsWith(".js"));
+
+        for (const file of files) {
+            const filePath = path.join(folderPath, file);
+            const customID = path.basename(file, ".js");
+
+            const run = import(filePath).then(fn => fn.default);
+
+            if (!bot.ints.has(folder.name))
+                bot.ints.set(folder.name, new Map());
+            bot.ints.get(folder.name).set(customID, run);
+
+            stats[folder.name] = interactions++;
+        }
+    }
+
+    console.log(" < [DC] >  Registrovány funkce: " + Object.entries(stats).map(([k, v]) => `${k} (${v})`).join(", "));
 }
