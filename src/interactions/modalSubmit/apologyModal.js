@@ -1,7 +1,7 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, EmbedBuilder, InteractionType, ModalBuilder, TextInputBuilder, TextInputStyle, time } from "discord.js";
 import fs from "fs";
 import path from "path";
-import { checkDB, checkEVENT, getDB, getServer } from "../../../src/functions/db.js";
+import { checkDB, checkEVENT, getDB, getServer } from "../../functions/db.js";
 
 export default async function run(bot, i) {
     let content, inFolder;

@@ -34,7 +34,7 @@ export default async function run(bot, i) {
     if (!bot.LEA.g[gotDB.guildName].includes(i.guild.id)) return i.reply({ content: `> 🛑 **<@${user.id}> je členem \`${gotDB.guildName}\`!** (Nemůžeš ho upravit)`, ephemeral: true });
 
     const modal = new ModalBuilder()
-        .setCustomId("rankUpModal")
+        .setCustomId("rankupModal")
         .setTitle("LEA | Povýšení");
 
     const idInput = new TextInputBuilder()

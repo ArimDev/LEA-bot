@@ -1,8 +1,8 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, EmbedBuilder, InteractionType, ModalBuilder, TextInputBuilder, TextInputStyle, time } from "discord.js";
 import fs from "fs";
 import path from "path";
-import { checkDB, checkEVENT, getDB, getServer } from "../../../src/functions/db.js";
-import { dcLog, simpleLog } from "../../../src/functions/logSystem.js";
+import { checkDB, checkEVENT, getDB, getServer } from "../../functions/db.js";
+import { dcLog, simpleLog } from "../../functions/logSystem.js";
 
 export default async function run(bot, i) {
     if (!(checkDB(i.fields.getTextInputValue("id"), i))) return i.reply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **není v DB.**", ephemeral: true });
