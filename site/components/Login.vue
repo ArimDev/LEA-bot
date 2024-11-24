@@ -14,7 +14,6 @@ const botid = import.meta.env.VITE_BOT_ID;
 const botredirect = import.meta.env.VITE_BOT_REDIRECT;
 
 const darkModeClass = ref(localStorage.getItem("colorTheme") === "dark" ? "darkMode" : "lightMode")
-console.log(darkModeClass, darkModeClass.value)
 
 const router = useRouter();
 const route = useRoute();

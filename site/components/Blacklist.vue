@@ -119,6 +119,7 @@ function getBadge(dep) {
 }
 
 .otherTables td {
+    color: black;
     border: 1px solid #edebe9;
 }
 
