@@ -13,7 +13,7 @@ export default async function run(bot, i) {
 
     let content, oldRolesIDs, rolesIDs, tagID, gotNick = true, gotRole = true, newRank = i.fields.getTextInputValue("rank"),
         oldGrade, newGrade;
-    if (i.guild.id === "1154446248934387828") { //LSPD
+    if (i.guild.id === "xxx" /* MISSING ID */) { //LSPD
         if (newRank === "Chief of Police") rolesIDs = ["1154446249005690910", "1267541873451339806"], tagID = "1304984531287408640", newGrade = 15;
         else if (newRank === "Assistant Chief of Police") rolesIDs = ["1154446248967938187", "1267541873451339806"], tagID = "1304984531287408640", newGrade = 14;
         else if (newRank === "Deputy Chief of Police") rolesIDs = ["1154446248967938186", "1267541873451339806"], tagID = "1304984531287408640", newGrade = 13;
@@ -53,7 +53,7 @@ export default async function run(bot, i) {
         else if (content.rank === "Police Officer II") oldRolesIDs = ["1267589547462754385"], oldGrade = 2;
         else if (content.rank === "Police Officer I") oldRolesIDs = ["1267589491405754369"], oldGrade = 1;
         else if (content.rank === "Cadet") oldRolesIDs = ["1267589609378812129"], oldGrade = 0;
-    } else if (i.guild.id === "1139266097921675345") { //LSSD
+    } else if (i.guild.id === "1154446248934387828") { //LSSD
         if (newRank === "Sheriff") rolesIDs = ["1139274486085058590", "1139267137651884072"], tagID = "1203829217167409192", newGrade = 11;
         else if (newRank === "Undersheriff") rolesIDs = ["1139274565973983262", "1139267137651884072"], tagID = "1203829217167409192", newGrade = 10;
         else if (newRank === "Assistant Sheriff") rolesIDs = ["1139274629547053139", "1139267137651884072"], tagID = "1203829217167409192", newGrade = 9;

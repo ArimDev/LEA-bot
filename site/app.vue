@@ -23,7 +23,7 @@
 			</div>
 			<div class="rightMenu">
 				<li class="LSPD">
-					<RouterLink to="/lspd">LSPD</RouterLink>
+					<span class="disabled">LSPD</span>
 				</li>
 				<li class="LSSD">
 					<RouterLink to="/lssd">LSSD</RouterLink>

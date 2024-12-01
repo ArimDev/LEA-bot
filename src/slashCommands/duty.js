@@ -50,7 +50,7 @@ export default async function run(bot, i) {
     modal.addComponents(actionRow0, actionRow1, actionRow2);
 
     if (
-        i.member.roles.cache.has("1267589609378812129") //LSPD cadet
+        i.member.roles.cache.has("xxx" /* MISSING ID */) //LSPD cadet
         || i.member.roles.cache.has("1139276175819157646") //LSSD trainee
         || i.member.roles.cache.has("1301163398540689497") //SAHP trainee
     ) {

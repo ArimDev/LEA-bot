@@ -14,7 +14,7 @@ export default async function run(bot, i) {
     const visible = i.customId.includes("_") ? (/true/).test(i.customId.split("_")[1]) : false;
 
     let content, oldRolesIDs, rolesIDs, tagID, gotNick = true, gotRole = true, newRank = i.fields.getTextInputValue("rank");
-    if (i.guild.id === "1154446248934387828") { //LSPD
+    if (i.guild.id === "xxx" /* MISSING ID */) { //LSPD
         content = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
         if (!(await i.guild.channels.fetch(content.folder))) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
 
@@ -49,7 +49,7 @@ export default async function run(bot, i) {
             else if (content.rank === "Police Officer I") oldRolesIDs = ["1267589491405754369"];
             else if (content.rank === "Cadet") oldRolesIDs = ["1267589609378812129"];
         }
-    } else if (i.guild.id === "1139266097921675345") { //LSSD
+    } else if (i.guild.id === "1154446248934387828") { //LSSD
         content = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
         if (!(await i.guild.channels.fetch(content.folder))) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
 

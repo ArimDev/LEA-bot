@@ -12,7 +12,7 @@ export default async function run(bot, i) {
     if (i.user.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
     if (i.user.id === authorID) passed = true;
     if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
-        if (i.member.roles.cache.has("1267541873451339806")) passed = true; //Leadership
+        if (i.member.roles.cache.has(/* MISSING ID */)) passed = true; //Leadership
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
         if (i.member.roles.cache.has("1139267137651884072")) passed = true; //Leadership
     } else if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {

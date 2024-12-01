@@ -13,7 +13,7 @@ import { useRouter, useRoute } from "vue-router";
 const botid = import.meta.env.VITE_BOT_ID;
 const botredirect = import.meta.env.VITE_BOT_REDIRECT;
 
-const darkModeClass = ref(localStorage.getItem("colorTheme") === "dark" ? "darkMode" : "lightMode")
+const darkModeClass = ref(localStorage.getItem("colorTheme") === "dark" ? "darkMode" : "lightMode");
 
 const router = useRouter();
 const route = useRoute();
@@ -84,9 +84,9 @@ onMounted(async () => {
             emit("popup", "Přihlášen(a)!");
         }
     } else if (lsGetItem("token_type") && lsGetItem("access_token")) {
-        if (!lsGetItem("expiry")) login(3);
-        if (lsGetItem("expiry") < Date.now()) login(4);
-        await getMe(lsGetItem("token_type"), lsGetItem("access_token"));
+        if (!lsGetItem("expiry")) return login(3);
+        if (lsGetItem("expiry") < Date.now()) return login(4);
+        getMe(lsGetItem("token_type"), lsGetItem("access_token"));
     }
 });
 
@@ -194,7 +194,6 @@ async function login(type) {
             }
         }
     } else if (type === 4) {
-        if (lsGetItem("expiry") > Date.now()) return login(2);
         lsRemItem("token_type");
         lsRemItem("access_token");
         lsRemItem("expiry");

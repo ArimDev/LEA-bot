@@ -21,11 +21,6 @@ export default async function web(bot, app) {
         res.status(200).sendFile(path.resolve("./web/index/index.html"));
     });
 
-    app.get('/old/lspd', async function (req, res) {
-        console.log(` < [PS/Web] >  Got ${req.path} ${req.method} request!`);
-        res.status(200).sendFile(path.resolve("./web/LSPD/LSPD.html"));
-    });
-
     app.get('/old/lscso', async function (req, res) {
         console.log(` < [PS/Web] >  Got ${req.path} ${req.method} request!`);
         res.status(200).sendFile(path.resolve("./web/LSCSO/LSCSO.html"));
@@ -62,6 +57,4 @@ export default async function web(bot, app) {
     app.get('/old/index/style.css', giveStatic);
     app.get('/old/LSCSO/script.js', giveStatic);
     app.get('/old/LSCSO/style.css', giveStatic);
-    app.get('/old/LSPD/script.js', giveStatic);
-    app.get('/old/LSPD/style.css', giveStatic);
 }

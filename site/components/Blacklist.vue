@@ -111,6 +111,9 @@ function getBadge(dep) {
 <style scoped>
 .otherTables tbody tr:hover {
     background: #3655c3;
+}
+
+tbody tr:hover td {
     color: white;
 }
 

@@ -35,8 +35,8 @@ export default async function run(bot, i) {
 
     let post = false, gotNick = true, gotRole = true, folders;
     const today = new Date();
-    if (i.guild.id === "1154446248934387828") { //LSPD
-        folders = await i.guild.channels.fetch("1290050353793994814");
+    if (i.guild.id === "xxx" /* MISSING ID */) { //LSPD
+        folders = await i.guild.channels.fetch(/* MISSING ID */);
         try { var member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
         catch (e) { await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true }); return console.log(e); }
 
@@ -57,7 +57,7 @@ export default async function run(bot, i) {
         else rolesIDs = false, tagID = false;
 
         if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${rank}\`)**`, ephemeral: true });
-        rolesIDs.push("1267590027496652961"); //LSPD role
+        rolesIDs.push("xxx" /* MISSING ID */); //LSPD role
 
         await i.deferReply({ ephemeral: !visible });
 
@@ -112,8 +112,8 @@ export default async function run(bot, i) {
             .setColor(getServer(i.guild.id).color)
             .setFooter({ text: `LEA-Bot v${process.env.version} 💫`, iconURL: bot.user.avatarURL() });
         await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
-    } else if (i.guild.id === "1139266097921675345") { //LSSD
-        folders = await i.guild.channels.fetch("1203743211000963082");
+    } else if (i.guild.id === "1154446248934387828") { //LSSD
+        folders = await i.guild.channels.fetch("1290050353793994814");
         try { var member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
         catch (e) { await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true }); console.log(e); }
 
