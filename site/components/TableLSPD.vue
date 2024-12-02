@@ -73,17 +73,17 @@
             <div class="loader"></div>
         </div>
         <div v-else-if="isLoggedIn && !hasAccess && !fetchError" class="noAccessMessage">
-            <img src="../assets/icon/lock.png" width="125">
+            <img src="/media/icon/lock.png" width="125">
             <h1>Přístup zamítnut!</h1>
             <p>Nemáš povolení zobrazit tento obsah.</p>
         </div>
         <div v-else-if="!isLoggedIn" class="loginMessage">
-            <img src="../assets/icon/key.png" width="125">
+            <img src="/media/icon/key.png" width="125">
             <h1>Nepřihlášen(a)!</h1>
             <p>Nejsi přihlášen(a) k ověření přístupu.</p>
         </div>
         <div v-else-if="fetchError" class="errorMessage">
-            <img src="../assets/icon/server-error.png" width="125">
+            <img src="/media/icon/server-error.png" width="125">
             <h1>Chyba!</h1>
             <p v-html="fetchErrorReason"></p>
         </div>
@@ -141,7 +141,14 @@ async function fetchWorkers() {
             return workers;
         }
     } catch (error) {
+        if (error.response?.status === 403) {
+            console.log(`[LEA-Bot / API Login] Ale ne! Nemáš povolen přístup k datům. (403)`);
+            hasAccess.value = false;
+            return [];
+        }
+
         console.log(`[LEA-Bot / API Login] Chyba při kontaktování serveru! (${error.response?.status || "500"})`);
+
         fetchError.value = true;
         fetchErrorReason.value = `Kontakt s databází selhal!<br>(${error.response?.status || "500"})`;
         return [];

@@ -41,19 +41,19 @@ export default async function run(bot, i) {
         catch (e) { await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true }); return console.log(e); }
 
         let rolesIDs, tagID;
-        if (rank === "Chief of Police") rolesIDs = ["1154446249005690910", "1267541873451339806"], tagID = "1304984531287408640";
-        else if (rank === "Assistant Chief of Police") rolesIDs = ["1154446248967938187", "1267541873451339806"], tagID = "1304984531287408640";
-        else if (rank === "Deputy Chief of Police") rolesIDs = ["1154446248967938186", "1267541873451339806"], tagID = "1304984531287408640";
-        else if (rank === "Commander") rolesIDs = ["1154446248967938185", "1267541873451339806"], tagID = "1304984531287408640";
-        else if (rank === "Captain") rolesIDs = ["1154446248967938183", "1267541873451339806"], tagID = "1304984531287408640";
-        else if (rank === "Lieutenant") rolesIDs = ["1267588047533248583", "1267541873451339806"], tagID = "1304984531287408640";
-        else if (rank === "Sergeant II") rolesIDs = ["1154446248967938181", "1267588695909728348"], tagID = "1304984557761597451";
-        else if (rank === "Sergeant I") rolesIDs = ["1267587700240809994", "1267588695909728348"], tagID = "1304984557761597451";
-        else if (rank === "Police Officer III+I") rolesIDs = ["1267588850952437800"], tagID = "1304984607501975614";
-        else if (rank === "Police Officer III") rolesIDs = ["1267542148102750238"], tagID = "1304984625398943836";
-        else if (rank === "Police Officer II") rolesIDs = ["1267589547462754385"], tagID = "1304984638158143589";
-        else if (rank === "Police Officer I") rolesIDs = ["1267589491405754369"], tagID = "1304984651991089182";
-        else if (rank === "Cadet") rolesIDs = ["1267589609378812129"], tagID = "1304984664607428770";
+        if (rank === "Chief of Police") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Assistant Chief of Police") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Deputy Chief of Police") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Commander") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Captain") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Lieutenant") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Sergeant II") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Sergeant I") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Police Officer III+I") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Police Officer III") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Police Officer II") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Police Officer I") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Cadet") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
         else rolesIDs = false, tagID = false;
 
         if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${rank}\`)**`, ephemeral: true });
@@ -118,22 +118,22 @@ export default async function run(bot, i) {
         catch (e) { await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true }); console.log(e); }
 
         let rolesIDs, tagID;
-        if (rank === "Sheriff") rolesIDs = ["1139274486085058590"], tagID = "1203829217167409192";
-        else if (rank === "Undersheriff") rolesIDs = ["1139274565973983262"], tagID = "1203829217167409192";
-        else if (rank === "Assistant Sheriff") rolesIDs = ["1139274629547053139"], tagID = "1203829217167409192";
-        else if (rank === "Division Chief") rolesIDs = ["1139274788842516520"], tagID = "1203829217167409192";
-        else if (rank === "Area Commander") rolesIDs = ["1139274892617977966"], tagID = "1203829217167409192";
-        else if (rank === "Captain") rolesIDs = ["1139274974683746335"], tagID = "1203829217167409192";
-        else if (rank === "Lieutenant") rolesIDs = ["1139275038877560856"], tagID = "1203829217167409192";
-        else if (rank === "Sergeant") rolesIDs = ["1139275398295867453", "1139279790210306198"], tagID = "1203829180232630362";
-        else if (rank === "Deputy III") rolesIDs = ["1139275782607347905"], tagID = "1203829143234551898";
-        else if (rank === "Deputy II") rolesIDs = ["1139275934025916568"], tagID = "1203829113240952904";
-        else if (rank === "Deputy I") rolesIDs = ["1139276036673130527"], tagID = "1203829081100001311";
-        else if (rank === "Deputy Trainee") rolesIDs = ["1139276175819157646"], tagID = "1203829031049367593";
+        if (rank === "Sheriff") rolesIDs = ["1154446249005690910"], tagID = "1203829217167409192";
+        else if (rank === "Undersheriff") rolesIDs = ["1154446248967938187"], tagID = "1203829217167409192";
+        else if (rank === "Assistant Sheriff") rolesIDs = ["1154446248967938186"], tagID = "1203829217167409192";
+        else if (rank === "Division Chief") rolesIDs = ["1154446248967938185"], tagID = "1203829217167409192";
+        else if (rank === "Area Commander") rolesIDs = ["1312853345806979092"], tagID = "1203829217167409192";
+        else if (rank === "Captain") rolesIDs = ["1154446248967938183"], tagID = "1203829217167409192";
+        else if (rank === "Lieutenant") rolesIDs = ["1267588047533248583"], tagID = "1203829217167409192";
+        else if (rank === "Sergeant") rolesIDs = ["1267587700240809994", "1267588695909728348"], tagID = "1203829180232630362";
+        else if (rank === "Deputy III") rolesIDs = ["1267542148102750238"], tagID = "1203829143234551898";
+        else if (rank === "Deputy II") rolesIDs = ["1267589547462754385"], tagID = "1203829113240952904";
+        else if (rank === "Deputy I") rolesIDs = ["1267589491405754369"], tagID = "1203829081100001311";
+        else if (rank === "Deputy Trainee") rolesIDs = ["1267589609378812129"], tagID = "1203829031049367593";
         else rolesIDs = false, tagID = false;
 
         if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${rank}\`)**`, ephemeral: true });
-        rolesIDs.push("1139276300188647444"); //LSSD role
+        rolesIDs.push("1267590027496652961"); //LSSD role
 
         await i.deferReply({ ephemeral: !visible });
 

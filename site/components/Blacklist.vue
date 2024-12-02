@@ -24,7 +24,7 @@
         </thead>
         <tbody>
             <tr v-for="(victim, index) in blData" :key="index">
-                <th scope="row">{{ victim.index }}</th> <!-- ID blacklistu -->
+                <th scope="row">{{ victim.index + 1 }}</th> <!-- ID blacklistu -->
                 <td>{{ victim.username }}</td> <!-- victim Discord username -->
                 <td>{{ victim.displayName }}</td> <!-- victim Discord displayName -->
                 <td>{{ victim.name }}</td> <!-- victim IC name -->

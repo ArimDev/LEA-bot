@@ -44,11 +44,11 @@
 		<footer class="footer">
 			<div class="left">
 				<button @click="toggleDarkMode()">
-					<img id="darkModeImage" :class="{ darkMode }" src="./assets/icon/darkmode.png" width="20" height="20">
+					<img id="darkModeImage" :class="{ darkMode }" src="/media/icon/darkmode.png" width="20" height="20">
 				</button>
 				<button>
 					<a target="_blank" href="https://github.com/Azator-Entertainment/LEA-bot">
-						<img id="githubImage" :class="{ darkMode }" src="./assets/icon/github.png" width="20" height="20">
+						<img id="githubImage" :class="{ darkMode }" src="/media/icon/github.png" width="20" height="20">
 					</a>
 				</button>
 			</div>
@@ -73,8 +73,8 @@ import './assets/style/frameMedia.css';
 import Login from './components/Login.vue';
 import PopBox from './components/PopBox.vue';
 import PopUp from './components/PopUp.vue';
-import darkModePNG from '/icon/darkmode.png';
-import lightModePNG from '/icon/lightmode.png';
+import darkModePNG from './assets/icon/darkmode.png';
+import lightModePNG from './assets/icon/lightmode.png';
 import { onMounted, ref } from "vue";
 
 onMounted(() => {

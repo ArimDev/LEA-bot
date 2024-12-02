@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => {
 	return {
 		root: "./site",
 		base: '/', // new/
+		publicDir: "./public/",
 		plugins: [
 			vue(),
 			createHtmlPlugin({

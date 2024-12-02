@@ -115,8 +115,10 @@ export default async function api(bot, app) {
         if (!origin.includes(secret().parsed.domain)) {
             return res.status(403).json({});
         }
+
         const dep = req.params.dep || "LSSD";
         const authString = req.headers.authorization;
+
         let verifyResponse = false;
         try {
             verifyResponse = await fetch(secret().parsed.web + apiPath + "/login/verifyMe/" + dep, {
@@ -125,10 +127,15 @@ export default async function api(bot, app) {
                     authorization: authString,
                 }
             });
-        } catch (e) { }
-        if (!verifyResponse.ok) return res.status(500).json({ passed: false, guildID: false, user: {}, member: {}, workers: [] });
+        } catch (e) {
+            return res.status(500).json({ passed: false, guildID: false, user: {}, member: {}, workers: [] });
+        }
+
+        if (!verifyResponse.ok) return res.status(verifyResponse.status).json({ passed: false, guildID: false, user: {}, member: {}, workers: [] });
+
         const verRep = await verifyResponse.json();
         const { passed } = verRep;
+
         if (!passed) return res.status(403).json({ passed: false, guildID: verRep.guildID, user: verRep.user, member: verRep.member, workers: [] });
 
         const guild = await bot.guilds.fetch(bot.LEA.g[dep][0]);
@@ -178,9 +185,9 @@ export default async function api(bot, app) {
                 if (worker.m.roles.cache.has("1139297368450277376")) worker.div.push("CID");
 
                 if ( //ACCESS TO THE TABLES - Discord roles
-                    worker.m.roles.cache.has("1139267137651884072") //Leadership
-                    && !worker.m.roles.cache.has("1139274974683746335") //Captain
-                    && !worker.m.roles.cache.has("1139275038877560856") //Lieutenant
+                    worker.m.roles.cache.has("1267541873451339806") //Leadership
+                    && !worker.m.roles.cache.has("1154446248967938183") //Captain
+                    && !worker.m.roles.cache.has("1267588047533248583") //Lieutenant
                 ) leadership = true;
                 if (
                     !leadership
@@ -188,17 +195,17 @@ export default async function api(bot, app) {
                     && (Math.round((worker.hours + Number.EPSILON) * 100) / 100) === 0
                 ) hours0 = true;
             } else if (dep === "LSPD" && worker.m) {
-                worker.roles.warn = worker.m.roles.cache.has("1154446248934387830");
-                worker.roles.suspend = worker.m.roles.cache.has("1267600894069964911");
-                if (worker.m.roles.cache.has("1240021849518112808")) worker.div.push("CID");
-                if (worker.m.roles.cache.has("1290357614039007294")) worker.div.push("ETF");
-                if (worker.m.roles.cache.has("1252175791966523444")) worker.div.push("ST");
-                if (worker.m.roles.cache.has("1251504241768529971")) worker.div.push("FTO");
-                if (worker.m.roles.cache.has("1154446248946978950")) worker.div.push("RPU");
-                if (worker.m.roles.cache.has("1242926544574349343")) worker.div.push("AU");
+                worker.roles.warn = worker.m.roles.cache.has(/* MISSING IDs */);
+                worker.roles.suspend = worker.m.roles.cache.has(/* MISSING IDs */);
+                if (worker.m.roles.cache.has("xxx" /* MISSING ID */)) worker.div.push("CID");
+                if (worker.m.roles.cache.has("xxx" /* MISSING ID */)) worker.div.push("ETF");
+                if (worker.m.roles.cache.has("xxx" /* MISSING ID */)) worker.div.push("ST");
+                if (worker.m.roles.cache.has("xxx" /* MISSING ID */)) worker.div.push("FTO");
+                if (worker.m.roles.cache.has("xxx" /* MISSING ID */)) worker.div.push("RPU");
+                if (worker.m.roles.cache.has("xxx" /* MISSING ID */)) worker.div.push("AU");
 
                 //ACCESS TO THE TABLES - Discord role
-                if (worker.m.roles.cache.has("1267541873451339806")) leadership = true;
+                if (worker.m.roles.cache.has("xxx" /* MISSING ID */)) leadership = true;
                 if (
                     !leadership
                     && !worker.roles.omluvenka
@@ -286,8 +293,8 @@ export default async function api(bot, app) {
             }
         }
 
-        const roles = { LSSD: "1139267137651884072", LSPD: "1267541873451339806", SAHP: "1301163398540689494" };
-        const dojRoles = { LSSD: "1139278117983223818", LSPD: "1267592715500257343", SAHP: "1301163398557339686" };
+        const roles = { LSSD: "1267541873451339806", LSPD: "xxx" /* MISSING ID */, SAHP: "1301163398557339686" };
+        const dojRoles = { LSSD: "1267592715500257343", LSPD: "xxx" /* MISSING ID */, SAHP: "1301163398540689494" };
 
         const first = await fetch(`https://discord.com/api/users/@me/guilds/${bot.LEA.g[dep][0]}/member`, {
             headers: { authorization: authString }
@@ -297,6 +304,7 @@ export default async function api(bot, app) {
             const firstRes = await first.json();
             passed = firstRes.roles.includes(roles[dep]) || firstRes.roles.includes(dojRoles[dep]);
             if (firstRes.user.id === "411436203330502658") passed = true; //b1ngo access
+
             if (passed) {
                 console.log(` < [PS/Login ${first.status}] > Verify: ${firstRes.user.username} verified from ${dep}`);
                 cache.push({
@@ -338,129 +346,131 @@ export default async function api(bot, app) {
                     }
                 });
             }
-        } else {
-            const second = await fetch(`https://discord.com/api/users/@me/guilds/${bot.LEA.g[getNextDep(dep, 1)][0]}/member`, {
-                headers: { authorization: authString }
-            });
+        }
 
-            if (second.ok) {
-                const secondRes = await second.json();
-                passed = secondRes.roles.includes(roles[getNextDep(dep, 1)]) || secondRes.roles.includes(dojRoles[getNextDep(dep, 1)]);
-                if (passed) {
-                    console.log(` < [PS/Login ${second.status}] > Verify: ${secondRes.user.username} verified from ${getNextDep(dep, 1)}`);
-                    cache.push({
-                        expiry: Date.now() + 3 * 60 * 1000,
-                        from: getNextDep(dep, 1),
-                        authorization: authString,
-                        guildID: bot.LEA.g[getNextDep(dep, 1)][0],
-                        user: {
-                            id: secondRes.user.id,
-                            username: secondRes.user.username,
-                            displayName: secondRes.user.global_name,
-                            avatar: secondRes.user.avatar,
-                            banner: secondRes.user.banner
-                        },
-                        member: {
-                            nickname: secondRes.nick,
-                            avatar: secondRes.avatar,
-                            banner: secondRes.banner,
-                            bio: secondRes.bio
-                        }
-                    });
-                    fs.writeFileSync(path.resolve("./db/cache.json"), JSON.stringify(cache, null, 4), "utf-8");
-                    return res.status(200).json({
-                        code: second.status,
-                        passed,
-                        guildID: bot.LEA.g[getNextDep(dep, 1)][0],
-                        user: {
-                            id: secondRes.user.id,
-                            username: secondRes.user.username,
-                            displayName: secondRes.user.global_name,
-                            avatar: secondRes.user.avatar,
-                            banner: secondRes.user.banner
-                        },
-                        member: {
-                            nickname: secondRes.nick,
-                            avatar: secondRes.avatar,
-                            banner: secondRes.banner,
-                            bio: secondRes.bio
-                        }
-                    });
-                } else {
-                    const third = await fetch(`https://discord.com/api/users/@me/guilds/${bot.LEA.g[getNextDep(dep, 2)][0]}/member`, {
-                        headers: { authorization: authString }
-                    });
+        const second = await fetch(`https://discord.com/api/users/@me/guilds/${bot.LEA.g[getNextDep(dep, 1)][0]}/member`, {
+            headers: { authorization: authString }
+        });
 
-                    if (third.ok) {
-                        const thirdRes = await third.json();
-                        passed = thirdRes.roles.includes(roles[getNextDep(dep, 2)]) || thirdRes.roles.includes(dojRoles[getNextDep(dep, 2)]);
-                        if (passed) {
-                            console.log(` < [PS/Login ${third.status}] > Verify: ${thirdRes.user.username} verified from ${getNextDep(dep, 2)}`);
-                            cache.push({
-                                from: dep.toUpperCase(),
-                                expiry: Date.now() + 3 * 60 * 1000,
-                                authorization: authString,
-                                guildID: bot.LEA.g[dep][0],
-                                user: {
-                                    id: thirdRes.user.id,
-                                    username: thirdRes.user.username,
-                                    displayName: thirdRes.user.global_name,
-                                    avatar: thirdRes.user.avatar,
-                                    banner: thirdRes.user.banner
-                                },
-                                member: {
-                                    nickname: thirdRes.nick,
-                                    avatar: thirdRes.avatar,
-                                    banner: thirdRes.banner,
-                                    bio: thirdRes.bio
-                                }
-                            });
-                            fs.writeFileSync(path.resolve("./db/cache.json"), JSON.stringify(cache, null, 4), "utf-8");
-                            return res.status(200).json({
-                                code: first.status,
-                                passed,
-                                guildID: bot.LEA.g[dep][0],
-                                user: {
-                                    id: thirdRes.user.id,
-                                    username: thirdRes.user.username,
-                                    displayName: thirdRes.user.global_name,
-                                    avatar: thirdRes.user.avatar,
-                                    banner: thirdRes.user.banner
-                                },
-                                member: {
-                                    nickname: thirdRes.nick,
-                                    avatar: thirdRes.avatar,
-                                    banner: thirdRes.banner,
-                                    bio: thirdRes.bio
-                                }
-                            });
-                        } else {
-                            console.log(` < [PS/Login ${third.status}] > Verify: ${thirdRes.user.username} has not been verified (not leadership).`);
-                            return res.status(200).json({
-                                code: third.status,
-                                passed,
-                                guildID: bot.LEA.g[getNextDep(dep, 2)][0],
-                                user: {
-                                    id: thirdRes.user.id,
-                                    username: thirdRes.user.username,
-                                    displayName: thirdRes.user.global_name,
-                                    avatar: thirdRes.user.avatar,
-                                    banner: thirdRes.user.banner
-                                },
-                                member: {
-                                    nickname: thirdRes.nick,
-                                    avatar: thirdRes.avatar,
-                                    banner: thirdRes.banner,
-                                    bio: thirdRes.bio
-                                }
-                            });
-                        }
-                    } else {
-                        console.log(` < [PS/Login ${third.status}] > Verify: ` + "XXX" + ` has not been verified (last [${getNextDep(dep, 2)}] verify check failed)`);
-                        return res.status(third.status).json({ code: third.status, passed: false, user: {}, member: {} });
+        if (second.ok) {
+            const secondRes = await second.json();
+            passed = secondRes.roles.includes(roles[getNextDep(dep, 1)]) || secondRes.roles.includes(dojRoles[getNextDep(dep, 1)]);
+
+            if (passed) {
+                console.log(` < [PS/Login ${second.status}] > Verify: ${secondRes.user.username} verified from ${getNextDep(dep, 1)}`);
+                cache.push({
+                    expiry: Date.now() + 3 * 60 * 1000,
+                    from: getNextDep(dep, 1),
+                    authorization: authString,
+                    guildID: bot.LEA.g[getNextDep(dep, 1)][0],
+                    user: {
+                        id: secondRes.user.id,
+                        username: secondRes.user.username,
+                        displayName: secondRes.user.global_name,
+                        avatar: secondRes.user.avatar,
+                        banner: secondRes.user.banner
+                    },
+                    member: {
+                        nickname: secondRes.nick,
+                        avatar: secondRes.avatar,
+                        banner: secondRes.banner,
+                        bio: secondRes.bio
                     }
-                }
+                });
+                fs.writeFileSync(path.resolve("./db/cache.json"), JSON.stringify(cache, null, 4), "utf-8");
+                return res.status(200).json({
+                    code: second.status,
+                    passed,
+                    guildID: bot.LEA.g[getNextDep(dep, 1)][0],
+                    user: {
+                        id: secondRes.user.id,
+                        username: secondRes.user.username,
+                        displayName: secondRes.user.global_name,
+                        avatar: secondRes.user.avatar,
+                        banner: secondRes.user.banner
+                    },
+                    member: {
+                        nickname: secondRes.nick,
+                        avatar: secondRes.avatar,
+                        banner: secondRes.banner,
+                        bio: secondRes.bio
+                    }
+                });
             }
         }
+
+        const third = await fetch(`https://discord.com/api/users/@me/guilds/${bot.LEA.g[getNextDep(dep, 2)][0]}/member`, {
+            headers: { authorization: authString }
+        });
+
+        if (third.ok) {
+            const thirdRes = await third.json();
+            passed = thirdRes.roles.includes(roles[getNextDep(dep, 2)]) || thirdRes.roles.includes(dojRoles[getNextDep(dep, 2)]);
+
+            if (passed) {
+                console.log(` < [PS/Login ${third.status}] > Verify: ${thirdRes.user.username} verified from ${getNextDep(dep, 2)}`);
+                cache.push({
+                    from: dep.toUpperCase(),
+                    expiry: Date.now() + 3 * 60 * 1000,
+                    authorization: authString,
+                    guildID: bot.LEA.g[dep][0],
+                    user: {
+                        id: thirdRes.user.id,
+                        username: thirdRes.user.username,
+                        displayName: thirdRes.user.global_name,
+                        avatar: thirdRes.user.avatar,
+                        banner: thirdRes.user.banner
+                    },
+                    member: {
+                        nickname: thirdRes.nick,
+                        avatar: thirdRes.avatar,
+                        banner: thirdRes.banner,
+                        bio: thirdRes.bio
+                    }
+                });
+                fs.writeFileSync(path.resolve("./db/cache.json"), JSON.stringify(cache, null, 4), "utf-8");
+                return res.status(200).json({
+                    code: first.status,
+                    passed,
+                    guildID: bot.LEA.g[dep][0],
+                    user: {
+                        id: thirdRes.user.id,
+                        username: thirdRes.user.username,
+                        displayName: thirdRes.user.global_name,
+                        avatar: thirdRes.user.avatar,
+                        banner: thirdRes.user.banner
+                    },
+                    member: {
+                        nickname: thirdRes.nick,
+                        avatar: thirdRes.avatar,
+                        banner: thirdRes.banner,
+                        bio: thirdRes.bio
+                    }
+                });
+            } else {
+                console.log(` < [PS/Login ${third.status}] > Verify: ${thirdRes.user.username} has not been verified (not leadership).`);
+                return res.status(200).json({
+                    code: third.status,
+                    passed,
+                    guildID: bot.LEA.g[getNextDep(dep, 2)][0],
+                    user: {
+                        id: thirdRes.user.id,
+                        username: thirdRes.user.username,
+                        displayName: thirdRes.user.global_name,
+                        avatar: thirdRes.user.avatar,
+                        banner: thirdRes.user.banner
+                    },
+                    member: {
+                        nickname: thirdRes.nick,
+                        avatar: thirdRes.avatar,
+                        banner: thirdRes.banner,
+                        bio: thirdRes.bio
+                    }
+                });
+            }
+        }
+
+        console.log(` < [PS/Login ${third.status}] > Verify: ` + "XXX" + ` has not been verified (last [${getNextDep(dep, 2)}] verify check failed)`);
+        return res.status(403).json({ code: third.status, passed: false, user: {}, member: {} });
     });
 }
