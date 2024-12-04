@@ -4,6 +4,7 @@ import { defineConfig } from 'vitepress';
 export default defineConfig({
     title: "Příručka LEA",
     description: "VegasRP",
+    base: '/docs/',
     themeConfig: {
 
         // https://vitepress.dev/reference/default-theme-config
@@ -46,7 +47,10 @@ export default defineConfig({
                 text: 'Bot', link: '/bot',
                 activeMatch: '/bot/'
             },
-            { text: 'Tabulky', link: 'https://leabot.petyxbron.cz/' }
+            {
+                text: 'Tabulky', link: 'https://leabot.petyxbron.cz/',
+                target: '_self',
+            }
         ],
 
         sidebar: {
@@ -119,5 +123,5 @@ export default defineConfig({
     lastUpdated: true,
     cleanUrls: true,
     metaChunk: true,
-    head: [['link', { rel: 'icon', href: '/media/leabot.png' }]]
+    head: [['link', { rel: 'icon', href: '/docs/media/leabot.png' }]]
 });

@@ -47,6 +47,16 @@
 					<img id="darkModeImage" :class="{ darkMode }" src="/media/icon/darkmode.png" width="20" height="20">
 				</button>
 				<button>
+					<a target="_self" href="/docs">
+						<img id="docsImage" :class="{ darkMode }" src="/media/icon/book.png" width="20" height="20">
+					</a>
+				</button>
+				<button>
+					<a target="_blank" href="https://discord.com/invite/PYTqqhWad2">
+						<img id="discordImage" :class="{ darkMode }" src="/media/icon/discord.png" width="20" height="20">
+					</a>
+				</button>
+				<button>
 					<a target="_blank" href="https://github.com/Azator-Entertainment/LEA-bot">
 						<img id="githubImage" :class="{ darkMode }" src="/media/icon/github.png" width="20" height="20">
 					</a>
