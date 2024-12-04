@@ -2,7 +2,7 @@
 - Vytvořil **[@PetyXbron aka b1ngo](https://github.com/PetyXbron/)**
 - Zdrojový kód je častěčně veřejný na platformě GitHub.
 - LEA Bot primárně slouží pouze pro smyšlené policejní sbory **Los Santos Police Department** a **Los Santos Sheriff Department** FiveM serveru **[VegasRP by Nolimit](https://nlmt.cc/)**. Jeho jiné používání není doporučeno a je nutné se řídit podmínkami.
-- Používáním dodržujete **[licenci](/LICENSE.md)**
+- Používáním dodržujete **[licenci](./license.md)**
 
 [![Creative Commons License](https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-nd/4.0/)
 
@@ -30,8 +30,8 @@ LEA Bot veřejný projekt a zároveň jeho kopie je přísně zakázáno k použ
 - ❌ zneužívání případných chyb a nedostatků
 
 ### Provozování kopie
-Každý provozovatel musí znát a dodržovat **[Podmínky Použití](/docs/terms-of-use.md)** a **[Zásady Ochrany Osobních Údajů](/docs/privacy-policy.md)**.
-Především je nutné se řídit **[licencí projektu](/LICENSE.md)**. Ve zkratce:
+Každý provozovatel musí znát a dodržovat **[Podmínky Použití](./terms-of-use.md)** a **[Zásady Ochrany Osobních Údajů](./privacy-policy.md)**.
+Především je nutné se řídit **[licencí projektu](./license.md)**. Ve zkratce:
 
 > Toto dílo je licencováno pod [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](http://creativecommons.org/licenses/by-nc-nd/4.0/).
 Kód můžete volně kopírovat a dále distribuovat na jakémkoli médiu nebo formátu. Při sdílení musíte poskytnout náležitý kredit / zdroj. Materiál nemůžete použít pro komerční účely. Pokud materiál remixujete, modifikujete, transformujete nebo na něm stavíte další práci, nesmíte upravený materiál dále distribuovat.

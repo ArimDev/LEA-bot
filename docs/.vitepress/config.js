@@ -8,11 +8,32 @@ export default defineConfig({
 
         // https://vitepress.dev/reference/default-theme-config
 
-
-        logo: '/assets/leabot.png',
+        logo: '/media/leabot.png',
 
         search: {
-            provider: 'local'
+            provider: 'local',
+            options: {
+                locales: {
+                    root: {
+                        translations: {
+                            button: {
+                                buttonText: 'Hledat',
+                            },
+                            modal: {
+                                displayDetails: 'Zobrazení',
+                                resetButtonTitle: 'Smazat',
+                                backButtonTitle: 'Zpět',
+                                noResultsText: 'Žádné výsledky pro',
+                                footer: {
+                                    selectText: 'Přejít na',
+                                    navigateText: 'Výběr',
+                                    closeText: 'Zavřít'
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         },
 
         nav: [
@@ -93,9 +114,10 @@ export default defineConfig({
         footer: {
             copyright: '© 2024 LEA-Bot vytvořil PetyXbron'
         }
+
     },
     lastUpdated: true,
     cleanUrls: true,
     metaChunk: true,
-    head: [['link', { rel: 'icon', href: '/assets/leabot.png' }]]
+    head: [['link', { rel: 'icon', href: '/media/leabot.png' }]]
 });
