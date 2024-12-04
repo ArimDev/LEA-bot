@@ -6,7 +6,7 @@ import { dg } from "../../functions/logSystem.js";
 
 export default async function run(bot, i) {
     if (!checkDB(i.user.id))
-        return i.reply({ content: "> 🛑 **Před zapsáním __faktury__ tě musí admin přilásit do DB.**\nZalož si vlastní složku v <#1139311793555116172> a počkej na správce DB.", ephemeral: true });
+        return i.reply({ content: "> 🛑 **Před zapsáním __faktury__ tě musí admin přilásit do DB.**", ephemeral: true });
 
     if (!checkEVENT(i.user.id)) {
         const worker = getDB(i.user.id).data;
@@ -76,7 +76,7 @@ export default async function run(bot, i) {
 
     i.reply({ embeds: [invoiceEmbed], ephemeral: true });
 
-    const ch = await i.guild.channels.fetch("1287863043883008010");
+    const ch = await i.guild.channels.fetch("1313926740854313022");
     const invoiceEmbedPublic = new EmbedBuilder()
         .setAuthor({ name: i.member.displayName, iconURL: i.member.displayAvatarURL() })
         .setTitle("Faktura #" + id.toString())

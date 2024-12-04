@@ -38,11 +38,11 @@ export default async function run(bot, i) {
     i.guild.fetch();
     const admin = i.member;
     if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
-    if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
+    if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1267541873451339806")) passed = true; //Leadership
     }
 
-    if (!bot.LEA.g.LSSD.includes(i.guild.id)) return i.reply({
+    if (!bot.LEA.g.SAHP.includes(i.guild.id)) return i.reply({
         content: "> 🛑 **Příkazy /event nejsou aktuálně dostupné pro " + i.guild.name + ".**",
         ephemeral: true
     });
@@ -129,7 +129,7 @@ export default async function run(bot, i) {
         i.reply({ embeds: [summaryEmbed], files: att, ephemeral: true });
 
         return console.log(" < [EVE/Souhrn] >  " + i.member.displayName + " zobrazil(a) souhrn " + member.displayName);
-    } else if (sub === "žebříček") { //Žěbříček
+    } else if (sub === "žebříček") { //Žebříček
         //if (!passed) return i.reply({ content: "> 🛑 **Žebříček je už skrytý! To je napětí...**", ephemeral: true });
 
         let users = [];
