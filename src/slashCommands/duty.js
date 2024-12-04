@@ -49,5 +49,21 @@ export default async function run(bot, i) {
 
     modal.addComponents(actionRow0, actionRow1, actionRow2);
 
+    if (
+        i.member.roles.cache.has("xxx" /* MISSING ID */) //LSPD cadet
+        || i.member.roles.cache.has("1267589609378812129") //LSSD trainee
+        || i.member.roles.cache.has("1301163398540689497") //SAHP trainee
+    ) {
+        const colleaguesInput = new TextInputBuilder()
+            .setCustomId("kolega")
+            .setLabel("Kolegové")
+            .setStyle(TextInputStyle.Short)
+            .setPlaceholder("Tango- 1, Sam-9")
+            .setRequired(false);
+
+        const actionRow3 = new ActionRowBuilder().addComponents(colleaguesInput);
+        modal.addComponents(actionRow3);
+    }
+
     i.showModal(modal);
 };

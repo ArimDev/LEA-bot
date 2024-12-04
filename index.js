@@ -29,6 +29,7 @@ let bot = new Client({
 });
 
 bot.slashes = new Collection();
+bot.ints = new Map();
 bot.LEA = {
     c: {
         LEAbot: "#3a9a97",
@@ -56,11 +57,9 @@ bot.LEA = {
         LSCSO: "<:LSCSO:1266078681479254176>"
     },
     g: {
-        LSPD: [
-            "1154446248934387828"
-        ],
+        LSPD: [],
         LSSD: [
-            "1139266097921675345"
+            "1154446248934387828"
         ],
         SAHP: [
             "1301163398515396668"
@@ -68,9 +67,10 @@ bot.LEA = {
     }
 };
 
-import { events, commands } from "./src/functions/register.js";
+import { events, commands, interactions } from "./src/functions/register.js";
 events(bot);
 commands(bot);
+interactions(bot);
 
 bot.login(secret().parsed.botToken);
 

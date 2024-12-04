@@ -56,6 +56,10 @@
     filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.2));
 }
 
+[data-theme="dark"] .errorMessage img {
+    filter: invert(1) drop-shadow(5px 5px 10px rgba(255, 255, 255, 0.1));
+}
+
 tbody tr:hover {
     background: #ffc935;
 }
@@ -68,6 +72,7 @@ table {
     border-radius: 10px;
     background-color: #ffffff;
     width: 100%;
+    color: var(--bgColor);
 }
 
 td {
@@ -132,4 +137,9 @@ input[type="checkbox"] {
     width: 20px;
     height: 20px;
     cursor: not-allowed;
+}
+
+.tablesBadge {
+    width: 65px;
+    height: 65px;
 }

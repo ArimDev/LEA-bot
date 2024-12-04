@@ -18,10 +18,10 @@ export default async function run(bot, i) {
     const admin = i.member;
     if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
     if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("1267541873451339806")) passed = true; //Leadership
+        if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true; //Leadership
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("1139267137651884072")) passed = true; //Leadership
-        if (admin.roles.cache.has("1139295201282764882")) passed = true; //FTO Commander
+        if (admin.roles.cache.has("1267541873451339806")) passed = true; //Leadership
+        if (admin.roles.cache.has("1251504025610747966")) passed = true; //FTO Commander
     } else if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1301163398557339686")) passed = true; //Leadership
     }
@@ -75,7 +75,7 @@ export default async function run(bot, i) {
 
             i.editReply({ content: `**Tenhle záznam (<@${user.id}>) byl vymazán z DB!**\n-# *Pozor, bot neodebral role!*`, files: [loc], components: [] });
 
-            dcLog(bot, workerGuildID, c.member,
+            await dcLog(bot, workerGuildID, c.member,
                 {
                     title: "Smazání z DB",
                     description:
@@ -89,6 +89,7 @@ export default async function run(bot, i) {
             );
 
             fs.unlinkSync(loc);
+
             return console.log(" < [CMD/DB] >  " + c.member.displayName + ` smazal(a) DB záznam ${user.id}.json`);
         });
 
@@ -118,7 +119,8 @@ export default async function run(bot, i) {
         await i.editReply({ content: `**Tenhle záznam (<@${user.id}>) byl vymazán z DB!**\n-# *Pozor, bot neodebral role!*`, files: [loc], ephemeral: true });
 
         console.log(" < [CMD/DB] >  " + i.member.displayName + ` smazal(a) DB záznam ${user.id}.json`);
-        dcLog(bot, i.guild.id, i.member,
+
+        await dcLog(bot, i.guild.id, i.member,
             {
                 title: "Smazání z DB",
                 description:
@@ -130,7 +132,8 @@ export default async function run(bot, i) {
                 file: loc
             }
         );
-        simpleLog(bot, i.guild.id,
+
+        await simpleLog(bot, i.guild.id,
             {
                 author: { name: `[${worker.radio}] ${worker.name}`, iconURL: member ? member.displayAvatarURL() : `https://cdn.discordapp.com/embed/avatars/${Math.floor(Math.random() * 6)}.png` },
                 title: "Vyloučení",
@@ -138,6 +141,7 @@ export default async function run(bot, i) {
                 footer: { text: i.member.displayName, iconURL: i.member.displayAvatarURL() }
             }
         );
+
         return fs.unlinkSync(loc);
     }
 };

@@ -43,16 +43,16 @@
     },
     {
         "rank": "Sergeant II",
-        "slots": 4,
+        "slots": 2,
         "firstBadge": 4018,
         "firstCallsign": "John-1",
         "title": "SERGEANT"
     },
     {
         "rank": "Sergeant I",
-        "slots": 6,
-        "firstBadge": 4022,
-        "firstCallsign": "John-5",
+        "slots": 8,
+        "firstBadge": 4020,
+        "firstCallsign": "John-3",
         "title": false
     },
     {

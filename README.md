@@ -13,7 +13,7 @@
 
 *Český Discord bot pro Law Enforcement Agencies na GTA V FiveM roleplay serveru [VegasRP by Nolimit](https://nlmt.cc/).*
 
-*Aktuálně podporuje sbory LSPD <img src="https://i.imgur.com/gfL0fGf.png" width="15" height="15"/>, LSSD <img src="https://i.imgur.com/X3cH2iu.png" width="15" height="15"/> a SAHP <img src="https://i.imgur.com/xgFoKuX.png" width="15" height="15"/>.*
+*Aktuálně podporuje sbory LSSD <img src="https://i.imgur.com/X3cH2iu.png" width="15" height="15"/> a SAHP <img src="https://i.imgur.com/xgFoKuX.png" width="15" height="15"/>.*
 
 Funkce:
 - služby zaměstnanců (zápis, úprava, smazání, přehled)
@@ -22,7 +22,6 @@ Funkce:
 - blacklistu (zápis, úprava, smazání, přehled)
 - webové tabulky *(Vue.js a Express.js s API)*
     - LSSD tabulky
-    - LSPD tabulky
     - SAHP tabulky
     - blacklist (ze seznamu v DB)
     - *a vedlejší informační stránky*

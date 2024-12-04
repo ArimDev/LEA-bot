@@ -14,7 +14,8 @@ export const slash = new SlashCommandBuilder()
             .addStringOption(option =>
                 option.setName("reason")
                     .setDescription("Důvod přidání na blacklist")
-                    .setRequired(true))
+                    .setRequired(true)
+                    .setMaxLength(100))
             .addUserOption(option =>
                 option.setName("discord")
                     .setDescription("Přidat Discord uživatele")
@@ -50,10 +51,10 @@ export default async function run(bot, i) {
     const admin = await i.member;
     if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
     if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("1267541873451339806")) passed = true; //Leadership
+        if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true; //Leadership
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("1139267137651884072")) passed = true; //Leadership
-        if (admin.roles.cache.has("1139295201282764882")) passed = true; //FTO Commander
+        if (admin.roles.cache.has("1267541873451339806")) passed = true; //Leadership
+        if (admin.roles.cache.has("1251504025610747966")) passed = true; //FTO Commander
     } else if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1301163398557339686")) passed = true; //Leadership
     }
@@ -260,6 +261,7 @@ export default async function run(bot, i) {
             .setStyle(TextInputStyle.Short)
             .setValue(bl.from.reason || "")
             .setPlaceholder(bl.from.reason || "")
+            .setMaxLength(100)
             .setRequired(true);
 
         const actionRow0 = new ActionRowBuilder().addComponents(usernameInput);

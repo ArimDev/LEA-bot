@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th scope="col" rowspan="2" style="text-align: center;">
-                    <img src="../assets/logo/SAHP.png" width="65" height="65" alt="Odznak SAHP" />
+                    <img class="tablesBadge" src="../assets/logo/SAHP.png" alt="Odznak SAHP" /> <!-- MĚNIT VELIKOST NA TELEFONU -->
                 </th>
                 <th scope="col" rowspan="2">Jméno</th>
                 <th scope="col" rowspan="2">Odznak</th>
@@ -72,18 +72,18 @@
         <div v-if="!loaded" class="loadingMessage">
             <div class="loader"></div>
         </div>
-        <div v-else-if="!isLoggedIn" class="loginMessage">
-            <img src="../assets/icon/key.png" width="125">
-            <h1>Nepřihlášen(a)!</h1>
-            <p>Nejsi přihlášen(a) k ověření přístupu.</p>
-        </div>
-        <div v-else-if="isLoggedIn && !hasAccess" class="noAccessMessage">
-            <img src="../assets/icon/lock.png" width="125">
+        <div v-else-if="isLoggedIn && !hasAccess && !fetchError" class="noAccessMessage">
+            <img src="/media/icon/lock.png" width="125">
             <h1>Přístup zamítnut!</h1>
             <p>Nemáš povolení zobrazit tento obsah.</p>
         </div>
+        <div v-else-if="!isLoggedIn" class="loginMessage">
+            <img src="/media/icon/key.png" width="125">
+            <h1>Nepřihlášen(a)!</h1>
+            <p>Nejsi přihlášen(a) k ověření přístupu.</p>
+        </div>
         <div v-else-if="fetchError" class="errorMessage">
-            <img src="../assets/icon/server-error.png" width="125">
+            <img src="/media/icon/server-error.png" width="125">
             <h1>Chyba!</h1>
             <p v-html="fetchErrorReason"></p>
         </div>
@@ -92,6 +92,7 @@
 
 <script setup>
 import '../assets/style/staffTables.css';
+import '../assets/style/staffTablesMedia.css';
 import axios from "axios";
 import { ref, onMounted } from "vue";
 
@@ -140,8 +141,14 @@ async function fetchWorkers() {
             return workers;
         }
     } catch (error) {
+        if (error.response?.status === 403) {
+            console.log(`[LEA-Bot / API Login] Ale ne! Nemáš povolen přístup k datům. (403)`);
+            hasAccess.value = false;
+            return [];
+        }
+
         console.log(`[LEA-Bot / API Login] Chyba při kontaktování serveru! (${error.response?.status || "500"})`);
-        if (error.response?.status === 403) hasAccess.value = false;
+
         fetchError.value = true;
         fetchErrorReason.value = `Kontakt s databází selhal!<br>(${error.response?.status || "500"})`;
         return [];
@@ -256,14 +263,18 @@ function calcCheckbox(workerData, method) {
 <style scoped>
 tbody tr:hover {
     background: #b79e49;
+}
+
+tbody tr:hover td {
     color: white;
 }
 
 table {
-    background-color: white;
+    background-color: var(--contentColor);
 }
 
 td {
+    color: var(--textColor);
     border: 1px solid black;
 }
 

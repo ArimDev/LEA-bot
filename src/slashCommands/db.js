@@ -39,10 +39,10 @@ export default async function run(bot, i) {
     const admin = i.member;
     if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
     if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("1267541873451339806")) passed = true; //Leadership
+        if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true; //Leadership
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("1139267137651884072")) passed = true; //Leadership
-        if (admin.roles.cache.has("1139295201282764882")) passed = true; //FTO Commander
+        if (admin.roles.cache.has("1267541873451339806")) passed = true; //Leadership
+        if (admin.roles.cache.has("1251504025610747966")) passed = true; //FTO Commander
     } else if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1301163398557339686")) passed = true; //Leadership
     }
@@ -107,7 +107,7 @@ export default async function run(bot, i) {
         if (!bot.LEA.g[gotDB.guildName].includes(i.guild.id)) return i.reply({ content: `> 🛑 **<@${user.id}> je členem \`${gotDB.guildName}\`!** (Nemůžeš ho povýšit)`, ephemeral: true });
 
         const modal = new ModalBuilder()
-            .setCustomId("rankUpModal_" + visible)
+            .setCustomId("rankupModal_" + visible)
             .setTitle("LEA | Povýšení");
 
         const idInput = new TextInputBuilder()
@@ -242,15 +242,13 @@ export default async function run(bot, i) {
                 filter, max: 1, time: 30000
             });
 
-            collector.on('collect', c => {
+            collector.on('collect', async c => {
                 worker = gotDB.data;
                 workerGuildID = bot.LEA.g[gotDB.guildName][0];
 
-                fs.unlinkSync(loc);
-
                 i.editReply({ content: `**Tenhle záznam (<@${user.id}>) byl vymazán z DB!**\n-# *Pozor, bot neodebral role!*`, files: [loc], components: [] });
 
-                dcLog(bot, workerGuildID, c.member,
+                await dcLog(bot, workerGuildID, c.member,
                     {
                         title: "Smazání z DB",
                         description:
@@ -262,6 +260,8 @@ export default async function run(bot, i) {
                         file: loc
                     }
                 );
+
+                fs.unlinkSync(loc);
 
                 return console.log(" < [CMD/DB] >  " + c.member.displayName + ` smazal(a) DB záznam ${user.id}.json`);
             });
@@ -292,6 +292,7 @@ export default async function run(bot, i) {
             await i.editReply({ content: `**Tenhle záznam (<@${user.id}>) byl vymazán z DB!**\n-# *Pozor, bot neodebral role!*`, files: [loc], ephemeral: true });
 
             console.log(" < [CMD/DB] >  " + i.member.displayName + ` smazal(a) DB záznam ${user.id}.json`);
+
             await dcLog(bot, i.guild.id, i.member,
                 {
                     title: "Smazání z DB",
