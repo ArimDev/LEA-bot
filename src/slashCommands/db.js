@@ -1,8 +1,8 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ModalBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, ModalBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
 import fs from "fs";
 import path from "path";
-import { checkDB, getDB, getServer } from "../../src/functions/db.js";
-import { dcLog, simpleLog } from "../../src/functions/logSystem.js";
+import { checkDB, getDB, getServer } from "../functions/db.js";
+import { dcLog, simpleLog } from "../functions/logSystem.js";
 
 export const slash = new SlashCommandBuilder()
     .setName("db")
@@ -212,7 +212,7 @@ export default async function run(bot, i) {
         if (!gotDB.exists) return i.reply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
         const serverDB = getServer(i.guild.id);
 
-        let loc, worker, workerGuildID;
+        let loc, worker, guild;
         loc = path.resolve(`./db/${gotDB.guildName}`) + "/" + user.id + ".json";
 
         const admins = [
@@ -220,9 +220,12 @@ export default async function run(bot, i) {
             "846451292388851722"/*aldix_eu*/, "343386988000444417"/*cenovka*/
         ];
 
-        await i.deferReply({ ephemeral: true });
+        await i.deferReply({ ephemeral: !visible });
 
-        if (serverDB.name !== gotDB.guildName) {
+        let passedFromOther = true;
+        if (serverDB.id !== gotDB.guild) {
+            passedFromOther = false;
+
             if (!admins.includes(admin.id))
                 return i.editReply({ content: "> 🛑 **<@" + user.id + "> je v jiném sboru. Nemůžeš ho odebrat!**", ephemeral: true });
 
@@ -234,7 +237,13 @@ export default async function run(bot, i) {
                         .setStyle(ButtonStyle.Danger)
                         .setEmoji('🛑'),
                 );
-            const rpl = await i.editReply({ content: "> ⚠️ **<@" + user.id + "> je v DB jiného sboru. Opravdu chceš záznam odebrat?** *(30s na odpověď)*", ephemeral: true, components: [row] });
+
+            const rpl = await i.editReply(
+                {
+                    content: "> ⚠️ **<@" + user.id + "> je v DB jiného sboru. Opravdu chceš záznam odebrat?** *(30s na odpověď)*",
+                    ephemeral: true, components: [row]
+                }
+            );
 
             const filter = i => i.customId === 'confirmOtherSborDelete' && i.user.id === admin.id;
 
@@ -242,79 +251,90 @@ export default async function run(bot, i) {
                 filter, max: 1, time: 30000
             });
 
-            collector.on('collect', async c => {
-                worker = gotDB.data;
-                workerGuildID = bot.LEA.g[gotDB.guildName][0];
-
-                i.editReply({ content: `**Tenhle záznam (<@${user.id}>) byl vymazán z DB!**\n-# *Pozor, bot neodebral role!*`, files: [loc], components: [] });
-
-                await dcLog(bot, workerGuildID, c.member,
-                    {
-                        title: "Smazání z DB",
-                        description:
-                            `**<@${c.user.id}> smazal <@${user.id}> z DB.**`
-                            + `\n> **Jméno:** \`${worker.name}\``
-                            + `\n> **Volačka:** \`${worker.radio}\``
-                            + `\n> **Odznak:** \`${worker.badge}\``,
-                        color: "#ff0000",
-                        file: loc
-                    }
-                );
-
-                fs.unlinkSync(loc);
-
-                return console.log(" < [CMD/DB] >  " + c.member.displayName + ` smazal(a) DB záznam ${user.id}.json`);
-            });
-
-            collector.on('error', () => {
-                return i.editReply({ content: "> 🛑 **Čas vypršel. Záznam nebyl smazán.**", components: [] });
-            });
+            collector.on('error', () =>
+                i.editReply({ content: "> 🛑 **Čas vypršel. Záznam nebyl smazán.**", components: [] })
+            );
 
             collector.on('end', collected => {
                 if (collected.size === 0) return i.editReply({ content: "> 🛑 **Čas vypršel. Záznam nebyl smazán.**", components: [] });
             });
-        } else {
-            worker = JSON.parse(fs.readFileSync(loc, "utf-8"));
-            let member;
-            try {
-                member = await i.guild.members.fetch(user.id);
-            } catch (err) {
-                member = undefined;
-            }
 
-            if (bot.LEA.g.LSPD.includes(i.guild.id)) {
-                try {
-                    const oldFolder = await i.guild.channels.fetch(worker.folder);
-                    await oldFolder.delete();
-                } catch { }
-            }
-
-            await i.editReply({ content: `**Tenhle záznam (<@${user.id}>) byl vymazán z DB!**\n-# *Pozor, bot neodebral role!*`, files: [loc], ephemeral: true });
-
-            console.log(" < [CMD/DB] >  " + i.member.displayName + ` smazal(a) DB záznam ${user.id}.json`);
-
-            await dcLog(bot, i.guild.id, i.member,
-                {
-                    title: "Smazání z DB",
-                    description:
-                        `**<@${i.user.id}> smazal <@${user.id}> z DB.**`
-                        + `\n> **Jméno:** \`${worker.name}\``
-                        + `\n> **Volačka:** \`${worker.radio}\``
-                        + `\n> **Odznak:** \`${worker.badge}\``,
-                    color: "#ff0000",
-                    file: loc
-                }
-            );
-            await simpleLog(bot, i.guild.id,
-                {
-                    author: { name: `[${worker.radio}] ${worker.name}`, iconURL: member ? member.displayAvatarURL() : `https://cdn.discordapp.com/embed/avatars/${Math.floor(Math.random() * 6)}.png` },
-                    title: "Vyloučení",
-                    color: "#ff0000",
-                    footer: { text: i.member.displayName, iconURL: i.member.displayAvatarURL() }
-                }
-            );
-
-            return fs.unlinkSync(loc);
+            collector.on('collect', () => {
+                return passedFromOther = true;
+            });
         }
+
+        if (!passedFromOther) return;
+
+        worker = gotDB.data;
+        guild = await bot.guilds.fetch(bot.LEA.g[gotDB.guildName][0]);
+
+        let member;
+        try {
+            member = await guild.members.fetch(user.id);
+        } catch (err) {
+            member = undefined;
+        }
+
+        let removedRoles, removedNickname, removedFolder;
+        try {
+            const folder = await guild.channels.fetch(worker.folder);
+            await folder.delete();
+            removedFolder = true;
+        } catch { removedFolder = false; }
+        if (member) try { await member.roles.remove(member.roles.cache); removedRoles = true; } catch { removedRoles = false; }
+        if (member) try { await member.setNickname(null); removedNickname = true; } catch { removedNickname = false; }
+
+        const deleteEmbed = new EmbedBuilder()
+            .setTitle("Officer vyhozen!")
+            .setDescription(
+                `<@${user.id}> byl(a) odebrána(a) z databáze.`
+                + "\n> **Databáze smazána:** ✅"
+                + "\n> **Složka smazána:**  " + (removedFolder ? "✅" : "❌")
+                + "\n> **Všechny role odebrány:** " + (removedRoles ? "✅" : "❌")
+                + "\n> **Přezdívka resetována:** " + (removedNickname ? "✅" : "❌")
+            )
+            .setColor(getServer(guild.id).color)
+            .setFooter(getServer(guild.id).footer);
+
+        await i.editReply({ content: "", embeds: [deleteEmbed], files: [loc], components: [], ephemeral: !visible });
+
+        if (!member) i.followUp({
+            content: "*Role a přezdívka nebyly vymazány protože officer již není na tomhle serveru.*",
+            ephemeral: true
+        });
+
+        if (member && (!removedRoles || !removedNickname)) i.followUp({
+            content:
+                "*Role a/nebo přezdívka nebyly vymazány protože bot nemá práva.*"
+                + "\n-# *Pravděpodobně to je vysoce umístěný člen.*",
+            ephemeral: true
+        });
+
+        await dcLog(bot, guild.id, member || user,
+            {
+                title: "Smazání z DB",
+                description:
+                    `**<@${admin.id}> smazal <@${user.id}> z DB.**`
+                    + `\n> **Jméno:** \`${worker.name}\``
+                    + `\n> **Volačka:** \`${worker.radio}\``
+                    + `\n> **Odznak:** \`${worker.badge}\``,
+                color: "#ff0000",
+                file: loc
+            }
+        );
+
+        await simpleLog(bot, guild.id,
+            {
+                author: { name: `[${worker.radio}] ${worker.name}`, iconURL: member ? member.displayAvatarURL() : `https://cdn.discordapp.com/embed/avatars/${Math.floor(Math.random() * 6)}.png` },
+                title: "Vyloučení",
+                color: "#ff0000",
+                footer: { text: i.member.displayName, iconURL: i.member.displayAvatarURL() }
+            }
+        );
+
+        fs.unlinkSync(loc);
+
+        return console.log(" < [CMD/DB] >  " + user.displayName + ` smazal(a) DB záznam ${user.id}.json`);
     }
 };
