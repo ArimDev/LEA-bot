@@ -22,7 +22,7 @@
 ## 10-70 - Útěk pěšky (Foot Pursuit)
 - Zahájení:
   - Nastává často po 10-80.
-  - Příklad hlášení: „[Volací znak], 10-70, 10-20 [poloha], osoba [popis], směr [světová strana].“
+  - Příklad hlášení: „`[Volací znak]`, 10-70, 10-20 `[poloha]`, osoba `[popis]`, směr `[světová strana]`.“
 - Pravidla:
   - Dbát na bezpečnost sebe i okolních obyvatel.
   - Hlášení polohy (10-20) a informací o suspectovi (10-43).
