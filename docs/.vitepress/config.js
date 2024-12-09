@@ -11,6 +11,10 @@ export default defineConfig({
 
         logo: '/media/leabot.png',
 
+        outline: {
+            label: "Obsah stránky"
+        },
+
         search: {
             provider: 'local',
             options: {
@@ -40,11 +44,11 @@ export default defineConfig({
         nav: [
             { text: 'Home', link: '/' },
             {
-                text: 'Návody', link: '/navody',
+                text: 'Návody', link: '/navody/pravidla',
                 activeMatch: '/navody/'
             },
             {
-                text: 'Bot', link: '/bot',
+                text: 'Bot', link: '/bot/uvod',
                 activeMatch: '/bot/'
             },
             {
@@ -86,6 +90,7 @@ export default defineConfig({
                         text: 'Základní',
                         collapsed: false,
                         items: [
+                            { text: 'Úvod', link: 'uvod' },
                             { text: 'Zápis služby', link: 'sluzby' },
                             { text: 'Omlouvání se', link: 'omluvenky' }
                         ]

@@ -1,6 +1,10 @@
-# Tresty SAHP
+# Tresty SAHP & LSSD
+
+Tyhle výchovné tresty platí pro sbory **San Andreas Highway Patrol** a **Los Santos Sheriff Department**.
 
 Za malý prohřešek můžete obdržet warn. Celkově můžete mít maximálně 2 warny, poté následuje degradace nebo vyhazov.
+
+## Seznam finačních sankcí
 
 1. **Nevhodný vzhled (dredy, nevhodná tetování, úprava vlasů)**
    - Warn a/nebo `50.000 $`
