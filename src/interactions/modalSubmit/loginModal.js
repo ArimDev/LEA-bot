@@ -106,7 +106,7 @@ export default async function run(bot, i) {
                 + "\n\n**Zde si povinně zapisujete časy služeb a případné omluvenky.**"
                 + "\n\nZápis probíhá pomocí bota **LEA-Bot**."
                 + "\n**Službu si zapisujete pomocí </duty:1170376396678377595> a omluvenku přes </omluvenka:1170382276492800131>.**"
-                + "\n\nV případě problémů, použijte <#1203634831284772864> nebo kontaktujte <@411436203330502658>."
+                + "\n\nV případě problémů, použijte <#MISSING ID> nebo kontaktujte <@411436203330502658>."
             )
             .setThumbnail(bot.LEA.i.LSPD)
             .setColor(getServer(i.guild.id).color)
@@ -182,7 +182,7 @@ export default async function run(bot, i) {
                 + "\n\n**Zde si povinně zapisujete časy služeb a případné omluvenky.**"
                 + "\n\nZápis probíhá pomocí bota **LEA-Bot**."
                 + "\n**Službu si zapisujete pomocí </duty:1170376396678377595> a omluvenku přes </omluvenka:1170382276492800131>.**"
-                + "\n\nV případě problémů, použijte <#1139284046388674610> nebo kontaktujte <@411436203330502658>."
+                + "\n\nV případě problémů, použijte <#1203634831284772864> nebo kontaktujte <@411436203330502658>."
             )
             .setThumbnail(bot.LEA.i.LSSD)
             .setColor(getServer(i.guild.id).color)
