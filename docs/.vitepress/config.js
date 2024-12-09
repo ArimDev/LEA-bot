@@ -60,8 +60,8 @@ export default defineConfig({
                         text: 'Pravidla',
                         collapsed: false,
                         items: [
-                            { text: 'Etický kodex', link: 'kodex' },
-                            { text: 'Pravidla sboru', link: 'pravidla-sboru' },
+                            { text: 'Interní pravidla LEA', link: 'pravidla' },
+                            { text: 'Výchovné tresty', link: 'tresty' },
                             { text: 'Vstup do kanceláře', link: 'kancelar' },
                             { text: 'Povinná výbava', link: 'vybava' }
                         ]
@@ -75,7 +75,7 @@ export default defineConfig({
                             { text: 'Traffic stop (10-11)', link: 'traffic-stop' },
                             { text: 'Stíhání (10-80 a 10-70)', link: 'stihani' },
                             { text: 'Fellony stop', link: 'fellony-stop' },
-                            { text: 'Loupeže a přepaení (10-68)', link: 'loupeze' }
+                            { text: 'Loupeže a přepadení (10-68)', link: 'loupeze' }
                         ]
                     },
                 ]

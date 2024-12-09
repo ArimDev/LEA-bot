@@ -1,19 +1,19 @@
-﻿
+﻿# VSTUP DO KANCELÁŘE
 
+## PŘEDVOLÁNÍ
 
-# Formální vstup do kanceláře
- __PŘI PŘEDVOLÁNÍ__
-  Na vysílačce jste vyzván, ať se dostavíte do kanceláře. Zaklepete 
-  • vyčkáváte na povolení ke vstupu do kanceláře Představíte se
-  • Oslovení, hodnost, jméno, žádost 
-   • Příklad: “Dobrý den pane Kapitáne, Police Officer III Peter Simpson dostavil jsem se na Váš rozkaz pane” Následný odchod 
-   • Oslovení, žádost Příklad: “Pane Kapitáne, dovolte mi odejít
-    
-   __PŘÍCHOD BEZ PŘEDVOLÁNÍ__
-    Postup se neliší, jediné v čem je rozdíl je v žádosti. 
-    • Oslovení, hodnost, jméno, žádost 
-    • Příklad: "Dobrý den pane Kapitáne, Police Officer III Peter Simpson dovolte mi promluvit..” 
-    __PŘÍCHOD VE VÍCE LIDECH__ 
-    •Mluví nejvyšší hodnost z těch lidí co vstupuje 
-    • V případě totožných hodnostní mluví osoba, která vstupuje jako první
-    • Příklad: "Dobrý den pane Kapitáne, Police Officer III Peter Simpson a další [(číslo množství lidí vstupujících do kanceláře)], dovolte mi promluvit." Zbytek zůstává totožné s předchozími příklady.
+* 1. Zaklepete.
+* 2. Počkáte, než Vám vyšší hodnot povolí vstup.
+* 3. Pozdravíte nejvyšší hodnost v kanceláři. (Případně postupně zdravíte nižší)
+* 4. Spolu s pozdravem se představíte (viz. příklad níže), Váš volací znak a jméno, dostavil jsem se na Vaše předvolání.
+* 5. Po dořešení žádosti vyšší hodnosti požádáte o odchod, Dovolte mi opustit kancelář pane, po schválení žádosti odejdete.
+
+**PŘÍKLAD**
+
+* Dobrý den pane Kennedy, G-35 James Cook dostavil jsem se na Vaše předvolání.
+
+## BEZ PŘEDVOLÁNÍ
+
+* To samé jak u vstupu z důvodu předvolání..
+* Jen neříkáme; Dostavil jsem se na Váš rozkaz, ale říkáme; Smím promluvit?
+* Dobrý den pane Kennedy, G-35 James Cook smím promluvit.../chtěl bych.../jdu protože...
