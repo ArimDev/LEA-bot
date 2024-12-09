@@ -3,9 +3,11 @@
 layout: home
 
 hero:
-  name: "Příručka LEA"
-  text: "VegasRP"
-  tagline: 
+  name: "VegasRP"
+  text: "Příručka LEA"
+  image:
+    src: /media/vegasrp.png
+    alt: VegasRP
   actions:
     - theme: brand
       text: Návody officera
