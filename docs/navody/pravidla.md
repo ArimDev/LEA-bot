@@ -35,5 +35,7 @@ takže jakékoliv nesportovní chování či neprofesionální chování bude ř
 
 - Akademik má týden na to si dodělat akademií nebo bude automaticky vyloučen z akademického programu.
 
+--------
+
 ::: info Credits
 Tohle vytvořil Stanley AKA Ceffel
