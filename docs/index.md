@@ -11,10 +11,10 @@ hero:
   actions:
     - theme: brand
       text: Návody officera
-      link: /navody
+      link: /navody/pravidla
     - theme: alt
       text: Používání bota
-      link: /bot
+      link: /bot/uvod
 
 features:
   - icon: 🔎
