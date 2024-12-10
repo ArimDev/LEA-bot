@@ -100,10 +100,10 @@ export default defineConfig({
                         text: 'Admin',
                         collapsed: true,
                         items: [
-                            { text: 'Registrace a vyhazov', link: 'registrace-vyhazov' },
-                            { text: 'Povýšení a degradace', link: 'povyseni-degradace' },
                             { text: 'Tabulky', link: 'tabulky' },
-                            { text: 'Blacklist', link: 'blacklist' }
+                            { text: 'Blacklist', link: 'blacklist' },
+                            { text: 'Registrace a vyhazov', link: 'registrace-vyhazov' },
+                            { text: 'Povýšení a degradace', link: 'povyseni-degradace' }
                         ]
                     },
                 ]

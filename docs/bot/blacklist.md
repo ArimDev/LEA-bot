@@ -30,4 +30,9 @@ Pro odebrání osoby z blacklistu použijte příkaz `/blacklistremove` a zadejt
 ## **Pravidla používání blacklistu**
 Blacklist může přidávat nebo odebírat pouze **leadership** daného sboru. Jakékoliv zneužití tohoto systému je přísně zakázáno a může vést k disciplinárním opatřením.
 
+## **Výhody propojeného systému**
+- **Přehlednost**: Všechny záznamy o blacklistech jsou na jednom místě.
+- **Propojenost**: Leadership má přístup k datům napříč sbory, což usnadňuje koordinaci.
+- **Okamžitá aktualizace**: Jakékoliv nové záznamy se ihned projeví v tabulkách.
+
 Pokud narazíte na problém, využijte kanál `📨│ticket` nebo kontaktujte administrátory.
