@@ -1,4 +1,4 @@
-﻿# VSTUP DO KANCELÁŘE
+﻿# Vstup do kanceláře
 
 ## PŘEDVOLÁNÍ
 
