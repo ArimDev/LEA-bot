@@ -5,6 +5,17 @@ export default defineConfig({
     title: "Příručka LEA",
     description: "VegasRP",
     base: '/docs/',
+
+    lastUpdated: true,
+    cleanUrls: true,
+    metaChunk: true,
+    head: [
+        ['link', { rel: 'icon', href: '/docs/media/logo/leabot.png' }],
+        ['meta', { property: 'og:image', content: '/docs/media/logo/leabot.png' }],
+        ['meta', { name: 'twitter:card', content: 'summary' }],
+        ['meta', { name: 'theme-color', content: '#ffffff' }]
+    ],
+
     themeConfig: {
 
         // https://vitepress.dev/reference/default-theme-config
@@ -138,10 +149,5 @@ export default defineConfig({
         footer: {
             copyright: '© 2024 LEA-Bot vytvořil PetyXbron'
         }
-
     },
-    lastUpdated: true,
-    cleanUrls: true,
-    metaChunk: true,
-    head: [['link', { rel: 'icon', href: '/docs/media/logo/leabot.png' }]]
 });

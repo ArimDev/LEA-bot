@@ -1,5 +1,4 @@
-﻿
-# ZÁKLADY 10-68 A JINÉ HOSTAGE SITUATION
+﻿# ZÁKLADY 10-68 A JINÉ HOSTAGE SITUATION
 
 ## 10-68 (Hostage Situation) - Základní informace
 - **Primární řešení**: SWAT/Sierra tým

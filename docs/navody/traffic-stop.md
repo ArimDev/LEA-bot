@@ -1,14 +1,28 @@
-﻿# **Traffic Stop (10-11)**  
+﻿---
+title: Traffic Stop
+description: Návod pro správný traffic stop
+---
+
+<script setup>
+    document.title = "LEA | " + __pageData.title
+
+    const ogTitle = document.createElement("meta");
+    ogTitle.setAttribute("property", "og:title");
+    ogTitle.setAttribute("content", "LEA Příručka | " + __pageData.title);
+    document.head.appendChild(ogTitle);
+</script>
+
+# [10-11] Traffic Stop
 
 Zastavení dopravy, dočasné zadržení řidiče vozidla za účelem vyšetřování možného přestupku nebo trestného činu.
 
-## **Postup zastavení vozidla**  
+## Postup zastavení vozidla
 
 - **Pozice vozidla:** Zaparkujete za pachatelem a necháte vozidlo na kód 2.  
 - **Příklad hlášení 10-11:**  
    > *„Adam 1, máme tu 10-11 na 10-20 Grand Senora Freeway, ve směru Paleto Bay, poblíž věznice. Jedná se o žlutý Cadillac, SPZ: DTVPVS, ve voze sedí 3 osoby se žlutými šátky přes obličej. Potřebujeme akutně 10-32.“*
 
-## **Obecná pravidla**  
+## Obecná pravidla
 
 1. Informace o spáchaném přestupku sdělujte až po kontrole dokladů.  
 2. Žádáte o:  
@@ -23,7 +37,7 @@ Zastavení dopravy, dočasné zadržení řidiče vozidla za účelem vyšetřov
    - Osobu informujete, že pokutu musí zaplatit nejpozději do 3 pracovních dnů.  
    - Vrátíte doklady a sdělíte, že po vypnutí majáků může pokračovat v jízdě.  
 
-## **Postup při komunikaci s řidičem**  
+## Postup při komunikaci s řidičem
 
 Pokud jedete sami, vždy si vyžádejte 10-32 (podporu).  
 

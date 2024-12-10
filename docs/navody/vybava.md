@@ -1,5 +1,4 @@
-﻿
-# POVINNÁ VÝBAVA VOZIDLA
+﻿# POVINNÁ VÝBAVA VOZIDLA
 
 - **TINT METER**
   - Značka: Laser Labs
