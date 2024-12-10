@@ -29,3 +29,9 @@ Kliknutím na červené tlačítko můžete odstranit záznamy, například omlu
 **Leadership** sleduje vaši aktivitu ve sboru, a tak je důležité zapisovat všechny údaje pravdivě a včas. Nesprávné nebo neúplné informace mohou být předmětem dalšího řešení.
 
 Pokud narazíte na problém, využijte kanál `📨│ticket` nebo kontaktujte administrátory.
+
+# Nigga
+
+xd
+
+## Nica
