@@ -5,7 +5,7 @@ Zde si povinně zapisujete časy služeb a případné omluvenky.
 ## **Zápis služby**
 Pro zapsání služby použijte příkaz `/duty`. Po zadání tohoto příkazu se vám otevře následující formulář:
 
-![Formulář pro zápis služby](Snímek%20obrazovky%202024-12-10%20175015.png)
+![Formulář pro zápis služby](/media/assets/bot/zapis-sluzby.png)
 
 Vyplníte:
 - **Datum služby** (např. 10. 12. 2024)

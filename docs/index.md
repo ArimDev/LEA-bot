@@ -6,7 +6,7 @@ hero:
   name: "VegasRP"
   text: "Příručka LEA"
   image:
-    src: /media/vegasrp.png
+    src: /media/logo/vegasrp.png
     alt: VegasRP
   actions:
     - theme: brand

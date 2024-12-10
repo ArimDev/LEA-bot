@@ -9,7 +9,7 @@ export default defineConfig({
 
         // https://vitepress.dev/reference/default-theme-config
 
-        logo: '/media/leabot.png',
+        logo: '/media/logo/leabot.png',
 
         outline: {
             label: "Obsah stránky"
@@ -128,5 +128,5 @@ export default defineConfig({
     lastUpdated: true,
     cleanUrls: true,
     metaChunk: true,
-    head: [['link', { rel: 'icon', href: '/docs/media/leabot.png' }]]
+    head: [['link', { rel: 'icon', href: '/docs/media/logo/leabot.png' }]]
 });
