@@ -15,6 +15,19 @@ export default defineConfig({
             label: "Obsah stránky"
         },
 
+        docFooter: {
+            prev: 'Předchozí stránka',
+            next: 'Následující stránka'
+        },
+
+        lastUpdated: {
+            text: 'Aktualizováno',
+            formatOptions: {
+                dateStyle: 'long',
+                timeStyle: 'short'
+            }
+        },
+
         search: {
             provider: 'local',
             options: {
@@ -91,7 +104,7 @@ export default defineConfig({
                         collapsed: false,
                         items: [
                             { text: 'Úvod', link: 'uvod' },
-                            { text: 'Složka', link: 'složka' },
+                            { text: 'Složka', link: 'slozka' },
                             { text: 'Zápis služby', link: 'sluzby' },
                             { text: 'Omlouvání se', link: 'omluvenky' }
                         ]
