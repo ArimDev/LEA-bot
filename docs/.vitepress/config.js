@@ -91,6 +91,7 @@ export default defineConfig({
                         collapsed: false,
                         items: [
                             { text: 'Úvod', link: 'uvod' },
+                            { text: 'Složka', link: 'složka' },
                             { text: 'Zápis služby', link: 'sluzby' },
                             { text: 'Omlouvání se', link: 'omluvenky' }
                         ]
