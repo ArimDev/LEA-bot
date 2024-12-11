@@ -7,6 +7,8 @@ description: Návod pro správný traffic stop
 
 Zastavení dopravy, dočasné zadržení řidiče vozidla za účelem vyšetřování možného přestupku nebo trestného činu.
 
+![Traffic Stop](/media/assets/traffic/traffic-stop.png)
+
 ## Postup zastavení vozidla
 
 - **Pozice vozidla:** Zaparkujete za pachatelem a necháte vozidlo na kód 2.  

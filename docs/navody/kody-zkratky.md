@@ -115,3 +115,12 @@ Seznam různých **státních složek** a **úřadů** ve zkratkách.
 | **SHOTS FIRED** | Střelba, které jste účastníkem                          |
 | **ADAM-CHECK**  | Dotaz na aktivní dvoučlenné hlídky                      |
 | **UNION-CHECK** | Dotaz na aktivní trojčlenné hlídky                      |
+
+# Rádiové frekvence
+| Frekvence   | Popis                                  |
+|------------:|----------------------------------------|
+| **1**       | Ozbrojené složky (**LSSD** a **SAHP**) |
+| **2**       | **EMS** (Emergency Medical Services)   |
+| **3**       | Hašiči (**LSFD**)                      |
+| **4 - 6**   | Volný kanál                            |
+| **7**       | Letový provoz                          |
