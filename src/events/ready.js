@@ -20,17 +20,13 @@ export default async function (bot) {
     await api_1(bot, app,);
     await api_2(bot, app,);
 
-    app.use("/docs", express.static(path.resolve("./docs/.vitepress/dist/")));
-    app.get("/docs/*", (req, res) => {
-        res.sendFile(path.join(path.resolve("./docs/.vitepress/dist/"), "index.html"));
-    });
-
     app.use(express.static(path.resolve("./site/dist/")));
     app.get(/^\/(?!api\/|old\/|docs\/).*/, (req, res) => {
         res.sendFile(path.join(path.resolve("./site/dist/"), "index.html"));
     });
 
     //404 error (or other errors) redirect
+    //! SERVED BY NGINX !
     /*app.use((req, res) => {
         res.status(404).sendFile(secret().parsed.errorPath + "/nginx404.html");
     });*/
