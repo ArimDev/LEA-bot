@@ -1,4 +1,6 @@
 ---
+description: Příručka pro každého officera se vším všudy!
+
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
 

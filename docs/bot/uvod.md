@@ -1,3 +1,8 @@
+---
+title: Bot pro správu
+description: Jak funguje bot a jak ho používat
+---
+
 # Instrukce o botovi
 
 # LEA Bot

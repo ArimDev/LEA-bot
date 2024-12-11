@@ -3,15 +3,6 @@ title: Interní pravidla
 description: Výpis pravidel LEA, kterými se řídí každý officer
 ---
 
-<script setup>
-    document.title = "LEA | " + __pageData.title
-
-    const ogTitle = document.createElement("meta");
-    ogTitle.setAttribute("property", "og:title");
-    ogTitle.setAttribute("content", "LEA Příručka | " + __pageData.title);
-    document.head.appendChild(ogTitle);
-</script>
-
 # Interní pravidla LEA
 
 ## Respekt a chování

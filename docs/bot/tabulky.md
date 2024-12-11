@@ -1,3 +1,8 @@
+---
+title: Tabulky
+description: Jak fungují tabulky a jak je užívat
+---
+
 # Tabulky
 
 Tabulky jsou nástroj sloužící ke sledování aktivity členů sboru. Automaticky zaznamenávají záznamy o službách a omluvenkách, které členové zadávají prostřednictvím příkazů `/duty` nebo `/omluvenka`. Tyto záznamy se okamžitě zobrazí v tabulce.

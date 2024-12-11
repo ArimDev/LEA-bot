@@ -1,4 +1,9 @@
-# **Registrace a Vyhazov**
+---
+title: Povýšení a degradace
+description: Návod pro registraci a vyhazov officera
+---
+
+# Registrace a Vyhazov
 
 ## **Jak funguje registrace?**
 Pro registraci nového člena použijte příkaz `/db` a postupujte podle instrukcí, které vám bot poskytne. Následně budete vyplňovat tyto informace:

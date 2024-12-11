@@ -3,15 +3,6 @@ title: Stíhání pachatele
 description: Návod pro stíhání pachatele při ujíždění (10-80) nebo pěšky (10-70)
 ---
 
-<script setup>
-    document.title = "LEA | " + __pageData.title
-
-    const ogTitle = document.createElement("meta");
-    ogTitle.setAttribute("property", "og:title");
-    ogTitle.setAttribute("content", "LEA Příručka | " + __pageData.title);
-    document.head.appendChild(ogTitle);
-</script>
-
 # [10-80] Ujíždění vozidla
 
 - **Zahájení:**

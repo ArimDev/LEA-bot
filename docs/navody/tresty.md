@@ -1,3 +1,8 @@
+---
+title: Finanční tresty SAHP a LSSD
+description: Seznam finančích sankcí
+---
+
 # Tresty SAHP a LSSD
 
 Tyhle výchovné tresty platí pro sbory **San Andreas Highway Patrol** a **Los Santos Sheriff Department**.

@@ -1,3 +1,8 @@
+---
+title: Složka
+description: Jak funguje složka a k čemu slouží
+---
+
 # Vítejte ve Vaší složce!
 
 Zde si povinně zapisujete časy služeb a případné omluvenky.

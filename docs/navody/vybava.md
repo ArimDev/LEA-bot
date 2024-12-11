@@ -1,4 +1,9 @@
-﻿# POVINNÁ VÝBAVA VOZIDLA
+﻿---
+title: Povinná výbava
+description: Seznamn povinných výbav pro officera a vozidlo
+---
+
+# Povinná výbava vozidla
 
 - **TINT METER**
   - Značka: Laser Labs
@@ -6,7 +11,6 @@
   - Zakázáno: Pure black  
 - **ALCOHOL TESTER**
   - Značka: X70 Lite Min. promile : 0.08
-    - Max. použití: 1x  
 - **DRUG WIPE**
   - Značka: Securetec
   - Kontrola užívání drog
@@ -49,7 +53,7 @@
     - náplasť na pľuzgiere
   :::
 - **IFAK**
-  - IFAK = Individual First Aid Kit
+  - IFAK = `Individual First Aid Kit`
   - Kompaktní lékarnička pro PP na vestu
   ::: details Obsah IFAKu
     - Rukavice
@@ -67,14 +71,21 @@
 - **DOPRAVNÍ KUŽEL**
   - Způsob řízení dopravy na silnicích.
 
-## Povinná výbava officera/deputy
+# Povinná výbava officera
 
 - **Glock 19**
   - Kalibr: 9mm
   - Počet nábojů v zásobníku: 15x 9mm
 - **Tazer X26**
-- Značka: Axon
-- Účinný dostřel: 10m
-- Napětí výstřelu: 50kV
-
-Teleskopicky Obušek, Baterka, Pouta ,MDT, Vysílačka, Bodycam, Odznak Turniket, Náhradní zásobníky
+  - Značka: Axon
+  - Účinný dostřel: 10m
+  - Napětí výstřelu: 50kV
+- **Teleskopicky Obušek**
+- **Baterka**
+- **Pouta**
+- **MDT**
+- **Vysílačka**
+- **Bodycam**
+- **Odznak**
+- **Turniket**
+- **Náhradní zásobníky**

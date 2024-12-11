@@ -1,6 +1,9 @@
-# Vítejte ve Vaší složce!
+---
+title: Omluvenky
+description: Návod pro zapisování omluvenek
+---
 
-Zde si povinně zapisujete časy služeb a případné omluvenky.
+# Omluvenky
 
 ## **Zápis omluvenky**
 Pro zapsání omluvenky použijte příkaz `/omluvenka`. Po zadání tohoto příkazu se vám otevře následující formulář:

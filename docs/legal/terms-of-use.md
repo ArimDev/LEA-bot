@@ -1,3 +1,9 @@
+---
+title: Podmínky Použití (TOS)
+description: Důležité dokumenty po ruce!
+layout: doc
+---
+
 # LEA Bot | Podmínky Použití (TOS)
 - Vytvořil **[@PetyXbron aka b1ngo](https://github.com/PetyXbron/)**
 - Zdrojový kód je častěčně veřejný na platformě GitHub.
