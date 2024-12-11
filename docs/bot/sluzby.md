@@ -1,3 +1,8 @@
+---
+title: Služby
+description: Návod jak na zápis služeb
+---
+
 # Vítejte ve Vaší složce!
 
 Zde si povinně zapisujete časy služeb a případné omluvenky.

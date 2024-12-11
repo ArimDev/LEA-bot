@@ -3,15 +3,6 @@ title: Traffic Stop
 description: Návod pro správný traffic stop
 ---
 
-<script setup>
-    document.title = "LEA | " + __pageData.title
-
-    const ogTitle = document.createElement("meta");
-    ogTitle.setAttribute("property", "og:title");
-    ogTitle.setAttribute("content", "LEA Příručka | " + __pageData.title);
-    document.head.appendChild(ogTitle);
-</script>
-
 # [10-11] Traffic Stop
 
 Zastavení dopravy, dočasné zadržení řidiče vozidla za účelem vyšetřování možného přestupku nebo trestného činu.

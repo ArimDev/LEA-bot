@@ -1,3 +1,8 @@
+---
+title: Povýšení a degradace
+description: Návod pro povýšení a degradaci officera
+---
+
 # Povýšení a Degradace
 
 **Povýšení a degradace člena** se provádí snadno pomocí příkazu `/db`. Jakmile příkaz zadáte, postupujete podle uvedených instrukcí.

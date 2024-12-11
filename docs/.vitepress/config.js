@@ -12,9 +12,18 @@ export default defineConfig({
     head: [
         ['link', { rel: 'icon', href: '/docs/media/logo/leabot.png' }],
         ['meta', { property: 'og:image', content: '/docs/media/logo/leabot.png' }],
+        ['meta', { name: 'og:site_name', content: 'VegasRP' }],
         ['meta', { name: 'twitter:card', content: 'summary' }],
         ['meta', { name: 'theme-color', content: '#ffffff' }]
     ],
+
+    transformPageData(pageData) {
+        pageData.frontmatter.head ??= [];
+        pageData.frontmatter.head.push([
+            'meta', { name: 'og:title', content: pageData.frontmatter.title ? ("LEA Příručka | " + pageData.frontmatter.title) : "LEA Příručka" },
+            'meta', { name: 'og:description', content: pageData.frontmatter.description || "Příručka se vším všudy!" }
+        ]);
+    },
 
     themeConfig: {
 

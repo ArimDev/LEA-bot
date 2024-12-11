@@ -3,15 +3,6 @@ title: Rádiové kódy
 description: Seznamy rádiových kódů a zkratek
 ---
 
-<script setup>
-    document.title = "LEA | " + __pageData.title
-
-    const ogTitle = document.createElement("meta");
-    ogTitle.setAttribute("property", "og:title");
-    ogTitle.setAttribute("content", "LEA Příručka | " + __pageData.title);
-    document.head.appendChild(ogTitle);
-</script>
-
 # Rádiové kódy
 
 **Rádiové kódy** slouží k **lepší komunikaci** na vysílačce a **zkrácené komunikace**, aby se nepřetěžovala síť hlášení, to znamená, aby nebyly zmatek při komunikaci.

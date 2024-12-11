@@ -1,3 +1,8 @@
+---
+title: Blacklist
+description: K čemu slouží blacklist a jak ho ovládat
+---
+
 # Blacklist
 
 Blacklist je systém, ve kterém se evidují osoby, které byly z různých důvodů vyloučeny nebo sankcionovány v rámci sboru. 

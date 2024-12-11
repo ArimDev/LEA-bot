@@ -1,4 +1,9 @@
-﻿# Postup v CPZ a Právo Miranda
+﻿---
+title: CPZ
+description: Příručka do CPZ a související postupy
+---
+
+# Postup v CPZ a Právo Miranda
 
 ## Chování k suspectovi při zadržení
 - Odebrání všech věcí kromě jídla a pití.
