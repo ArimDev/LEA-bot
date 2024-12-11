@@ -163,7 +163,7 @@ export default defineConfig({
         ],
 
         footer: {
-            copyright: '© 2024 LEA-Bot vytvořil PetyXbron'
+            copyright: '© 2024 LEA-Bot vytvořil PetyXbron (b1ngo)'
         }
     },
 });
