@@ -21,11 +21,12 @@ export default async function (bot) {
     await api_2(bot, app,);
 
     app.use(express.static(path.resolve("./site/dist/")));
-    app.get(/^\/(?!api\/|old\/).*/, (req, res) => {
+    app.get(/^\/(?!api\/|old\/|docs\/).*/, (req, res) => {
         res.sendFile(path.join(path.resolve("./site/dist/"), "index.html"));
     });
 
     //404 error (or other errors) redirect
+    //! SERVED BY NGINX !
     /*app.use((req, res) => {
         res.status(404).sendFile(secret().parsed.errorPath + "/nginx404.html");
     });*/
