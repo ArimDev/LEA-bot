@@ -19,6 +19,34 @@
 	<meta property="twitter:domain" content="<%= VITE_DOMAIN %>">
 </head>
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=<%= VITE_GTAG %>"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() { dataLayer.push(arguments); }
+	gtag('js', new Date());
+
+	const cookiesAccepted = localStorage.getItem("cookiesAccepted");
+
+	if (cookiesAccepted !== null) {
+		gtag('consent', 'default', {
+			'ad_storage': 'granted',
+			'ad_user_data': 'granted',
+			'ad_personalization': 'granted',
+			'analytics_storage': 'granted'
+		});
+	} else {
+		gtag('consent', 'default', {
+			'ad_storage': 'denied',
+			'ad_user_data': 'denied',
+			'ad_personalization': 'denied',
+			'analytics_storage': 'denied'
+		});
+	}
+
+	gtag('config', '<%= VITE_GTAG %>');
+</script>
+
 <body>
 	<div class="app"></div>
 	<script type="module" src="main.js"></script>

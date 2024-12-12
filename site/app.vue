@@ -6,6 +6,10 @@
 		<h1>{{ popboxContent.heading }}</h1>
 		<p v-html="popboxContent.message"></p>
 	</PopBox>
+	<ConsentBar v-show="displayConsent" @consent="consent">
+		<h1>{{ consentContent.heading }}</h1>
+		<p v-html="consentContent.message"></p>
+	</ConsentBar>
 	<div class="wrapper">
 		<header class="header">
 			<div class="routerMenu">
@@ -83,6 +87,7 @@ import './assets/style/frameMedia.css';
 import Login from './components/Login.vue';
 import PopBox from './components/PopBox.vue';
 import PopUp from './components/PopUp.vue';
+import ConsentBar from './components/ConsentBar.vue';
 import darkModePNG from './assets/icon/darkmode.png';
 import lightModePNG from './assets/icon/lightmode.png';
 import { onMounted, ref } from "vue";
@@ -108,6 +113,20 @@ function openPopBox({ h, msg }) {
 
 function closePopBox() {
 	displayPopBox.value = false;
+}
+
+const displayConsent = ref(localStorage.getItem("cookiesAccepted") === null);
+const consentContent = ref({ heading: "Pojďme společně vylepšit Tabulky!", message: "Tato stránka používá soubory <strong>cookies</strong>. Kliknutím na tlačítko <strong>„Jdeme na to“</strong> souhlasíš s využívaním cookies<br>a dalších údajů k nezbytnému, analytickému a marketingovému použití." });
+
+function consent(consent) {
+	localStorage.setItem("cookiesAccepted", consent);
+	gtag('consent', 'update', {
+		'ad_storage': 'granted',
+		'ad_user_data': 'granted',
+		'ad_personalization': 'granted',
+		'analytics_storage': 'granted'
+	});
+	displayConsent.value = false;
 }
 
 const popupRef = ref(null);
