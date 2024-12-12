@@ -19,10 +19,10 @@ export default defineConfig({
 
     transformPageData(pageData) {
         pageData.frontmatter.head ??= [];
-        pageData.frontmatter.head.push([
-            'meta', { name: 'og:title', content: pageData.frontmatter.title ? ("LEA Příručka | " + pageData.frontmatter.title) : "LEA Příručka" },
-            'meta', { name: 'og:description', content: pageData.frontmatter.description || "Příručka se vším všudy!" }
-        ]);
+        pageData.frontmatter.head.push(
+            ['meta', { name: 'og:title', content: pageData.frontmatter.title ? ("LEA Příručka | " + pageData.frontmatter.title) : "LEA Příručka" }],
+            ['meta', { name: 'og:description', content: pageData.frontmatter.description || "Příručka se vším všudy!" }]
+        );
     },
 
     themeConfig: {
