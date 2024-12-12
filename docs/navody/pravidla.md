@@ -22,11 +22,11 @@ takže jakékoliv nesportovní chování či neprofesionální chování bude ř
 - FTO si Vás může kdykoliv předvolat do kanceláře na řešení.
 - FTO má povinnost vám pomáhat a naučit Vás ke chování, pokud bude třeba.
 
-## Internal Affairs Division
+## Department of Justice
 
-- IAD si vás může kdykoliv předvolat do kanceláře k řešení
-- Povinnost IAD je vyhledávat a terminovat korupční členy v daném sboru
-- Členové IAD můžou řešit i nadřízené pokud je to potřeba
+- DOJ si vás může kdykoliv předvolat do kanceláře k řešení
+- Jednou z povinností DOJ je vyhledávat a terminovat korupční členy v daném sboru
+- Členové DOJ můžou řešit i nadřízené pokud je to potřeba
 
 ## Vozidla
 
