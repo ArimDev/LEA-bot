@@ -113,6 +113,8 @@ export default defineConfig({
                             { text: 'Traffic stop (10-11)', link: 'traffic-stop' },
                             { text: 'Stíhání (10-80 a 10-70)', link: 'stihani' },
                             { text: 'Felony stop (Kód 5)', link: 'felony-stop' },
+                            { text: 'Box Manévr', link: 'box' },
+                            { text: 'Pit Manévr', link: 'pit' },
                             { text: 'Loupeže a přepadení (10-68)', link: 'loupeze' }
                         ]
                     },
