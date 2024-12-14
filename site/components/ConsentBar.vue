@@ -2,7 +2,7 @@
 	<div class="consentBar">
 		<div class="consentBarContent">
 			<slot />
-			<div class="buttons">
+			<div class="consentBarButtons">
 				<button @click="consent(true)">Jdeme na to</button>
 				<button @click="consent(false)">Odmítnout</button>
 			</div>
@@ -24,7 +24,7 @@ function consent(consent) {
 	width: 97.2%;
 	bottom: 0;
 	z-index: 99;
-	background-color: white;;
+	background-color: white;
 	color: black;
 	justify-content: space-between;
 	align-items: center;
@@ -45,22 +45,15 @@ function consent(consent) {
 	align-items: center;
 }
 
-.buttons {
+.consentBarButtons {
 	margin-top: 10px;
 	display: flex;
 	gap: 10px;
 }
 
-button {
+.consentBarButtons button {
 	font-size: 16px;
 	font-weight: bold;
-	color: black;
-	border-radius: 5px;
-	border: 2px solid black;
-	cursor: pointer;
-	padding: 8px 12px;
-	background-color: transparent;
-	transition: background-color 0.3s, color 0.3s;
 	text-decoration: none;
 	color: var(--textColor);
 	border-radius: 25px;
@@ -71,7 +64,7 @@ button {
 	transition: background-color 0.5s, color 0.5s;
 }
 
-button:hover {
+.consentBarButtons button:hover {
 	background-color: black;
 	color: white;
 }

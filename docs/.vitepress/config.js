@@ -22,9 +22,28 @@ export default async () => {
             ['meta', { name: 'og:site_name', content: 'VegasRP' }],
             ['meta', { name: 'twitter:card', content: 'summary' }],
             ['meta', { name: 'theme-color', content: '#ffffff' }],
-            ['script', { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=' + env.VITE_GTAG }],
+            ['script', { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=' + env.VITE_GTAG }],
             ['script', {},
-                `window.dataLayer = window.dataLayer || [];\nfunction gtag(){dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', '${env.VITE_GTAG}');`
+                `window.dataLayer = window.dataLayer || [];`
+                + `\nfunction gtag(){dataLayer.push(arguments);}`
+                + `\ngtag('js', new Date());`
+                + `\nconst cookiesAccepted = localStorage.getItem("cookiesAccepted");`
+                + `\n\nif (cookiesAccepted !== null) {`
+                + `\n    gtag('consent', 'default', {`
+                + `\n        'ad_storage': 'granted',`
+                + `\n        'ad_user_data': 'granted',`
+                + `\n        'ad_personalization': 'granted',`
+                + `\n        'analytics_storage': 'granted'`
+                + `\n    });`
+                + `\n} else {`
+                + `\n    gtag('consent', 'default', {`
+                + `\n        'ad_storage': 'denied',`
+                + `\n        'ad_user_data': 'denied',`
+                + `\n        'ad_personalization': 'denied',`
+                + `\n        'analytics_storage': 'denied'`
+                + `\n    });`
+                + `\n}`
+                + `\n\ngtag('config', '${env.VITE_GTAG}');`
             ]
         ],
 

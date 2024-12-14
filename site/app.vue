@@ -116,15 +116,24 @@ function closePopBox() {
 }
 
 const displayConsent = ref(localStorage.getItem("cookiesAccepted") === null);
-const consentContent = ref({ heading: "Pojďme společně vylepšit Tabulky!", message: "Tato stránka používá soubory <strong>cookies</strong>. Kliknutím na tlačítko <strong>„Jdeme na to“</strong> souhlasíš s využívaním cookies<br>a dalších údajů k nezbytnému, analytickému a marketingovému použití." });
+const consentContent = ref({
+	heading:
+		"Pojďme společně vylepšit Tabulky!",
+	message:
+		`Tato stránka používá soubory <b>cookies</b>
+		Kliknutím na tlačítko <b>„Jdeme na to“</b>
+		souhlasíš s využívaním cookies<br>a dalších údajů k nezbytnému,
+		analytickému a marketingovému použití.`
+});
 
 function consent(consent) {
 	localStorage.setItem("cookiesAccepted", consent);
+	const state = consent ? "granted" : "denied";
 	gtag('consent', 'update', {
-		'ad_storage': 'granted',
-		'ad_user_data': 'granted',
-		'ad_personalization': 'granted',
-		'analytics_storage': 'granted'
+		'ad_storage': state,
+		'ad_user_data': state,
+		'ad_personalization': state,
+		'analytics_storage': state
 	});
 	displayConsent.value = false;
 }
