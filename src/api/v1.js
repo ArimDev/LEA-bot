@@ -173,16 +173,15 @@ export default async function api(bot, app) {
             }
 
             if (dep === "LSSD" && worker.m) {
-                worker.roles.warn = worker.m.roles.cache.has("1139379787324997722");
-                worker.roles.suspend = worker.m.roles.cache.has("1139379875610898522");
-                if (worker.m.roles.cache.has("1139275625740370001")) worker.div.push("SRT");
-                if (worker.m.roles.cache.has("1139296112117817534")) worker.div.push("DEA");
-                if (worker.m.roles.cache.has("1139293160602874066")) worker.div.push("ST");
-                if (worker.m.roles.cache.has("1139294859354710188")) worker.div.push("AU");
-                if (worker.m.roles.cache.has("1139297065063690315")) worker.div.push("TU");
-                if (worker.m.roles.cache.has("1139298429391089685")) worker.div.push("MBU");
-                if (worker.m.roles.cache.has("1139295387266580652")) worker.div.push("FTO");
-                if (worker.m.roles.cache.has("1139297368450277376")) worker.div.push("CID");
+                worker.roles.warn = worker.m.roles.cache.has("1154446248934387830");
+                worker.roles.suspend = worker.m.roles.cache.has("1267600894069964911");
+                if (worker.m.roles.cache.has("1240021849518112808")) worker.div.push("CID");
+                if (worker.m.roles.cache.has("1290357614039007294")) worker.div.push("SRT");
+                if (worker.m.roles.cache.has("1252175791966523444")) worker.div.push("ST");
+                if (worker.m.roles.cache.has("1251504241768529971")) worker.div.push("FTO");
+                if (worker.m.roles.cache.has("1154446248946978950")) worker.div.push("TEU");
+                if (worker.m.roles.cache.has("1312862027206885436")) worker.div.push("MBU");
+                if (worker.m.roles.cache.has("1242926544574349343")) worker.div.push("ASD");
 
                 if ( //ACCESS TO THE TABLES - Discord roles
                     worker.m.roles.cache.has("1267541873451339806") //Leadership
