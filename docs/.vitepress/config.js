@@ -118,6 +118,10 @@ export default async () => {
             nav: [
                 { text: 'Home', link: '/' },
                 {
+                    text: 'Sbory', link: '/sbory/uvod',
+                    activeMatch: '/sbory/'
+                },
+                {
                     text: 'Návody', link: '/navody/pravidla',
                     activeMatch: '/navody/'
                 },
@@ -132,6 +136,29 @@ export default async () => {
             ],
 
             sidebar: {
+                '/sbory/': {
+                    base: '/sbory/', items: [
+                        { text: 'Úvod', link: 'uvod' },
+                        {
+                            text: 'SAHP',
+                            collapsed: false,
+                            items: [
+                                { text: 'Leadership', link: 'sahp/vedeni' },
+                                { text: 'Hodnosti', link: 'sahp/hodnosti' },
+                                { text: 'Divize', link: 'sahp/divize' }
+                            ]
+                        },
+                        {
+                            text: 'LSSD',
+                            collapsed: false,
+                            items: [
+                                { text: 'Leadership', link: 'lssd/vedeni' },
+                                { text: 'Hodnosti', link: 'lssd/hodnosti' },
+                                { text: 'Divize', link: 'lssd/divize' }
+                            ]
+                        },
+                    ]
+                },
                 '/navody/': {
                     base: '/navody/', items: [
                         {
