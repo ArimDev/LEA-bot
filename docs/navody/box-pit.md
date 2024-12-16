@@ -2,6 +2,9 @@
 title: Manévry Box a Pit
 description: Manuál pro manévry se služebními vozidly
 ---
+<script setup>
+  const gAds = import.meta.env.VITE_GADS;
+</script>
 
 # Manévry s vozidlem: Box a Pit
 
@@ -34,6 +37,18 @@ description: Manuál pro manévry se služebními vozidly
 
 Při provádění manévru hlaste do vysílačky: **"Box! Box! Box!"**
 
+<scriptx async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-{{ gAds }}"
+     crossorigin="anonymous"></scriptx>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-{{ gAds }}"
+     data-ad-slot="7591922319"></ins>
+<scriptx>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</scriptx>
+
 ## Pit manévr
 
 Jedná se o důkladně školený manévr s vozidlem, zapříčinující **zastavení jiného vozidla**.  
@@ -50,14 +65,16 @@ Je to taktický manévr **při pronásledování**, díky kterému může proná
 
 ### Podmínky provedení PIT manévru
 
-- #### Povolení:
+- #### Povolení
+
   Pro PIT manévr si musíte **vyžádat povolení** od osoby s nejvyšší dostupnou hodností.
   - Žádost:
   > [Callsign]: Mám tu 10-80, žádám si povolení k provedení PIT manévru, moje 10-20 je na dálnici směr do Paleta.
   - Povolení:
   > [Callsign]: Potvrzuji, PIT manévr můžete provést, pokud nebudete mít okolo sebe jiná vozidla než vozidlo podezřelého.
 
-- #### Postup provedení:
+- #### Postup provedení
+
   - Pronásledující policejní vozidlo se přiblíží svým **předním rohem k zadnímu rohu** pronásledovaného vozidla.
   - Následně do něj **zatlačí** tak, aby pronásledované vozidlo dostalo **smyk** a udělalo tzv. "**hodiny**."
 

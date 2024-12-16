@@ -2,6 +2,9 @@
 title: Felony stop
 description: Návod pro tzv. Felony stop
 ---
+<script setup>
+  const gAds = import.meta.env.VITE_GADS;
+</script>
 
 # **FELONY STOP neboli CODE 5**
 
@@ -48,3 +51,15 @@ description: Návod pro tzv. Felony stop
   - Nejprve zkontrolujte vnitřek vozu.  
   - Poté přistupte ke kufru:  
     - Jedna jednotka otevírá kufr, druhá jistí.
+
+<scriptx async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-{{ gAds }}"
+     crossorigin="anonymous"></scriptx>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-{{ gAds }}"
+     data-ad-slot="7591922319"></ins>
+<scriptx>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</scriptx>

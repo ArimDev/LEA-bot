@@ -2,7 +2,7 @@ import { loadEnv, defineConfig } from 'vitepress';
 
 // https://vitepress.dev/reference/site-config
 export default async () => {
-    const env = loadEnv("", process.cwd())
+    const env = loadEnv("", process.cwd());
 
     return defineConfig({
         title: "Příručka LEA",
@@ -18,11 +18,17 @@ export default async () => {
         metaChunk: true,
         head: [
             ['link', { rel: 'icon', href: '/docs/media/logo/leabot.png' }],
+
+            //Discord embeds (OpenGraph)
             ['meta', { property: 'og:image', content: '/docs/media/logo/leabot.png' }],
             ['meta', { name: 'og:site_name', content: 'VegasRP' }],
             ['meta', { name: 'twitter:card', content: 'summary' }],
             ['meta', { name: 'theme-color', content: '#ffffff' }],
-            ['script', { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=' + env.VITE_GTAG }],
+
+            //Google Analytics
+            ['script',
+                { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=' + env.VITE_GTAG }
+            ],
             ['script', {},
                 `window.dataLayer = window.dataLayer || [];`
                 + `\nfunction gtag(){dataLayer.push(arguments);}`
@@ -44,7 +50,12 @@ export default async () => {
                 + `\n    });`
                 + `\n}`
                 + `\n\ngtag('config', '${env.VITE_GTAG}');`
-            ]
+            ],
+
+            //Google AdSense
+            ['script',
+                { async: true, src: `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${env.VITE_GADS}`, crossorigin: "anonymous" }
+            ],
         ],
 
         transformPageData(pageData) {

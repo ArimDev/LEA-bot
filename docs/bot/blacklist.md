@@ -2,6 +2,9 @@
 title: Blacklist
 description: K čemu slouží blacklist a jak ho ovládat
 ---
+<script setup>
+  const gAds = import.meta.env.VITE_GADS;
+</script>
 
 # Blacklist
 

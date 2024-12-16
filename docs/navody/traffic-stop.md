@@ -2,6 +2,9 @@
 title: Traffic Stop
 description: Návod pro správný traffic stop
 ---
+<script setup>
+  const gAds = import.meta.env.VITE_GADS;
+</script>
 
 # [10-11] Traffic Stop
 
@@ -29,6 +32,18 @@ Zastavení dopravy, dočasné zadržení řidiče vozidla za účelem vyšetřov
    - Vždy se ptáte, zda osoba s pokutou souhlasí.  
    - Osobu informujete, že pokutu musí zaplatit nejpozději do 3 pracovních dnů.  
    - Vrátíte doklady a sdělíte, že po vypnutí majáků může pokračovat v jízdě.  
+
+<scriptx async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-{{ gAds }}"
+     crossorigin="anonymous"></scriptx>
+<ins class="adsbygoogle"
+     style="display:block; text-align:center;"
+     data-ad-layout="in-article"
+     data-ad-format="fluid"
+     data-ad-client="ca-pub-{{ gAds }}"
+     data-ad-slot="7591922319"></ins>
+<scriptx>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</scriptx>
 
 ## Postup při komunikaci s řidičem
 
