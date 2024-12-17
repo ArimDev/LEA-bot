@@ -161,6 +161,7 @@ export default async () => {
                 },
                 '/navody/': {
                     base: '/navody/', items: [
+                        { text: 'VegasRP Pravidla', link: '../pravidla' },
                         {
                             text: 'Pravidla',
                             collapsed: false,

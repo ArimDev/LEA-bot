@@ -51,7 +51,7 @@
 					<img id="darkModeImage" :class="{ darkMode }" src="/media/icon/darkmode.png" width="20" height="20">
 				</button>
 				<button>
-					<a target="_self" href="/docs">
+					<a target="_self" href="/docs/">
 						<img id="docsImage" :class="{ darkMode }" src="/media/icon/book.png" width="20" height="20">
 					</a>
 				</button>
