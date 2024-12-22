@@ -120,7 +120,7 @@ const consentContent = ref({
 	heading:
 		"Pojďme společně vylepšit Tabulky!",
 	message:
-		`Tato stránka používá soubory <b>cookies</b>
+		`Tato stránka používá soubory <b>cookies</b>.
 		Kliknutím na tlačítko <b>„Jdeme na to“</b>
 		souhlasíš s využívaním cookies<br>a dalších údajů k nezbytnému,
 		analytickému a marketingovému použití.`

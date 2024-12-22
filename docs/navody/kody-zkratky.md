@@ -16,7 +16,9 @@ Tzv. **desítkové kódy** jsou ty nejběžnější a nejdůležitější kódy 
 
 | Kód         | Popis                                                      |
 |-------------|------------------------------------------------------------|
-| **10-0**    | vizuální kontakt ztracen                                   |
+| **10-0**    | Vizuální kontakt ztracen                                   |
+| **10-1**    | Změna frekvence                                            |
+| **10-2**    | vizuální kontakt ztracen                                   |
 | **10-3**    | Ticho na vysílačce                                         |
 | **10-4**    | Dobře, rozumím                                             |
 | **10-5**    | Přestávka                                                  |
@@ -29,9 +31,9 @@ Tzv. **desítkové kódy** jsou ty nejběžnější a nejdůležitější kódy 
 | **10-12**   | Samostatná patrola                                         |
 | **10-13**   | Střelba                                                    |
 | **10-14**   | Prodej drog                                                |
+| **10-15**   | Převoz osob(y) na stanici                                  |
 | **10-16**   | Krádež vozidla                                             |
 | **10-18**   | Trespassing (neoprávněný vstup na pozemek)                 |
-| **10-19**   | Převoz suspecta směr policejní stanice                     |
 | **10-20**   | Lokace                                                     |
 | **10-22**   | Ignorujte příkaz                                           |
 | **10-23**   | Dorazil na místo, ke scéně                                 |
@@ -45,9 +47,11 @@ Tzv. **desítkové kódy** jsou ty nejběžnější a nejdůležitější kódy 
 | **10-43**   | Podejte informace                                          |
 | **10-44**   | Osoba zemřela                                              |
 | **10-50**   | Dopravní nehoda                                            |
+| **10-50**   | Potřebujeme hasiče na místo                                |
 | **10-52**   | Potřebujeme záchranku na místo                             |
 | **10-60**   | Ozbrojený střelnou zbraní                                  |
 | **10-62**   | Únos                                                       |
+| **10-64**   | Sexuální napadení                                          |
 | **10-66**   | Bezohledný řidič                                           |
 | **10-68**   | Ozbrojená loupež                                           |
 | **10-69**   | Vykrádání domu                                             |
@@ -62,18 +66,22 @@ Tzv. **desítkové kódy** jsou ty nejběžnější a nejdůležitější kódy 
 
 ## Ostatní kódy
 
-| Kód         | Popis                                                      |
-|-------------|------------------------------------------------------------|
-| **Kód-0**   | Suspect odletěl z města (pád hry)                          |
-| **Kód-1**   | Bez majáků, bez sirén                                      |
-| **Kód-2**   | Majáky (křižovatka přehouknout, zpomalit)                  |
-| **Kód-3**   | Majáky, sirény (křižovatka zpomalit)                       |
-| **Kód-4**   | Situace pod kontrolou                                      |
-| **Kód-5**   | Felony Stop                                                |
-| **Kód-6**   | Dorazil na místo, officer zahajuje vyšetřování             |
-| **Kód-11**  | Jsou potřeba speciální zásahové jednotky (S.W.A.T., S.R.T.)|
-| **Kód-12**  | Falešný poplach                                            |
-| **Kód-1000**| Pád letadla                                                |
+| Kód            | Popis                                                      |
+|----------------|------------------------------------------------------------|
+| **Kód 0**      | Suspect odletěl z města (pád hry)                          |
+| **Kód 1**      | Bez majáků, bez sirén                                      |
+| **Kód 2**      | Majáky (křižovatka přehouknout, zpomalit)                  |
+| **Kód 3**      | Majáky, sirény (křižovatka zpomalit)                       |
+| **Kód 4**      | Situace pod kontrolou                                      |
+| **Kód 5**      | Felony Stop                                                |
+| **Kód 6**      | Dorazil na místo, officer zahajuje vyšetřování             |
+| **Kód 11**     | Jsou potřeba speciální zásahové jednotky (S.W.A.T., S.R.T.)|
+| **Kód 12**     | Falešný poplach                                            |
+| **Kód 1000**   | Pád letadla                                                |
+| **509**        | Officer jako rukojmí                                       |
+| **Signál 11**  | Měření úseku radarem                                       |
+| **Signál 60**  | Zátah na drogy                                             |
+| **Signál 100** | Zastavení provozu s výjimkou státních složek               |
 
 <scriptx async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-{{ gAds }}"
      crossorigin="anonymous"></scriptx>
