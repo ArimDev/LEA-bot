@@ -18,7 +18,7 @@ Tzv. **desítkové kódy** jsou ty nejběžnější a nejdůležitější kódy 
 |-------------|------------------------------------------------------------|
 | **10-0**    | Vizuální kontakt ztracen                                   |
 | **10-1**    | Změna frekvence                                            |
-| **10-2**    | vizuální kontakt ztracen                                   |
+| **10-2**    | Návrat na stanici                                          |
 | **10-3**    | Ticho na vysílačce                                         |
 | **10-4**    | Dobře, rozumím                                             |
 | **10-5**    | Přestávka                                                  |

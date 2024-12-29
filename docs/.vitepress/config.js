@@ -7,20 +7,20 @@ export default async () => {
     return defineConfig({
         title: "Příručka LEA",
         description: "VegasRP",
-        base: '/docs/',
+        base: '/',
 
         sitemap: {
-            hostname: 'https://leabot.petyxbron.cz/docs/'
+            hostname: env.VITE_hostname
         },
 
         lastUpdated: true,
         cleanUrls: true,
         metaChunk: true,
         head: [
-            ['link', { rel: 'icon', href: '/docs/media/logo/leabot.png' }],
+            ['link', { rel: 'icon', href: '/media/logo/leabot.png' }],
 
             //Discord embeds (OpenGraph)
-            ['meta', { property: 'og:image', content: '/docs/media/logo/leabot.png' }],
+            ['meta', { property: 'og:image', content: '/media/logo/leabot.png' }],
             ['meta', { name: 'og:site_name', content: 'VegasRP' }],
             ['meta', { name: 'twitter:card', content: 'summary' }],
             ['meta', { name: 'theme-color', content: '#ffffff' }],

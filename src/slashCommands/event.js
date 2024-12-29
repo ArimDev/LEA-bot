@@ -34,6 +34,12 @@ export default async function run(bot, i) {
     const sub = i.options._subcommand;
     const user = i.options.getUser("účastník");
 
+    //if (!bot.LEA.g.SAHP.includes(i.guild.id))
+    return i.reply({
+        content: "> 🛑 **Příkazy /event nejsou aktuálně dostupné pro " + i.guild.name + ".**",
+        ephemeral: true
+    });
+
     let passed = false;
     i.guild.fetch();
     const admin = i.member;
@@ -41,11 +47,6 @@ export default async function run(bot, i) {
     if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1267541873451339806")) passed = true; //Leadership
     }
-
-    if (!bot.LEA.g.SAHP.includes(i.guild.id)) return i.reply({
-        content: "> 🛑 **Příkazy /event nejsou aktuálně dostupné pro " + i.guild.name + ".**",
-        ephemeral: true
-    });
 
     if (sub === "faktura") { //Faktura
         const modal = new ModalBuilder()

@@ -5,14 +5,19 @@ import path from "path";
 
 export async function getProfile(bot, id) {
     const db = getDB(id);
-    const rep = await getRep(id);
     if (!db.exists) return false;
-    //IF LEFT CHECK
+
+    const rep = await getRep(id);
+
     const guild = await bot.guilds.fetch(db.guildID);
     if (!guild) return false;
-    const member = await guild.members.fetch(id);
+
+    try { var member = await guild.members.fetch(id); }
+    catch { return false; }
     if (!member) return false;
+
     const worker = db.data;
+
     let profileEmbed = new EmbedBuilder()
         .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
         .setDescription(
