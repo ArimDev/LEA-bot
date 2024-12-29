@@ -185,8 +185,6 @@ export default async function api(bot, app) {
 
                 if ( //ACCESS TO THE TABLES - Discord roles
                     worker.m.roles.cache.has("1267541873451339806") //Leadership
-                    && !worker.m.roles.cache.has("1154446248967938183") //Captain
-                    && !worker.m.roles.cache.has("1267588047533248583") //Lieutenant
                 ) leadership = true;
                 if (
                     !leadership
