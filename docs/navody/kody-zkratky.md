@@ -47,7 +47,7 @@ Tzv. **desítkové kódy** jsou ty nejběžnější a nejdůležitější kódy 
 | **10-43**   | Podejte informace                                          |
 | **10-44**   | Osoba zemřela                                              |
 | **10-50**   | Dopravní nehoda                                            |
-| **10-50**   | Potřebujeme hasiče na místo                                |
+| **10-51**   | Potřebujeme hasiče na místo                                |
 | **10-52**   | Potřebujeme záchranku na místo                             |
 | **10-60**   | Ozbrojený střelnou zbraní                                  |
 | **10-62**   | Únos                                                       |
