@@ -297,7 +297,9 @@ export default async function run(bot, i) {
             .setColor(getServer(guild.id).color)
             .setFooter(getServer(guild.id).footer);
 
-        await i.editReply({ content: "", embeds: [deleteEmbed], files: [loc], components: [], ephemeral: !visible });
+        try {
+            await i.editReply({ content: "", embeds: [deleteEmbed], files: [loc], components: [], ephemeral: !visible });
+        } catch { return }
 
         if (!member) i.followUp({
             content: "*Role a přezdívka nebyly vymazány protože officer již není na tomhle serveru.*",

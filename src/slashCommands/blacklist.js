@@ -132,8 +132,11 @@ export default async function run(bot, i) {
 
             await i.showModal(modal);
 
-            var submit = await i.awaitModalSubmit({ filter: int => int.user.id === i.user.id, time: 600000 }).catch(e => {
-                return null;
+            var submit = await i.awaitModalSubmit({
+                filter: int => int.user.id === i.user.id,
+                time: 600000
+            }).catch(() => {
+                return;
             });
 
             if (submit) {
@@ -160,11 +163,12 @@ export default async function run(bot, i) {
                         "reason": blReason
                     }
                 };
-            }
+            } else return;
         }
 
         const bl = JSON.parse(fs.readFileSync(path.resolve("./db/blacklist.json"), "utf-8"));
-        bl.push(record);
+        if (record) bl.push(record);
+        else return
 
         fs.writeFileSync(path.resolve("./db/blacklist.json"), JSON.stringify(bl, null, 4), "utf-8");
 
@@ -274,8 +278,11 @@ export default async function run(bot, i) {
 
         await i.showModal(modal);
 
-        var submit = await i.awaitModalSubmit({ filter: int => int.user.id === i.user.id, time: 600000 }).catch(e => {
-            return null;
+        var submit = await i.awaitModalSubmit({
+            filter: int => int.user.id === i.user.id,
+            time: 600000
+        }).catch(() => {
+            return;
         });
 
         if (submit) {
@@ -302,9 +309,11 @@ export default async function run(bot, i) {
                     "reason": bl_reason
                 }
             };
-        }
+        } else return
 
-        blacklist[blID - 1] = bl;
+        if (bl) blacklist[blID - 1] = bl;
+        else return
+
         fs.writeFileSync(path.resolve("./db/blacklist.json"), JSON.stringify(blacklist, null, 4), "utf-8");
 
         const blEmbed = new EmbedBuilder()

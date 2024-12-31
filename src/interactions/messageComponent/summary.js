@@ -9,8 +9,16 @@ export default async function run(bot, i) {
     if (i.customId.includes("_")) worker.id = i.customId.split("_")[1];
     else worker = i.message.interaction.user;
 
-    if (!(checkDB(worker.id))) return i.editReply({ content: "> 🛑 <@" + worker.id + "> **není v DB.**", ephemeral: true });
-    const member = await i.guild.members.fetch(worker.id);
+    if (!(checkDB(worker.id))) return await i.editReply({ content: "> 🛑 <@" + worker.id + "> **není v DB.**", ephemeral: true });
+
+    let member;
+    try { member = await i.guild.members.fetch(worker.id); }
+    catch {
+        await i.editReply({
+            content: "*Tenhle officer už není členem Discord serveru!*",
+            ephemeral: true
+        });
+    }
 
     let log;
     if (bot.LEA.g.LSPD.includes(i.guild.id)) log = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + worker.id + ".json"), "utf-8"));
