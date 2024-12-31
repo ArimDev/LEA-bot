@@ -87,7 +87,15 @@ export default async function run(bot, i) {
         if (!(checkEVENT(user.id, i))) return i.reply({ content: "> 🛑 **<@" + user.id + "> ještě nesoutěží.**", ephemeral: true });
 
         const eventer = JSON.parse(fs.readFileSync((path.resolve("./db/event") + "/" + user.id + ".json"), "utf-8"));
-        const member = await i.guild.members.fetch(user.id);
+
+        let member;
+        try { member = await i.guild.members.fetch(user.id); }
+        catch {
+            await i.editReply({
+                content: "*Tenhle officer už není členem Discord serveru!*",
+                ephemeral: true
+            });
+        }
 
         let invoices = [], values = [], att = [];
         for (const inv of eventer.invoices) {

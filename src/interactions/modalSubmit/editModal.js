@@ -8,8 +8,15 @@ export default async function run(bot, i) {
     if (!(checkDB(i.fields.getTextInputValue("id"), i))) return i.reply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **není v DB.**", ephemeral: true });
     const gotDB = getDB(i.fields.getTextInputValue("id"));
     if (!bot.LEA.g[gotDB.guildName].includes(i.guild.id)) return i.reply({ content: `> 🛑 **<@${user.id}> je členem \`${gotDB.guildName}\`!** (Nemůžeš ho upravit)`, ephemeral: true });
-    const member = await i.guild.members.fetch(i.fields.getTextInputValue("id"));
-    if (!member) return i.reply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **není v DB.**", ephemeral: true });
+
+    let member;
+    try { member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
+    catch {
+        await i.editReply({
+            content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **není v DB.**",
+            ephemeral: true
+        });
+    }
 
     const visible = i.customId.includes("_") ? (/true/).test(i.customId.split("_")[1]) : false;
 
