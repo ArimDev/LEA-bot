@@ -29,7 +29,7 @@
     },
     {
         "rank": "Assistant Chief",
-        "slots": 1,
+        "slots": 2,
         "firstBadge": 104,
         "firstCallsign": "Heaven-5",
         "title": false
@@ -37,14 +37,14 @@
     {
         "rank": "Captain",
         "slots": 5,
-        "firstBadge": 105,
+        "firstBadge": 106,
         "firstCallsign": "Frost-1",
         "title": " "
     },
     {
         "rank": "Lieutenant",
         "slots": 9,
-        "firstBadge": 110,
+        "firstBadge": 111,
         "firstCallsign": "Mike-1",
         "title": " "
     },
