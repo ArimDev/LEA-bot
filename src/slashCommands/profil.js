@@ -18,7 +18,7 @@ export const slash = new SlashCommandBuilder()
     .addIntegerOption(option =>
         option.setName("odznak")
             .setDescription("Hledat na základě odznaku")
-            .setMinValue(1000)
+            .setMinValue(100)
             .setMaxValue(9999)
             .setRequired(false))
     .addStringOption(option =>
