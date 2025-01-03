@@ -13,7 +13,6 @@
                 <th scope="col" colspan="2">Povýšení</th>
                 <th scope="col" colspan="2">Hodin</th>
                 <th scope="col" colspan="2">Omluvenky</th>
-                <th scope="col" rowspan="2">Složka</th>
                 <th scope="col" colspan="4">Pole</th>
                 <th scope="col" rowspan="2">Divize</th>
             </tr>
@@ -50,7 +49,10 @@
                     <td class="tdCenter">{{ staff.firstBadge + slotIndex - 1 }}</td>
                     <td class="tdLeft">{{ staff.rank }}</td>
                     <td class="tdCenter">{{ workerData?.discordID || "" }}</td>
-                    <td class="tdCenter">{{ workerData ? (workerData.u?.tag || "Není na appce") : "" }}</td>
+                    <td class="tdCenter" :style="{ color: workerData?.u?.tag === 'petyxbron' ? '#FFA500' : '' }">
+                        {{ workerData ? (workerData.u?.tag || "Není na appce") : "" }}
+                        <span v-if="workerData?.u?.tag === 'petyxbron'"> 👑</span>
+                    </td>
                     <td class="tdCenter" :style="calcWorker(workerData, 'lastDuty').css">{{ calcWorker(workerData, "lastDuty").value }}</td> <!-- LD Last Duty -->
                     <td class="tdCenter">{{ workerData?.rankups[workerData.rankups.length - 1]?.date || "" }}</td>
                     <td class="tdCenter">{{ calcWorker(workerData, "rankUpHours") }}</td>
@@ -58,7 +60,6 @@
                     <td class="tdCenter" :style="calcWorker(workerData, 'hours14d').css">{{ calcWorker(workerData, "hours14d").value }}</td> <!-- Hodin za 14 d -->
                     <td class="tdCenter">{{ calcWorker(workerData, "totalApologies") }}</td>
                     <td class="tdCenter">{{ calcWorker(workerData, "apologies14d") }}</td> <!-- Omluvenky za 14 d -->
-                    <td class="tdCenter">{{ calcWorker(workerData, "folderButton") }}</td> <!-- Složka -->
                     <td class="tdCenter"><input type="checkbox" :checked="calcCheckbox(workerData, 'apology')" onclick="return false" /></td> <!-- Omluven? -->
                     <td class="tdCenter"><input type="checkbox" :checked="calcCheckbox(workerData, 'warn')" onclick="return false" /></td> <!-- Warn? -->
                     <td class="tdCenter"><input type="checkbox" :checked="calcCheckbox(workerData, 'suspend')" onclick="return false" /></td> <!-- Suspend? -->
@@ -240,8 +241,6 @@ function calcWorker(workerData, method) {
             if (days <= 14) return true;
             else return false;
         }).length;
-    } else if (method === "folderButton") {
-        return "WIP";
     } else return "";
 
 }
