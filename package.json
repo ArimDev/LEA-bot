@@ -1,6 +1,6 @@
 {
   "name": "lea-bot",
-  "version": "7.4.5",
+  "version": "7.4.6",
   "description": "VegasRP (FiveM GTA V roleplay) Discord bot for LEA - making internal police department actions easier.",
   "type": "module",
   "main": "index.js",

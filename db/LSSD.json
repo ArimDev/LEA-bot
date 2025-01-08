@@ -29,16 +29,16 @@
     },
     {
         "rank": "Area Commander",
-        "slots": 1,
+        "slots": 2,
         "firstBadge": 1004,
         "firstCallsign": "County-5",
         "title": false
     },
     {
         "rank": "Captain",
-        "slots": 5,
-        "firstBadge": 1005,
-        "firstCallsign": "County-6",
+        "slots": 4,
+        "firstBadge": 1006,
+        "firstCallsign": "County-7",
         "title": " "
     },
     {
