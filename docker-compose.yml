@@ -1,0 +1,22 @@
+services:
+  LEA-Bot:
+    image: lea-bot
+    build:
+      context: .
+      args:
+        webPort: ${webPort}
+    container_name: LEA-Bot
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    ports:
+      - "${webPort}:${webPort}"
+    networks:
+      - Cordos
+
+networks:
+  Cordos:
+    driver: bridge
+    name: Cordos

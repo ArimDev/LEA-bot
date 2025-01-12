@@ -76,7 +76,7 @@ export default async function run(bot, i) {
             )
             .setThumbnail(bot.LEA.i.LSPD)
             .setColor(bot.LEA.c.LSPD)
-            .setFooter({ text: `LSPD | LEA-Bot v${process.env.version} 💫`, iconURL: bot.LEA.i.LSPD });
+            .setFooter({ text: `LSPD | LEA-Bot v${bot.version} 💫`, iconURL: bot.LEA.i.LSPD });
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
@@ -110,7 +110,7 @@ export default async function run(bot, i) {
             )
             .setThumbnail(bot.LEA.i.LSPD)
             .setColor(getServer(i.guild.id).color)
-            .setFooter({ text: `LEA-Bot v${process.env.version} 💫`, iconURL: bot.user.avatarURL() });
+            .setFooter({ text: `LEA-Bot v${bot.version} 💫`, iconURL: bot.user.avatarURL() });
         await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
     } else if (i.guild.id === "1154446248934387828") { //LSSD
         folders = await i.guild.channels.fetch("1290050353793994814");
@@ -152,7 +152,7 @@ export default async function run(bot, i) {
             )
             .setThumbnail(bot.LEA.i.LSSD)
             .setColor(bot.LEA.c.LSSD)
-            .setFooter({ text: `LSSD | LEA-Bot v${process.env.version} 💫`, iconURL: bot.LEA.i.LSSD });
+            .setFooter({ text: `LSSD | LEA-Bot v${bot.version} 💫`, iconURL: bot.LEA.i.LSSD });
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
@@ -186,7 +186,7 @@ export default async function run(bot, i) {
             )
             .setThumbnail(bot.LEA.i.LSSD)
             .setColor(getServer(i.guild.id).color)
-            .setFooter({ text: `LEA-Bot v${process.env.version} 💫`, iconURL: bot.user.avatarURL() });
+            .setFooter({ text: `LEA-Bot v${bot.version} 💫`, iconURL: bot.user.avatarURL() });
         await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
     } else if (i.guild.id === "1301163398515396668") { //SAHP
         folders = await i.guild.channels.fetch("1301228299858481162");
@@ -229,7 +229,7 @@ export default async function run(bot, i) {
             )
             .setThumbnail(bot.LEA.i.SAHP)
             .setColor(bot.LEA.c.SAHP)
-            .setFooter({ text: `SAHP | LEA-Bot v${process.env.version} 💫`, iconURL: bot.LEA.i.SAHP });
+            .setFooter({ text: `SAHP | LEA-Bot v${bot.version} 💫`, iconURL: bot.LEA.i.SAHP });
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
@@ -271,7 +271,7 @@ export default async function run(bot, i) {
             )
             .setThumbnail(bot.LEA.i.SAHP)
             .setColor(getServer(i.guild.id).color)
-            .setFooter({ text: `LEA-Bot v${process.env.version} 💫`, iconURL: bot.user.avatarURL() });
+            .setFooter({ text: `LEA-Bot v${bot.version} 💫`, iconURL: bot.user.avatarURL() });
         await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
     }
 

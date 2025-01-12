@@ -28,6 +28,10 @@ let bot = new Client({
     ]
 });
 
+import fs from "fs/promises"
+const packageJson = JSON.parse(await fs.readFile("./package.json"))
+
+bot.version = packageJson.version;
 bot.slashes = new Collection();
 bot.ints = new Map();
 bot.LEA = {

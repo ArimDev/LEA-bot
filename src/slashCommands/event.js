@@ -132,7 +132,7 @@ export default async function run(bot, i) {
             for (const inv of eventer.invoices) {
                 fileLines.push(`#${inv.id} > ${inv.value.toLocaleString()} $ (${inv.shared})`);
             }
-            att = [new AttachmentBuilder(Buffer.from(fileLines.join("\n")), { name: `LEA-Bot v${process.env.version}_faktury_${eventer.name}.txt` })];
+            att = [new AttachmentBuilder(Buffer.from(fileLines.join("\n")), { name: `LEA-Bot v${bot.version}_faktury_${eventer.name}.txt` })];
         }
 
         i.reply({ embeds: [summaryEmbed], files: att, ephemeral: true });
