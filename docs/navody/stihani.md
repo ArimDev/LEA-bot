@@ -25,14 +25,16 @@ description: Návod pro stíhání pachatele při ujíždění (10-80) nebo pě�
   - K zastavení lze použít PIT manévr.
   - Po zastavení vozu následuje CODE 5 nebo BOX.
 
-<scriptx async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-{{ gAds }}"
-     crossorigin="anonymous"></scriptx>
+<scriptx async :src="'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-' + gAds"
+     crossorigin="anonymous">
+</scriptx>
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
      data-ad-layout="in-article"
      data-ad-format="fluid"
-     data-ad-client="ca-pub-{{ gAds }}"
-     data-ad-slot="7591922319"></ins>
+     :data-ad-client="'ca-pub-' + gAds"
+     data-ad-slot="7591922319">
+</ins>
 <scriptx>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </scriptx>

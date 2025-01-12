@@ -48,14 +48,16 @@ Na konci znění se zeptej podezdřelého zda rozuměl.
 
 Nejlépe ve vozidle, pokud sdělíte osobě Mirandu a ona vám řekne některé věci ve vozidle, tak to můžete použít jako důkazní materiál (doznání) ale musí **před tím zaznít právo** Mirandy. Zkrátka, čím dřív, tím líp!
 
-<scriptx async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-{{ gAds }}"
-     crossorigin="anonymous"></scriptx>
+<scriptx async :src="'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-' + gAds"
+     crossorigin="anonymous">
+</scriptx>
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
      data-ad-layout="in-article"
      data-ad-format="fluid"
-     data-ad-client="ca-pub-{{ gAds }}"
-     data-ad-slot="7591922319"></ins>
+     :data-ad-client="'ca-pub-' + gAds"
+     data-ad-slot="7591922319">
+</ins>
 <scriptx>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </scriptx>
