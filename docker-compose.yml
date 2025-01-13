@@ -10,7 +10,7 @@ services:
     env_file:
       - .env
     volumes:
-      - .:/app
+      - ./db:/db
     ports:
       - "${webPort}:${webPort}"
     networks:
@@ -18,5 +18,4 @@ services:
 
 networks:
   Cordos:
-    driver: bridge
-    name: Cordos
+    external: true
