@@ -58,6 +58,7 @@ export default async function run(bot, i) {
         .setLabel("OOC důvod")
         .setStyle(TextInputStyle.Paragraph)
         .setPlaceholder("Rodinna akce")
+        .setMaxLength(100)
         .setRequired(true);
 
     const icInput = new TextInputBuilder()
@@ -65,6 +66,7 @@ export default async function run(bot, i) {
         .setLabel("IC důvod")
         .setStyle(TextInputStyle.Paragraph)
         .setPlaceholder("Zlomená ruka")
+        .setMaxLength(100)
         .setRequired(true);
 
     const actionRow0 = new ActionRowBuilder().addComponents(eventIDInput);

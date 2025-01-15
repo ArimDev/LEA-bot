@@ -29,7 +29,7 @@ export default async function run(bot, i) {
     const recordID = parseInt(embed.fields[0].name.split("#")[1]);
     const record = type === "duty" ? worker.duties[recordID - 1] : worker.apologies[recordID - 1];
 
-    if (record.removed) return i.reply({ content: "> 🛑 **Zápis je již smazán!**", ephemeral: true });;
+    if (record.removed) return i.editReply({ content: "> 🛑 **Zápis je již smazán!**", ephemeral: true });;
     record.removed = true;
 
     const deletedDutyEmbed = new EmbedBuilder(embed)

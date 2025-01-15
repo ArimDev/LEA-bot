@@ -28,6 +28,10 @@ export default async function run(bot, i) {
     const record = type === "duty" ? worker.duties[recordID - 1] : worker.apologies[recordID - 1];
 
     if (type === "duty") {
+        if (!record || !record.date || !record.start || !record.end) {
+            return i.reply({ content: "> 🛑 **Tenhle zápis nejde upravit.**", ephemeral: true });
+        }
+
         const modal = new ModalBuilder()
             .setCustomId("dutyOwModal")
             .setTitle("LEA | Přepis služby");
@@ -164,6 +168,14 @@ export default async function run(bot, i) {
             })
             .catch(e => null);
     } else {
+        if (
+            !record
+            || !record.eventID || !record.start || !record.end || !record.ooc || !record.ic
+            || record.ooc.length > 100 || record.ic.length > 100
+        ) {
+            return i.reply({ content: "> 🛑 **Tenhle zápis nelze upravit.**", ephemeral: true });
+        }
+
         const modal = new ModalBuilder()
             .setCustomId("apologyOwModal")
             .setTitle("LEA | Přepis omluvenky");
@@ -172,7 +184,7 @@ export default async function run(bot, i) {
             .setCustomId("eventID")
             .setLabel("ID Události (nepovinné)")
             .setStyle(TextInputStyle.Short)
-            .setValue(record.eventID.toString())
+            .setValue(record.eventID.toString()) //x
             .setPlaceholder(record.eventID.toString())
             .setMaxLength(5)
             .setRequired(false);
@@ -203,6 +215,7 @@ export default async function run(bot, i) {
             .setStyle(TextInputStyle.Paragraph)
             .setValue(record.ooc)
             .setPlaceholder(record.ooc)
+            .setMaxLength(100)
             .setRequired(true);
 
         const icInput = new TextInputBuilder()
@@ -211,6 +224,7 @@ export default async function run(bot, i) {
             .setStyle(TextInputStyle.Paragraph)
             .setValue(record.ic)
             .setPlaceholder(record.ic)
+            .setMaxLength(100)
             .setRequired(true);
 
         const actionRow0 = new ActionRowBuilder().addComponents(eventIDInput);
