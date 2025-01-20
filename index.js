@@ -4,9 +4,6 @@ else if (process.argv[2] === "test") { runType = 1; }
 else { runType = 2; console.error("ERR! Correct launch: \"node index.js test|start\""); process.exit(4); }
 export { runType };
 
-import { setup as setupLogs } from "./src/functions/logSystem.js";
-await setupLogs();
-
 console.log("-------------------------------> LEA Bot <-------------------------------");
 if (runType === 0) console.log("                                starting...                               ");
 if (runType === 1) console.log("                                testing...                                ");

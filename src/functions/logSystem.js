@@ -19,53 +19,6 @@ export function dg(date, option) {
     return r.toString();
 }
 
-export async function setup() {
-    const date = new Date();
-
-    async function getWriteStream() {
-        let files = await fs.readdirSync(path.resolve("./logs"));
-
-        files = await files.filter((d) => d.includes((dg(date, "FullYear") + "-" + dg(date, "Month") + "-" + dg(date, "Date"))));
-
-        if (files[0]) await files.forEach((f, i) => {
-            files[i] = parseInt(f.split("_")[1].split(".log")[0]);
-        });
-
-        const index = files[0] ? (Math.max(...files) + 1) : 1;
-        return fs.createWriteStream(
-            path.resolve(
-                "./logs/"
-                + dg(date, "FullYear") + "-" + dg(date, "Month") + "-" + dg(date, "Date") + "_" + index
-                + ".log"
-            ),
-            { flags: 'wx' });
-    }
-
-    const logStream = await getWriteStream();
-    const logStdout = process.stdout;
-
-    console.log = function (d) {
-        const day = dg(date, "Date") + ":" + dg(date, "Month") + ":" + dg(date, "FullYear");
-        const time = dg(date, "Hours") + ":" + dg(date, "Minutes") + ":" + dg(date, "Seconds");
-        logStream.write(`[${day} | ${time} LOG] ${util.format(d)}` + "\n");
-        logStdout.write(`[${day} | ${time} LOG] ${util.format(d)}` + "\n");
-    };
-
-    console.error = function (d) {
-        const day = dg(date, "Date") + ":" + dg(date, "Month") + ":" + dg(date, "FullYear");
-        const time = dg(date, "Hours") + ":" + dg(date, "Minutes") + ":" + dg(date, "Seconds");
-        logStream.write(`[${day} | ${time} ERR] ${util.format(d)}` + "\n");
-        logStdout.write(`[${day} | ${time} ERR] ${util.format(d)}` + "\n");
-    };
-
-    console.warn = function (d) {
-        const day = dg(date, "Date") + ":" + dg(date, "Month") + ":" + dg(date, "FullYear");
-        const time = dg(date, "Hours") + ":" + dg(date, "Minutes") + ":" + dg(date, "Seconds");
-        logStream.write(`[${day} | ${time} WAR] ${util.format(d)}` + "\n");
-        logStdout.write(`[${day} | ${time} WAR] ${util.format(d)}` + "\n");
-    };
-}
-
 export async function dcLog(bot, guildID, member, options = {}) {
     const gotServer = getServer(guildID);
     let guild, channel,
@@ -84,7 +37,7 @@ export async function dcLog(bot, guildID, member, options = {}) {
             .setTitle(title)
             .setDescription(description)
             .setColor(color)
-            .setFooter({ text: `LSPD | LEA-Bot v${process.env.version} 💫`, iconURL: bot.LEA.i.LSPD });
+            .setFooter({ text: `LSPD | LEA-Bot v${bot.version} 💫`, iconURL: bot.LEA.i.LSPD });
         await channel.send({ embeds: [logEmbed], files: files });
     } else if (gotServer.id === 2) {
         let files = [];
@@ -97,7 +50,7 @@ export async function dcLog(bot, guildID, member, options = {}) {
             .setTitle(title)
             .setDescription(description)
             .setColor(color)
-            .setFooter({ text: `LSSD | LEA-Bot v${process.env.version} 💫`, iconURL: bot.LEA.i.LSSD });
+            .setFooter({ text: `LSSD | LEA-Bot v${bot.version} 💫`, iconURL: bot.LEA.i.LSSD });
         await channel.send({ embeds: [logEmbed], files: files });
     } else if (gotServer.id === 3) {
         let files = [];
@@ -110,7 +63,7 @@ export async function dcLog(bot, guildID, member, options = {}) {
             .setTitle(title)
             .setDescription(description)
             .setColor(color)
-            .setFooter({ text: `SAHP | LEA-Bot v${process.env.version} 💫`, iconURL: bot.LEA.i.SAHP });
+            .setFooter({ text: `SAHP | LEA-Bot v${bot.version} 💫`, iconURL: bot.LEA.i.SAHP });
         await channel.send({ embeds: [logEmbed], files: files });
     }
 }
