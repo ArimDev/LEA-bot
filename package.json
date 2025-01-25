@@ -1,6 +1,6 @@
 {
   "name": "lea-bot",
-  "version": "7.5.3",
+  "version": "7.5.4",
   "description": "VegasRP (FiveM GTA V roleplay) Discord bot for LEA - making internal police department actions easier.",
   "type": "module",
   "main": "index.js",
@@ -47,8 +47,8 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.4",
-    "vite": "^6.0.7",
+    "vite": "^6.0.11",
     "vite-plugin-html": "^3.2.2",
-    "vitepress": "^1.5.0"
+    "vitepress": "^1.6.3"
   }
 }

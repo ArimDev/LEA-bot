@@ -69,10 +69,10 @@ export default async function run(bot, i) {
 
         if (blUser) {
             await i.deferReply();
-            blMember = await i.guild.members.fetch(blUser.id).then(() => true).catch(() => false);
+            blMember = await i.guild.members.fetch(blUser.id).catch(() => null);
             record = {
                 "removed": false,
-                "name": blMember?.displayName || "",
+                "name": blMember ? blMember.displayName : "",
                 "displayName": blUser.displayName,
                 "username": blUser.username,
                 "id": blUser.id,
@@ -168,7 +168,7 @@ export default async function run(bot, i) {
 
         const bl = JSON.parse(fs.readFileSync(path.resolve("./db/blacklist.json"), "utf-8"));
         if (record) bl.push(record);
-        else return
+        else return;
 
         fs.writeFileSync(path.resolve("./db/blacklist.json"), JSON.stringify(bl, null, 4), "utf-8");
 
@@ -309,10 +309,10 @@ export default async function run(bot, i) {
                     "reason": bl_reason
                 }
             };
-        } else return
+        } else return;
 
         if (bl) blacklist[blID - 1] = bl;
-        else return
+        else return;
 
         fs.writeFileSync(path.resolve("./db/blacklist.json"), JSON.stringify(blacklist, null, 4), "utf-8");
 
