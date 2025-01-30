@@ -147,32 +147,6 @@ export default async function run(bot, i) {
 
     const today = new Date();
 
-    await dcLog(bot, i.guild.id, i.member,
-        {
-            title: `${newGrade >= oldGrade ? "Povýšení" : "Degradace"} v DB`,
-            description:
-                `**<@${i.user.id}> ${newGrade >= oldGrade ? "povýšil" : "degradoval"}(a) <@${i.fields.getTextInputValue("id")}> v DB.**`
-                + `\n> **Jméno:** \`${content.name}\``
-                + `\n> **Hodnost:** \`${content.rank}\` -> \`${i.fields.getTextInputValue("rank")}\``
-                + `\n> **Volačka:** \`${content.radio}\` -> \`${i.fields.getTextInputValue("call")}\``
-                + `\n> **Odznak:** \`${content.badge}\` -> \`${i.fields.getTextInputValue("badge")}\``,
-            color: newGrade >= oldGrade ? "#0033ff" : "#ff9500"
-        }
-    );
-    await simpleLog(bot, i.guild.id,
-        {
-            author: { name: member.displayName, iconURL: member.displayAvatarURL() },
-            title: newGrade >= oldGrade ? "Povýšení" : "Degradace",
-            description:
-                `${content.rank} ➤ **${i.fields.getTextInputValue("rank")}**`
-                + `\n${content.radio} ➤ **${i.fields.getTextInputValue("call")}**`,
-            color: newGrade >= oldGrade ? "#0033ff" : "#ff9500",
-            footer: { text: i.member.displayName, iconURL: i.member.displayAvatarURL() }
-        }
-    );
-
-    console.log(" < [DB/Rankup] >  " + i.member.displayName + ` ${newGrade >= oldGrade ? "povýšil" : "degradoval"}(a) [${content.radio}] ${content.name} na [${i.fields.getTextInputValue("call")}] ${content.name} (${i.fields.getTextInputValue("rank")})`);
-
     const rankup = {
         "date": today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear(),
         "to": i.fields.getTextInputValue("rank"),
@@ -269,21 +243,50 @@ export default async function run(bot, i) {
                 .setFooter(getServer(i.guild.id).footer);
             await folder.send({ content: `<@${i.fields.getTextInputValue("id")}>` + (start ? "" : "<@411436203330502658>"), embeds: [rankup2Embed] });
             await folder.setName(`[${i.fields.getTextInputValue("call")}] ${content.name}`);
-
-            const rankupEmbed = new EmbedBuilder()
-                .setTitle("Úspěch")
-                .setDescription(
-                    `<@${i.fields.getTextInputValue("id")}> byl(a) ${newGrade >= oldGrade ? "povýšen" : "degradován"}(a)!\n`
-                    + `> **Popis složky:** ${start ? "✅" : "❌"}\n`
-                    + `> **Název složky:** ✅\n`
-                    + `> **Přezdívka:** ${gotNick ? "✅" : "❌"}\n`
-                    + `> **Role:** ${gotRole ? "✅" : "❌"}`)
-                .setColor(getServer(i.guild.id).color)
-                .setFooter(getServer(i.guild.id).footer);
-
-            await i.editReply({ embeds: [rankupEmbed], ephemeral: !visible });
         } catch (e) {
             console.error(e);
         }
     }
+
+    console.log(" < [DB/Rankup] >  " + i.member.displayName + ` ${newGrade >= oldGrade ? "povýšil" : "degradoval"}(a) [${content.radio}] ${content.name} na [${i.fields.getTextInputValue("call")}] ${content.name} (${i.fields.getTextInputValue("rank")})`);
+
+    const rankupEmbed = new EmbedBuilder()
+        .setTitle("Úspěch")
+        .setDescription(
+            `<@${i.fields.getTextInputValue("id")}> byl(a) ${newGrade >= oldGrade ? "povýšen" : "degradován"}(a)!\n`
+            + `> **Popis složky:** ${start ? "✅" : "❌"}\n`
+            + `> **Název složky:** ✅\n`
+            + `> **Přezdívka:** ${gotNick ? "✅" : "❌"}\n`
+            + `> **Role:** ${gotRole ? "✅" : "❌"}`)
+        .setColor(getServer(i.guild.id).color)
+        .setFooter(getServer(i.guild.id).footer);
+
+    await i.editReply({ embeds: [rankupEmbed], ephemeral: !visible });
+
+    await dcLog(bot, i.guild.id, i.member,
+        {
+            title: `${newGrade >= oldGrade ? "Povýšení" : "Degradace"} v DB`,
+            description:
+                `**<@${i.user.id}> ${newGrade >= oldGrade ? "povýšil" : "degradoval"}(a) <@${i.fields.getTextInputValue("id")}> v DB.**`
+                + `\n> **Jméno:** \`${content.name}\``
+                + `\n> **Hodnost:** \`${content.rank}\` -> \`${i.fields.getTextInputValue("rank")}\``
+                + `\n> **Volačka:** \`${content.radio}\` -> \`${i.fields.getTextInputValue("call")}\``
+                + `\n> **Odznak:** \`${content.badge}\` -> \`${i.fields.getTextInputValue("badge")}\``,
+            color: newGrade >= oldGrade ? "#0033ff" : "#ff9500"
+        }
+    );
+
+    await simpleLog(bot, i.guild.id,
+        {
+            author: { name: member.displayName, iconURL: member.displayAvatarURL() },
+            title: newGrade >= oldGrade ? "Povýšení" : "Degradace",
+            description:
+                `${content.rank} ➤ **${i.fields.getTextInputValue("rank")}**`
+                + `\n${content.radio} ➤ **${i.fields.getTextInputValue("call")}**`,
+            color: newGrade >= oldGrade ? "#0033ff" : "#ff9500",
+            footer: { text: i.member.displayName, iconURL: i.member.displayAvatarURL() }
+        }
+    );
+
+    return
 }

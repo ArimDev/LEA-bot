@@ -152,6 +152,9 @@ export default async function run(bot, i) {
                 try { await member.send({ embeds: [userEmbed] }); sentPM = true; } catch { sentPM = false; }
             }
 
+            fs.unlinkSync(loc);
+
+            console.log(" < [CMD/DB] >  " + user.displayName + ` smazal(a) DB záznam ${user.id}.json`);
 
             const deleteEmbed = new EmbedBuilder()
                 .setTitle("Officer vyhozen!")
@@ -203,9 +206,7 @@ export default async function run(bot, i) {
                 }
             );
 
-            fs.unlinkSync(loc);
-
-            return console.log(" < [CMD/DB] >  " + user.displayName + ` smazal(a) DB záznam ${user.id}.json`);
+            return;
         })
         .catch(e => null);
 };

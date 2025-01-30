@@ -167,7 +167,7 @@ export default async function run(bot, i) {
         }
 
         const bl = JSON.parse(fs.readFileSync(path.resolve("./db/blacklist.json"), "utf-8"));
-        if (record) bl.push(record);
+        if (record) bl.push(record); //TODO: check this!! record is always true
         else return;
 
         fs.writeFileSync(path.resolve("./db/blacklist.json"), JSON.stringify(bl, null, 4), "utf-8");
@@ -180,6 +180,9 @@ export default async function run(bot, i) {
             .setColor(getServer(i.guild.id).color)
             .setFooter(getServer(i.guild.id).footer);
 
+        if (submit) await submit.editReply({ embeds: [blEmbed] });
+        else await i.editReply({ embeds: [blEmbed] });
+
         await dcLog(bot, i.guild.id, i.member,
             {
                 title: "Nový blacklist záznam",
@@ -189,6 +192,7 @@ export default async function run(bot, i) {
                 color: "#000000"
             }
         );
+
         await simpleLog(bot, i.guild.id,
             {
                 author: { name: blUser ? blUser.tag : bl_discordUsername, iconURL: blMember ? blMember.displayAvatarURL() : `https://cdn.discordapp.com/embed/avatars/${Math.floor(Math.random() * 6)}.png` },
@@ -198,8 +202,7 @@ export default async function run(bot, i) {
             }
         );
 
-        if (submit) return await submit.editReply({ embeds: [blEmbed] });
-        else return await i.editReply({ embeds: [blEmbed] });
+        return;
     }
 
     if (sub === "edit") {
@@ -381,6 +384,8 @@ export default async function run(bot, i) {
                 .setColor(getServer(i.guild.id).color)
                 .setFooter(getServer(i.guild.id).footer);
 
+            await rpl.edit({ embeds: [blEmbed], content: "", components: [] });
+
             await dcLog(bot, i.guild.id, i.member,
                 {
                     title: "Blacklist smazán",
@@ -391,6 +396,7 @@ export default async function run(bot, i) {
                     color: "#000000"
                 }
             );
+
             await simpleLog(bot, i.guild.id,
                 {
                     author: { name: bl.username, iconURL: `https://cdn.discordapp.com/embed/avatars/${Math.floor(Math.random() * 6)}.png` },
@@ -400,7 +406,7 @@ export default async function run(bot, i) {
                 }
             );
 
-            return rpl.edit({ embeds: [blEmbed], content: "", components: [] });
+            return;
         });
     }
 }

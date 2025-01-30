@@ -308,6 +308,8 @@ export default async function run(bot, i) {
         JSON.stringify(worker, null, 4)
     );
 
+    console.log(" < [DB/Login] >  " + i.member.displayName + " zaregistroval(a) [" + i.fields.getTextInputValue("call") + "] " + i.fields.getTextInputValue("name") + " do DB");
+
     const loginEmbed = new EmbedBuilder()
         .setTitle("Složka vytvořena!")
         .setDescription(
@@ -319,6 +321,8 @@ export default async function run(bot, i) {
         )
         .setColor(getServer(i.guild.id).color)
         .setFooter(getServer(i.guild.id).footer);
+
+    await i.editReply({ embeds: [loginEmbed], ephemeral: !visible });
 
     await dcLog(bot, i.guild.id, i.member,
         {
@@ -332,6 +336,7 @@ export default async function run(bot, i) {
             color: "#00ff0d"
         }
     );
+
     await simpleLog(bot, i.guild.id,
         {
             author: { name: `[${i.fields.getTextInputValue("call")}] ${i.fields.getTextInputValue("name")}`, iconURL: member.displayAvatarURL() },
@@ -341,7 +346,5 @@ export default async function run(bot, i) {
         }
     );
 
-    console.log(" < [DB/Login] >  " + i.member.displayName + " zaregistroval(a) [" + i.fields.getTextInputValue("call") + "] " + i.fields.getTextInputValue("name") + " do DB");
-
-    await i.editReply({ embeds: [loginEmbed], ephemeral: !visible });
+    return;
 }
