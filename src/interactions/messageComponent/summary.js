@@ -4,16 +4,20 @@ import path from "path";
 import { checkDB, checkEVENT, getDB, getServer } from "../../../src/functions/db.js";
 
 export default async function run(bot, i) {
-    await i.deferReply({ ephemeral: true });
+    if (i) await i.deferReply({ ephemeral: true }); //! ERROR 10062 !
+    else return
+
     let worker = {};
     if (i.customId.includes("_")) worker.id = i.customId.split("_")[1];
     else worker = i.message.interaction.user;
 
     if (!(checkDB(worker.id))) return await i.editReply({ content: "> 🛑 <@" + worker.id + "> **není v DB.**", ephemeral: true });
 
-    let member;
+    let member, memberFailed = false;
     try { member = await i.guild.members.fetch(worker.id); }
-    catch {
+    catch { memberFailed = true; }
+
+    if (memberFailed || !member) {
         await i.editReply({
             content: "*Tenhle officer už není členem Discord serveru!*",
             ephemeral: true

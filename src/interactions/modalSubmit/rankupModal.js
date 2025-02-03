@@ -19,7 +19,7 @@ export default async function run(bot, i) {
     const visible = i.customId.includes("_") ? (/true/).test(i.customId.split("_")[1]) : false;
 
     let content, oldRolesIDs, rolesIDs, tagID, gotNick = true, gotRole = true, newRank = i.fields.getTextInputValue("rank"),
-        oldGrade, newGrade;
+        oldGrade, newGrade, start = null;
     if (i.guild.id === "xxx" /* MISSING ID */) { //LSPD
         if (newRank === "Chief of Police") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */, newGrade = 15;
         else if (newRank === "Assistant Chief of Police") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */, newGrade = 14;
@@ -178,7 +178,7 @@ export default async function run(bot, i) {
             const folder = await i.guild.channels.fetch(content.folder);
 
             if (folder.archived) folder.setArchived(false, "otevření složky z neaktivity");
-            const start = await folder.fetchStarterMessage({ force: true });
+            start = await folder.fetchStarterMessage({ force: true });
             if (tagID) await folder.setAppliedTags([tagID]);
 
             if (start) {

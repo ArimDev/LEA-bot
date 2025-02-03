@@ -167,7 +167,7 @@ export default async function run(bot, i) {
         }
 
         const bl = JSON.parse(fs.readFileSync(path.resolve("./db/blacklist.json"), "utf-8"));
-        if (record) bl.push(record); //TODO: check this!! record is always true
+        if (record) bl.push(record);
         else return;
 
         fs.writeFileSync(path.resolve("./db/blacklist.json"), JSON.stringify(bl, null, 4), "utf-8");
@@ -216,7 +216,7 @@ export default async function run(bot, i) {
         let bl = blacklist[blID - 1];
         if (!bl) return i.reply({ content: `> 🛑 **Záznam s tímto ID (\`${blID}\`) nebyl nalezen.**`, ephemeral: true });
         if (!passed) {
-            if (record.from.id !== i.user.id)
+            if (bl.from.id !== i.user.id)
                 return i.reply({ content: "> 🛑 **Tenhle záznam jsi nevytvořil, proto ho nemůžeš upravit!**", ephemeral: true });
         }
 

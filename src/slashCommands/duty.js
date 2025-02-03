@@ -65,5 +65,6 @@ export default async function run(bot, i) {
         modal.addComponents(actionRow3);
     }
 
-    i.showModal(modal);
+    if (i) await i.showModal(modal); //! ERROR 10062 !
+    else return;
 };
