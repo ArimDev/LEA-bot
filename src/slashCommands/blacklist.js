@@ -49,7 +49,7 @@ export default async function run(bot, i) {
     let passed = false;
     await i.guild.fetch();
     const admin = await i.member;
-    if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
+    if (admin.id === bot.LEA.o) passed = true; //PetyXbron / b1ngo
     if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true; //Leadership
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
@@ -207,18 +207,21 @@ export default async function run(bot, i) {
 
     if (sub === "edit") {
         let passed = false;
-        if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
-        if (admin.id === "644571265725628437") passed = true; //griffin0s
-        if (admin.id === "885611486758719498") passed = true; //ceffel
+        if (admin.id === bot.LEA.o) passed = true; //PetyXbron / b1ngo
+        else if (bot.LEA.g.LSSD.includes(i.guild.id)) {
+            if (admin.roles.cache.has("1328411383322378331")) passed = true; //Executive Staff
+        } else if (bot.LEA.g.SAHP.includes(i.guild.id)) {
+            if (admin.roles.cache.has("1310392880095039498")) passed = true; //Executive Staff
+        }
+
+        if (!passed)
+            return i.reply({ content: "> 🛑 **Nemáš právo upravovat blacklist záznamy!**", ephemeral: true });
+
 
         const blacklist = JSON.parse(fs.readFileSync(path.resolve("./db/blacklist.json"), "utf-8"));
         const blID = i.options.getInteger("id");
         let bl = blacklist[blID - 1];
         if (!bl) return i.reply({ content: `> 🛑 **Záznam s tímto ID (\`${blID}\`) nebyl nalezen.**`, ephemeral: true });
-        if (!passed) {
-            if (bl.from.id !== i.user.id)
-                return i.reply({ content: "> 🛑 **Tenhle záznam jsi nevytvořil, proto ho nemůžeš upravit!**", ephemeral: true });
-        }
 
         let blDate = new Date();
 
@@ -344,16 +347,20 @@ export default async function run(bot, i) {
 
     if (sub === "remove") {
         let passed = false;
-        if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
+        if (admin.id === bot.LEA.o) passed = true; //PetyXbron / b1ngo
+        else if (bot.LEA.g.LSSD.includes(i.guild.id)) {
+            if (admin.roles.cache.has("1328411383322378331")) passed = true; //Executive Staff
+        } else if (bot.LEA.g.SAHP.includes(i.guild.id)) {
+            if (admin.roles.cache.has("1310392880095039498")) passed = true; //Executive Staff
+        }
+
+        if (!passed)
+            return i.reply({ content: "> 🛑 **Nemáš právo mazat blacklist záznamy!**", ephemeral: true });
 
         const blacklist = JSON.parse(fs.readFileSync(path.resolve("./db/blacklist.json"), "utf-8"));
         const blID = i.options.getInteger("id");
         let bl = blacklist[blID - 1];
         if (!bl) return i.reply({ content: `> 🛑 **Záznam s tímto ID (\`${blID}\`) nebyl nalezen.**`, ephemeral: true });
-        if (!passed) {
-            if (bl.from.id !== i.user.id)
-                return i.reply({ content: "> 🛑 **Tenhle záznam jsi nevytvořil, proto ho nemůžeš smazat!**", ephemeral: true });
-        }
 
         const row = new ActionRowBuilder()
             .addComponents(

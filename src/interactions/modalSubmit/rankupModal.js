@@ -241,7 +241,7 @@ export default async function run(bot, i) {
                 .setThumbnail(getServer(i.guild.id).footer.iconURL)
                 .setColor(getServer(i.guild.id).color)
                 .setFooter(getServer(i.guild.id).footer);
-            await folder.send({ content: `<@${i.fields.getTextInputValue("id")}>` + (start ? "" : "<@411436203330502658>"), embeds: [rankup2Embed] });
+            await folder.send({ content: `<@${i.fields.getTextInputValue("id")}>` + (start ? "" : `<@${bot.LEA.o}>`), embeds: [rankup2Embed] });
             await folder.setName(`[${i.fields.getTextInputValue("call")}] ${content.name}`);
         } catch (e) {
             console.error(e);

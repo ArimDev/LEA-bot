@@ -16,7 +16,7 @@ export default async function run(bot, i) {
     let passed = false;
     i.guild.fetch();
     const admin = i.member;
-    if (admin.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
+    if (admin.id === bot.LEA.o) passed = true; //PetyXbron / b1ngo
     if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true; //Leadership
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {

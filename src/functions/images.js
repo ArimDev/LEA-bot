@@ -13,10 +13,7 @@ export async function klipy(bot, m) {
 
 export async function fotosoutez(bot, m) {
     if (
-        ![
-            "411436203330502658"/*b1ngo*/, "607915400604286997"/*samus*/, "801373399564681236"/*daviiid_.*/,
-            "846451292388851722"/*aldix_eu*/, "343386988000444417"/*cenovka*/
-        ].includes(m.author.id)
+        !bot.LEA.a.includes(m.author.id)
         && !m.attachments.size
         && !new RegExp(/https?:\/\/\S+/g).test(m.content)
     ) return m.delete();

@@ -25,13 +25,20 @@ let bot = new Client({
     ]
 });
 
-import fs from "fs/promises"
-const packageJson = JSON.parse(await fs.readFile("./package.json"))
+import fs from "fs/promises";
+const packageJson = JSON.parse(await fs.readFile("./package.json"));
 
 bot.version = packageJson.version;
 bot.slashes = new Collection();
 bot.ints = new Map();
 bot.LEA = {
+    a: [
+        "411436203330502658", //b1ngo
+        "607915400604286997", //samus
+        "801373399564681236", //daviiid_.
+        "846451292388851722", //aldix_eu
+        "343386988000444417", //cenovka
+    ],
     c: {
         LEAbot: "#3a9a97",
         LSPD: "#000c1e",
@@ -43,13 +50,6 @@ bot.LEA = {
         summary: "#25be5c",
         event: "#Be25ab",
         deleted: "#c43136"
-    },
-    i: {
-        LEAbot: "https://i.imgur.com/EnZErOi.png",
-        LSPD: "https://i.imgur.com/gfL0fGf.png",
-        SAHP: "https://i.imgur.com/xgFoKuX.png",
-        LSSD: "https://i.imgur.com/X3cH2iu.png",
-        LSCSO: "https://i.imgur.com/Hex0MQF.png"
     },
     e: {
         LSPD: "<:LSPD:1178108366514565181>",
@@ -65,7 +65,15 @@ bot.LEA = {
         SAHP: [
             "1301163398515396668"
         ]
-    }
+    },
+    i: {
+        LEAbot: "https://i.imgur.com/EnZErOi.png",
+        LSPD: "https://i.imgur.com/gfL0fGf.png",
+        SAHP: "https://i.imgur.com/xgFoKuX.png",
+        LSSD: "https://i.imgur.com/X3cH2iu.png",
+        LSCSO: "https://i.imgur.com/Hex0MQF.png"
+    },
+    o: "411436203330502658" //b1ngo
 };
 
 import { events, commands, interactions } from "./src/functions/register.js";

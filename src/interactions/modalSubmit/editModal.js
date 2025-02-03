@@ -220,7 +220,7 @@ export default async function run(bot, i) {
                 )
                 .setColor(getServer(i.guild.id).color)
                 .setFooter(getServer(i.guild.id).footer);
-            await folder.send({ content: `<@${i.fields.getTextInputValue("id")}>` + (start ? "" : "<@411436203330502658>"), embeds: [rankup2Embed] });
+            await folder.send({ content: `<@${i.fields.getTextInputValue("id")}>` + (start ? "" : `<@${bot.LEA.o}>`), embeds: [rankup2Embed] });
             if (changed.name || changed.radio) await folder.setName(`[${i.fields.getTextInputValue("call")}] ${content.name}`);
 
             const rankupEmbed = new EmbedBuilder()

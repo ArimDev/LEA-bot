@@ -9,7 +9,7 @@ export default async function run(bot, i) {
     else authorID = i.message.interaction.user.id;
 
     let passed = false;
-    if (i.user.id === "411436203330502658") passed = true; //PetyXbron / b1ngo
+    if (i.user.id === bot.LEA.o) passed = true; //PetyXbron / b1ngo
     if (i.user.id === authorID) passed = true;
     if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
         if (i.member.roles.cache.has("xxx" /* MISSING ID */)) passed = true; //Leadership

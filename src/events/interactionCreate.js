@@ -19,7 +19,7 @@ export default async function (bot, i) {
         content:
             `> 🛑 ***Probíhá údržba bota!***
             > Odhadovaný konec: <t:1715625900:R>
-            > Správce: <@411436203330502658>`,
+            > Správce: <@${bot.LEA.o}>`,
         ephemeral: true });*/
 
     if (
