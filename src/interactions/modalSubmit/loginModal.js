@@ -33,12 +33,12 @@ export default async function run(bot, i) {
     if (await findWorker("radio", radio))
         return i.reply({ content: `> 🛑 **Volací znak \`${radio}\` už je obsazený!**`, ephemeral: true });
 
-    let post = false, gotNick = true, gotRole = true, folders;
+    let member, post = false, gotNick = true, gotRole = true, folders;
     const today = new Date();
     if (i.guild.id === "xxx" /* MISSING ID */) { //LSPD
         folders = await i.guild.channels.fetch(/* MISSING ID */);
-        try { var member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
-        catch (e) { await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true }); return console.log(e); }
+        try { member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
+        catch (e) { return await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true }); }
 
         let rolesIDs, tagID;
         if (rank === "Chief of Police") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
@@ -114,8 +114,8 @@ export default async function run(bot, i) {
         await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
     } else if (i.guild.id === "1154446248934387828") { //LSSD
         folders = await i.guild.channels.fetch("1290050353793994814");
-        try { var member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
-        catch (e) { await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true }); console.log(e); }
+        try { member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
+        catch (e) { return await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true }); }
 
         let rolesIDs, tagID;
         if (rank === "Sheriff") rolesIDs = ["1154446249005690910"], tagID = "1203829217167409192";
@@ -190,8 +190,8 @@ export default async function run(bot, i) {
         await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
     } else if (i.guild.id === "1301163398515396668") { //SAHP
         folders = await i.guild.channels.fetch("1301228299858481162");
-        try { var member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
-        catch (e) { await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true }); console.log(e); }
+        try { member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
+        catch (e) { return await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true });  }
 
         let rolesIDs, tagID;
         if (rank === "Commissioner") rolesIDs = ["1301163398595350582", "1301163398557339686"], tagID = "1304980716693487618";

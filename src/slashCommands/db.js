@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, ModalBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
+import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, ModalBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
 import fs from "fs";
 import path from "path";
 import { checkDB, getDB, getServer } from "../functions/db.js";
@@ -300,12 +300,8 @@ export default async function run(bot, i) {
                 worker = gotDB.data;
                 guild = await bot.guilds.fetch(bot.LEA.g[gotDB.guildName][0]);
 
-                let member;
-                try {
-                    member = await guild.members.fetch(user.id);
-                } catch (err) {
-                    member = undefined;
-                }
+                let member = undefined;
+                try { member = await guild.members.fetch(user.id); } catch { }
 
                 const userEmbed = new EmbedBuilder()
                     .setTitle("Byl(a) jste propuštěn(a)!")
@@ -329,6 +325,7 @@ export default async function run(bot, i) {
                     try { await member.send({ embeds: [userEmbed] }); sentPM = true; } catch { sentPM = false; }
                 }
 
+                const file = fs.readFileSync(loc);
                 fs.unlinkSync(loc);
 
                 console.log(" < [CMD/DB] >  " + user.displayName + ` smazal(a) DB záznam ${user.id}.json`);
@@ -346,7 +343,7 @@ export default async function run(bot, i) {
                     .setColor(getServer(guild.id).color)
                     .setFooter(getServer(guild.id).footer);
 
-                await submit.editReply({ content: "", embeds: [deleteEmbed], files: [loc], components: [], ephemeral: !visible });
+                await submit.editReply({ content: "", embeds: [deleteEmbed], files: [file], components: [], ephemeral: !visible });
 
                 if (!member) submit.followUp({
                     content: "*Role a přezdívka nebyly vymazány protože officer již není na tomhle serveru.*",
@@ -370,7 +367,7 @@ export default async function run(bot, i) {
                             + `\n> **Odznak:** \`${worker.badge}\``
                             + `\n> **Důvod:**\`\`\`${reason}\`\`\``,
                         color: "#ff0000",
-                        file: loc
+                        file: file
                     }
                 );
 
@@ -385,6 +382,6 @@ export default async function run(bot, i) {
 
                 return;
             })
-            .catch(e => null);
+            .catch();
     }
 };

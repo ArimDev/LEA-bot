@@ -135,9 +135,7 @@ export default async function run(bot, i) {
             var submit = await i.awaitModalSubmit({
                 filter: int => int.user.id === i.user.id,
                 time: 600000
-            }).catch(() => {
-                return;
-            });
+            }).catch(() => null);
 
             if (submit) {
                 await submit.deferReply();
@@ -287,9 +285,7 @@ export default async function run(bot, i) {
         var submit = await i.awaitModalSubmit({
             filter: int => int.user.id === i.user.id,
             time: 600000
-        }).catch(() => {
-            return;
-        });
+        }).catch(() => null);
 
         if (submit) {
             await submit.deferReply();

@@ -10,7 +10,7 @@ export default async function run(bot, i) {
     let member;
     try { member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
     catch {
-        await i.editReply({
+        return await i.editReply({
             content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **již není členem Discord serveru.**",
             ephemeral: true
         });
@@ -40,12 +40,8 @@ export default async function run(bot, i) {
 
         content = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
 
-        let folderCh;
-        try {
-            folderCh = await i.guild.channels.fetch(content.folder);
-        } catch {
-            return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
-        }
+        let folderCh = false;
+        try { folderCh = await i.guild.channels.fetch(content.folder); } catch { }
         if (!folderCh) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
 
         if (content.rank === "Chief of Police") oldRolesIDs = [/* MISSING IDs */], oldGrade = 15;
@@ -80,12 +76,8 @@ export default async function run(bot, i) {
 
         content = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
 
-        let folderCh;
-        try {
-            folderCh = await i.guild.channels.fetch(content.folder);
-        } catch {
-            return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
-        }
+        let folderCh = false;
+        try { folderCh = await i.guild.channels.fetch(content.folder); } catch { }
         if (!folderCh) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
 
         if (content.rank === "Sheriff") oldRolesIDs = ["1154446249005690910", "1267541873451339806"], oldGrade = 11;
@@ -120,12 +112,8 @@ export default async function run(bot, i) {
 
         content = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
 
-        let folderCh;
-        try {
-            folderCh = await i.guild.channels.fetch(content.folder);
-        } catch {
-            return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
-        }
+        let folderCh = false;
+        try { folderCh = await i.guild.channels.fetch(content.folder); } catch { }
         if (!folderCh) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
 
         if (content.rank === "Commissioner") oldRolesIDs = ["1301163398595350582", "1301163398557339686"], oldGrade = 12;
@@ -146,6 +134,8 @@ export default async function run(bot, i) {
     await i.deferReply({ ephemeral: !visible });
 
     const today = new Date();
+
+    const oldContent = content
 
     const rankup = {
         "date": today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear(),
@@ -174,78 +164,74 @@ export default async function run(bot, i) {
     try { await member.roles.add(rolesIDs); } catch { gotRole = false; }
 
     if (content.folder) {
-        try {
-            const folder = await i.guild.channels.fetch(content.folder);
+        const folder = await i.guild.channels.fetch(content.folder);
 
-            if (folder.archived) folder.setArchived(false, "otevření složky z neaktivity");
-            start = await folder.fetchStarterMessage({ force: true });
-            if (tagID) await folder.setAppliedTags([tagID]);
+        if (folder.archived) folder.setArchived(false, "otevření složky z neaktivity");
+        start = await folder.fetchStarterMessage({ force: true });
+        if (tagID) await folder.setAppliedTags([tagID]);
 
-            if (start) {
-                const rankUpDateArr = rankup.date.split(". ");
-                const rankUpDate = new Date(rankUpDateArr[1] + "/" + rankUpDateArr[0] + "/" + rankUpDateArr[2]);
+        if (start) {
+            const rankUpDateArr = rankup.date.split(". ");
+            const rankUpDate = new Date(rankUpDateArr[1] + "/" + rankUpDateArr[0] + "/" + rankUpDateArr[2]);
 
-                const workerEmbed = new EmbedBuilder()
-                    .setAuthor({ name: `[${content.radio}] ${content.name}`, iconURL: member.displayAvatarURL() })
-                    .setDescription(
-                        `> **App:** <@${i.fields.getTextInputValue("id")}>`
-                        + `\n> **Jméno:** \`${content.name}\``
-                        + `\n> **Hodnost:** ${rolesIDs ? `<@&${rolesIDs[0]}>` : `\`${content.rank}\``}`
-                        + `\n> **Odznak:** \`${content.badge}\``
-                        + `\n> **Volačka:** \`${content.radio}\``
-                        + "\n\n"
-                        + `\n> **Hodin:** \`${Math.round((content.hours + Number.EPSILON) * 100) / 100}\``
-                        + `\n> **Omluvenek:** \`${content.apologies.filter(a => !a.removed).length}\``
-                        + `\n> **Povýšení:** ${time(rankUpDate, "R")}`
-                    )
-                    .setThumbnail(getServer(i.guild.id).footer.iconURL)
-                    .setColor(getServer(i.guild.id).color)
-                    .setFooter(getServer(i.guild.id).footer);
-                const row = new ActionRowBuilder()
-                    .addComponents(
-                        new ButtonBuilder()
-                            .setCustomId("summary_" + i.fields.getTextInputValue("id"))
-                            .setStyle(ButtonStyle.Success)
-                            .setLabel("Souhrn")
-                            .setEmoji("📑"),
-                    );
-                await start.edit({ message: `<@${i.fields.getTextInputValue("id")}>`, embeds: [workerEmbed], components: [row] });
-            }
-
-            const rankup2Embed = new EmbedBuilder()
-                .setTitle(newGrade >= oldGrade ? "Povýšení!" : "Degradace!")
+            const workerEmbed = new EmbedBuilder()
+                .setAuthor({ name: `[${content.radio}] ${content.name}`, iconURL: member.displayAvatarURL() })
                 .setDescription(
-                    newGrade >= oldGrade ?
-                        `Gratuluji <@${i.fields.getTextInputValue("id")}>, byl(a) jste povýšen(a).`
-                        : `<@${i.fields.getTextInputValue("id")}>, byl(a) jste degradován(a).`
-                        + `\nZkontrolujte si své nové údaje.`
+                    `> **App:** <@${i.fields.getTextInputValue("id")}>`
+                    + `\n> **Jméno:** \`${content.name}\``
+                    + `\n> **Hodnost:** ${rolesIDs ? `<@&${rolesIDs[0]}>` : `\`${content.rank}\``}`
+                    + `\n> **Odznak:** \`${content.badge}\``
+                    + `\n> **Volačka:** \`${content.radio}\``
+                    + "\n\n"
+                    + `\n> **Hodin:** \`${Math.round((content.hours + Number.EPSILON) * 100) / 100}\``
+                    + `\n> **Omluvenek:** \`${content.apologies.filter(a => !a.removed).length}\``
+                    + `\n> **Povýšení:** ${time(rankUpDate, "R")}`
                 )
-                .addFields([
-                    {
-                        name: `Aktualizace`, inline: true,
-                        value:
-                            `> **Popis složky:** ${start ? "✅" : "❌"}\n`
-                            + `> **Název složky:** ✅\n`
-                            + `> **Přezdívka:** ${gotNick ? "✅" : "❌"}\n`
-                            + `> **Role:** ${gotRole ? "✅" : "❌"}`
-                    },
-                    {
-                        name: `Aktuální údaje`, inline: true,
-                        value:
-                            `> **Jméno:** \`${content.name}\`\n`
-                            + `> **Hodnost:** \`${i.fields.getTextInputValue("rank")}\`\n`
-                            + `> **Volačka:** \`${i.fields.getTextInputValue("call")}\`\n`
-                            + `> **Č. Odznaku:** \`${i.fields.getTextInputValue("badge")}\``
-                    }
-                ])
                 .setThumbnail(getServer(i.guild.id).footer.iconURL)
                 .setColor(getServer(i.guild.id).color)
                 .setFooter(getServer(i.guild.id).footer);
-            await folder.send({ content: `<@${i.fields.getTextInputValue("id")}>` + (start ? "" : `<@${bot.LEA.o}>`), embeds: [rankup2Embed] });
-            await folder.setName(`[${i.fields.getTextInputValue("call")}] ${content.name}`);
-        } catch (e) {
-            console.error(e);
+            const row = new ActionRowBuilder()
+                .addComponents(
+                    new ButtonBuilder()
+                        .setCustomId("summary_" + i.fields.getTextInputValue("id"))
+                        .setStyle(ButtonStyle.Success)
+                        .setLabel("Souhrn")
+                        .setEmoji("📑"),
+                );
+            await start.edit({ message: `<@${i.fields.getTextInputValue("id")}>`, embeds: [workerEmbed], components: [row] });
         }
+
+        const rankup2Embed = new EmbedBuilder()
+            .setTitle(newGrade >= oldGrade ? "Povýšení!" : "Degradace!")
+            .setDescription(
+                newGrade >= oldGrade ?
+                    `Gratuluji <@${i.fields.getTextInputValue("id")}>, byl(a) jste povýšen(a).`
+                    : `<@${i.fields.getTextInputValue("id")}>, byl(a) jste degradován(a).`
+                    + `\nZkontrolujte si své nové údaje.`
+            )
+            .addFields([
+                {
+                    name: `Aktualizace`, inline: true,
+                    value:
+                        `> **Popis složky:** ${start ? "✅" : "❌"}\n`
+                        + `> **Název složky:** ✅\n`
+                        + `> **Přezdívka:** ${gotNick ? "✅" : "❌"}\n`
+                        + `> **Role:** ${gotRole ? "✅" : "❌"}`
+                },
+                {
+                    name: `Aktuální údaje`, inline: true,
+                    value:
+                        `> **Jméno:** \`${content.name}\`\n`
+                        + `> **Hodnost:** \`${i.fields.getTextInputValue("rank")}\`\n`
+                        + `> **Volačka:** \`${i.fields.getTextInputValue("call")}\`\n`
+                        + `> **Č. Odznaku:** \`${i.fields.getTextInputValue("badge")}\``
+                }
+            ])
+            .setThumbnail(getServer(i.guild.id).footer.iconURL)
+            .setColor(getServer(i.guild.id).color)
+            .setFooter(getServer(i.guild.id).footer);
+        await folder.send({ content: `<@${i.fields.getTextInputValue("id")}>` + (start ? "" : `<@${bot.LEA.o}>`), embeds: [rankup2Embed] });
+        await folder.setName(`[${i.fields.getTextInputValue("call")}] ${content.name}`);
     }
 
     console.log(" < [DB/Rankup] >  " + i.member.displayName + ` ${newGrade >= oldGrade ? "povýšil" : "degradoval"}(a) [${content.radio}] ${content.name} na [${i.fields.getTextInputValue("call")}] ${content.name} (${i.fields.getTextInputValue("rank")})`);
@@ -269,9 +255,9 @@ export default async function run(bot, i) {
             description:
                 `**<@${i.user.id}> ${newGrade >= oldGrade ? "povýšil" : "degradoval"}(a) <@${i.fields.getTextInputValue("id")}> v DB.**`
                 + `\n> **Jméno:** \`${content.name}\``
-                + `\n> **Hodnost:** \`${content.rank}\` -> \`${i.fields.getTextInputValue("rank")}\``
-                + `\n> **Volačka:** \`${content.radio}\` -> \`${i.fields.getTextInputValue("call")}\``
-                + `\n> **Odznak:** \`${content.badge}\` -> \`${i.fields.getTextInputValue("badge")}\``,
+                + `\n> **Hodnost:** \`${oldContent.rank}\` -> \`${content.rank}\``
+                + `\n> **Volačka:** \`${oldContent.radio}\` -> \`${content.radio}\``
+                + `\n> **Odznak:** \`${oldContent.badge}\` -> \`${content.badge}\``,
             color: newGrade >= oldGrade ? "#0033ff" : "#ff9500"
         }
     );
@@ -281,12 +267,12 @@ export default async function run(bot, i) {
             author: { name: member.displayName, iconURL: member.displayAvatarURL() },
             title: newGrade >= oldGrade ? "Povýšení" : "Degradace",
             description:
-                `${content.rank} ➤ **${i.fields.getTextInputValue("rank")}**`
-                + `\n${content.radio} ➤ **${i.fields.getTextInputValue("call")}**`,
+                `${oldContent.rank} ➤ **${content.rank}**`
+                + `\n${oldContent.radio} ➤ **${content.radio}**`,
             color: newGrade >= oldGrade ? "#0033ff" : "#ff9500",
             footer: { text: i.member.displayName, iconURL: i.member.displayAvatarURL() }
         }
     );
 
-    return
+    return;
 }

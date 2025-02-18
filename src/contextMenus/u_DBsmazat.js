@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ApplicationCommandType, ButtonBuilder, ButtonStyle, ContextMenuCommandBuilder, EmbedBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
+import { ActionRowBuilder, AttachmentBuilder, ApplicationCommandType, ButtonBuilder, ButtonStyle, ContextMenuCommandBuilder, EmbedBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
 import fs from "fs";
 import path from "path";
 import { getDB, getServer } from "../functions/db.js";
@@ -149,6 +149,7 @@ export default async function run(bot, i) {
                 try { await member.send({ embeds: [userEmbed] }); sentPM = true; } catch { sentPM = false; }
             }
 
+            const file = fs.readFileSync(loc);
             fs.unlinkSync(loc);
 
             console.log(" < [CMD/DB] >  " + user.displayName + ` smazal(a) DB záznam ${user.id}.json`);
@@ -166,7 +167,7 @@ export default async function run(bot, i) {
                 .setColor(getServer(guild.id).color)
                 .setFooter(getServer(guild.id).footer);
 
-            await submit.editReply({ content: "", embeds: [deleteEmbed], files: [loc], components: [], ephemeral: true });
+            await submit.editReply({ content: "", embeds: [deleteEmbed], files: [file], components: [], ephemeral: true });
 
             if (!member) submit.followUp({
                 content: "*Role a přezdívka nebyly vymazány protože officer již není na tomhle serveru.*",
@@ -190,7 +191,7 @@ export default async function run(bot, i) {
                         + `\n> **Odznak:** \`${worker.badge}\``
                         + `\n> **Důvod:**\`\`\`${reason}\`\`\``,
                     color: "#ff0000",
-                    file: loc
+                    file: file
                 }
             );
 
@@ -205,5 +206,5 @@ export default async function run(bot, i) {
 
             return;
         })
-        .catch(e => null);
+        .catch();
 };

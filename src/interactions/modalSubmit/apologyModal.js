@@ -51,7 +51,7 @@ export default async function run(bot, i) {
         });
     }
 
-    try { await i.deferReply({ ephemeral: inFolder ? false : true }); } catch { return; }
+    await i.deferReply({ ephemeral: inFolder ? false : true });
 
     const dutyEmbed = new EmbedBuilder()
         .setAuthor({ name: i.member.displayName, iconURL: i.member.displayAvatarURL() })

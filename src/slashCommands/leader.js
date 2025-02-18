@@ -91,12 +91,8 @@ export default async function run(bot, i) {
                     else if (bot.LEA.g.LSSD.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + file), "utf-8"));
                     else if (bot.LEA.g.SAHP.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + file), "utf-8"));
 
-                    let m;
-                    try {
-                        m = await i.guild.members.fetch(file.split(".")[0]);
-                    } catch (e) {
-                        m = false;
-                    }
+                    let m = false;
+                    try { m = await i.guild.members.fetch(file.split(".")[0]); } catch { }
 
                     if (m) {
                         const ap = worker.apologies;
@@ -140,8 +136,6 @@ export default async function run(bot, i) {
                     ephemeral: true
                 });
             })
-            .catch(e => {
-                return null;
-            });
+            .catch();
     }
 };

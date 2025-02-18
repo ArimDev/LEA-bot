@@ -17,7 +17,7 @@ export default async function run(bot, i) {
     try { member = await i.guild.members.fetch(worker.id); }
     catch { memberFailed = true; }
 
-    if (memberFailed || !member) {
+    if (memberFailed || !member || !member.displayName) {
         await i.editReply({
             content: "*Tenhle officer už není členem Discord serveru!*",
             ephemeral: true

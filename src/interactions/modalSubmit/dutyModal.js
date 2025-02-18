@@ -105,7 +105,9 @@ export default async function run(bot, i) {
     if (inFolder)
         msg = await i.editReply({ embeds: [dutyEmbed], components: [row] });
     else {
-        const ch = await i.guild.channels.fetch(content.folder);
+        try { var ch = await i.guild.channels.fetch(content.folder); }
+        catch { return await i.editReply({ content: `> 🛑 **Nebylo možné zapsat duty do složky (asi neexistuje)!**`, ephemeral: true }); }
+
         if (ch.archived) await ch.setArchived(false, "otevření složky z neaktivity");
         msg = await ch.send({ embeds: [dutyEmbed], components: [row] });
         await i.editReply({ content: `> ✅ **Služba byla zapsána: ${msg.url}**`, ephemeral: true });

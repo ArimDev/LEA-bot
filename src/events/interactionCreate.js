@@ -22,45 +22,43 @@ export default async function (bot, i) {
             > Správce: <@${bot.LEA.o}>`,
         ephemeral: true });*/
 
-    if (
-        i.isUserContextMenuCommand()
-        || i.type === InteractionType.ApplicationCommand
-    ) {
-        let cmdName = i.commandName;
-        if (i.isUserContextMenuCommand()) {
-            cmdName = i.commandName.replaceAll(" ", "");
-            cmdName = "u_" + cmdName;
-        }
+    try {
+        if (
+            i.isUserContextMenuCommand()
+            || i.type === InteractionType.ApplicationCommand
+        ) {
+            let lowSlashes = new Map();
+            bot.slashes.forEach((value, key) =>
+                lowSlashes.set(key.toLowerCase(), value)
+            );
 
-        let lowSlashes = new Map();
-        bot.slashes.forEach((value, key) =>
-            lowSlashes.set(key.toLowerCase(), value)
-        );
-
-        const command = lowSlashes.get(cmdName.toLowerCase());
-        if (command) {
-            return command.default(bot, i);
-        }
-    }
-
-    if (i.type === InteractionType.MessageComponent
-        || i.type === InteractionType.ModalSubmit
-    ) {
-        let category = "";
-        if (i.type === InteractionType.MessageComponent) category = "messageComponent";
-        else if (i.type === InteractionType.ModalSubmit) category = "modalSubmit";
-
-        const ints = bot.ints.get(category);
-
-        function findInt(thatMap, includesName) {
-            for (const [name, run] of thatMap.entries()) {
-                if (name.includes(includesName))
-                    return run;
+            const command = lowSlashes.get(i.commandName.toLowerCase());
+            if (command) {
+                return command.default(bot, i);
             }
-            return null;
         }
 
-        const int = findInt(ints, i.customId.split("_")[0]);
-        if (int) return int(bot, i);
+        if (i.type === InteractionType.MessageComponent
+            || i.type === InteractionType.ModalSubmit
+        ) {
+            let category = "";
+            if (i.type === InteractionType.MessageComponent) category = "messageComponent";
+            else if (i.type === InteractionType.ModalSubmit) category = "modalSubmit";
+
+            const ints = bot.ints.get(category);
+
+            function findInt(thatMap, includesName) {
+                for (const [name, run] of thatMap.entries()) {
+                    if (name.includes(includesName))
+                        return run;
+                }
+                return null;
+            }
+
+            const int = findInt(ints, i.customId.split("_")[0]);
+            if (int) return int(bot, i);
+        }
+    } catch (e) {
+        return console.error(e);
     }
 }

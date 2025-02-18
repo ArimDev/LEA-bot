@@ -7,12 +7,12 @@ import { dcLog, simpleLog } from "../../functions/logSystem.js";
 export default async function run(bot, i) {
     if (!(checkDB(i.fields.getTextInputValue("id"), i))) return i.reply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **není v DB.**", ephemeral: true });
     const gotDB = getDB(i.fields.getTextInputValue("id"));
-    if (!bot.LEA.g[gotDB.guildName].includes(i.guild.id)) return i.reply({ content: `> 🛑 **<@${user.id}> je členem \`${gotDB.guildName}\`!** (Nemůžeš ho upravit)`, ephemeral: true });
+    if (!bot.LEA.g[gotDB.guildName].includes(i.guild.id)) return i.reply({ content: `> 🛑 **<@${i.fields.getTextInputValue("id")}> je členem \`${gotDB.guildName}\`!** (Nemůžeš ho upravit)`, ephemeral: true });
 
     let member;
     try { member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
     catch {
-        await i.editReply({
+        return await i.editReply({
             content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **není v DB.**",
             ephemeral: true
         });
@@ -171,69 +171,65 @@ export default async function run(bot, i) {
     if (changed.rank) try { await member.roles.add(rolesIDs); } catch { gotRole = false; }
 
     if (content.folder) {
-        try {
-            const folder = await i.guild.channels.fetch(content.folder);
+        const folder = await i.guild.channels.fetch(content.folder);
 
-            if (folder.archived) folder.setArchived(false, "otevření složky z neaktivity");
-            const start = await folder.fetchStarterMessage({ force: true });
+        if (folder.archived) folder.setArchived(false, "otevření složky z neaktivity");
+        const start = await folder.fetchStarterMessage({ force: true });
 
-            if (changed.rank && tagID) await folder.setAppliedTags([tagID]);
+        if (changed.rank && tagID) await folder.setAppliedTags([tagID]);
 
-            if (start) {
-                const rankUpDateArr = content.rankups[content.rankups.length - 1].date.split(". ");
-                const rankUpDate = new Date(rankUpDateArr[1] + "/" + rankUpDateArr[0] + "/" + rankUpDateArr[2]);
+        if (start) {
+            const rankUpDateArr = content.rankups[content.rankups.length - 1].date.split(". ");
+            const rankUpDate = new Date(rankUpDateArr[1] + "/" + rankUpDateArr[0] + "/" + rankUpDateArr[2]);
 
-                const workerEmbed = new EmbedBuilder()
-                    .setAuthor({ name: `[${content.radio}] ${content.name}`, iconURL: member.displayAvatarURL() })
-                    .setDescription(
-                        `> **App:** <@${i.fields.getTextInputValue("id")}>`
-                        + `\n> **Jméno:** \`${content.name}\``
-                        + `\n> **Hodnost:** ${rolesIDs ? `<@&${rolesIDs[0]}>` : `\`${content.rank}\``}`
-                        + `\n> **Odznak:** \`${content.badge}\``
-                        + `\n> **Volačka:** \`${content.radio}\``
-                        + "\n\n"
-                        + `\n> **Hodin:** \`${Math.round((content.hours + Number.EPSILON) * 100) / 100}\``
-                        + `\n> **Omluvenek:** \`${content.apologies.filter(a => !a.removed).length}\``
-                        + `\n> **Povýšení:** ${time(rankUpDate, "R")}`
-                    )
-                    .setThumbnail(getServer(i.guild.id).footer.iconURL)
-                    .setColor(getServer(i.guild.id).color)
-                    .setFooter(getServer(i.guild.id).footer);
-                const row = new ActionRowBuilder()
-                    .addComponents(
-                        new ButtonBuilder()
-                            .setCustomId("summary_" + i.fields.getTextInputValue("id"))
-                            .setStyle(ButtonStyle.Success)
-                            .setLabel("Souhrn")
-                            .setEmoji("📑"),
-                    );
-                await start.edit({ message: `<@${i.fields.getTextInputValue("id")}>`, embeds: [workerEmbed], components: [row] });
-            }
-
-            const rankup2Embed = new EmbedBuilder()
-                .setTitle("Úprava!")
+            const workerEmbed = new EmbedBuilder()
+                .setAuthor({ name: `[${content.radio}] ${content.name}`, iconURL: member.displayAvatarURL() })
                 .setDescription(
-                    (changed.name ? `> **Jméno:** \`${old.name}\` -> \`${content.name}\`` : `> **Jméno:** \`${content.name}\``)
-                    + "\n" + (changed.rank ? `> **Hodnost:** \`${old.rank}\` -> **__\`${content.rank}\`__**` : `> **Hodnost:** \`${content.rank}\``)
-                    + "\n" + (changed.radio ? `> **Volačka:** \`${old.radio}\` -> **__\`${content.radio}\`__**` : `> **Volačka:** \`${content.radio}\``)
-                    + "\n" + (changed.badge ? `> **Odznak:** \`${old.badge}\` -> **__\`${content.badge}\`__**` : `> **Odznak:** \`${content.badge}\``)
+                    `> **App:** <@${i.fields.getTextInputValue("id")}>`
+                    + `\n> **Jméno:** \`${content.name}\``
+                    + `\n> **Hodnost:** ${rolesIDs ? `<@&${rolesIDs[0]}>` : `\`${content.rank}\``}`
+                    + `\n> **Odznak:** \`${content.badge}\``
+                    + `\n> **Volačka:** \`${content.radio}\``
+                    + "\n\n"
+                    + `\n> **Hodin:** \`${Math.round((content.hours + Number.EPSILON) * 100) / 100}\``
+                    + `\n> **Omluvenek:** \`${content.apologies.filter(a => !a.removed).length}\``
+                    + `\n> **Povýšení:** ${time(rankUpDate, "R")}`
                 )
+                .setThumbnail(getServer(i.guild.id).footer.iconURL)
                 .setColor(getServer(i.guild.id).color)
                 .setFooter(getServer(i.guild.id).footer);
-            await folder.send({ content: `<@${i.fields.getTextInputValue("id")}>` + (start ? "" : `<@${bot.LEA.o}>`), embeds: [rankup2Embed] });
-            if (changed.name || changed.radio) await folder.setName(`[${i.fields.getTextInputValue("call")}] ${content.name}`);
-
-            const rankupEmbed = new EmbedBuilder()
-                .setTitle("Úspěch")
-                .setDescription(
-                    `<@${i.fields.getTextInputValue("id")}> byl(a) upravena(a)!`)
-                .setColor(getServer(i.guild.id).color)
-                .setFooter(getServer(i.guild.id).footer);
-
-            await i.editReply({ embeds: [rankupEmbed], ephemeral: !visible });
-        } catch (e) {
-            console.error(e);
+            const row = new ActionRowBuilder()
+                .addComponents(
+                    new ButtonBuilder()
+                        .setCustomId("summary_" + i.fields.getTextInputValue("id"))
+                        .setStyle(ButtonStyle.Success)
+                        .setLabel("Souhrn")
+                        .setEmoji("📑"),
+                );
+            await start.edit({ message: `<@${i.fields.getTextInputValue("id")}>`, embeds: [workerEmbed], components: [row] });
         }
+
+        const rankup2Embed = new EmbedBuilder()
+            .setTitle("Úprava!")
+            .setDescription(
+                (changed.name ? `> **Jméno:** \`${old.name}\` -> \`${content.name}\`` : `> **Jméno:** \`${content.name}\``)
+                + "\n" + (changed.rank ? `> **Hodnost:** \`${old.rank}\` -> **__\`${content.rank}\`__**` : `> **Hodnost:** \`${content.rank}\``)
+                + "\n" + (changed.radio ? `> **Volačka:** \`${old.radio}\` -> **__\`${content.radio}\`__**` : `> **Volačka:** \`${content.radio}\``)
+                + "\n" + (changed.badge ? `> **Odznak:** \`${old.badge}\` -> **__\`${content.badge}\`__**` : `> **Odznak:** \`${content.badge}\``)
+            )
+            .setColor(getServer(i.guild.id).color)
+            .setFooter(getServer(i.guild.id).footer);
+        await folder.send({ content: `<@${i.fields.getTextInputValue("id")}>` + (start ? "" : `<@${bot.LEA.o}>`), embeds: [rankup2Embed] });
+        if (changed.name || changed.radio) await folder.setName(`[${i.fields.getTextInputValue("call")}] ${content.name}`);
+
+        const rankupEmbed = new EmbedBuilder()
+            .setTitle("Úspěch")
+            .setDescription(
+                `<@${i.fields.getTextInputValue("id")}> byl(a) upravena(a)!`)
+            .setColor(getServer(i.guild.id).color)
+            .setFooter(getServer(i.guild.id).footer);
+
+        await i.editReply({ embeds: [rankupEmbed], ephemeral: !visible });
     }
 
 }

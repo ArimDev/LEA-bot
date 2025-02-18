@@ -50,7 +50,7 @@ export default async function run(bot, i) {
             ])
             .setThumbnail("https://servers-live.fivem.net/servers/icon/994ldb/-892566759.png")
             .setColor("#6a371c")
-            .setFooter({ text: `VegasRP by Nolimit | nlmt.cc`, iconURL: "https://nlmt.cc/src/imgs/logo.png" });
+            .setFooter({ text: `VegasRP by Nolimit | nlmt.cc`, iconURL: "https://servers-live.fivem.net/servers/icon/994ldb/-892566759.png" });
 
         await i.editReply({ embeds: [onlineEmbed], ephemeral: true });
     } catch (e) {
