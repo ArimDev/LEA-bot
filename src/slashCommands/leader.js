@@ -136,6 +136,6 @@ export default async function run(bot, i) {
                     ephemeral: true
                 });
             })
-            .catch();
+            .catch(() => {});
     }
 };

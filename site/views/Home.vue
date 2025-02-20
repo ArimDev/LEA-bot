@@ -1,6 +1,6 @@
 <template>
 	<div class="center">
-		<p class="beforeHeader"><b>VEGAS RP</b> vs <b>b1ngo</b></p>
+		<p class="beforeHeader"><b>FRESH RP</b> vs <b>b1ngo</b></p>
 		<h1>Law Enforcement Agencies - Bot</h1>
 		<p>
 			<b>LEA-Bot</b> slouží k digitální <b>organizaci</b> státních ozbrojených složek.

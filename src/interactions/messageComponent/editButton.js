@@ -166,7 +166,7 @@ export default async function run(bot, i) {
                 console.log(" < [DB/Duty] >  " + i.member.displayName + " přepsala(a) duty o délce " + hours.toString() + " hodin");
                 return submit.editReply({ content: "> ✅ **Zápis byl upraven.**" });
             })
-            .catch();
+            .catch(() => {});
     } else {
         if (
             !record
@@ -311,6 +311,6 @@ export default async function run(bot, i) {
                 console.log(" < [DB/Duty] >  " + i.member.displayName + " přepsala(a) duty o délce " + hours.toString() + " hodin");
                 return submit.editReply({ content: "> ✅ **Zápis byl upraven.**" });
             })
-            .catch();
+            .catch(() => {});
     }
 }

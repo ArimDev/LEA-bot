@@ -11,7 +11,7 @@
 
 ## POPIS
 
-*Český Discord bot pro Law Enforcement Agencies na GTA V FiveM roleplay serveru [VegasRP by Nolimit](https://nlmt.cc/).*
+*Český Discord bot pro Law Enforcement Agencies na GTA V FiveM roleplay serveru [FreshRP](https://servers.fivem.net/servers/detail/994ldb).*
 
 *Aktuálně podporuje sbory LSSD <img src="https://i.imgur.com/X3cH2iu.png" width="15" height="15"/> a SAHP <img src="https://i.imgur.com/xgFoKuX.png" width="15" height="15"/>.*
 
@@ -51,5 +51,5 @@ Kód můžete volně kopírovat a dále distribuovat na jakémkoli médiu nebo f
 
 *Vlastněno a spravováno organizací [ArimDev](https://github.com/ArimDev).*
 
-© 2023 - 2024
+© 2023 - 2025
 </div>

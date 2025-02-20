@@ -5,11 +5,11 @@ description: Příručka pro každého officera se vším všudy!
 layout: home
 
 hero:
-  name: "VegasRP"
+  name: "FreshRP"
   text: "Příručka LEA"
   image:
-    src: /media/logo/vegasrp.png
-    alt: VegasRP
+    src: /media/logo/freshrp.png
+    alt: FreshRP
   actions:
     - theme: brand
       text: Návody officera

@@ -77,7 +77,7 @@ export default async function run(bot, i) {
                 value:
                     `> **Autor:** <@${bot.LEA.o}> ([web](https://petyxbron.cz/cs/p))
                     > **Sloužím:** LSSD ${bot.LEA.e.LSSD} a SAHP ${bot.LEA.e.SAHP}
-                    > **FiveM:** VegasRP by Nolimit 🌴
+                    > **FiveM:** FreshRP 🌴
                     > **GitHub**: [petyxbron.cz/lea-bot](https://petyxbron.cz/lea-bot)`
             },
             {

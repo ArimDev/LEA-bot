@@ -382,6 +382,6 @@ export default async function run(bot, i) {
 
                 return;
             })
-            .catch();
+            .catch(() => {});
     }
 };

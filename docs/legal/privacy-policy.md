@@ -8,7 +8,7 @@ layout: doc
 
 - Vytvořil **[@PetyXbron aka b1ngo](https://github.com/PetyXbron/)**
 - Zdrojový kód je častěčně veřejný na platformě GitHub.
-- LEA Bot primárně slouží pouze pro smyšlené policejní sbory **Los Santos Police Department** a **Los Santos Sheriff Department** FiveM serveru **[VegasRP by Nolimit](https://nlmt.cc/)**. Jeho jiné používání není doporučeno a je nutné se řídit podmínkami.
+- LEA Bot primárně slouží pouze pro smyšlené policejní sbory **Los Santos Police Department** a **Los Santos Sheriff Department** FiveM serveru **[FreshRP](https://servers.fivem.net/servers/detail/994ldb)**. Jeho jiné používání není doporučeno a je nutné se řídit podmínkami.
 - Používáním dodržujete **[licenci](./license.md)**
 
 [![Creative Commons License](https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-nd/4.0/)

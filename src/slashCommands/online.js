@@ -4,7 +4,7 @@ import { checkDB, getDB } from "../../src/functions/db.js";
 
 export const slash = new SlashCommandBuilder()
     .setName("online")
-    .setDescription(`Zobrazí kolik členů hraje VegasRP`)
+    .setDescription(`Zobrazí kolik členů hraje FreshRP`)
     .setContexts([0])
     .setIntegrationTypes([0])
     .setNSFW(false);
@@ -20,7 +20,7 @@ export default async function run(bot, i) {
         let n = 0, onNotSorted = [], onSorted = [];
 
         for (const m of ms.values()) {
-            if (m.presence && m.presence.activities && m.presence.activities.find(a => a.name.includes("VegasRP"))) {
+            if (m.presence && m.presence.activities && m.presence.activities.find(a => a.name.includes("FreshRP"))) {
                 if (!(checkDB(m.id))) continue;
                 const { data } = getDB(m.id);
                 n++;
@@ -35,7 +35,7 @@ export default async function run(bot, i) {
 
         const onlineEmbed = new EmbedBuilder()
             .setAuthor({ name: "Právě ve službě", iconURL: getServer(i.guild.id).footer.iconURL })
-            .setDescription(`Členi **${getServer(i.guild.id).name}** hrající **VegasRP** právě teď.`)
+            .setDescription(`Členi **${getServer(i.guild.id).name}** hrající **FreshRP** právě teď.`)
             .addFields([
                 {
                     name: `Seznam`, inline: false,
@@ -48,9 +48,9 @@ export default async function run(bot, i) {
                         `> **Dohromady online:** \`${n}\``
                 }
             ])
-            .setThumbnail("https://servers-live.fivem.net/servers/icon/994ldb/-892566759.png")
-            .setColor("#6a371c")
-            .setFooter({ text: `VegasRP by Nolimit | nlmt.cc`, iconURL: "https://servers-live.fivem.net/servers/icon/994ldb/-892566759.png" });
+            .setThumbnail("https://servers-frontend.fivem.net/api/servers/icon/994ldb/1698551087.png")
+            .setColor("#df6980")
+            .setFooter({ text: `FreshRP`, iconURL: "https://servers-frontend.fivem.net/api/servers/icon/994ldb/1698551087.png" });
 
         await i.editReply({ embeds: [onlineEmbed], ephemeral: true });
     } catch (e) {

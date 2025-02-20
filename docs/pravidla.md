@@ -1,13 +1,13 @@
 ---
 layout: page
-title: Pravidla VegasRP
-description: Seznam pravidel VegasRP
+title: Pravidla FreshRP
+description: Seznam pravidel FreshRP
 ---
 
-<div class="vegasRules">
+<div class="freshRules">
   <iframe
     src="https://docs.google.com/document/d/1-1aWnH_hIrgIjmxzH3l6ASapBJP69AkRGNYmDYas0nc/edit?embedded=true"
-    class="vegasFrame"
+    class="freshFrame"
     frameborder="0"
     marginheight="0"
     marginwidth="0">
@@ -16,19 +16,19 @@ description: Seznam pravidel VegasRP
 </div>
 
 <style scoped>
-  .vegasRules {
+  .freshRules {
     display: flex;
-    justify-content: center; /* Zarovnání na střed vodorovně */
-    align-items: center;     /* Zarovnání na střed svisle, pokud je potřeba */
-    margin: 0 auto;          /* Střední odsazení celého boxu */
-    padding: 20px;           /* Prostor kolem iframe */
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 20px;
   }
 
-    .vegasFrame {
-    width: 100%;             /* Šířka iframu */
-    max-width: 1200px;       /* Maximální šířka pro velké obrazovky */
-    height: 80vh;            /* Výška na základě výšky viewportu */
-    max-height: 90vh;        /* Maximální výška iframu */
-    border: none;            /* Bez rámečku */
+    .freshFrame {
+    width: 100%;
+    max-width: 1200px;
+    height: 80vh;
+    max-height: 90vh;
+    border: none;
   }
 </style>

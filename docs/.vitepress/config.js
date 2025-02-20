@@ -6,7 +6,7 @@ export default async () => {
 
     return defineConfig({
         title: "Příručka LEA",
-        description: "VegasRP",
+        description: "FreshRP",
         base: '/',
 
         sitemap: {
@@ -21,7 +21,7 @@ export default async () => {
 
             //Discord embeds (OpenGraph)
             ['meta', { property: 'og:image', content: '/media/logo/leabot.png' }],
-            ['meta', { name: 'og:site_name', content: 'VegasRP' }],
+            ['meta', { name: 'og:site_name', content: 'FreshRP' }],
             ['meta', { name: 'twitter:card', content: 'summary' }],
             ['meta', { name: 'theme-color', content: '#ffffff' }],
 
@@ -161,7 +161,7 @@ export default async () => {
                 },
                 '/navody/': {
                     base: '/navody/', items: [
-                        { text: 'VegasRP Pravidla', link: '../pravidla' },
+                        { text: 'FreshRP Pravidla', link: '../pravidla' },
                         {
                             text: 'Pravidla',
                             collapsed: false,
@@ -233,7 +233,7 @@ export default async () => {
             ],
 
             footer: {
-                copyright: '© 2024 LEA-Bot vytvořil PetyXbron (b1ngo)'
+                copyright: '© 2024 - 2025 LEA-Bot<br>vytvořil PetyXbron (b1ngo)'
             }
         },
     });

@@ -18,7 +18,7 @@ export default async function run(bot, i) {
     catch { memberFailed = true; }
 
     if (memberFailed || !member || !member.displayName) {
-        await i.editReply({
+        return await i.editReply({
             content: "*Tenhle officer už není členem Discord serveru!*",
             ephemeral: true
         });
