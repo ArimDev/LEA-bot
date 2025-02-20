@@ -211,7 +211,7 @@ export default async function api(bot, app) {
             } else if (dep === "SAHP" && worker.m) {
                 worker.roles.warn = worker.m.roles.cache.has("1301163398515396674");
                 worker.roles.suspend = worker.m.roles.cache.has("1301163398515396672");
-                if (worker.m.roles.cache.has("1301163398528241692")) worker.div.push("TRU");
+                if (worker.m.roles.cache.has("1301163398528241692")) worker.div.push("Lynx");
                 if (worker.m.roles.cache.has("1305307518943105095")) worker.div.push("ST");
                 if (worker.m.roles.cache.has("1301163398540689489")) worker.div.push("CID");
                 if (worker.m.roles.cache.has("1301163398528241687")) worker.div.push("FTO");
