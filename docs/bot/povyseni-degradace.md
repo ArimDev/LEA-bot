@@ -2,9 +2,6 @@
 title: Povýšení a degradace
 description: Návod pro povýšení a degradaci officera
 ---
-<script setup>
-  const gAds = import.meta.env.VITE_GADS;
-</script>
 
 # Povýšení a Degradace
 

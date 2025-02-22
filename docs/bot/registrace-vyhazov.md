@@ -2,9 +2,6 @@
 title: Povýšení a degradace
 description: Návod pro registraci a vyhazov officera
 ---
-<script setup>
-  const gAds = import.meta.env.VITE_GADS;
-</script>
 
 # Registrace a Vyhazov
 

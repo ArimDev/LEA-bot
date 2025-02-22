@@ -2,9 +2,6 @@
 title: Služby
 description: Návod jak na zápis služeb
 ---
-<script setup>
-  const gAds = import.meta.env.VITE_GADS;
-</script>
 
 # Vítejte ve Vaší složce!
 

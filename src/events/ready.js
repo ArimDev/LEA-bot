@@ -25,12 +25,6 @@ export default async function (bot) {
         res.sendFile(path.join(path.resolve("./site/dist/"), "index.html"));
     });
 
-    //404 error (or other errors) redirect
-    //! SERVED BY NGINX !
-    /*app.use((req, res) => {
-        res.status(404).sendFile(secret().parsed.errorPath + "/nginx404.html");
-    });*/
-
     await app.listen(secret().parsed.webPort, () => {
         console.log(` < [PS/Web] >  LEA Bot tables are now available at IP:${secret().parsed.webPort}!`);
     });

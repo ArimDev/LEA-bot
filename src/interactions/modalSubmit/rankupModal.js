@@ -135,7 +135,7 @@ export default async function run(bot, i) {
 
     const today = new Date();
 
-    const oldContent = content
+    const oldContent = { ...content }
 
     const rankup = {
         "date": today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear(),

@@ -2,9 +2,6 @@
 title: Složka
 description: Jak funguje složka a k čemu slouží
 ---
-<script setup>
-  const gAds = import.meta.env.VITE_GADS;
-</script>
 
 # Vítejte ve Vaší složce!
 

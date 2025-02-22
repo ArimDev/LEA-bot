@@ -2,9 +2,6 @@
 title: Povinná výbava
 description: Seznamn povinných výbav pro officera a vozidlo
 ---
-<script setup>
-  const gAds = import.meta.env.VITE_GADS;
-</script>
 
 # Povinná výbava vozidla
 
@@ -73,20 +70,6 @@ description: Seznamn povinných výbav pro officera a vozidlo
   - Způsob zastavení ujíždějícího vozidla.
 - **DOPRAVNÍ KUŽEL**
   - Způsob řízení dopravy na silnicích.
-
-<scriptx async :src="'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-' + gAds"
-     crossorigin="anonymous">
-</scriptx>
-<ins class="adsbygoogle"
-     style="display:block; text-align:center;"
-     data-ad-layout="in-article"
-     data-ad-format="fluid"
-     :data-ad-client="'ca-pub-' + gAds"
-     data-ad-slot="7591922319">
-</ins>
-<scriptx>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</scriptx>
 
 # Povinná výbava officera
 

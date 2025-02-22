@@ -51,11 +51,6 @@ export default async () => {
                 + `\n}`
                 + `\n\ngtag('config', '${env.VITE_GTAG}');`
             ],
-
-            //Google AdSense
-            ['script',
-                { async: true, src: `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${env.VITE_GADS}`, crossorigin: "anonymous" }
-            ],
         ],
 
         transformPageData(pageData) {

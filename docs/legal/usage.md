@@ -12,13 +12,15 @@ layout: doc
 
 [![Creative Commons License](https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png)](http://creativecommons.org/licenses/by-nc-nd/4.0/)
 
+> Tenhle návod je neaktualizovaný, nemusí fungovat, ale určitě pomůže.
+
 ## OBSAH:
 1. [Spuštění procesu](#1-spuštění-procesu)
 2. [Přidání bota na server](#2-přidání-bota-na-server)
 
 
 ### 1. Spuštění procesu
-Před spuštěním nezapomeň použít `npm install` pro instalaci balíčků (`discord.js`, `dotenv`, `express`, `node-fetch`).
+Před spuštěním nezapomeň použít `npm install` pro instalaci balíčků.
 - `npm start` pro zapnutí na dobu neurčitou
 - `npm test` pro kontrolu bezproblémového zapnutí
 

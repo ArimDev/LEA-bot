@@ -2,9 +2,6 @@
 title: Felony stop
 description: Návod pro tzv. Felony stop
 ---
-<script setup>
-  const gAds = import.meta.env.VITE_GADS;
-</script>
 
 # **FELONY STOP neboli CODE 5**
 

@@ -2,9 +2,6 @@
 title: Interní pravidla
 description: Výpis pravidel LEA, kterými se řídí každý officer
 ---
-<script setup>
-  const gAds = import.meta.env.VITE_GADS;
-</script>
 
 # Interní pravidla LEA
 

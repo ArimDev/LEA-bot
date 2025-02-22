@@ -2,9 +2,6 @@
 title: Vstup do kanceláře
 description: Návod pro formální vstup do kanceláře
 ---
-<script setup>
-  const gAds = import.meta.env.VITE_GADS;
-</script>
 
 # Vstup do kanceláře
 

@@ -1,7 +1,6 @@
 import express from "express";
 import path from "path";
 import { updateDiv, updateBL } from "../../web/script.js";
-import { config as secret } from "dotenv";
 
 export default async function web(bot, app) {
     //app.set('trust proxy', true);
@@ -36,14 +35,6 @@ export default async function web(bot, app) {
         console.log(` < [PS/Web] >  Got ${req.path} ${req.method} request!`);
         res.status(200).send(await updateBL(bot));
         //res.sendFile(path.resolve("./web/blacklist.html"));
-    });
-
-    app.get('/502', async function (req, res) {
-        res.status(502).sendFile(secret().parsed.errorPath + "/nginx502.html");
-    });
-
-    app.get('/404', async function (req, res) {
-        res.status(404).sendFile(secret().parsed.errorPath + "/nginx404.html");
     });
 
     function giveStatic(req, res) {

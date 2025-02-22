@@ -2,9 +2,6 @@
 title: MDT (Video)
 description: Zhlédni video s návodem pro MDT
 ---
-<script setup>
-  const gAds = import.meta.env.VITE_GADS;
-</script>
 
 # MDT
 

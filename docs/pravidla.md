@@ -24,10 +24,10 @@ description: Seznam pravidel FreshRP
     padding: 20px;
   }
 
-    .freshFrame {
+  .freshFrame {
     width: 100%;
     max-width: 1200px;
-    height: 80vh;
+    height: 77vh;
     max-height: 90vh;
     border: none;
   }

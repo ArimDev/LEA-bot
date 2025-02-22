@@ -2,9 +2,6 @@
 title: Manévry Box a Pit
 description: Manuál pro manévry se služebními vozidly
 ---
-<script setup>
-  const gAds = import.meta.env.VITE_GADS;
-</script>
 
 # Manévry s vozidlem: Box a Pit
 

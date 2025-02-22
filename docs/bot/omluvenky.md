@@ -2,9 +2,6 @@
 title: Omluvenky
 description: Návod pro zapisování omluvenek
 ---
-<script setup>
-  const gAds = import.meta.env.VITE_GADS;
-</script>
 
 # Omluvenky
 

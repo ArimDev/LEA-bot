@@ -16,11 +16,9 @@
 				<li>
 					<RouterLink to="/">DOMŮ</RouterLink>
 				</li>
-				<li><span class="disabled">STATISTIKY</span></li>
 				<li>
 					<RouterLink to="/blacklist">BLACKLIST</RouterLink>
 				</li>
-				<li><span class="disabled">GALERIE</span></li>
 			</div>
 			<div class="centerMenu">
 				<a class="homeLink" href="/"><img class="webLogo" src="./assets/logo/leabot.png"></a>

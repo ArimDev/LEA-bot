@@ -2,9 +2,6 @@
 title: Bot pro správu
 description: Jak funguje bot a jak ho používat
 ---
-<script setup>
-  const gAds = import.meta.env.VITE_GADS;
-</script>
 
 # Instrukce o botovi
 
