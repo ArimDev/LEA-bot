@@ -210,7 +210,7 @@ export default async () => {
                 '/legal/': {
                     base: '/legal/', items: [
                         {
-                            text: 'Dokumnenty',
+                            text: 'Dokumenty',
                             collapsed: false,
                             items: [
                                 { text: 'Zásady Ochrany Osobních Údajů', link: 'privacy-policy' },
