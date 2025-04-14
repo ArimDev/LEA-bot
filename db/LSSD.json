@@ -49,6 +49,13 @@
         "title": " "
     },
     {
+        "rank": "Lieutenant",
+        "slots": 1,
+        "firstBadge": 1025,
+        "firstCallsign": "Shock-6",
+        "title": false
+    },
+    {
         "rank": "Sergeant",
         "slots": 10,
         "firstBadge": 1015,
