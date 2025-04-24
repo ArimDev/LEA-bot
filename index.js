@@ -73,7 +73,41 @@ bot.LEA = {
         LSSD: "https://i.imgur.com/X3cH2iu.png",
         LSCSO: "https://i.imgur.com/Hex0MQF.png"
     },
-    o: "411436203330502658" //b1ngo
+    o: "411436203330502658", //b1ngo
+    r: {
+        LSPD: {
+            strike1: "",
+            strike2: "",
+            warn: "",
+            suspend: "",
+        },
+        LSSD: {
+            strike1: "1313974697666547774",
+            strike2: "1313974759754567761",
+            warn: "1154446248934387830",
+            suspend: "1267600894069964911",
+        },
+        SAHP: {
+            strike1: "1301163398515396673",
+            strike2: "1305972756319436892",
+            warn: "1301163398515396674",
+            suspend: "1301163398515396672",
+        },
+    },
+    ch: {
+        LSPD: {
+            warns: "",
+            suspends: "",
+        },
+        LSSD: {
+            warns: "1313973585760747550",
+            suspends: "1259036457062895668",
+        },
+        SAHP: {
+            warns: "1301163401292025907",
+            suspends: "1301163401292025909",
+        },
+    },
 };
 
 import { events, commands, interactions } from "./src/functions/register.js";
