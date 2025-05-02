@@ -63,6 +63,13 @@
         "title": false
     },
     {
+        "rank": "Senior Trooper",
+        "slots": 20,
+        "firstBadge": 150,
+        "firstCallsign": "Senior-1",
+        "title": "Senior Trooper"
+    },
+    {
         "rank": "Trooper III",
         "slots": 30,
         "firstBadge": 200,

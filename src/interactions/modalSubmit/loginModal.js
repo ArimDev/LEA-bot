@@ -203,6 +203,7 @@ export default async function run(bot, i) {
         else if (rank === "Lieutenant") rolesIDs = ["1301163398557339687", "1301163398557339686"], tagID = "1304980716693487618";
         else if (rank === "Sergeant II") rolesIDs = ["1301163398557339685", "1301163398557339683"], tagID = "1304980780182798438";
         else if (rank === "Sergeant I") rolesIDs = ["1301163398557339684", "1301163398557339683"], tagID = "1304980780182798438";
+        else if (rank === "Senior Trooper") rolesIDs = ["1367967086365773956"], tagID = "1367968421651939378";
         else if (rank === "Trooper III") rolesIDs = ["1301163398557339681"], tagID = "1304980812646842421";
         else if (rank === "Trooper II") rolesIDs = ["1301163398557339680"], tagID = "1304980828375486524";
         else if (rank === "Trooper I") rolesIDs = ["1301163398557339679"], tagID = "1304980853318746182";

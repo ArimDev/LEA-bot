@@ -103,6 +103,7 @@ export default async function run(bot, i) {
             else if (newRank === "Lieutenant") rolesIDs = ["1301163398557339687", "1301163398557339686"], tagID = "1304980716693487618";
             else if (newRank === "Sergeant II") rolesIDs = ["1301163398557339685", "1301163398557339683"], tagID = "1304980780182798438";
             else if (newRank === "Sergeant I") rolesIDs = ["1301163398557339684", "1301163398557339683"], tagID = "1304980780182798438";
+            else if (newRank === "Senior Trooper") rolesIDs = ["1367967086365773956"], tagID = "1367968421651939378";
             else if (newRank === "Trooper III") rolesIDs = ["1301163398557339681"], tagID = "1304980812646842421";
             else if (newRank === "Trooper II") rolesIDs = ["1301163398557339680"], tagID = "1304980828375486524";
             else if (newRank === "Trooper I") rolesIDs = ["1301163398557339679"], tagID = "1304980853318746182";
@@ -120,6 +121,7 @@ export default async function run(bot, i) {
             else if (content.rank === "Lieutenant") oldRolesIDs = ["1301163398557339687", "1301163398557339686"];
             else if (content.rank === "Sergeant II") oldRolesIDs = ["1301163398557339685", "1301163398557339683"];
             else if (content.rank === "Sergeant I") oldRolesIDs = ["1301163398557339684", "1301163398557339683"];
+            else if (content.rank === "Senior Trooper") oldRolesIDs = ["1367967086365773956"];
             else if (content.rank === "Trooper III") oldRolesIDs = ["1301163398557339681"];
             else if (content.rank === "Trooper II") oldRolesIDs = ["1301163398557339680"];
             else if (content.rank === "Trooper I") oldRolesIDs = ["1301163398557339679"];
