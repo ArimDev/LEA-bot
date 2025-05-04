@@ -174,6 +174,12 @@ export default async function run(bot, i) {
 
         try { await member.setNickname(`[${radio}] ${name}`); } catch { gotNick = false; }
         try { await member.roles.add(rolesIDs); } catch { gotRole = false; }
+        if (i.guild.id === "1154446248934387828" && rank === "Deputy Trainee") //Odebrat roli Akademika pro LSSD
+            try {
+                await member.roles.remove([
+                    "1360330905750868090", //Akademik
+                ]);
+            } catch { gotRole = false; }
 
         const slozkaEmbed = new EmbedBuilder()
             .setTitle("Vítejte ve Vaší složce!")
@@ -191,7 +197,7 @@ export default async function run(bot, i) {
     } else if (i.guild.id === "1301163398515396668") { //SAHP
         folders = await i.guild.channels.fetch("1301228299858481162");
         try { member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
-        catch (e) { return await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true });  }
+        catch (e) { return await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true }); }
 
         let rolesIDs, tagID;
         if (rank === "Commissioner") rolesIDs = ["1301163398595350582", "1301163398557339686"], tagID = "1304980716693487618";
