@@ -12,13 +12,15 @@ export const slash = new SlashCommandBuilder()
         option.setName("duvod")
             .setDescription("Důvod udělení warnu")
             .setRequired(true))
+    .addBooleanOption(option =>
+        option.setName("visible")
+            .setDescription("Má být odpověď na tuto interakci viditelná všem?")
+            .setRequired(false))
     .setContexts([0])
     .setIntegrationTypes([0])
     .setNSFW(false);
 
 export default async function run(bot, i) {
-    await i.deferReply();
-
     let passed = false;
     await i.guild.fetch();
     const admin = i.member;
@@ -34,21 +36,23 @@ export default async function run(bot, i) {
         if (admin.roles.cache.has("1301163398557339683")) passed = true; //Supervisor
     }
 
-    if (!passed) return i.editReply({ content: "> 🛑 **Warn může udělit pouze __Leadership__ nebo __Supervisor__**", ephemeral: true });
+    if (!passed) return i.reply({ content: "> 🛑 **Warn může udělit pouze __Leadership__ nebo __Supervisor__**", ephemeral: true });
 
     const discord = i.options.getUser("discord");
     let found = false, alreadyWarned = false;
 
     if (checkDB(discord.id)) found = true;
-    if (!found) return i.editReply({ content: `> 🛑 **<@${discord.id}> není členem LEA.**`, ephemeral: true });
+    if (!found) return i.reply({ content: `> 🛑 **<@${discord.id}> není členem LEA.**`, ephemeral: true });
 
     const member = await i.guild.members.fetch(discord.id),
         server = getServer(i.guild.id),
         role = bot.LEA.r[server.name]?.warn,
         channel = bot.LEA.ch[server.name]?.warns;
 
-    if (!role || !i.guild.roles.fetch(role)) return i.editReply({ content: `> 🛑 **Role warnu je pro ${server.name} neplatná.**`, ephemeral: true });
-    if (!channel || !i.guild.channels.fetch(channel)) return i.editReply({ content: `> 🛑 **Kanál warnů je pro ${server.name} neplatný.**`, ephemeral: true });
+    if (!role || !i.guild.roles.fetch(role))
+        return i.reply({ content: `> 🛑 **Role warnu je pro ${server.name} neplatná.**`, ephemeral: true });
+    if (!channel || !i.guild.channels.fetch(channel))
+        return i.reply({ content: `> 🛑 **Kanál warnů je pro ${server.name} neplatný.**`, ephemeral: true });
 
     if (member.roles.cache.has(role)) alreadyWarned = true;
     if (!alreadyWarned) member.roles.add(role);
@@ -68,7 +72,17 @@ export default async function run(bot, i) {
     let warnsChannel = await i.guild.channels.fetch(channel);
     await warnsChannel.send({ content: `<@${admin.id}> <@${discord.id}>`, embeds: [warnEmbed] });
 
-    await i.editReply({ content: `> ✅ **Udělen ${alreadyWarned ? "2." : "1."} warn <@${discord.id}>**` });
-    if (alreadyWarned) await i.followUp({ content: `> ⚠️ **Tohle byl už 2. warn <@${discord.id}>**` });
+    const visible = i.options.getBoolean("visible") || false;
+    let hide = false;
+    if (i.channel.id === channel) hide = true;
+
+    await i.reply({
+        content: `> ✅ **Udělen ${alreadyWarned ? "2." : "1."} warn <@${discord.id}>**`,
+        ephemeral: hide ? true : !visible
+    });
+    if (alreadyWarned) await i.followUp({
+        content: `> ⚠️ **Tohle byl už 2. warn <@${discord.id}>**`,
+        ephemeral: hide ? true : !visible
+    });
     return;
 };
