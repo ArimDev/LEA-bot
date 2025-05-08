@@ -1,44 +1,9 @@
-import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
-import { checkDB, getServer } from "../functions/db.js";
-
-export const slash = new SlashCommandBuilder()
-    .setName("strike")
-    .setDescription(`Udělí strike officerovi`)
-    .addUserOption(option =>
-        option.setName("discord")
-            .setDescription("Discord officera")
-            .setRequired(true))
-    .addStringOption(option =>
-        option.setName("duvod")
-            .setDescription("Důvod udělení striku")
-            .setRequired(true))
-    .addBooleanOption(option =>
-        option.setName("visible")
-            .setDescription("Má být odpověď na tuto interakci viditelná všem?")
-            .setRequired(false))
-    .setContexts([0])
-    .setIntegrationTypes([0])
-    .setNSFW(false);
+import { EmbedBuilder } from "discord.js";
+import { checkDB, getServer } from "../../functions/db.js";
 
 export default async function run(bot, i) {
-    let passed = false;
-    await i.guild.fetch();
-    const admin = i.member;
-    if (admin.id === bot.LEA.o) passed = true; //PetyXbron / b1ngo
-    if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true; //Leadership
-        if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true; //Supervisor
-    } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("1267541873451339806")) passed = true; //Leadership
-        if (admin.roles.cache.has("1267588695909728348")) passed = true; //Supervisor
-    } else if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("1301163398557339686")) passed = true; //Leadership
-        if (admin.roles.cache.has("1301163398557339683")) passed = true; //Supervisor
-    }
-
-    if (!passed) return i.reply({ content: "> 🛑 **Strike může udělit pouze __Leadership__ nebo __Supervisor__**", ephemeral: true });
-
-    const discord = i.options.getUser("discord");
+    const admin = i.member,
+        discord = i.options.getUser("discord");
     let found = false, alreadyStriked = false;
 
     if (checkDB(discord.id)) found = true;
@@ -77,7 +42,7 @@ export default async function run(bot, i) {
         .setFooter({ text: `${server.name}`, iconURL: bot.LEA.i[server.name] })
         .setTimestamp();
     let warnsChannel = await i.guild.channels.fetch(channel);
-    await warnsChannel.send({ content: `<@${admin.id}> <@${discord.id}>`, embeds: [strikeEmbed] });
+    await warnsChannel.send({ content: `<@${admin.id}> udělil(a) **strike** <@${discord.id}>`, embeds: [strikeEmbed] });
 
     const visible = i.options.getBoolean("visible") || false;
     let hide = false;

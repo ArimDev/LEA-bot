@@ -96,8 +96,17 @@ export default async function run(bot, i) {
 
                     if (m) {
                         const ap = worker.apologies;
+
                         let apologized = false;
+                        if (bot.LEA.g.LSPD.includes(i.guild.id)) {
+                            if (m.roles.cache.has("xxx" /* MISSING ID */)) apologized = true; //Leadership
+                        } else if (bot.LEA.g.LSSD.includes(i.guild.id)) {
+                            if (m.roles.cache.has("1267541873451339806")) apologized = true; //Leadership
+                        } else if (bot.LEA.g.SAHP.includes(i.guild.id)) {
+                            if (m.roles.cache.has("1301163398557339686")) apologized = true; //Leadership
+                        }
                         if (ignored.includes(worker.badge.toString())) apologized = true;
+
                         if (!apologized) for (const a of ap) {
                             if (a.eventID === id) {
                                 apologized = true;
@@ -131,11 +140,18 @@ export default async function run(bot, i) {
                 }
                 const listAtt = new AttachmentBuilder(Buffer.from(list.join("\n")), { name: "list.txt" });
 
-                return submit.editReply({
+                const command = `/trest hromadny officer:${users.map(u => u.id).join(", ")} trest:Strike duvod:Neomluvená absence na události ${id}`;
+                await submit.editReply({
+                    content: `**Neomluveno:** ${users.length}\n-# *Příkaz pro zkopírování bude v další zprávě.*`,
                     files: [listAtt, mentionsAtt],
                     ephemeral: true
                 });
+                await submit.followUp({
+                    content: command,
+                    ephemeral: true
+                });
+                return;
             })
-            .catch(() => {});
+            .catch(() => { });
     }
 };
