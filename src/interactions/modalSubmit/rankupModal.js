@@ -188,6 +188,22 @@ export default async function run(bot, i) {
         catch { failedWarn = true; }
     }
 
+    if (
+        server.name === "LSSD" && newGrade >= 5 && oldGrade < 5
+        || server.name === "SAHP" && newGrade >= 7 && oldGrade < 7
+    ) {
+        try {
+            await member.send({
+                content:
+                    `*Gratuluji k povýšení na **${newRank}**!*`
+                    + "\n\nVzhledem k tomu, že jsi nyní členem **Leadershipu**,"
+                    + "\nprosím připoj se na Discord server **LEA-Bota**."
+                    + "\nPo obdržení role můžeš navrhovat, diskutovat a hlasovat o nových funkcích."
+                    + "\nhttps://discord.com/invite/PYTqqhWad2"
+            });
+        } catch { }
+    }
+
     if (content.folder) {
         const folder = await i.guild.channels.fetch(content.folder);
 
@@ -270,9 +286,10 @@ export default async function run(bot, i) {
             + `\n> **Popis složky:** ${start ? "✅" : "❌"}`
             + `\n> **Název složky:** ✅\n`
             + `\n> **Přezdívka:** ${gotNick ? "✅" : "❌"}`
-            + `\n> **Role:** ${gotRole ? "✅" : "❌"}`)
+            + `\n> **Role:** ${gotRole ? "✅" : "❌"}`
             + (removedStrikes > 0 ? `\n> **Odebrány striky:** ${failedStrikes ? "❌" : "✅"} (${removedStrikes})` : "")
             + (removedWarn ? `\n> **Odebrán warn:** ${failedWarn ? "❌" : "✅"}` : "")
+        )
         .setColor(getServer(i.guild.id).color)
         .setFooter(getServer(i.guild.id).footer);
 
