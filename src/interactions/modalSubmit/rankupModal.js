@@ -102,7 +102,7 @@ export default async function run(bot, i) {
         else if (newRank === "Lieutenant") rolesIDs = ["1301163398557339687", "1301163398557339686"], tagID = "1304980716693487618", newGrade = 7;
         else if (newRank === "Sergeant II") rolesIDs = ["1301163398557339685", "1301163398557339683"], tagID = "1304980780182798438", newGrade = 6;
         else if (newRank === "Sergeant I") rolesIDs = ["1301163398557339684", "1301163398557339683"], tagID = "1304980780182798438", newGrade = 5;
-        else if (newRank === "Senior Trooper") rolesIDs = ["1367967086365773956"], tagID = "1367968421651939378", newGrade = 4
+        else if (newRank === "Senior Trooper") rolesIDs = ["1367967086365773956"], tagID = "1367968421651939378", newGrade = 4;
         else if (newRank === "Trooper III") rolesIDs = ["1301163398557339681"], tagID = "1304980812646842421", newGrade = 3;
         else if (newRank === "Trooper II") rolesIDs = ["1301163398557339680"], tagID = "1304980828375486524", newGrade = 2;
         else if (newRank === "Trooper I") rolesIDs = ["1301163398557339679"], tagID = "1304980853318746182", newGrade = 1;
@@ -126,7 +126,7 @@ export default async function run(bot, i) {
         else if (content.rank === "Lieutenant") oldRolesIDs = ["1301163398557339687", "1301163398557339686"], oldGrade = 7;
         else if (content.rank === "Sergeant II") oldRolesIDs = ["1301163398557339685", "1301163398557339683"], oldGrade = 6;
         else if (content.rank === "Sergeant I") oldRolesIDs = ["1301163398557339684", "1301163398557339683"], oldGrade = 5;
-        else if (content.rank === "Senior Trooper") oldRolesIDs = ["1367967086365773956"], oldGrade = 4
+        else if (content.rank === "Senior Trooper") oldRolesIDs = ["1367967086365773956"], oldGrade = 4;
         else if (content.rank === "Trooper III") oldRolesIDs = ["1301163398557339681"], oldGrade = 3;
         else if (content.rank === "Trooper II") oldRolesIDs = ["1301163398557339680"], oldGrade = 2;
         else if (content.rank === "Trooper I") oldRolesIDs = ["1301163398557339679"], oldGrade = 1;
@@ -137,7 +137,7 @@ export default async function run(bot, i) {
 
     const today = new Date();
 
-    const oldContent = { ...content }
+    const oldContent = { ...content };
 
     const rankup = {
         "date": today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear(),
@@ -164,6 +164,29 @@ export default async function run(bot, i) {
     try { await member.setNickname(`[${content.radio}] ${content.name}`); } catch { gotNick = false; }
     try { await member.roles.remove(oldRolesIDs); } catch { gotRole = false; }
     try { await member.roles.add(rolesIDs); } catch { gotRole = false; }
+
+    const server = getServer(i.guild.id),
+        strike1Role = bot.LEA.r[server.name]?.strike1,
+        strike2Role = bot.LEA.r[server.name]?.strike2,
+        warnRole = bot.LEA.r[server.name]?.warn;
+
+    let removedWarn = false, removedStrikes = 0,
+        failedWarn = false, failedStrikes = false;
+
+    if (member.roles.cache.has(strike1Role)) {
+        try { await member.roles.remove(strike1Role); removedStrikes++; }
+        catch { failedStrikes = true; }
+    }
+
+    if (member.roles.cache.has(strike2Role)) {
+        try { await member.roles.remove(strike2Role); removedStrikes++; }
+        catch { failedStrikes = true; }
+    }
+
+    if (member.roles.cache.has(warnRole)) {
+        try { await member.roles.remove(warnRole); removedWarn = true; }
+        catch { failedWarn = true; }
+    }
 
     if (content.folder) {
         const folder = await i.guild.channels.fetch(content.folder);
@@ -215,10 +238,12 @@ export default async function run(bot, i) {
                 {
                     name: `Aktualizace`, inline: true,
                     value:
-                        `> **Popis složky:** ${start ? "✅" : "❌"}\n`
-                        + `> **Název složky:** ✅\n`
-                        + `> **Přezdívka:** ${gotNick ? "✅" : "❌"}\n`
-                        + `> **Role:** ${gotRole ? "✅" : "❌"}`
+                        `> **Popis složky:** ${start ? "✅" : "❌"}`
+                        + `\n> **Název složky:** ✅`
+                        + `\n> **Přezdívka:** ${gotNick ? "✅" : "❌"}`
+                        + `\n> **Role:** ${gotRole ? "✅" : "❌"}`
+                        + (removedStrikes > 0 ? `\n> **Odebrány striky:** ${failedStrikes ? "❌" : "✅"} (${removedStrikes})` : "")
+                        + (removedWarn ? `\n> **Odebrán warn:** ${failedWarn ? "❌" : "✅"}` : "")
                 },
                 {
                     name: `Aktuální údaje`, inline: true,
@@ -241,11 +266,13 @@ export default async function run(bot, i) {
     const rankupEmbed = new EmbedBuilder()
         .setTitle("Úspěch")
         .setDescription(
-            `<@${i.fields.getTextInputValue("id")}> byl(a) ${newGrade >= oldGrade ? "povýšen" : "degradován"}(a)!\n`
-            + `> **Popis složky:** ${start ? "✅" : "❌"}\n`
-            + `> **Název složky:** ✅\n`
-            + `> **Přezdívka:** ${gotNick ? "✅" : "❌"}\n`
-            + `> **Role:** ${gotRole ? "✅" : "❌"}`)
+            `<@${i.fields.getTextInputValue("id")}> byl(a) ${newGrade >= oldGrade ? "povýšen" : "degradován"}(a)!`
+            + `\n> **Popis složky:** ${start ? "✅" : "❌"}`
+            + `\n> **Název složky:** ✅\n`
+            + `\n> **Přezdívka:** ${gotNick ? "✅" : "❌"}`
+            + `\n> **Role:** ${gotRole ? "✅" : "❌"}`)
+            + (removedStrikes > 0 ? `\n> **Odebrány striky:** ${failedStrikes ? "❌" : "✅"} (${removedStrikes})` : "")
+            + (removedWarn ? `\n> **Odebrán warn:** ${failedWarn ? "❌" : "✅"}` : "")
         .setColor(getServer(i.guild.id).color)
         .setFooter(getServer(i.guild.id).footer);
 
