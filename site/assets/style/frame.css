@@ -10,17 +10,33 @@
     }
 }
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body,
+.app {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .wrapper {
+    height: 100%;
     display: flex;
     flex-direction: column;
     animation: fadeIn 0.5s ease-in-out;
+    margin: 0 30px;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 8px;
+    margin: 30px 0;
 }
 
 .webLogo {
@@ -35,7 +51,6 @@
 }
 
 .header .routerMenu {
-    padding-left: 20px;
     list-style-type: none;
     display: flex;
     gap: 15px;
@@ -96,7 +111,6 @@
 }
 
 .header .rightMenu {
-    padding-right: 20px;
     list-style-type: none;
     display: flex;
     gap: 15px;
@@ -240,12 +254,7 @@ a.router-link-active {
     background: var(--contentColor);
     flex-direction: column;
     justify-content: flex-start;
-    height: 81vh;
-    margin: 10px auto;
-    padding: 20px;
     border-radius: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
     overflow: scroll;
     overflow-y: scroll;
     overflow-x: scroll;
@@ -257,11 +266,11 @@ a.router-link-active {
     font-size: 13px;
     justify-content: space-between;
     align-items: center;
+    margin: 30px 0;
 }
 
 .footer .left {
     flex: 1;
-    padding-left: 20px;
     justify-content: flex-start;
     display: flex;
     gap: 5px;
@@ -277,7 +286,6 @@ a.router-link-active {
 .footer .right {
     display: flex;
     flex: 1;
-    padding-right: 20px;
     justify-content: flex-end;
     font-weight: bold;
     gap: 5px

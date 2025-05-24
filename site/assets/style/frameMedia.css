@@ -1,9 +1,17 @@
+.header {
+    height: 5% !important;
+}
+
+.content {
+    height: 90% !important;
+}
+
+.footer {
+    height: 5% !important;
+}
+
 /* Phones */
 @media (max-width: 800px) {
-    .content {
-        height: 65vh;
-    }
-
     .header {
         flex-direction: column;
     }
@@ -75,9 +83,6 @@
 
 /* Vertical monitor */
 @media (min-width: 1025px) and (max-width: 1279px) {
-    .content {
-        height: 90vh;
-    }
 
     .footer,
     .footer a {
@@ -91,8 +96,4 @@
 }
 
 /* Horizontal monitor */
-@media (min-width: 1280px) {
-    .content {
-        height: 81vh;
-    }
-}
+@media (min-width: 1280px) {}
