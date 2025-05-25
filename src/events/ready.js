@@ -1,5 +1,4 @@
 import { ActivityType } from "discord.js";
-import web from "./web.js";
 import api_1 from "../api/v1.js";
 import api_2 from "../api/v2.js";
 import express from "express";
@@ -16,7 +15,6 @@ export default async function (bot) {
     const app = express();
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
-    await web(bot, app);
     await api_1(bot, app,);
     await api_2(bot, app,);
 
