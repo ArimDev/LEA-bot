@@ -23,7 +23,10 @@ export default async function run(bot, i) {
     let content, oldRolesIDs, rolesIDs, tagID, gotNick = true, gotRole = true, newRank = i.fields.getTextInputValue("rank");
     if (i.guild.id === "xxx" /* MISSING ID */) { //LSPD
         content = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
-        if (!(await i.guild.channels.fetch(content.folder))) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
+        let folderExists = true;
+        try { if (!(await i.guild.channels.fetch(content.folder))) folderExists = false; }
+        catch { folderExists = false; }
+        if (!folderExists) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
 
         if (newRank !== content.rank) {
             if (newRank === "Chief of Police") rolesIDs = [/* MISSING IDs */], tagID = "xxx"/* MISSING ID */;
@@ -58,7 +61,10 @@ export default async function run(bot, i) {
         }
     } else if (i.guild.id === "1385604665252642897") { //LSSD
         content = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
-        if (!(await i.guild.channels.fetch(content.folder))) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
+        let folderExists = true;
+        try { if (!(await i.guild.channels.fetch(content.folder))) folderExists = false; }
+        catch { folderExists = false; }
+        if (!folderExists) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
 
         if (newRank !== content.rank) {
             if (newRank === "Sheriff") rolesIDs = ["1385604665340854437", "1385604665328144470"], tagID = "1386379896498163802";
@@ -91,7 +97,10 @@ export default async function run(bot, i) {
         }
     } else if (i.guild.id === "1301163398515396668") { //SAHP
         content = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
-        if (!(await i.guild.channels.fetch(content.folder))) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
+        let folderExists = true;
+        try { if (!(await i.guild.channels.fetch(content.folder))) folderExists = false; }
+        catch { folderExists = false; }
+        if (!folderExists) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
 
         if (newRank !== content.rank) {
             if (newRank === "Commissioner") rolesIDs = ["1301163398595350582", "1301163398557339686"], tagID = "1304980716693487618";
