@@ -6,7 +6,7 @@ import { dcLog, simpleLog } from "../../functions/logSystem.js";
 import { findWorker } from "../../functions/profiles.js";
 
 export default async function run(bot, i) {
-    const rank = i.fields.getTextInputValue("rank"),
+    let rank = i.fields.getTextInputValue("rank"),
         name = i.fields.getTextInputValue("name"),
         radio = i.fields.getTextInputValue("call"),
         badge = i.fields.getTextInputValue("badge");
@@ -14,9 +14,23 @@ export default async function run(bot, i) {
 
     const visible = i.customId.includes("_") ? (/true/).test(i.customId.split("_")[1]) : false;
 
+    let member, data = false;
+    try { member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
+    catch (e) { return await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true }); }
+
     //Checks
-    if (checkDB(i.fields.getTextInputValue("id"), i))
-        return i.reply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **už je v DB.**", ephemeral: true });
+    if (checkDB(i.fields.getTextInputValue("id"), i)) {
+        if (member.roles.cache.size !== 0) // ? Ignoruje tohle i @everyone ?
+            return i.reply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **už je v DB.**", ephemeral: true });
+        else {
+            data = getDB(i.fields.getTextInputValue("id")).data;
+            if (rank === "x") rank = data.rank;
+            if (name === "x") name = data.name;
+            if (radio === "x") radio = data.radio;
+            if (badge === "x") badge = data.badge;
+        }
+    }
+
     if (bl.some(e => !e.removed && e.id === i.fields.getTextInputValue("id")))
         return i.reply({ content: `> 🛑 <@${i.fields.getTextInputValue("id")}> **je na blacklistu!**`, ephemeral: true });
     if (!radio.includes("-") || !/^\p{Lu}/u.test(radio))
@@ -33,12 +47,10 @@ export default async function run(bot, i) {
     if (await findWorker("radio", radio))
         return i.reply({ content: `> 🛑 **Volací znak \`${radio}\` už je obsazený!**`, ephemeral: true });
 
-    let member, post = false, gotNick = true, gotRole = true, folders;
+    let post = false, gotNick = true, gotRole = true, folders;
     const today = new Date();
     if (i.guild.id === "xxx" /* MISSING ID */) { //LSPD
         folders = await i.guild.channels.fetch(/* MISSING ID */);
-        try { member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
-        catch (e) { return await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true }); }
 
         let rolesIDs, tagID;
         if (rank === "Chief of Police") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
@@ -70,8 +82,8 @@ export default async function run(bot, i) {
                 + `\n> **Odznak:** \`${badge}\``
                 + `\n> **Volačka:** \`${radio}\``
                 + "\n\n"
-                + `\n> **Hodin:** \`0\``
-                + `\n> **Omluvenek:** \`0\``
+                + `\n> **Hodin:** \`${data ? data.hours : "0"}\``
+                + `\n> **Omluvenek:** \`${data ? data.apologies.length.filter(a => !a.removed) : "0"}\``
                 + `\n> **Povýšení:** ${time(today, "R")}`
             )
             .setThumbnail(bot.LEA.i.LSPD)
@@ -93,7 +105,7 @@ export default async function run(bot, i) {
                 components: [row]
             },
             appliedTags: [tagID],
-            reason: "Registrace od " + i.user.tag
+            reason: (data ? "OBNOVA" : "") + "Registrace od " + i.user.tag
         });
 
         try { await member.setNickname(`[${radio}] ${name}`); } catch { gotNick = false; }
@@ -114,8 +126,6 @@ export default async function run(bot, i) {
         await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
     } else if (i.guild.id === "1154446248934387828") { //LSSD
         folders = await i.guild.channels.fetch("1290050353793994814");
-        try { member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
-        catch (e) { return await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true }); }
 
         let rolesIDs, tagID;
         if (rank === "Sheriff") rolesIDs = ["1154446249005690910"], tagID = "1203829217167409192";
@@ -146,8 +156,8 @@ export default async function run(bot, i) {
                 + `\n> **Odznak:** \`${badge}\``
                 + `\n> **Volačka:** \`${radio}\``
                 + "\n\n"
-                + `\n> **Hodin:** \`0\``
-                + `\n> **Omluvenek:** \`0\``
+                + `\n> **Hodin:** \`${data ? data.hours : "0"}\``
+                + `\n> **Omluvenek:** \`${data ? data.apologies.length.filter(a => !a.removed) : "0"}\``
                 + `\n> **Povýšení:** ${time(today, "R")}`
             )
             .setThumbnail(bot.LEA.i.LSSD)
@@ -169,7 +179,7 @@ export default async function run(bot, i) {
                 components: [row]
             },
             appliedTags: [tagID],
-            reason: "Registrace od " + i.user.tag
+            reason: (data ? "OBNOVA" : "") + "Registrace od " + i.user.tag
         });
 
         try { await member.setNickname(`[${radio}] ${name}`); } catch { gotNick = false; }
@@ -196,8 +206,6 @@ export default async function run(bot, i) {
         await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
     } else if (i.guild.id === "1301163398515396668") { //SAHP
         folders = await i.guild.channels.fetch("1301228299858481162");
-        try { member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
-        catch (e) { return await i.reply({ content: "> 🛑 **Člen nebyl nalezen.**", ephemeral: true }); }
 
         let rolesIDs, tagID;
         if (rank === "Commissioner") rolesIDs = ["1301163398595350582", "1301163398557339686"], tagID = "1304980716693487618";
@@ -230,8 +238,8 @@ export default async function run(bot, i) {
                 + `\n> **Odznak:** \`${badge}\``
                 + `\n> **Volačka:** \`${radio}\``
                 + "\n\n"
-                + `\n> **Hodin:** \`0\``
-                + `\n> **Omluvenek:** \`0\``
+                + `\n> **Hodin:** \`${data ? data.hours : "0"}\``
+                + `\n> **Omluvenek:** \`${data ? data.apologies.length.filter(a => !a.removed) : "0"}\``
                 + `\n> **Povýšení:** ${time(today, "R")}`
             )
             .setThumbnail(bot.LEA.i.SAHP)
@@ -253,7 +261,7 @@ export default async function run(bot, i) {
                 components: [row]
             },
             appliedTags: [tagID],
-            reason: "Registrace od " + i.user.tag
+            reason: (data ? "OBNOVA" : "") + "Registrace od " + i.user.tag
         });
 
         try { await member.setNickname(`[${radio}] ${name}`); } catch { gotNick = false; }
@@ -282,45 +290,55 @@ export default async function run(bot, i) {
         await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
     }
 
-    const worker = {
-        "active": true,
-        "badge": parseInt(i.fields.getTextInputValue("badge")),
-        "name": i.fields.getTextInputValue("name"),
-        "radio": i.fields.getTextInputValue("call"),
-        "rank": i.fields.getTextInputValue("rank"),
-        "folder": post ? post.id : null,
-        "hours": 0,
-        "duties": [],
-        "apologies": [],
-        "reputations": [],
-        "rankups": [
-            {
-                "date": today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear(),
-                "to": i.fields.getTextInputValue("rank"),
-                "from": null,
-                "boss": i.member.displayName,
-                "hours": 0
-            }
-        ]
-    };
-
     let workersPath;
     if (bot.LEA.g.LSPD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSPD") + "/" + i.fields.getTextInputValue("id") + ".json");
     else if (bot.LEA.g.LSSD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSSD") + "/" + i.fields.getTextInputValue("id") + ".json");
     else if (bot.LEA.g.SAHP.includes(i.guild.id)) workersPath = (path.resolve("./db/SAHP") + "/" + i.fields.getTextInputValue("id") + ".json");
-    else return i.editReply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
+    else return i.editReply({ content: "> 🛑 **Tenhle server není uveden na seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
-    fs.writeFileSync(
-        workersPath,
-        JSON.stringify(worker, null, 4)
-    );
+    if (!data) {
+        const worker = {
+            "active": true,
+            "badge": parseInt(i.fields.getTextInputValue("badge")),
+            "name": i.fields.getTextInputValue("name"),
+            "radio": i.fields.getTextInputValue("call"),
+            "rank": i.fields.getTextInputValue("rank"),
+            "folder": post ? post.id : null,
+            "hours": 0,
+            "duties": [],
+            "apologies": [],
+            "reputations": [],
+            "rankups": [
+                {
+                    "date": today.getDate() + ". " + (parseInt(today.getMonth()) + 1) + ". " + today.getFullYear(),
+                    "to": i.fields.getTextInputValue("rank"),
+                    "from": null,
+                    "boss": i.member.displayName,
+                    "hours": 0
+                }
+            ]
+        };
 
-    console.log(" < [DB/Login] >  " + i.member.displayName + " zaregistroval(a) [" + i.fields.getTextInputValue("call") + "] " + i.fields.getTextInputValue("name") + " do DB");
+        fs.writeFileSync(
+            workersPath,
+            JSON.stringify(worker, null, 4)
+        );
+    } else {
+        const worker = data;
+        worker.folder = post ? post.id : null;
+
+        fs.writeFileSync(
+            workersPath,
+            JSON.stringify(worker, null, 4)
+        );
+    }
+
+    console.log(" < [DB/Login] >  " + i.member.displayName + ` ${data ? "obnovil(a)" : "zaregistroval(a)"} [` + i.fields.getTextInputValue("call") + "] " + i.fields.getTextInputValue("name") + " do DB");
 
     const loginEmbed = new EmbedBuilder()
         .setTitle("Složka vytvořena!")
         .setDescription(
-            `<@${i.fields.getTextInputValue("id")}> byl(a) přihlášen(a) do systému.`
+            `<@${i.fields.getTextInputValue("id")}> byl(a) ${data ? "ZNOVU " : ""}přihlášen(a) do systému.`
             + (post ? `\n> **Složka:** <#${post.id}>` : "\n> **Složka:** ✅")
             + "\n> **Přezdívka:** " + (gotNick ? "✅" : "❌")
             + "\n> **Role:** " + (gotRole ? "✅" : "❌")
@@ -333,9 +351,9 @@ export default async function run(bot, i) {
 
     await dcLog(bot, i.guild.id, i.member,
         {
-            title: "Přidání do DB",
+            title: (data ? "Zpětné p" : "P") + "řidání do DB",
             description:
-                `**<@${i.user.id}> přidal(a) <@${i.fields.getTextInputValue("id")}> do DB.**`
+                `**<@${i.user.id}> přidal(a) <@${i.fields.getTextInputValue("id")}> ${data ? "ZNOVU " : ""}do DB.**`
                 + `\n> **Jméno:** \`${i.fields.getTextInputValue("name")}\``
                 + `\n> **Hodnost:** \`${i.fields.getTextInputValue("rank")}\``
                 + `\n> **Volačka:** \`${i.fields.getTextInputValue("call")}\``
@@ -347,7 +365,7 @@ export default async function run(bot, i) {
     await simpleLog(bot, i.guild.id,
         {
             author: { name: `[${i.fields.getTextInputValue("call")}] ${i.fields.getTextInputValue("name")}`, iconURL: member.displayAvatarURL() },
-            title: "Přijetí",
+            title: "Přijetí" + (data ? " (znova)" : ""),
             color: "#00ff0d",
             footer: { text: i.member.displayName, iconURL: i.member.displayAvatarURL() }
         }
