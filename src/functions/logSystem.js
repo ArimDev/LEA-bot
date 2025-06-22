@@ -43,8 +43,8 @@ export async function dcLog(bot, guildID, member, options = {}) {
         let files = [];
         if (!!file) files = [file];
 
-        guild = await bot.guilds.fetch("1154446248934387828");
-        channel = await guild.channels.fetch("1290052054273757249");
+        guild = await bot.guilds.fetch("1385604665252642897");
+        channel = await guild.channels.fetch("1385604666456408096");
         const logEmbed = new EmbedBuilder()
             .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
             .setTitle(title)
@@ -76,8 +76,8 @@ export async function simpleLog(bot, guildID, options) {
         guild = await bot.guilds.fetch(/* MISSING ID */);
         channel = await guild.channels.fetch(/* MISSING ID */);
     } else if (gotServer.id === 2) {
-        guild = await bot.guilds.fetch("1154446248934387828");
-        channel = await guild.channels.fetch("1269400178415112283");
+        guild = await bot.guilds.fetch("1385604665252642897");
+        channel = await guild.channels.fetch("1385604666942820446");
     } else if (gotServer.id === 3) {
         guild = await bot.guilds.fetch("1301163398515396668");
         channel = await guild.channels.fetch("1301163400935768160");

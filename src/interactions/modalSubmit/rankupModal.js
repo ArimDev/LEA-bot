@@ -57,19 +57,19 @@ export default async function run(bot, i) {
         else if (content.rank === "Police Officer II") oldRolesIDs = [/* MISSING IDs */], oldGrade = 2;
         else if (content.rank === "Police Officer I") oldRolesIDs = [/* MISSING IDs */], oldGrade = 1;
         else if (content.rank === "Cadet") oldRolesIDs = [/* MISSING IDs */], oldGrade = 0;
-    } else if (i.guild.id === "1154446248934387828") { //LSSD
-        if (newRank === "Sheriff") rolesIDs = ["1154446249005690910", "1267541873451339806"], tagID = "1203829217167409192", newGrade = 11;
-        else if (newRank === "Undersheriff") rolesIDs = ["1154446248967938187", "1267541873451339806"], tagID = "1203829217167409192", newGrade = 10;
-        else if (newRank === "Assistant Sheriff") rolesIDs = ["1154446248967938186", "1267541873451339806"], tagID = "1203829217167409192", newGrade = 9;
-        else if (newRank === "Division Chief") rolesIDs = ["1154446248967938185", "1267541873451339806"], tagID = "1203829217167409192", newGrade = 8;
-        else if (newRank === "Area Commander") rolesIDs = ["1312853345806979092", "1267541873451339806"], tagID = "1203829217167409192", newGrade = 7;
-        else if (newRank === "Captain") rolesIDs = ["1154446248967938183", "1267541873451339806"], tagID = "1203829217167409192", newGrade = 6;
-        else if (newRank === "Lieutenant") rolesIDs = ["1267588047533248583", "1267541873451339806"], tagID = "1203829217167409192", newGrade = 5;
-        else if (newRank === "Sergeant") rolesIDs = ["1267587700240809994", "1267588695909728348"], tagID = "1203829180232630362", newGrade = 4;
-        else if (newRank === "Deputy III") rolesIDs = ["1267542148102750238"], tagID = "1203829143234551898", newGrade = 3;
-        else if (newRank === "Deputy II") rolesIDs = ["1267589547462754385"], tagID = "1203829113240952904", newGrade = 2;
-        else if (newRank === "Deputy I") rolesIDs = ["1267589491405754369"], tagID = "1203829081100001311", newGrade = 1;
-        else if (newRank === "Deputy Trainee") rolesIDs = ["1267589609378812129"], tagID = "1203829031049367593", newGrade = 0;
+    } else if (i.guild.id === "1385604665252642897") { //LSSD
+        if (newRank === "Sheriff") rolesIDs = ["1385604665340854437", "1385604665328144470"], tagID = "1386379896498163802", newGrade = 11;
+        else if (newRank === "Undersheriff") rolesIDs = ["1385604665340854436", "1385604665328144470"], tagID = "1386379896498163802", newGrade = 10;
+        else if (newRank === "Assistant Sheriff") rolesIDs = ["1385604665340854435", "1385604665328144470"], tagID = "1386379896498163802", newGrade = 9;
+        else if (newRank === "Division Chief") rolesIDs = ["1385604665340854433", "1385604665328144470"], tagID = "1386379896498163802", newGrade = 8;
+        else if (newRank === "Area Commander") rolesIDs = ["1385604665328144475", "1385604665328144470"], tagID = "1386379896498163802", newGrade = 7;
+        else if (newRank === "Captain") rolesIDs = ["1385604665328144473", "1385604665328144470"], tagID = "1386379896498163802", newGrade = 6;
+        else if (newRank === "Lieutenant") rolesIDs = ["1385604665328144472", "1385604665328144470"], tagID = "1386379896498163802", newGrade = 5;
+        else if (newRank === "Sergeant") rolesIDs = ["1385604665328144467", "1385604665328144466"], tagID = "1386380080577515530", newGrade = 4;
+        else if (newRank === "Deputy III") rolesIDs = ["1385604665315426384"], tagID = "1386380117164429543", newGrade = 3;
+        else if (newRank === "Deputy II") rolesIDs = ["1385604665315426383"], tagID = "1386380151566373007", newGrade = 2;
+        else if (newRank === "Deputy I") rolesIDs = ["1385604665315426382"], tagID = "1386380164266594474", newGrade = 1;
+        else if (newRank === "Deputy Trainee") rolesIDs = ["1385604665315426381"], tagID = "1386380174383255592", newGrade = 0;
         else rolesIDs = false, tagID = false;
 
         if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${newRank}\`)**`, ephemeral: true });
@@ -80,18 +80,18 @@ export default async function run(bot, i) {
         try { folderCh = await i.guild.channels.fetch(content.folder); } catch { }
         if (!folderCh) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
 
-        if (content.rank === "Sheriff") oldRolesIDs = ["1154446249005690910", "1267541873451339806"], oldGrade = 11;
-        else if (content.rank === "Undersheriff") oldRolesIDs = ["1154446248967938187", "1267541873451339806"], oldGrade = 10;
-        else if (content.rank === "Assistant Sheriff") oldRolesIDs = ["1154446248967938186", "1267541873451339806"], oldGrade = 9;
-        else if (content.rank === "Division Chief") oldRolesIDs = ["1154446248967938185", "1267541873451339806"], oldGrade = 8;
-        else if (content.rank === "Area Commander") oldRolesIDs = ["1312853345806979092", "1267541873451339806"], oldGrade = 7;
-        else if (content.rank === "Captain") oldRolesIDs = ["1154446248967938183", "1267541873451339806"], oldGrade = 6;
-        else if (content.rank === "Lieutenant") oldRolesIDs = ["1267588047533248583", "1267541873451339806"], oldGrade = 5;
-        else if (content.rank === "Sergeant") oldRolesIDs = ["1267587700240809994", "1267588695909728348"], oldGrade = 4;
-        else if (content.rank === "Deputy III") oldRolesIDs = ["1267542148102750238"], oldGrade = 3;
-        else if (content.rank === "Deputy II") oldRolesIDs = ["1267589547462754385"], oldGrade = 2;
-        else if (content.rank === "Deputy I") oldRolesIDs = ["1267589491405754369"], oldGrade = 1;
-        else if (content.rank === "Deputy Trainee") oldRolesIDs = ["1267589609378812129"], oldGrade = 0;
+        if (content.rank === "Sheriff") oldRolesIDs = ["1385604665340854437", "1385604665328144470"], oldGrade = 11;
+        else if (content.rank === "Undersheriff") oldRolesIDs = ["1385604665340854436", "1385604665328144470"], oldGrade = 10;
+        else if (content.rank === "Assistant Sheriff") oldRolesIDs = ["1385604665340854435", "1385604665328144470"], oldGrade = 9;
+        else if (content.rank === "Division Chief") oldRolesIDs = ["1385604665340854433", "1385604665328144470"], oldGrade = 8;
+        else if (content.rank === "Area Commander") oldRolesIDs = ["1385604665328144475", "1385604665328144470"], oldGrade = 7;
+        else if (content.rank === "Captain") oldRolesIDs = ["1385604665328144473", "1385604665328144470"], oldGrade = 6;
+        else if (content.rank === "Lieutenant") oldRolesIDs = ["1385604665328144472", "1385604665328144470"], oldGrade = 5;
+        else if (content.rank === "Sergeant") oldRolesIDs = ["1385604665328144467", "1385604665328144466"], oldGrade = 4;
+        else if (content.rank === "Deputy III") oldRolesIDs = ["1385604665315426384"], oldGrade = 3;
+        else if (content.rank === "Deputy II") oldRolesIDs = ["1385604665315426383"], oldGrade = 2;
+        else if (content.rank === "Deputy I") oldRolesIDs = ["1385604665315426382"], oldGrade = 1;
+        else if (content.rank === "Deputy Trainee") oldRolesIDs = ["1385604665315426381"], oldGrade = 0;
     } else if (i.guild.id === "1301163398515396668") { //SAHP
         if (newRank === "Commissioner") rolesIDs = ["1301163398595350582", "1301163398557339686"], tagID = "1304980716693487618", newGrade = 13;
         else if (newRank === "Deputy Commissioner") rolesIDs = ["1301163398595350581", "1301163398557339686"], tagID = "1304980716693487618", newGrade = 12;

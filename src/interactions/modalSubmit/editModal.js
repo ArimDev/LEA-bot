@@ -56,38 +56,38 @@ export default async function run(bot, i) {
             else if (content.rank === "Police Officer I") oldRolesIDs = [/* MISSING IDs */];
             else if (content.rank === "Cadet") oldRolesIDs = [/* MISSING IDs */];
         }
-    } else if (i.guild.id === "1154446248934387828") { //LSSD
+    } else if (i.guild.id === "1385604665252642897") { //LSSD
         content = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
         if (!(await i.guild.channels.fetch(content.folder))) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
 
         if (newRank !== content.rank) {
-            if (newRank === "Sheriff") rolesIDs = ["1154446249005690910", "1267541873451339806"], tagID = "1203829217167409192";
-            else if (newRank === "Undersheriff") rolesIDs = ["1154446248967938187", "1267541873451339806"], tagID = "1203829217167409192";
-            else if (newRank === "Assistant Sheriff") rolesIDs = ["1154446248967938186", "1267541873451339806"], tagID = "1203829217167409192";
-            else if (newRank === "Division Chief") rolesIDs = ["1154446248967938185", "1267541873451339806"], tagID = "1203829217167409192";
-            else if (newRank === "Area Commander") rolesIDs = ["1312853345806979092", "1267541873451339806"], tagID = "1203829217167409192";
-            else if (newRank === "Captain") rolesIDs = ["1154446248967938183", "1267541873451339806"], tagID = "1203829217167409192";
-            else if (newRank === "Lieutenant") rolesIDs = ["1267588047533248583", "1267541873451339806"], tagID = "1203829217167409192";
-            else if (newRank === "Sergeant") rolesIDs = ["1267587700240809994", "1267588695909728348"], tagID = "1203829180232630362";
-            else if (newRank === "Deputy III") rolesIDs = ["1267542148102750238"], tagID = "1203829143234551898";
-            else if (newRank === "Deputy II") rolesIDs = ["1267589547462754385"], tagID = "1203829113240952904";
-            else if (newRank === "Deputy I") rolesIDs = ["1267589491405754369"], tagID = "1203829081100001311";
-            else if (newRank === "Deputy Trainee") rolesIDs = ["1267589609378812129"], tagID = "1203829031049367593";
+            if (newRank === "Sheriff") rolesIDs = ["1385604665340854437", "1385604665328144470"], tagID = "1386379896498163802";
+            else if (newRank === "Undersheriff") rolesIDs = ["1385604665340854436", "1385604665328144470"], tagID = "1386379896498163802";
+            else if (newRank === "Assistant Sheriff") rolesIDs = ["1385604665340854435", "1385604665328144470"], tagID = "1386379896498163802";
+            else if (newRank === "Division Chief") rolesIDs = ["1385604665340854433", "1385604665328144470"], tagID = "1386379896498163802";
+            else if (newRank === "Area Commander") rolesIDs = ["1385604665328144475", "1385604665328144470"], tagID = "1386379896498163802";
+            else if (newRank === "Captain") rolesIDs = ["1385604665328144473", "1385604665328144470"], tagID = "1386379896498163802";
+            else if (newRank === "Lieutenant") rolesIDs = ["1385604665328144472", "1385604665328144470"], tagID = "1386379896498163802";
+            else if (newRank === "Sergeant") rolesIDs = ["1385604665328144467", "1385604665328144466"], tagID = "1386380080577515530";
+            else if (newRank === "Deputy III") rolesIDs = ["1385604665315426384"], tagID = "1386380117164429543";
+            else if (newRank === "Deputy II") rolesIDs = ["1385604665315426383"], tagID = "1386380151566373007";
+            else if (newRank === "Deputy I") rolesIDs = ["1385604665315426382"], tagID = "1386380164266594474";
+            else if (newRank === "Deputy Trainee") rolesIDs = ["1385604665315426381"], tagID = "1386380174383255592";
             else rolesIDs = false, tagID = false;
             if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${newRank}\`)**`, ephemeral: true });
 
-            if (content.rank === "Sheriff") rolesIDs = ["1154446249005690910", "1267541873451339806"];
-            else if (content.rank === "Undersheriff") rolesIDs = ["1154446248967938187", "1267541873451339806"];
-            else if (content.rank === "Assistant Sheriff") rolesIDs = ["1154446248967938186", "1267541873451339806"];
-            else if (content.rank === "Division Chief") rolesIDs = ["1154446248967938185", "1267541873451339806"];
-            else if (content.rank === "Area Commander") rolesIDs = ["1312853345806979092", "1267541873451339806"];
-            else if (content.rank === "Captain") rolesIDs = ["1154446248967938183", "1267541873451339806"];
-            else if (content.rank === "Lieutenant") rolesIDs = ["1267588047533248583", "1267541873451339806"];
-            else if (content.rank === "Sergeant") rolesIDs = ["1267587700240809994", "1267588695909728348"];
-            else if (content.rank === "Deputy III") rolesIDs = ["1267542148102750238"];
-            else if (content.rank === "Deputy II") rolesIDs = ["1267589547462754385"];
-            else if (content.rank === "Deputy I") rolesIDs = ["1267589491405754369"];
-            else if (content.rank === "Deputy Trainee") rolesIDs = ["1267589609378812129"];
+            if (content.rank === "Sheriff") rolesIDs = ["1385604665340854437", "1385604665328144470"];
+            else if (content.rank === "Undersheriff") rolesIDs = ["1385604665340854436", "1385604665328144470"];
+            else if (content.rank === "Assistant Sheriff") rolesIDs = ["1385604665340854435", "1385604665328144470"];
+            else if (content.rank === "Division Chief") rolesIDs = ["1385604665340854433", "1385604665328144470"];
+            else if (content.rank === "Area Commander") rolesIDs = ["1385604665328144475", "1385604665328144470"];
+            else if (content.rank === "Captain") rolesIDs = ["1385604665328144473", "1385604665328144470"];
+            else if (content.rank === "Lieutenant") rolesIDs = ["1385604665328144472", "1385604665328144470"];
+            else if (content.rank === "Sergeant") rolesIDs = ["1385604665328144467", "1385604665328144466"];
+            else if (content.rank === "Deputy III") rolesIDs = ["1385604665315426384"];
+            else if (content.rank === "Deputy II") rolesIDs = ["1385604665315426383"];
+            else if (content.rank === "Deputy I") rolesIDs = ["1385604665315426382"];
+            else if (content.rank === "Deputy Trainee") rolesIDs = ["1385604665315426381"];
         }
     } else if (i.guild.id === "1301163398515396668") { //SAHP
         content = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));

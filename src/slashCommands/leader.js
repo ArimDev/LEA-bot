@@ -25,8 +25,8 @@ export default async function run(bot, i) {
     if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true; //Leadership
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("1267541873451339806")) passed = true; //Leadership
-        if (admin.roles.cache.has("1251504025610747966")) passed = true; //FTO Commander
+        if (admin.roles.cache.has("1385604665328144470")) passed = true; //Leadership
+        if (admin.roles.cache.has("1385604665290526729")) passed = true; //FTO Commander
     } else if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1301163398557339686")) passed = true; //Leadership
     }
@@ -101,7 +101,7 @@ export default async function run(bot, i) {
                         if (bot.LEA.g.LSPD.includes(i.guild.id)) {
                             if (m.roles.cache.has("xxx" /* MISSING ID */)) apologized = true; //Leadership
                         } else if (bot.LEA.g.LSSD.includes(i.guild.id)) {
-                            if (m.roles.cache.has("1267541873451339806")) apologized = true; //Leadership
+                            if (m.roles.cache.has("1385604665328144470")) apologized = true; //Leadership
                         } else if (bot.LEA.g.SAHP.includes(i.guild.id)) {
                             if (m.roles.cache.has("1301163398557339686")) apologized = true; //Leadership
                         }

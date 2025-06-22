@@ -172,18 +172,18 @@ export default async function api(bot, app) {
             }
 
             if (dep === "LSSD" && worker.m) {
-                worker.roles.warn = worker.m.roles.cache.has("1154446248934387830");
-                worker.roles.suspend = worker.m.roles.cache.has("1267600894069964911");
-                if (worker.m.roles.cache.has("1240021849518112808")) worker.div.push("CID");
-                if (worker.m.roles.cache.has("1290357614039007294")) worker.div.push("SRT");
-                if (worker.m.roles.cache.has("1252175791966523444")) worker.div.push("ST");
-                if (worker.m.roles.cache.has("1251504241768529971")) worker.div.push("FTO");
-                if (worker.m.roles.cache.has("1154446248946978950")) worker.div.push("TEU");
-                if (worker.m.roles.cache.has("1312862027206885436")) worker.div.push("MBU");
-                if (worker.m.roles.cache.has("1242926544574349343")) worker.div.push("ASD");
+                worker.roles.warn = worker.m.roles.cache.has("1385604665290526721");
+                worker.roles.suspend = worker.m.roles.cache.has("1385604665252642905");
+                if (worker.m.roles.cache.has("1385604665298911280")) worker.div.push("CID");
+                if (worker.m.roles.cache.has("1385604665298911277")) worker.div.push("SRT");
+                if (worker.m.roles.cache.has("1385604665298911272")) worker.div.push("ST");
+                if (worker.m.roles.cache.has("1385604665290526728")) worker.div.push("FTO");
+                if (worker.m.roles.cache.has("1385604665290526726")) worker.div.push("TEU");
+                if (worker.m.roles.cache.has("1385604665290526724")) worker.div.push("MBU");
+                if (worker.m.roles.cache.has("1385604665290526722")) worker.div.push("ASD");
 
                 if ( //ACCESS TO THE TABLES - Discord roles
-                    worker.m.roles.cache.has("1267541873451339806") //Leadership
+                    worker.m.roles.cache.has("1385604665328144470") //Leadership
                 ) leadership = true;
                 if (
                     !leadership
@@ -289,8 +289,8 @@ export default async function api(bot, app) {
             }
         }
 
-        const roles = { LSSD: "1267541873451339806", LSPD: "xxx" /* MISSING ID */, SAHP: "1301163398557339686" };
-        const dojRoles = { LSSD: "1267592715500257343", LSPD: "xxx" /* MISSING ID */, SAHP: "1301163398540689494" };
+        const roles = { LSSD: "1385604665328144470", LSPD: "xxx" /* MISSING ID */, SAHP: "1301163398557339686" };
+        const dojRoles = { LSSD: "1385604665315426378", LSPD: "xxx" /* MISSING ID */, SAHP: "1301163398540689494" };
 
         const first = await fetch(`https://discord.com/api/users/@me/guilds/${bot.LEA.g[dep][0]}/member`, {
             headers: { authorization: authString }
