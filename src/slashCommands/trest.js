@@ -97,8 +97,8 @@ export default async function run(bot, i) {
         if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true; //Leadership
         if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true; //Supervisor
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("1385604665328144470")) passed = true; //Leadership
-        if (admin.roles.cache.has("1385604665328144466")) passed = true; //Supervisor
+        if (admin.roles.cache.has("1391525298461347971")) passed = true; //Leadership
+        if (admin.roles.cache.has("1391525303733452860")) passed = true; //Supervisor
     } else if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1301163398557339686")) passed = true; //Leadership
         if (admin.roles.cache.has("1301163398557339683")) passed = true; //Supervisor

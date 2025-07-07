@@ -174,16 +174,16 @@ export default async function api(bot, app) {
             if (dep === "LSSD" && worker.m) {
                 worker.roles.warn = worker.m.roles.cache.has("1385604665290526721");
                 worker.roles.suspend = worker.m.roles.cache.has("1385604665252642905");
-                if (worker.m.roles.cache.has("1385604665298911280")) worker.div.push("CID");
-                if (worker.m.roles.cache.has("1385604665298911277")) worker.div.push("SRT");
-                if (worker.m.roles.cache.has("1385604665298911272")) worker.div.push("ST");
-                if (worker.m.roles.cache.has("1385604665290526728")) worker.div.push("FTO");
-                if (worker.m.roles.cache.has("1385604665290526726")) worker.div.push("TEU");
-                if (worker.m.roles.cache.has("1385604665290526724")) worker.div.push("MBU");
-                if (worker.m.roles.cache.has("1385604665290526722")) worker.div.push("ASD");
+                if (worker.m.roles.cache.has("1391525318711316621")) worker.div.push("CID");
+                if (worker.m.roles.cache.has("1391525322742038651")) worker.div.push("SRT");
+                if (worker.m.roles.cache.has("1391525330107498597")) worker.div.push("ST");
+                if (worker.m.roles.cache.has("1391525334372847686")) worker.div.push("FTO");
+                if (worker.m.roles.cache.has("1391525346595311779")) worker.div.push("TEU");
+                if (worker.m.roles.cache.has("1391525349199843452")) worker.div.push("MBU");
+                if (worker.m.roles.cache.has("1391525351829803198")) worker.div.push("ASD");
 
                 if ( //ACCESS TO THE TABLES - Discord roles
-                    worker.m.roles.cache.has("1385604665328144470") //Leadership
+                    worker.m.roles.cache.has("1391525298461347971") //Leadership
                 ) leadership = true;
                 if (
                     !leadership
@@ -289,8 +289,8 @@ export default async function api(bot, app) {
             }
         }
 
-        const roles = { LSSD: "1385604665328144470", LSPD: "xxx" /* MISSING ID */, SAHP: "1301163398557339686" };
-        const dojRoles = { LSSD: "1385604665315426378", LSPD: "xxx" /* MISSING ID */, SAHP: "1301163398540689494" };
+        const roles = { LSSD: "1391525298461347971", LSPD: "xxx" /* MISSING ID */, SAHP: "1301163398557339686" };
+        const dojRoles = { LSSD: "1391525312994738206", LSPD: "xxx" /* MISSING ID */, SAHP: "1301163398540689494" };
 
         const first = await fetch(`https://discord.com/api/users/@me/guilds/${bot.LEA.g[dep][0]}/member`, {
             headers: { authorization: authString }
