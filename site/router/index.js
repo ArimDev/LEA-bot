@@ -18,6 +18,11 @@ const router = createRouter({
 			path: "/", name: "Domů", component: viewsHome
 		},
 		{
+			path: "/lspd", name: "LSPD", component: viewsLSPD, meta: {
+				title: "LSPD", image: badgeLSPD, color: "#ffc935"
+			},
+		},
+		{
 			path: "/lssd", name: "LSSD", component: viewsLSSD, meta: {
 				title: "LSSD", image: badgeLSSD, color: "#bd8131"
 			},

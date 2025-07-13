@@ -50,27 +50,27 @@ export default async function run(bot, i) {
 
     let post = false, gotNick = true, gotRole = true, folders;
     const today = new Date();
-    if (i.guild.id === "xxx" /* MISSING ID */) { //LSPD
-        folders = await i.guild.channels.fetch(/* MISSING ID */);
+    if (i.guild.id === "1301163398515396668") { //LSPD
+        folders = await i.guild.channels.fetch("1394005807271514204");
 
         let rolesIDs, tagID;
-        if (rank === "Chief of Police") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
-        else if (rank === "Assistant Chief of Police") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
-        else if (rank === "Deputy Chief of Police") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
-        else if (rank === "Commander") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
-        else if (rank === "Captain") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
-        else if (rank === "Lieutenant") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
-        else if (rank === "Sergeant II") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
-        else if (rank === "Sergeant I") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
-        else if (rank === "Police Officer III+I") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
-        else if (rank === "Police Officer III") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
-        else if (rank === "Police Officer II") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
-        else if (rank === "Police Officer I") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
-        else if (rank === "Cadet") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        if (rank === "Chief of Police") rolesIDs = ["1301163398595350582", "1301163398557339686"], tagID = "1394017573586341898";
+        else if (rank === "Assistant Chief of Police") rolesIDs = ["1301163398595350581", "1301163398557339686"], tagID = "1394017573586341898";
+        else if (rank === "Deputy Chief of Police") rolesIDs = ["1301163398595350580", "1301163398557339686"], tagID = "1394017573586341898";
+        else if (rank === "Commander") rolesIDs = ["1301163398595350578", "1301163398557339686"], tagID = "1394017573586341898";
+        else if (rank === "Captain") rolesIDs = ["1301163398557339688", "1301163398557339686"], tagID = "1394017573586341898";
+        else if (rank === "Lieutenant") rolesIDs = ["1301163398557339687", "1301163398557339686"], tagID = "1394017573586341898";
+        else if (rank === "Sergeant II") rolesIDs = ["1301163398557339685", "1301163398557339683"], tagID = "1394017606662619297";
+        else if (rank === "Sergeant I") rolesIDs = ["1301163398557339684", "1301163398557339683"], tagID = "1394017606662619297";
+        else if (rank === "Police Officer III+I") rolesIDs = ["1367967086365773956"], tagID = "1394017661620584578";
+        else if (rank === "Police Officer III") rolesIDs = ["1301163398557339681"], tagID = "1394017679207170059";
+        else if (rank === "Police Officer II") rolesIDs = ["1301163398557339680"], tagID = "1394017698236862466";
+        else if (rank === "Police Officer I") rolesIDs = ["1301163398557339679"], tagID = "1394017709552832612";
+        else if (rank === "Cadet") rolesIDs = ["1301163398540689497"], tagID = "1394017721641074810";
         else rolesIDs = false, tagID = false;
 
         if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${rank}\`)**`, ephemeral: true });
-        rolesIDs.push("xxx" /* MISSING ID */); //LSPD role
+        rolesIDs.push("1301163398540689496"); //LSPD role
 
         await i.deferReply({ ephemeral: !visible });
 
@@ -111,6 +111,8 @@ export default async function run(bot, i) {
 
         try { await member.setNickname(`[${radio}] ${name}`); } catch { gotNick = false; }
         try { await member.roles.add(rolesIDs); } catch { gotRole = false; }
+        if (i.guild.id === "1301163398515396668" && rank === "Trooper Trainee")
+            try { await member.roles.remove(["1302389194836148226"]); } catch { gotRole = false; } //Akademik
 
         const slozkaEmbed = new EmbedBuilder()
             .setTitle("Vítejte ve Vaší složce!")
@@ -119,7 +121,7 @@ export default async function run(bot, i) {
                 + "\n\n**Zde si povinně zapisujete časy služeb a případné omluvenky.**"
                 + "\n\nZápis probíhá pomocí bota **LEA-Bot**."
                 + "\n**Službu si zapisujete pomocí </duty:1170376396678377595> a omluvenku přes </omluvenka:1170382276492800131>.**"
-                + `\n\nV případě problémů, použijte <#MISSING ID> nebo kontaktujte <@${bot.LEA.o}>.`
+                + `\n\nV případě problémů, použijte <#1301163401527169068> nebo kontaktujte <@${bot.LEA.o}>.`
             )
             .setThumbnail(bot.LEA.i.LSPD)
             .setColor(getServer(i.guild.id).color)
@@ -205,28 +207,28 @@ export default async function run(bot, i) {
             .setColor(getServer(i.guild.id).color)
             .setFooter({ text: `LEA-Bot v${bot.version} 💫`, iconURL: bot.user.avatarURL() });
         await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
-    } else if (i.guild.id === "1301163398515396668") { //SAHP
-        folders = await i.guild.channels.fetch("1301228299858481162");
+    } else if (i.guild.id === "xxx" /* MISSING ID */) { //SAHP
+        folders = await i.guild.channels.fetch("xxx" /* MISSING ID */);
 
         let rolesIDs, tagID;
-        if (rank === "Commissioner") rolesIDs = ["1301163398595350582", "1301163398557339686"], tagID = "1304980716693487618";
-        else if (rank === "Deputy Commissioner") rolesIDs = ["1301163398595350581", "1301163398557339686"], tagID = "1304980716693487618";
-        else if (rank === "Assistant Commissioner") rolesIDs = ["1301163398595350580", "1301163398557339686"], tagID = "1304980716693487618";
-        else if (rank === "Chief") rolesIDs = ["1301163398595350578", "1301163398557339686"], tagID = "1304980716693487618";
-        else if (rank === "Assistant Chief") rolesIDs = ["1301165286954635344", "1301163398557339686"], tagID = "1304980716693487618";
-        else if (rank === "Captain") rolesIDs = ["1301163398557339688", "1301163398557339686"], tagID = "1304980716693487618";
-        else if (rank === "Lieutenant") rolesIDs = ["1301163398557339687", "1301163398557339686"], tagID = "1304980716693487618";
-        else if (rank === "Sergeant II") rolesIDs = ["1301163398557339685", "1301163398557339683"], tagID = "1304980780182798438";
-        else if (rank === "Sergeant I") rolesIDs = ["1301163398557339684", "1301163398557339683"], tagID = "1304980780182798438";
-        else if (rank === "Senior Trooper") rolesIDs = ["1367967086365773956"], tagID = "1367968421651939378";
-        else if (rank === "Trooper III") rolesIDs = ["1301163398557339681"], tagID = "1304980812646842421";
-        else if (rank === "Trooper II") rolesIDs = ["1301163398557339680"], tagID = "1304980828375486524";
-        else if (rank === "Trooper I") rolesIDs = ["1301163398557339679"], tagID = "1304980853318746182";
-        else if (rank === "Trooper Trainee") rolesIDs = ["1301163398540689497"], tagID = "1304980877234929694";
+        if (rank === "Commissioner") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Deputy Commissioner") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Assistant Commissioner") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Chief") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Assistant Chief") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Captain") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Lieutenant") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Sergeant II") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Sergeant I") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Senior Trooper") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Trooper III") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Trooper II") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Trooper I") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Trooper Trainee") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
         else rolesIDs = false, tagID = false;
 
         if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${rank}\`)**`, ephemeral: true });
-        rolesIDs.push("1301163398540689496"); //SAHP role
+        rolesIDs.push("xxx" /* MISSING ID */); //SAHP role
 
         await i.deferReply({ ephemeral: !visible });
 
@@ -267,12 +269,12 @@ export default async function run(bot, i) {
 
         try { await member.setNickname(`[${radio}] ${name}`); } catch { gotNick = false; }
         try { await member.roles.add(rolesIDs); } catch { gotRole = false; }
-        if (i.guild.id === "1301163398515396668" && rank === "Trooper Trainee") //Odebrat roli Akademika pro SAHP
+        if (i.guild.id === "xxx" /* MISSING ID */ && rank === "Trooper Trainee") //Odebrat roli Akademika pro SAHP
             try {
                 await member.roles.remove([
-                    "1302389194836148226", //Akademik
-                    "1302351904562483200", //1. výcvik
-                    "1302352056727765053", //2. výcvik
+                    "xxx" /* MISSING ID */, //Akademik
+                    "xxx" /* MISSING ID */, //1. výcvik
+                    "xxx" /* MISSING ID */, //2. výcvik
                 ]);
             } catch { gotRole = false; }
 
@@ -283,7 +285,7 @@ export default async function run(bot, i) {
                 + "\n\n**Zde si povinně zapisujete časy služeb a případné omluvenky.**"
                 + "\n\nZápis probíhá pomocí bota **LEA-Bot**."
                 + "\n**Službu si zapisujete pomocí </duty:1170376396678377595> a omluvenku přes </omluvenka:1170382276492800131>.**"
-                + `\n\nV případě problémů, použijte <#1301163401527169068> nebo kontaktujte <@${bot.LEA.o}>.`
+                + `\n\nV případě problémů, použijte <#MISSING ID> nebo kontaktujte <@${bot.LEA.o}>.`
             )
             .setThumbnail(bot.LEA.i.SAHP)
             .setColor(getServer(i.guild.id).color)

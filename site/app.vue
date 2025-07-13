@@ -25,13 +25,13 @@
 			</div>
 			<div class="rightMenu">
 				<li class="LSPD">
-					<span class="disabled">LSPD</span>
+					<RouterLink to="/lspd">LSPD</RouterLink>
 				</li>
 				<li class="LSSD">
 					<RouterLink to="/lssd">LSSD</RouterLink>
 				</li>
 				<li class="SAHP">
-					<RouterLink to="/sahp">SAHP</RouterLink>
+					<span class="disabled">SAHP</span>
 				</li>
 				<div class="loginSide">
 					<Login @alert="openPopBox" @popup="popup" />
