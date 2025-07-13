@@ -126,7 +126,7 @@ export default async function run(bot, i) {
             .setFooter({ text: `LEA-Bot v${bot.version} 💫`, iconURL: bot.user.avatarURL() });
         await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
     } else if (i.guild.id === "1385604665252642897") { //LSSD
-        folders = await i.guild.channels.fetch("1386379600795271451");
+        folders = await i.guild.channels.fetch("1391879913350627389");
 
         let rolesIDs, tagID;
         if (rank === "Sheriff") rolesIDs = ["1391525286021169185"], tagID = "1391880113921982595";
@@ -188,7 +188,7 @@ export default async function run(bot, i) {
         if (i.guild.id === "1385604665252642897" && rank === "Deputy Trainee") //Odebrat roli Akademika pro LSSD
             try {
                 await member.roles.remove([
-                    "1385976135933886526", //Akademik
+                    "1391900098237169844", //Akademik
                 ]);
             } catch { gotRole = false; }
 
@@ -199,7 +199,7 @@ export default async function run(bot, i) {
                 + "\n\n**Zde si povinně zapisujete časy služeb a případné omluvenky.**"
                 + "\n\nZápis probíhá pomocí bota **LEA-Bot**."
                 + "\n**Službu si zapisujete pomocí </duty:1170376396678377595> a omluvenku přes </omluvenka:1170382276492800131>.**"
-                + `\n\nV případě problémů, použijte <#1385604666133319844> nebo kontaktujte <@${bot.LEA.o}>.`
+                + `\n\nV případě problémů, použijte <#1391525429608841318> nebo kontaktujte <@${bot.LEA.o}>.`
             )
             .setThumbnail(bot.LEA.i.LSSD)
             .setColor(getServer(i.guild.id).color)
