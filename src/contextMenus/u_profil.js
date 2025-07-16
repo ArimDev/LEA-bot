@@ -9,18 +9,17 @@ export const context = new ContextMenuCommandBuilder()
     .setType(ApplicationCommandType.User);
 
 export default async function run(bot, i) {
-    const discord = await i.targetUser;
+    const targetID = i.targetId;
+    let found = false
 
-    let found = false, db = [], worker = { id: undefined, name: undefined, radio: undefined, badge: undefined };
+    if (checkDB(targetID)) found = true;
+    if (!found) return i.reply({ content: `> 🛑 **<@${targetID}> není členem LEA.**`, ephemeral: true });
 
-    if (checkDB(discord.id)) found = true, worker.id = discord.id;
-    if (!found) return i.reply({ content: `> 🛑 **<@${discord.id}> není členem LEA.**`, ephemeral: true });
-
-    const profile = await getProfile(bot, worker.id);
+    const profile = await getProfile(bot, targetID);
 
     if (!profile) return i.reply({ content: "> 🛑 **Chyba!**", ephemeral: true });
 
-    console.log(" < [CMD/Profil] >  " + i.user.tag + ` zobrazil(a) profil ${worker.id}.json`);
+    console.log(" < [CMD/Profil] >  " + i.user.tag + ` zobrazil(a) profil ${targetID}.json`);
 
     await i.reply({ embeds: [profile], ephemeral: true });
 };

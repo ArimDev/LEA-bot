@@ -7,7 +7,7 @@ export async function getProfile(bot, id) {
     const db = getDB(id);
     if (!db.exists) return false;
 
-    const rep = await getRep(id);
+    // const rep = await getRep(id);
 
     const guild = await bot.guilds.fetch(db.guildID);
     if (!guild) return false;
@@ -27,7 +27,7 @@ export async function getProfile(bot, id) {
             + `> **Odznak:** \`${worker.badge}\`\n`
             + (worker.folder ? `> **Složka:** <#${worker.folder}>\n` : "> **Složka:** `N/A`\n")
             + `> **Počet hodin:** \`${worker.hours}\``
-            + (rep.p === 0 && rep.n === 0 ? "" : `> **Reputace:** \`${rep.p !== 0 ? `+${rep.p}` : ``} ${rep.n !== 0 ? `-${rep.n}` : ``}\``)
+            // + (rep.p === 0 && rep.n === 0 ? "" : `> **Reputace:** \`${rep.p !== 0 ? `+${rep.p}` : ``} ${rep.n !== 0 ? `-${rep.n}` : ``}\``)
         )
         .setColor(bot.LEA.c[db.guildName])
         .setThumbnail(bot.LEA.i[db.guildName])

@@ -36,13 +36,16 @@ export async function commands(bot) {
 
     for (const file of summ) {
         let commandFile;
+        let key;
         if (slashCommands.includes(file)) {
             commandFile = await import(`../slashCommands/${file}`);
+            key = `slash:${commandFile.slash?.name || file.split(".")[0]}`;
         } else if (contextMenus.includes(file)) {
             commandFile = await import(`../contextMenus/${file}`);
+            key = `context:${commandFile.context?.name || file.split(".")[0]}`;
         }
 
-        bot.slashes.set(file.split(".")[0], commandFile);
+        bot.slashes.set(key, commandFile);
         if (commandFile.slash) allCmd.push(commandFile.slash.toJSON());
         else if (commandFile.context) allCmd.push(commandFile.context.toJSON());
     };

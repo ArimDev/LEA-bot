@@ -27,14 +27,17 @@ export default async function (bot, i) {
             i.isUserContextMenuCommand()
             || i.type === InteractionType.ApplicationCommand
         ) {
-            let lowSlashes = new Map();
-            bot.slashes.forEach((value, key) =>
-                lowSlashes.set(key.toLowerCase(), value)
-            );
-
-            const command = lowSlashes.get(i.commandName.toLowerCase());
+            let key;
+            if (i.isUserContextMenuCommand()) {
+                key = `context:${i.commandName}`;
+            } else {
+                key = `slash:${i.commandName}`;
+            }
+            const command = bot.slashes.get(key);
             if (command) {
                 return command.default(bot, i);
+            } else {
+                console.error(`Unknown command: ${i.commandName} (${key})`);
             }
         }
 
