@@ -44,9 +44,7 @@ export default async function run(bot, i) {
     i.guild.fetch();
     const admin = i.member;
     if (admin.id === bot.LEA.o) passed = true; //PetyXbron / b1ngo
-    if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("1391525298461347971")) passed = true; //Leadership
-    }
+    if (!passed && admin.roles.cache.has("1391525298461347971")) passed = true; //Leadership
 
     if (sub === "faktura") { //Faktura
         const modal = new ModalBuilder()
