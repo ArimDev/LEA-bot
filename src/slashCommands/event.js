@@ -34,18 +34,18 @@ export default async function run(bot, i) {
     const sub = i.options._subcommand;
     const user = i.options.getUser("účastník");
 
-    //if (!bot.LEA.g.SAHP.includes(i.guild.id))
-    return i.reply({
-        content: "> 🛑 **Příkazy /event nejsou aktuálně dostupné pro " + i.guild.name + ".**",
-        ephemeral: true
-    });
+    if (!bot.LEA.g.LSSD.includes(i.guild.id))
+        return i.reply({
+            content: "> 🛑 **Příkazy /event nejsou aktuálně dostupné pro " + i.guild.name + ".**",
+            ephemeral: true
+        });
 
     let passed = false;
     i.guild.fetch();
     const admin = i.member;
     if (admin.id === bot.LEA.o) passed = true; //PetyXbron / b1ngo
     if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has(/* MISSING ID */)) passed = true; //Leadership
+        if (admin.roles.cache.has("1391525298461347971")) passed = true; //Leadership
     }
 
     if (sub === "faktura") { //Faktura
@@ -139,7 +139,7 @@ export default async function run(bot, i) {
 
         return console.log(" < [EVE/Souhrn] >  " + i.member.displayName + " zobrazil(a) souhrn " + member.displayName);
     } else if (sub === "žebříček") { //Žebříček
-        //if (!passed) return i.reply({ content: "> 🛑 **Žebříček je už skrytý! To je napětí...**", ephemeral: true });
+        if (!passed) return i.reply({ content: "> 🛑 **Žebříček si může zobrazit jen Leadership.**", ephemeral: true });
 
         let users = [];
         const eventDB = fs.readdirSync(path.resolve("./db/event")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
