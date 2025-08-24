@@ -207,7 +207,7 @@ export default async function run(bot, i) {
         let passed = false;
         if (admin.id === bot.LEA.o) passed = true; //PetyXbron / b1ngo
         else if (bot.LEA.g.LSSD.includes(i.guild.id)) {
-            if (admin.roles.cache.has("1328411383322378331")) passed = true; //Executive Staff
+            if (admin.roles.cache.has("1391525294321696879")) passed = true; //Executive Staff
         } else if (bot.LEA.g.LSPD.includes(i.guild.id)) {
             if (admin.roles.cache.has("1310392880095039498")) passed = true; //High Command Staff
         }
@@ -345,7 +345,7 @@ export default async function run(bot, i) {
         let passed = false;
         if (admin.id === bot.LEA.o) passed = true; //PetyXbron / b1ngo
         else if (bot.LEA.g.LSSD.includes(i.guild.id)) {
-            if (admin.roles.cache.has("1328411383322378331")) passed = true; //Executive Staff
+            if (admin.roles.cache.has("1391525294321696879")) passed = true; //Executive Staff
         } else if (bot.LEA.g.LSPD.includes(i.guild.id)) {
             if (admin.roles.cache.has("1310392880095039498")) passed = true; //High Command Staff
         }

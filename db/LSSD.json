@@ -36,24 +36,31 @@
     },
     {
         "rank": "Captain",
-        "slots": 3,
+        "slots": 5,
         "firstBadge": 1005,
         "firstCallsign": "County-6",
         "title": " "
     },
     {
         "rank": "Lieutenant",
-        "slots": 4,
+        "slots": 5,
         "firstBadge": 1010,
         "firstCallsign": "Shock-1",
         "title": " "
     },
     {
         "rank": "Sergeant",
-        "slots": 8,
+        "slots": 10,
         "firstBadge": 1015,
         "firstCallsign": "Nora-1",
         "title": "SERGEANT"
+    },
+    {
+        "rank": "Deputy Senior",
+        "slots": 12,
+        "firstBadge": 1025,
+        "firstCallsign": "Eagle-1",
+        "title": "Deputy Senior"
     },
     {
         "rank": "Deputy III",

@@ -139,6 +139,7 @@ export default async function run(bot, i) {
         else if (rank === "Captain") rolesIDs = ["1391525295432929341"], tagID = "1391880113921982595";
         else if (rank === "Lieutenant") rolesIDs = ["1391525296385163334"], tagID = "1391880113921982595";
         else if (rank === "Sergeant") rolesIDs = ["1391525302638874794", "1391525303733452860"], tagID = "1391880138500608162";
+        else if (rank === "Deputy Senior") rolesIDs = ["1409231271774650510"], tagID = "1409231457544568862";
         else if (rank === "Deputy III") rolesIDs = ["1391525305134354634"], tagID = "1391880178694750218";
         else if (rank === "Deputy II") rolesIDs = ["1391525306505887956"], tagID = "1391880192061865984";
         else if (rank === "Deputy I") rolesIDs = ["1391525307550404799"], tagID = "1391880204988973077";
