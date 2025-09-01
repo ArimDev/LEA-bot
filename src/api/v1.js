@@ -290,7 +290,7 @@ export default async function api(bot, app) {
         }
 
         const roles = { LSSD: "1391525298461347971", LSPD: "1301163398557339686", SAHP: "xxx" /* MISSING ID */ };
-        const dojRoles = { LSSD: "1391525312994738206", LSPD: "1301163398540689494", SAHP: "xxx" /* MISSING ID */ };
+        const govRoles = { LSSD: "1391525312994738206", LSPD: "1301163398540689494", SAHP: "xxx" /* MISSING ID */ };
 
         const first = await fetch(`https://discord.com/api/users/@me/guilds/${bot.LEA.g[dep][0]}/member`, {
             headers: { authorization: authString }
@@ -298,7 +298,7 @@ export default async function api(bot, app) {
 
         if (first.ok) {
             const firstRes = await first.json();
-            passed = firstRes.roles.includes(roles[dep]) || firstRes.roles.includes(dojRoles[dep]);
+            passed = firstRes.roles.includes(roles[dep]) || firstRes.roles.includes(govRoles[dep]);
             if (firstRes.user.id === bot.LEA.o) passed = true; //b1ngo access
 
             if (passed) {
@@ -350,7 +350,7 @@ export default async function api(bot, app) {
 
         if (second.ok) {
             const secondRes = await second.json();
-            passed = secondRes.roles.includes(roles[getNextDep(dep, 1)]) || secondRes.roles.includes(dojRoles[getNextDep(dep, 1)]);
+            passed = secondRes.roles.includes(roles[getNextDep(dep, 1)]) || secondRes.roles.includes(govRoles[getNextDep(dep, 1)]);
 
             if (passed) {
                 console.log(` < [PS/Login ${second.status}] > Verify: ${secondRes.user.username} verified from ${getNextDep(dep, 1)}`);
@@ -401,7 +401,7 @@ export default async function api(bot, app) {
 
         if (third.ok) {
             const thirdRes = await third.json();
-            passed = thirdRes.roles.includes(roles[getNextDep(dep, 2)]) || thirdRes.roles.includes(dojRoles[getNextDep(dep, 2)]);
+            passed = thirdRes.roles.includes(roles[getNextDep(dep, 2)]) || thirdRes.roles.includes(govRoles[getNextDep(dep, 2)]);
 
             if (passed) {
                 console.log(` < [PS/Login ${third.status}] > Verify: ${thirdRes.user.username} verified from ${getNextDep(dep, 2)}`);

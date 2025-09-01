@@ -39,8 +39,10 @@ export default async function run(bot, i) {
     const admin = i.member;
     if (admin.id === bot.LEA.o) passed = true; //PetyXbron / b1ngo
     if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1301163398540689494")) passed = true; //Government
         if (admin.roles.cache.has("1301163398557339686")) passed = true; //Leadership
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1391525312994738206")) passed = true; //Government
         if (admin.roles.cache.has("1391525298461347971")) passed = true; //Leadership
         if (admin.roles.cache.has("1391525331835420722")) passed = true; //FTO Commander
     } else if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {

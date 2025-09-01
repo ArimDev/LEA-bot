@@ -76,7 +76,7 @@ export default async function run(bot, i) {
 
     i.reply({ embeds: [invoiceEmbed], ephemeral: true });
 
-    const ch = await i.guild.channels.fetch("1401577945449103511");
+    const ch = await i.guild.channels.fetch("1313926740854313022");
     const invoiceEmbedPublic = new EmbedBuilder()
         .setAuthor({ name: i.member.displayName, iconURL: i.member.displayAvatarURL() })
         .setTitle("Faktura #" + id.toString())

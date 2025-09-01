@@ -34,7 +34,7 @@ export default async function run(bot, i) {
     const sub = i.options._subcommand;
     const user = i.options.getUser("účastník");
 
-    if (!bot.LEA.g.LSSD.includes(i.guild.id))
+    if (!bot.LEA.g.LSPD.includes(i.guild.id))
         return i.reply({
             content: "> 🛑 **Příkazy /event nejsou aktuálně dostupné pro " + i.guild.name + ".**",
             ephemeral: true
@@ -44,7 +44,7 @@ export default async function run(bot, i) {
     i.guild.fetch();
     const admin = i.member;
     if (admin.id === bot.LEA.o) passed = true; //PetyXbron / b1ngo
-    if (!passed && admin.roles.cache.has("1391525298461347971")) passed = true; //Leadership
+    if (!passed && admin.roles.cache.has("1301163398557339686")) passed = true; //Leadership
 
     if (sub === "faktura") { //Faktura
         const modal = new ModalBuilder()

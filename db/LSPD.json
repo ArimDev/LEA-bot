@@ -35,6 +35,12 @@
         "title": "COMMAND STAFF - CAPTAIN"
     },
     {
+        "rank": "Captain",
+        "slots": 1,
+        "firstBadge": 290,
+        "firstCallsign": "King-4"
+    },
+    {
         "rank": "Lieutenant",
         "slots": 4,
         "firstBadge": 108,
