@@ -15,7 +15,7 @@
     },
     {
         "rank": "Deputy Chief of Police",
-        "slots": 1,
+        "slots": 2,
         "firstBadge": 102,
         "firstCallsign": "Staff-3",
         "title": false
@@ -23,8 +23,8 @@
     {
         "rank": "Commander",
         "slots": 2,
-        "firstBadge": 103,
-        "firstCallsign": "Staff-4",
+        "firstBadge": 292,
+        "firstCallsign": "Charles-1",
         "title": false
     },
     {
@@ -38,7 +38,8 @@
         "rank": "Captain",
         "slots": 1,
         "firstBadge": 290,
-        "firstCallsign": "King-4"
+        "firstCallsign": "King-4",
+        "title": false
     },
     {
         "rank": "Lieutenant",
@@ -46,6 +47,13 @@
         "firstBadge": 108,
         "firstCallsign": "Henry-1",
         "title": "COMMAND STAFF - LIEUTENANT"
+    },
+    {
+        "rank": "Lieutenant",
+        "slots": 1,
+        "firstBadge": 291,
+        "firstCallsign": "Henry-5",
+        "title": false
     },
     {
         "rank": "Sergeant II",
