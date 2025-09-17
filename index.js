@@ -61,7 +61,7 @@ bot.LEA = {
     g: {
         LSPD: ["1301163398515396668"],
         LSSD: ["1385604665252642897"],
-        SAHP: ["1301163398515396668"]
+        SAHP: []
     },
     i: {
         LEAbot: "https://i.imgur.com/EnZErOi.png",

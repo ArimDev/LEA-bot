@@ -89,7 +89,7 @@ export default async function run(bot, i) {
             )
             .setThumbnail(bot.LEA.i.LSPD)
             .setColor(bot.LEA.c.LSPD)
-            .setFooter({ text: `LSPD | LEA-Bot v${bot.version} 💫`, iconURL: bot.LEA.i.LSPD });
+            .setFooter({ text: `LSPD | LEA-Bot v${bot.version} 🏳️`, iconURL: bot.LEA.i.LSPD });
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
@@ -125,25 +125,25 @@ export default async function run(bot, i) {
             )
             .setThumbnail(bot.LEA.i.LSPD)
             .setColor(getServer(i.guild.id).color)
-            .setFooter({ text: `LEA-Bot v${bot.version} 💫`, iconURL: bot.user.avatarURL() });
+            .setFooter({ text: `LEA-Bot v${bot.version} 🏳️`, iconURL: bot.user.avatarURL() });
         await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
     } else if (i.guild.id === "1385604665252642897") { //LSSD
-        folders = await i.guild.channels.fetch("1391879913350627389");
+        folders = await i.guild.channels.fetch("1417958785732972765");
 
         let rolesIDs, tagID;
-        if (rank === "Sheriff") rolesIDs = ["1391525286021169185"], tagID = "1391880113921982595";
-        else if (rank === "Undersheriff") rolesIDs = ["1391525287421804624"], tagID = "1391880113921982595";
-        else if (rank === "Assistant Sheriff") rolesIDs = ["1391525289045266472"], tagID = "1391880113921982595";
-        else if (rank === "Division Chief") rolesIDs = ["1391525291620307044"], tagID = "1391880113921982595";
-        else if (rank === "Area Commander") rolesIDs = ["1391525292828524685"], tagID = "1391880113921982595";
-        else if (rank === "Captain") rolesIDs = ["1391525295432929341"], tagID = "1391880113921982595";
-        else if (rank === "Lieutenant") rolesIDs = ["1391525296385163334"], tagID = "1391880113921982595";
-        else if (rank === "Sergeant") rolesIDs = ["1391525302638874794", "1391525303733452860"], tagID = "1391880138500608162";
-        else if (rank === "Deputy Senior") rolesIDs = ["1409231271774650510"], tagID = "1409231457544568862";
-        else if (rank === "Deputy III") rolesIDs = ["1391525305134354634"], tagID = "1391880178694750218";
-        else if (rank === "Deputy II") rolesIDs = ["1391525306505887956"], tagID = "1391880192061865984";
-        else if (rank === "Deputy I") rolesIDs = ["1391525307550404799"], tagID = "1391880204988973077";
-        else if (rank === "Deputy Trainee") rolesIDs = ["1391525308628205662"], tagID = "1391880217613570269";
+        if (rank === "Sheriff") rolesIDs = ["1391525286021169185"], tagID = "1417958911549505579";
+        else if (rank === "Undersheriff") rolesIDs = ["1391525287421804624"], tagID = "1417958911549505579";
+        else if (rank === "Assistant Sheriff") rolesIDs = ["1391525289045266472"], tagID = "1417958911549505579";
+        else if (rank === "Division Chief") rolesIDs = ["1391525291620307044"], tagID = "1417958911549505579";
+        else if (rank === "Area Commander") rolesIDs = ["1391525292828524685"], tagID = "1417958911549505579";
+        else if (rank === "Captain") rolesIDs = ["1391525295432929341"], tagID = "1417958911549505579";
+        else if (rank === "Lieutenant") rolesIDs = ["1391525296385163334"], tagID = "1417958911549505579";
+        else if (rank === "Sergeant") rolesIDs = ["1391525302638874794", "1391525303733452860"], tagID = "1417958995670470707";
+        else if (rank === "Deputy Senior") rolesIDs = ["1409231271774650510"], tagID = "1417959092764541039";
+        else if (rank === "Deputy III") rolesIDs = ["1391525305134354634"], tagID = "1417959251208573039";
+        else if (rank === "Deputy II") rolesIDs = ["1391525306505887956"], tagID = "1417959324763951325";
+        else if (rank === "Deputy I") rolesIDs = ["1391525307550404799"], tagID = "1417959369714303026";
+        else if (rank === "Deputy Trainee") rolesIDs = ["1391525308628205662"], tagID = "1417959411946754069";
         else rolesIDs = false, tagID = false;
 
         if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${rank}\`)**`, ephemeral: true });
@@ -166,7 +166,7 @@ export default async function run(bot, i) {
             )
             .setThumbnail(bot.LEA.i.LSSD)
             .setColor(bot.LEA.c.LSSD)
-            .setFooter({ text: `LSSD | LEA-Bot v${bot.version} 💫`, iconURL: bot.LEA.i.LSSD });
+            .setFooter({ text: `LSSD | LEA-Bot v${bot.version} 🏳️`, iconURL: bot.LEA.i.LSSD });
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
@@ -206,7 +206,7 @@ export default async function run(bot, i) {
             )
             .setThumbnail(bot.LEA.i.LSSD)
             .setColor(getServer(i.guild.id).color)
-            .setFooter({ text: `LEA-Bot v${bot.version} 💫`, iconURL: bot.user.avatarURL() });
+            .setFooter({ text: `LEA-Bot v${bot.version} 🏳️`, iconURL: bot.user.avatarURL() });
         await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
     } else if (i.guild.id === "xxx" /* MISSING ID */) { //SAHP
         folders = await i.guild.channels.fetch("xxx" /* MISSING ID */);
@@ -248,7 +248,7 @@ export default async function run(bot, i) {
             )
             .setThumbnail(bot.LEA.i.SAHP)
             .setColor(bot.LEA.c.SAHP)
-            .setFooter({ text: `SAHP | LEA-Bot v${bot.version} 💫`, iconURL: bot.LEA.i.SAHP });
+            .setFooter({ text: `SAHP | LEA-Bot v${bot.version} 🏳️`, iconURL: bot.LEA.i.SAHP });
         const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
@@ -290,7 +290,7 @@ export default async function run(bot, i) {
             )
             .setThumbnail(bot.LEA.i.SAHP)
             .setColor(getServer(i.guild.id).color)
-            .setFooter({ text: `LEA-Bot v${bot.version} 💫`, iconURL: bot.user.avatarURL() });
+            .setFooter({ text: `LEA-Bot v${bot.version} 🏳️`, iconURL: bot.user.avatarURL() });
         await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
     }
 

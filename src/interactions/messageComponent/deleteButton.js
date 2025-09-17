@@ -9,8 +9,9 @@ export default async function run(bot, i) {
     else authorID = i.message.interaction.user.id;
 
     let passed = false;
-    if (i.user.id === bot.LEA.o) passed = true; //PetyXbron / b1ngo
-    if (i.user.id === authorID) passed = true;
+    const admin = i.member;
+    if (admin.id === bot.LEA.o) passed = true; //PetyXbron / b1ngo
+    if (admin.id === authorID) passed = true;
     if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("1301163398557339686")) passed = true; //Leadership
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {

@@ -37,7 +37,7 @@ export async function dcLog(bot, guildID, member, options = {}) {
             .setTitle(title)
             .setDescription(description)
             .setColor(color)
-            .setFooter({ text: `LSPD | LEA-Bot v${bot.version} 💫`, iconURL: bot.LEA.i.LSPD });
+            .setFooter({ text: `LSPD | LEA-Bot v${bot.version} 🏳️`, iconURL: bot.LEA.i.LSPD });
         await channel.send({ embeds: [logEmbed], files: files });
     } else if (gotServer.id === 2) {
         let files = [];
@@ -50,7 +50,7 @@ export async function dcLog(bot, guildID, member, options = {}) {
             .setTitle(title)
             .setDescription(description)
             .setColor(color)
-            .setFooter({ text: `LSSD | LEA-Bot v${bot.version} 💫`, iconURL: bot.LEA.i.LSSD });
+            .setFooter({ text: `LSSD | LEA-Bot v${bot.version} 🏳️`, iconURL: bot.LEA.i.LSSD });
         await channel.send({ embeds: [logEmbed], files: files });
     } else if (gotServer.id === 3) {
         let files = [];
@@ -63,7 +63,7 @@ export async function dcLog(bot, guildID, member, options = {}) {
             .setTitle(title)
             .setDescription(description)
             .setColor(color)
-            .setFooter({ text: `SAHP | LEA-Bot v${bot.version} 💫`, iconURL: bot.LEA.i.SAHP });
+            .setFooter({ text: `SAHP | LEA-Bot v${bot.version} 🏳️`, iconURL: bot.LEA.i.SAHP });
         await channel.send({ embeds: [logEmbed], files: files });
     }
 }
