@@ -51,7 +51,7 @@ export default async function run(bot, i) {
     let post = false, gotNick = true, gotRole = true, folders;
     const today = new Date();
     if (i.guild.id === "1301163398515396668") { //LSPD
-        folders = await i.guild.channels.fetch("1394005807271514204");
+        folders = await i.guild.channels.fetch("1434488348650770523");
 
         let rolesIDs, tagID;
         if (rank === "Chief of Police") rolesIDs = ["1301163398595350582", "1301163398557339686"], tagID = "1394017573586341898";
@@ -70,7 +70,7 @@ export default async function run(bot, i) {
         else rolesIDs = false, tagID = false;
 
         if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${rank}\`)**`, ephemeral: true });
-        rolesIDs.push("1301163398540689496"); //LSPD role
+        rolesIDs.push("1434435458066288720"); //LSPD role
 
         await i.deferReply({ ephemeral: !visible });
 

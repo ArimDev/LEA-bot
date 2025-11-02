@@ -11,7 +11,7 @@ export const slash = new SlashCommandBuilder()
 export default async function run(bot, i) {
     if (!(checkDB(i.user.id))) return i.reply({ content: "> 🛑 **Před zadáváním __duties__ a __omluvenek__ tě musí admin přilásit do DB.**\nZalož si vlastní složku a počkej na správce DB.", ephemeral: true });
 
-    const folders = ["1417958785732972765", "1394005807271514204"];
+    const folders = ["1417958785732972765", "1434488348650770523"];
     let folder;
     if (getServer(i.guild.id).id === 1) folder = folders[0];
     else if (getServer(i.guild.id).id === 2) folder = folders[1];
