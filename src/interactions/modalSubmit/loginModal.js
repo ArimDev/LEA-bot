@@ -51,12 +51,12 @@ export default async function run(bot, i) {
     let post = false, gotNick = true, gotRole = true, folders;
     const today = new Date();
     if (i.guild.id === "1301163398515396668") { //LSPD
-        folders = await i.guild.channels.fetch("1434488348650770523");
+        folders = await i.guild.channels.fetch("1445823227250343967");
 
         let rolesIDs, tagID;
-        if (rank === "Chief of Police") rolesIDs = ["1301163398595350582", "1301163398557339686"], tagID = "1394017573586341898";
-        else if (rank === "Assistant Chief of Police") rolesIDs = ["1301163398595350581", "1301163398557339686"], tagID = "1394017573586341898";
-        else if (rank === "Deputy Chief of Police") rolesIDs = ["1301163398595350580", "1301163398557339686"], tagID = "1394017573586341898";
+        if (rank === "Chief") rolesIDs = ["1301163398595350582", "1301163398557339686"], tagID = "1394017573586341898";
+        else if (rank === "Assistant Chief") rolesIDs = ["1301163398595350581", "1301163398557339686"], tagID = "1394017573586341898";
+        else if (rank === "Deputy Chief") rolesIDs = ["1301163398595350580", "1301163398557339686"], tagID = "1394017573586341898";
         else if (rank === "Commander") rolesIDs = ["1301163398595350578", "1301163398557339686"], tagID = "1394017573586341898";
         else if (rank === "Captain") rolesIDs = ["1301163398557339688", "1301163398557339686"], tagID = "1394017573586341898";
         else if (rank === "Lieutenant") rolesIDs = ["1301163398557339687", "1301163398557339686"], tagID = "1394017573586341898";
@@ -139,10 +139,9 @@ export default async function run(bot, i) {
         else if (rank === "Captain") rolesIDs = ["1391525295432929341"], tagID = "1417958911549505579";
         else if (rank === "Lieutenant") rolesIDs = ["1391525296385163334"], tagID = "1417958911549505579";
         else if (rank === "Sergeant") rolesIDs = ["1391525302638874794", "1391525303733452860"], tagID = "1417958995670470707";
-        else if (rank === "Deputy Senior") rolesIDs = ["1409231271774650510"], tagID = "1417959092764541039";
-        else if (rank === "Deputy III") rolesIDs = ["1391525305134354634"], tagID = "1417959251208573039";
-        else if (rank === "Deputy II") rolesIDs = ["1391525306505887956"], tagID = "1417959324763951325";
-        else if (rank === "Deputy I") rolesIDs = ["1391525307550404799"], tagID = "1417959369714303026";
+        else if (rank === "Deputy Sheriff Bonus II") rolesIDs = ["1391525305134354634"], tagID = "1417959092764541039";
+        else if (rank === "Deputy Sheriff Bonus I") rolesIDs = ["1391525306505887956"], tagID = "1417959251208573039";
+        else if (rank === "Deputy Sheriff") rolesIDs = ["1391525307550404799"], tagID = "1417959324763951325";
         else if (rank === "Deputy Trainee") rolesIDs = ["1391525308628205662"], tagID = "1417959411946754069";
         else rolesIDs = false, tagID = false;
 

@@ -1,21 +1,21 @@
 [
     {
-        "rank": "Chief of Police",
+        "rank": "Chief",
         "slots": 1,
         "firstBadge": 100,
         "firstCallsign": "Staff-1",
         "title": "HIGH COMMAND STAFF"
     },
     {
-        "rank": "Assistant Chief of Police",
+        "rank": "Assistant Chief",
         "slots": 1,
         "firstBadge": 101,
         "firstCallsign": "Staff-2",
         "title": false
     },
     {
-        "rank": "Deputy Chief of Police",
-        "slots": 2,
+        "rank": "Deputy Chief",
+        "slots": 1,
         "firstBadge": 102,
         "firstCallsign": "Staff-3",
         "title": false
@@ -23,84 +23,70 @@
     {
         "rank": "Commander",
         "slots": 2,
-        "firstBadge": 292,
+        "firstBadge": 103,
         "firstCallsign": "Charles-1",
         "title": false
     },
     {
         "rank": "Captain",
-        "slots": 3,
+        "slots": 2,
         "firstBadge": 105,
-        "firstCallsign": "King-1",
+        "firstCallsign": "Nora-1",
         "title": "COMMAND STAFF - CAPTAIN"
     },
     {
-        "rank": "Captain",
-        "slots": 1,
-        "firstBadge": 290,
-        "firstCallsign": "King-4",
-        "title": false
-    },
-    {
         "rank": "Lieutenant",
-        "slots": 4,
-        "firstBadge": 108,
-        "firstCallsign": "Henry-1",
+        "slots": 3,
+        "firstBadge": 109,
+        "firstCallsign": "Victor-1",
         "title": "COMMAND STAFF - LIEUTENANT"
     },
     {
-        "rank": "Lieutenant",
-        "slots": 1,
-        "firstBadge": 291,
-        "firstCallsign": "Henry-5",
-        "title": false
-    },
-    {
         "rank": "Sergeant II",
-        "slots": 3,
+        "slots": 1,
         "firstBadge": 112,
-        "firstCallsign": "John-1",
+        "firstCallsign": "Henry-1",
         "title": "SERGEANT"
     },
     {
         "rank": "Sergeant I",
         "slots": 5,
-        "firstBadge": 115,
-        "firstCallsign": "John-4",
+        "firstBadge": 113,
+        "firstCallsign": "John-1",
         "title": false
     },
     {
         "rank": "Police Officer III+I",
-        "slots": 30,
+        "slots": 10,
         "firstBadge": 120,
         "firstCallsign": "William-1",
         "title": "Police Officer III+I"
     },
     {
         "rank": "Police Officer III",
-        "slots": 35,
-        "firstBadge": 150,
-        "firstCallsign": "Victor-1",
+        "slots": 15,
+        "firstBadge": 130,
+        "firstCallsign": "Lincoln-1",
         "title": "Police Officer III"
     },
     {
         "rank": "Police Officer II",
-        "slots": 35,
-        "firstBadge": 185,
-        "firstCallsign": "Lincoln-1",
+        "slots": 15,
+        "firstBadge": 145,
+        "firstCallsign": "Lincoln-16",
         "title": "Police Officer II"
     },
     {
         "rank": "Police Officer I",
-        "slots": 40,
-        "firstBadge": 220,
-        "firstCallsign": "Queen-1",
+        "slots": 15,
+        "firstBadge": 160,
+        "firstCallsign": "Lincoln-31",
         "title": "Police Officer I"
     },
     {
         "rank": "Cadet",
-        "slots": 30,
-        "firstBadge": 260,
+        "slots": 15,
+        "firstBadge": 185,
         "firstCallsign": "Tom-1",
         "title": "CADET"
     }
