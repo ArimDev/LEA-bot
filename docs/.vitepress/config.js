@@ -27,7 +27,7 @@ export default async () => {
 
             //Google Analytics
             ['script',
-                { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=' + env.VITE_GTAG }
+                { async: true, src: 'https://www.googletagmanager.com/gtag/js?id=' + env.VITE_GTAG_1 }
             ],
             ['script', {},
                 `window.dataLayer = window.dataLayer || [];`
@@ -49,7 +49,7 @@ export default async () => {
                 + `\n        'analytics_storage': 'denied'`
                 + `\n    });`
                 + `\n}`
-                + `\n\ngtag('config', '${env.VITE_GTAG}');`
+                + `\n\ngtag('config', '${env.VITE_GTAG_1}');`
             ],
         ],
 
