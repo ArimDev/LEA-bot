@@ -3,35 +3,35 @@
         "rank": "Sheriff",
         "slots": 1,
         "firstBadge": 200,
-        "firstCallsign": "Ranger-1",
+        "firstCallsign": "County-1",
         "title": false
     },
     {
         "rank": "Undersheriff",
         "slots": 1,
         "firstBadge": 201,
-        "firstCallsign": "Ranger-2",
+        "firstCallsign": "County-2",
         "title": false
     },
     {
         "rank": "Assistant Sheriff",
         "slots": 1,
         "firstBadge": 202,
-        "firstCallsign": "Ranger-3",
+        "firstCallsign": "County-3",
         "title": false
     },
     {
         "rank": "Division Chief",
         "slots": 1,
         "firstBadge": 203,
-        "firstCallsign": "Ranger-4",
+        "firstCallsign": "County-4",
         "title": false
     },
     {
         "rank": "Area Commander",
         "slots": 1,
         "firstBadge": 204,
-        "firstCallsign": "Frost-1",
+        "firstCallsign": "County-5",
         "title": false
     },
     {
@@ -59,28 +59,28 @@
         "rank": "Deputy Sheriff Bonus II",
         "slots": 15,
         "firstBadge": 220,
-        "firstCallsign": "County-1",
+        "firstCallsign": "Sam-1",
         "title": "Deputy Bonus II"
     },
     {
         "rank": "Deputy Sheriff Bonus I",
         "slots": 15,
         "firstBadge": 235,
-        "firstCallsign": "County-16",
+        "firstCallsign": "Sam-16",
         "title": "Deputy Bonus I"
     },
     {
         "rank": "Deputy Sheriff",
         "slots": 15,
         "firstBadge": 250,
-        "firstCallsign": "County-31",
+        "firstCallsign": "Charlie-1",
         "title": "Deputy Sheriff"
     },
     {
         "rank": "Deputy Trainee",
         "slots": 30,
         "firstBadge": 270,
-        "firstCallsign": "Bryan-1",
+        "firstCallsign": "Green-1",
         "title": "Deputy Trainee"
     }
 ]
