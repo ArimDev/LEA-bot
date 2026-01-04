@@ -53,5 +53,5 @@ Kód můžete volně kopírovat a dále distribuovat na jakémkoli médiu nebo f
 
 *Vlastněno a spravováno organizací [ArimDev](https://github.com/ArimDev).*
 
-© 2023 - 2025
+© 2023 - 2026
 </div>
