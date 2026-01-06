@@ -139,9 +139,9 @@ export default async function run(bot, i) {
         else if (rank === "Captain") rolesIDs = ["1391525295432929341"], tagID = "1417958911549505579";
         else if (rank === "Lieutenant") rolesIDs = ["1391525296385163334"], tagID = "1417958911549505579";
         else if (rank === "Sergeant") rolesIDs = ["1391525302638874794", "1391525303733452860"], tagID = "1417958995670470707";
-        else if (rank === "Deputy Sheriff Bonus II") rolesIDs = ["1391525305134354634"], tagID = "1417959092764541039";
-        else if (rank === "Deputy Sheriff Bonus I") rolesIDs = ["1391525306505887956"], tagID = "1417959251208573039";
-        else if (rank === "Deputy Sheriff") rolesIDs = ["1391525307550404799"], tagID = "1417959324763951325";
+        else if (rank === "Deputy III") rolesIDs = ["1391525305134354634"], tagID = "1417959092764541039";
+        else if (rank === "Deputy II") rolesIDs = ["1391525306505887956"], tagID = "1417959251208573039";
+        else if (rank === "Deputy I") rolesIDs = ["1391525307550404799"], tagID = "1417959324763951325";
         else if (rank === "Deputy Trainee") rolesIDs = ["1391525308628205662"], tagID = "1417959411946754069";
         else rolesIDs = false, tagID = false;
 

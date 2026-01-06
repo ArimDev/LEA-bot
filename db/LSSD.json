@@ -56,31 +56,31 @@
         "title": "SERGEANT"
     },
     {
-        "rank": "Deputy Sheriff Bonus II",
+        "rank": "Deputy III",
         "slots": 15,
         "firstBadge": 220,
         "firstCallsign": "Sam-1",
-        "title": "Deputy Bonus II"
+        "title": "DEPUTY III"
     },
     {
-        "rank": "Deputy Sheriff Bonus I",
+        "rank": "Deputy II",
         "slots": 15,
         "firstBadge": 235,
         "firstCallsign": "Sam-16",
-        "title": "Deputy Bonus I"
+        "title": "DEPUTY II"
     },
     {
-        "rank": "Deputy Sheriff",
+        "rank": "Deputy I",
         "slots": 15,
         "firstBadge": 250,
         "firstCallsign": "Charlie-1",
-        "title": "Deputy Sheriff"
+        "title": "DEPUTY I"
     },
     {
         "rank": "Deputy Trainee",
         "slots": 30,
         "firstBadge": 270,
         "firstCallsign": "Green-1",
-        "title": "Deputy Trainee"
+        "title": "DEPUTY TRAINEE"
     }
 ]
