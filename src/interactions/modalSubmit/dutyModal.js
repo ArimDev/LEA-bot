@@ -34,6 +34,7 @@ export default async function run(bot, i) {
     if (bot.LEA.g.LSPD.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + i.user.id + ".json"), "utf-8"));
     else if (bot.LEA.g.LSSD.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.user.id + ".json"), "utf-8"));
     else if (bot.LEA.g.SAHP.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + i.user.id + ".json"), "utf-8"));
+    else if (bot.LEA.g.SAND.includes(i.guild.id)) content = JSON.parse(fs.readFileSync((path.resolve("./db/SAND") + "/" + i.user.id + ".json"), "utf-8"));
     else return i.reply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
     if (i.channel.id === content.folder) inFolder = true;
@@ -127,6 +128,7 @@ export default async function run(bot, i) {
     if (bot.LEA.g.LSPD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSPD") + "/" + i.user.id + ".json");
     else if (bot.LEA.g.LSSD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSSD") + "/" + i.user.id + ".json");
     else if (bot.LEA.g.SAHP.includes(i.guild.id)) workersPath = (path.resolve("./db/SAHP") + "/" + i.user.id + ".json");
+    else if (bot.LEA.g.SAND.includes(i.guild.id)) workersPath = (path.resolve("./db/SAND") + "/" + i.user.id + ".json");
 
     fs.writeFileSync(
         workersPath,

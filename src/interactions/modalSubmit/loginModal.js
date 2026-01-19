@@ -6,10 +6,13 @@ import { dcLog, simpleLog } from "../../functions/logSystem.js";
 import { findWorker } from "../../functions/profiles.js";
 
 export default async function run(bot, i) {
+    let SAND = false;
+    if (i.guild.id === "1342063021811433514") SAND = true;
+
     let rank = i.fields.getTextInputValue("rank"),
         name = i.fields.getTextInputValue("name"),
         radio = i.fields.getTextInputValue("call"),
-        badge = i.fields.getTextInputValue("badge"),
+        badge = !SAND ? i.fields.getTextInputValue("badge") : false,
         userId = i.fields.getTextInputValue("id");
     const bl = JSON.parse(fs.readFileSync(path.resolve("./db/blacklist.json"), "utf-8"));
 
@@ -43,7 +46,7 @@ export default async function run(bot, i) {
                 + "\n- Musí začínat velkým písmenem",
             ephemeral: true
         });
-    if (!data && await findWorker("badge", badge))
+    if (!SAND && !data && await findWorker("badge", badge))
         return i.reply({ content: `> 🛑 **Číslo odznaku \`${badge}\` už je obsazené!**`, ephemeral: true });
     if (!data && await findWorker("radio", radio))
         return i.reply({ content: `> 🛑 **Volací znak \`${radio}\` už je obsazený!**`, ephemeral: true });
@@ -80,7 +83,7 @@ export default async function run(bot, i) {
                 `> **App:** <@${member.id}>`
                 + `\n> **Jméno:** \`${name}\``
                 + `\n> **Hodnost:** <@&${rolesIDs[0]}>`
-                + `\n> **Odznak:** \`${badge}\``
+                + (!SAND ? `\n> **Odznak:** \`${badge}\`` : "")
                 + `\n> **Volačka:** \`${radio}\``
                 + "\n\n"
                 + `\n> **Hodin:** \`${data ? data.hours : "0"}\``
@@ -156,7 +159,7 @@ export default async function run(bot, i) {
                 `> **App:** <@${member.id}>`
                 + `\n> **Jméno:** \`${name}\``
                 + `\n> **Hodnost:** <@&${rolesIDs[0]}>`
-                + `\n> **Odznak:** \`${badge}\``
+                + (!SAND ? `\n> **Odznak:** \`${badge}\`` : "")
                 + `\n> **Volačka:** \`${radio}\``
                 + "\n\n"
                 + `\n> **Hodin:** \`${data ? data.hours : "0"}\``
@@ -238,7 +241,7 @@ export default async function run(bot, i) {
                 `> **App:** <@${member.id}>`
                 + `\n> **Jméno:** \`${name}\``
                 + `\n> **Hodnost:** <@&${rolesIDs[0]}>`
-                + `\n> **Odznak:** \`${badge}\``
+                + (!SAND ? `\n> **Odznak:** \`${badge}\`` : "")
                 + `\n> **Volačka:** \`${radio}\``
                 + "\n\n"
                 + `\n> **Hodin:** \`${data ? data.hours : "0"}\``
@@ -291,18 +294,92 @@ export default async function run(bot, i) {
             .setColor(getServer(i.guild.id).color)
             .setFooter({ text: `LEA-Bot v${bot.version} 🏳️`, iconURL: bot.user.avatarURL() });
         await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
+    } else if (i.guild.id === "1342063021811433514") { //SAND
+        folders = await i.guild.channels.fetch("1460352184192602186");
+
+        let rolesIDs, tagID;
+        if (rank === "General") rolesIDs = ["1342063021991661576"], tagID = false;
+        else if (rank === "Lieutenant General") rolesIDs = ["1342063021991661575"], tagID = false;
+        else if (rank === "Major General") rolesIDs = ["1342063021991661574"], tagID = false;
+        else if (rank === "Brigadier General") rolesIDs = ["1454204899528278138"], tagID = false;
+        else if (rank === "Colonel") rolesIDs = ["1342063021991661571"], tagID = false;
+        else if (rank === "Major") rolesIDs = ["1342063021991661569"], tagID = false;
+        else if (rank === "Captain") rolesIDs = ["1342063021991661568"], tagID = false;
+        else if (rank === "Sergeant Major") rolesIDs = ["1342063021912100934"], tagID = false;
+        else if (rank === "Sergeant") rolesIDs = ["1342063021912100933"], tagID = false;
+        else if (rank === "Corporal") rolesIDs = ["1342063021912100926"], tagID = false;
+        else if (rank === "Private First Class") rolesIDs = ["1342063021912100925"], tagID = false;
+        else if (rank === "Private") rolesIDs = ["1342063021857443899"], tagID = false;
+        else rolesIDs = false, tagID = false;
+
+        if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${rank}\`)**`, ephemeral: true });
+        rolesIDs.push("1342063021811433523"); //United States Army role
+
+        await i.deferReply({ ephemeral: !visible });
+
+        const workerEmbed = new EmbedBuilder()
+            .setAuthor({ name: `[${radio}] ${name}`, iconURL: member.displayAvatarURL() })
+            .setDescription(
+                `> **App:** <@${member.id}>`
+                + `\n> **Jméno:** \`${name}\``
+                + `\n> **Hodnost:** <@&${rolesIDs[0]}>`
+                + `\n> **Volačka:** \`${radio}\``
+                + "\n\n"
+                + `\n> **Hodin:** \`${data ? data.hours : "0"}\``
+                + `\n> **Omluvenek:** \`${data ? data.apologies.filter(a => !a.removed).length : "0"}\``
+                + `\n> **Povýšení:** ${time(today, "R")}`
+            )
+            .setThumbnail(bot.LEA.i.SAND)
+            .setColor(bot.LEA.c.SAND)
+            .setFooter({ text: `SAND | LEA-Bot v${bot.version} 🏳️`, iconURL: bot.LEA.i.SAND });
+        const row = new ActionRowBuilder()
+            .addComponents(
+                new ButtonBuilder()
+                    .setCustomId("summary_" + member.id)
+                    .setStyle(ButtonStyle.Success)
+                    .setLabel("Souhrn")
+                    .setEmoji("📑"),
+            );
+        post = await folders.threads.create({
+            name: `[${radio}] ${name}`,
+            message: {
+                content: `<@${member.id}>`,
+                embeds: [workerEmbed],
+                components: [row]
+            },
+            appliedTags: [], // ! NO TAGS FOR SAND
+            reason: (data ? "OBNOVA" : "") + "Registrace od " + i.user.tag
+        });
+
+        try { await member.setNickname(`[${radio}] ${name}`); } catch { gotNick = false; }
+        try { await member.roles.add(rolesIDs); } catch { gotRole = false; }
+
+        const slozkaEmbed = new EmbedBuilder()
+            .setTitle("Vítejte ve Vaší složce!")
+            .setDescription(
+                `<@${member.id}>, gratulujeme Vám k úspěšnému přijetí na hodnost <@&${rolesIDs[0]}>.`
+                + "\n\n**Zde si povinně zapisujete časy služeb a případné omluvenky.**"
+                + "\n\nZápis probíhá pomocí bota **LEA-Bot**."
+                + "\n**Službu si zapisujete pomocí </duty:1170376396678377595> a omluvenku přes </omluvenka:1170382276492800131>.**"
+                + `\n\nV případě problémů, použijte <#1460352184192602186> nebo kontaktujte <@${bot.LEA.o}>.`
+            )
+            .setThumbnail(bot.LEA.i.SAND)
+            .setColor(getServer(i.guild.id).color)
+            .setFooter({ text: `LEA-Bot v${bot.version} 🏳️`, iconURL: bot.user.avatarURL() });
+        await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
     }
 
     let workersPath, worker;
     if (bot.LEA.g.LSPD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSPD") + "/" + userId + ".json");
     else if (bot.LEA.g.LSSD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSSD") + "/" + userId + ".json");
     else if (bot.LEA.g.SAHP.includes(i.guild.id)) workersPath = (path.resolve("./db/SAHP") + "/" + userId + ".json");
+    else if (bot.LEA.g.SAND.includes(i.guild.id)) workersPath = (path.resolve("./db/SAND") + "/" + userId + ".json");
     else return i.editReply({ content: "> 🛑 **Tenhle server není uveden na seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
     if (!data) {
         worker = {
             "active": true,
-            "badge": parseInt(badge),
+            "badge": badge ? parseInt(badge) : false,
             "name": name,
             "radio": radio,
             "rank": rank,
@@ -360,7 +437,7 @@ export default async function run(bot, i) {
                 + `\n> **Jméno:** \`${name}\``
                 + `\n> **Hodnost:** \`${rank}\``
                 + `\n> **Volačka:** \`${radio}\``
-                + `\n> **Odznak:** \`${badge}\``,
+                + (!SAND ? `\n> **Odznak:** \`${badge}\`` : ""),
             color: "#00ff0d"
         }
     );

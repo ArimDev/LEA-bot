@@ -11,12 +11,13 @@ export const slash = new SlashCommandBuilder()
 export default async function run(bot, i) {
     if (!(checkDB(i.user.id))) return i.reply({ content: "> 🛑 **Před zadáváním __duties__ a __omluvenek__ tě musí admin přilásit do DB.**\nZalož si vlastní složku a počkej na správce DB.", ephemeral: true });
 
-    const folders = ["1417958785732972765", "1445823227250343967"];
+    const folders = ["1417958785732972765", "1445823227250343967", "1460352184192602186"];
     let folder;
     if (getServer(i.guild.id).id === 1) folder = folders[0];
     else if (getServer(i.guild.id).id === 2) folder = folders[1];
-    else if (getServer(i.guild.id).id === 3) folder = folders[2];
-    else return i.reply({ content: "> 🛑 **Neznámý server!**", ephemeral: true });
+    else if (getServer(i.guild.id).id === 3) return i.reply({ content: "> 🛑 **Neznámý server!** (js18)", ephemeral: true });
+    else if (getServer(i.guild.id).id === 4) folder = folders[2];
+    else return i.reply({ content: "> 🛑 **Neznámý server!** (js20)", ephemeral: true });
     if (!i.channel.isThread()) return i.reply({ content: `> 🛑 **Zápis __duties__ a __omluvenek__ je povolen pouze ve své složce, ve <#${folder}>.**`, ephemeral: true });
     if (!folders.includes(i.channel.parentId)) return i.reply({ content: `> 🛑 **Zápis __duties__ a __omluvenek__ je povolen pouze ve své složce, v <#${folder}>.**`, ephemeral: true });
 

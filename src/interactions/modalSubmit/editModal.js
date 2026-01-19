@@ -9,6 +9,9 @@ export default async function run(bot, i) {
     const gotDB = getDB(i.fields.getTextInputValue("id"));
     if (!bot.LEA.g[gotDB.guildName].includes(i.guild.id)) return i.reply({ content: `> 🛑 **<@${i.fields.getTextInputValue("id")}> je členem \`${gotDB.guildName}\`!** (Nemůžeš ho upravit)`, ephemeral: true });
 
+    let SAND = false;
+    if (i.guild.id === "1342063021811433514") SAND = true;
+
     let member;
     try { member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
     catch {
@@ -138,6 +141,43 @@ export default async function run(bot, i) {
             else if (content.rank === "Trooper I") oldRolesIDs = [/* MISSING IDs */];
             else if (content.rank === "Trooper Trainee") oldRolesIDs = [/* MISSING IDs */];
         }
+    } else if (i.guild.id === "1342063021811433514") { //SAND
+        content = JSON.parse(fs.readFileSync((path.resolve("./db/SAND") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
+        let folderExists = true;
+        try { if (!(await i.guild.channels.fetch(content.folder))) folderExists = false; }
+        catch { folderExists = false; }
+        if (!folderExists) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
+
+        if (newRank !== content.rank) {
+            if (newRank === "General") rolesIDs = ["1342063021991661576"], tagID = false;
+            else if (newRank === "Lieutenant General") rolesIDs = ["1342063021991661575"], tagID = false;
+            else if (newRank === "Major General") rolesIDs = ["1342063021991661574"], tagID = false;
+            else if (newRank === "Brigadier General") rolesIDs = ["1454204899528278138"], tagID = false;
+            else if (newRank === "Colonel") rolesIDs = ["1342063021991661571"], tagID = false;
+            else if (newRank === "Major") rolesIDs = ["1342063021991661569"], tagID = false;
+            else if (newRank === "Captain") rolesIDs = ["1342063021991661568"], tagID = false;
+            else if (newRank === "Sergeant Major") rolesIDs = ["1342063021912100934"], tagID = false;
+            else if (newRank === "Sergeant") rolesIDs = ["1342063021912100933"], tagID = false;
+            else if (newRank === "Corporal") rolesIDs = ["1342063021912100926"], tagID = false;
+            else if (newRank === "Private First Class") rolesIDs = ["1342063021912100925"], tagID = false;
+            else if (newRank === "Private") rolesIDs = ["1342063021857443899"], tagID = false;
+            else rolesIDs = false, tagID = false;
+
+            if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${newRank}\`)**`, ephemeral: true });
+
+            if (content.rank === "General") oldRolesIDs = ["1342063021991661576"], tagID = false;
+            else if (content.rank === "Lieutenant General") oldRolesIDs = ["1342063021991661575"], tagID = false;
+            else if (content.rank === "Major General") oldRolesIDs = ["1342063021991661574"], tagID = false;
+            else if (content.rank === "Brigadier General") oldRolesIDs = ["1454204899528278138"], tagID = false;
+            else if (content.rank === "Colonel") oldRolesIDs = ["1342063021991661571"], tagID = false;
+            else if (content.rank === "Major") oldRolesIDs = ["1342063021991661569"], tagID = false;
+            else if (content.rank === "Captain") oldRolesIDs = ["1342063021991661568"], tagID = false;
+            else if (content.rank === "Sergeant Major") oldRolesIDs = ["1342063021912100934"], tagID = false;
+            else if (content.rank === "Sergeant") oldRolesIDs = ["1342063021912100933"], tagID = false;
+            else if (content.rank === "Corporal") oldRolesIDs = ["1342063021912100926"], tagID = false;
+            else if (content.rank === "Private First Class") oldRolesIDs = ["1342063021912100925"], tagID = false;
+            else if (content.rank === "Private") oldRolesIDs = ["1342063021857443899"], tagID = false;
+        }
     }
 
     await i.deferReply({ ephemeral: !visible });
@@ -145,7 +185,7 @@ export default async function run(bot, i) {
     let changed = { name: false, badge: false, radio: false, rank: false },
         old = { name: content.name, badge: content.badge, radio: content.radio, rank: content.rank };
     if (i.fields.getTextInputValue("name") !== content.name) changed.name = true;
-    if (parseInt(i.fields.getTextInputValue("badge")) !== content.badge) changed.badge = true;
+    if (!SAND && parseInt(i.fields.getTextInputValue("badge")) !== content.badge) changed.badge = true;
     if (i.fields.getTextInputValue("call") !== content.radio) changed.radio = true;
     if (i.fields.getTextInputValue("rank") !== content.rank) changed.rank = true;
 
@@ -157,7 +197,7 @@ export default async function run(bot, i) {
                 + "\n" + (changed.name ? `> **Jméno:** \`${old.name}\` -> \`${i.fields.getTextInputValue("name")}\`` : `> **Jméno:** \`${content.name}\``)
                 + "\n" + (changed.rank ? `> **Hodnost:** \`${old.rank}\` -> \`${i.fields.getTextInputValue("rank")}\`` : `> **Hodnost:** \`${content.rank}\``)
                 + "\n" + (changed.radio ? `> **Volačka:** \`${old.radio}\` -> \`${i.fields.getTextInputValue("call")}\`` : `> **Volačka:** \`${content.radio}\``)
-                + "\n" + (changed.badge ? `> **Odznak:** \`${old.badge}\` -> \`${i.fields.getTextInputValue("badge")}\`` : `> **Odznak:** \`${content.badge}\``),
+                + (!SAND ? ("\n" + (changed.badge ? `> **Odznak:** \`${old.badge}\` -> \`${i.fields.getTextInputValue("badge")}\`` : `> **Odznak:** \`${content.badge}\``)) : ""),
             color: "#fcba03"
         }
     );
@@ -201,7 +241,7 @@ export default async function run(bot, i) {
                     `> **App:** <@${i.fields.getTextInputValue("id")}>`
                     + `\n> **Jméno:** \`${content.name}\``
                     + `\n> **Hodnost:** ${rolesIDs ? `<@&${rolesIDs[0]}>` : `\`${content.rank}\``}`
-                    + `\n> **Odznak:** \`${content.badge}\``
+                    + (!SAND ? `\n> **Odznak:** \`${content.badge}\`` : "")
                     + `\n> **Volačka:** \`${content.radio}\``
                     + "\n\n"
                     + `\n> **Hodin:** \`${Math.round((content.hours + Number.EPSILON) * 100) / 100}\``

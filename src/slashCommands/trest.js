@@ -104,6 +104,8 @@ export default async function run(bot, i) {
     } else if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true; //Leadership
         if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true; //Supervisor
+    } else if (bot.LEA.g.SAND.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1342063021991661572")) passed = true; //CO
     }
 
     const sub = i.options._subcommand;

@@ -13,20 +13,25 @@ export const context = new ContextMenuCommandBuilder()
 export default async function run(bot, i) {
     const user = i.targetUser;
 
-    let passed = false;
+    let passed = false, SAND = false;
     i.guild.fetch();
     const admin = i.member;
     if (admin.id === bot.LEA.o) passed = true; //PetyXbron / b1ngo
     if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1301163398540689494")) passed = true; //Government
         if (admin.roles.cache.has("1301163398557339686")) passed = true; //Leadership
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1391525312994738206")) passed = true; //Government
         if (admin.roles.cache.has("1391525298461347971")) passed = true; //Leadership
         if (admin.roles.cache.has("1391525331835420722")) passed = true; //FTO Commander
     } else if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true; //Leadership
+    } else if (bot.LEA.g.SAND.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1342063021991661572")) passed = true; //CO
     }
 
     if (!passed) return i.reply({ content: "> 🛑 **K tomuhle má přístup jen admin.**", ephemeral: true });
+    if (bot.LEA.g.SAND.includes(i.guild.id)) SAND = true;
 
     if (!(checkDB(user.id))) return i.reply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
 
@@ -72,7 +77,7 @@ export default async function run(bot, i) {
     const actionRow2 = new ActionRowBuilder().addComponents(badgeInput);
     const actionRow3 = new ActionRowBuilder().addComponents(rankInput);
 
-    modal.addComponents(actionRow0, actionRow1, actionRow2, actionRow3);
+    modal.addComponents(actionRow0, actionRow1, ...(!SAND ? [actionRow2] : []), actionRow3);
 
     i.showModal(modal);
 };

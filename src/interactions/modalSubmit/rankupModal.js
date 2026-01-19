@@ -7,6 +7,9 @@ import { dcLog, simpleLog } from "../../functions/logSystem.js";
 export default async function run(bot, i) {
     if (!(checkDB(i.fields.getTextInputValue("id"), i))) return i.reply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **není v DB.**", ephemeral: true });
 
+    let SAND = false;
+    if (i.guild.id === "1342063021811433514") SAND = true;
+
     let member;
     try { member = await i.guild.members.fetch(i.fields.getTextInputValue("id")); }
     catch {
@@ -133,6 +136,41 @@ export default async function run(bot, i) {
         else if (content.rank === "Trooper II") oldRolesIDs = [/* MISSING IDs */], oldGrade = 2;
         else if (content.rank === "Trooper I") oldRolesIDs = [/* MISSING IDs */], oldGrade = 1;
         else if (content.rank === "Trooper Trainee") oldRolesIDs = [/* MISSING IDs */], oldGrade = 0;
+    } else if (i.guild.id === "1342063021811433514") { //SAND
+        if (newRank === "General") rolesIDs = ["1342063021991661576"], tagID = false, newGrade = 12;
+        else if (newRank === "Lieutenant General") rolesIDs = ["1342063021991661575"], tagID = false, newGrade = 11;
+        else if (newRank === "Major General") rolesIDs = ["1342063021991661574"], tagID = false, newGrade = 10;
+        else if (newRank === "Brigadier General") rolesIDs = ["1454204899528278138"], tagID = false, newGrade = 9;
+        else if (newRank === "Colonel") rolesIDs = ["1342063021991661571"], tagID = false, newGrade = 8;
+        else if (newRank === "Major") rolesIDs = ["1342063021991661569"], tagID = false, newGrade = 7;
+        else if (newRank === "Captain") rolesIDs = ["1342063021991661568"], tagID = false, newGrade = 6;
+        else if (newRank === "Sergeant Major") rolesIDs = ["1342063021912100934"], tagID = false, newGrade = 5;
+        else if (newRank === "Sergeant") rolesIDs = ["1342063021912100933"], tagID = false, newGrade = 4;
+        else if (newRank === "Corporal") rolesIDs = ["1342063021912100926"], tagID = false, newGrade = 3;
+        else if (newRank === "Private First Class") rolesIDs = ["1342063021912100925"], tagID = false, newGrade = 2;
+        else if (newRank === "Private") rolesIDs = ["1342063021857443899"], tagID = false, newGrade = 1;
+        else rolesIDs = false, tagID = false;
+
+        if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${newRank}\`)**`, ephemeral: true });
+
+        content = JSON.parse(fs.readFileSync((path.resolve("./db/SAND") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
+
+        let folderCh = false;
+        try { folderCh = await i.guild.channels.fetch(content.folder); } catch { }
+        if (!folderCh) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
+
+        if (content.rank === "General") oldRolesIDs = ["1342063021991661576"], tagID = false, oldGrade = 12;
+        else if (content.rank === "Lieutenant General") oldRolesIDs = ["1342063021991661575"], tagID = false, oldGrade = 11;
+        else if (content.rank === "Major General") oldRolesIDs = ["1342063021991661574"], tagID = false, oldGrade = 10;
+        else if (content.rank === "Brigadier General") oldRolesIDs = ["1454204899528278138"], tagID = false, oldGrade = 9;
+        else if (content.rank === "Colonel") oldRolesIDs = ["1342063021991661571"], tagID = false, oldGrade = 8;
+        else if (content.rank === "Major") oldRolesIDs = ["1342063021991661569"], tagID = false, oldGrade = 7;
+        else if (content.rank === "Captain") oldRolesIDs = ["1342063021991661568"], tagID = false, oldGrade = 6;
+        else if (content.rank === "Sergeant Major") oldRolesIDs = ["1342063021912100934"], tagID = false, oldGrade = 5;
+        else if (content.rank === "Sergeant") oldRolesIDs = ["1342063021912100933"], tagID = false, oldGrade = 4;
+        else if (content.rank === "Corporal") oldRolesIDs = ["1342063021912100926"], tagID = false, oldGrade = 3;
+        else if (content.rank === "Private First Class") oldRolesIDs = ["1342063021912100925"], tagID = false, oldGrade = 2;
+        else if (content.rank === "Private") oldRolesIDs = ["1342063021857443899"], tagID = false, oldGrade = 1;
     }
 
     await i.deferReply({ ephemeral: !visible });
@@ -149,7 +187,7 @@ export default async function run(bot, i) {
         "hours": content.hours
     };
     content.rankups.push(rankup);
-    content.badge = parseInt(i.fields.getTextInputValue("badge"));
+    if (!SAND) content.badge = parseInt(i.fields.getTextInputValue("badge"));
     content.radio = i.fields.getTextInputValue("call");
     content.rank = i.fields.getTextInputValue("rank");
 
@@ -157,6 +195,7 @@ export default async function run(bot, i) {
     if (bot.LEA.g.LSPD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSPD") + "/" + i.fields.getTextInputValue("id") + ".json");
     else if (bot.LEA.g.LSSD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSSD") + "/" + i.fields.getTextInputValue("id") + ".json");
     else if (bot.LEA.g.SAHP.includes(i.guild.id)) workersPath = (path.resolve("./db/SAHP") + "/" + i.fields.getTextInputValue("id") + ".json");
+    else if (bot.LEA.g.SAND.includes(i.guild.id)) workersPath = (path.resolve("./db/SAND") + "/" + i.fields.getTextInputValue("id") + ".json");
 
     fs.writeFileSync(
         workersPath,
@@ -193,6 +232,7 @@ export default async function run(bot, i) {
     if (
         server.name === "LSSD" && newGrade >= 6 && oldGrade < 6
         || server.name === "LSPD" && newGrade >= 10 && oldGrade < 10
+        || server.name === "SAND" && newGrade >= 6 && oldGrade < 6
     ) {
         try {
             await member.send({
@@ -223,7 +263,7 @@ export default async function run(bot, i) {
                     `> **App:** <@${i.fields.getTextInputValue("id")}>`
                     + `\n> **Jméno:** \`${content.name}\``
                     + `\n> **Hodnost:** ${rolesIDs ? `<@&${rolesIDs[0]}>` : `\`${content.rank}\``}`
-                    + `\n> **Odznak:** \`${content.badge}\``
+                    + (!SAND ? `\n> **Odznak:** \`${content.badge}\`` : "")
                     + `\n> **Volačka:** \`${content.radio}\``
                     + "\n\n"
                     + `\n> **Hodin:** \`${Math.round((content.hours + Number.EPSILON) * 100) / 100}\``
@@ -269,7 +309,7 @@ export default async function run(bot, i) {
                         `> **Jméno:** \`${content.name}\`\n`
                         + `> **Hodnost:** \`${i.fields.getTextInputValue("rank")}\`\n`
                         + `> **Volačka:** \`${i.fields.getTextInputValue("call")}\`\n`
-                        + `> **Č. Odznaku:** \`${i.fields.getTextInputValue("badge")}\``
+                        + (!SAND ? `\n> *Č. Odznaku:** \`${i.fields.getTextInputValue("badge")}\`` : "")
                 }
             ])
             .setThumbnail(getServer(i.guild.id).footer.iconURL)
@@ -305,7 +345,7 @@ export default async function run(bot, i) {
                 + `\n> **Jméno:** \`${content.name}\``
                 + `\n> **Hodnost:** \`${oldContent.rank}\` -> \`${content.rank}\``
                 + `\n> **Volačka:** \`${oldContent.radio}\` -> \`${content.radio}\``
-                + `\n> **Odznak:** \`${oldContent.badge}\` -> \`${content.badge}\``,
+                + (!SAND ? `\n> *Odznak:** \`${oldContent.badge}\` -> \`${content.badge}\`` : ""),
             color: newGrade >= oldGrade ? "#0033ff" : "#ff9500"
         }
     );

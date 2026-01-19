@@ -157,6 +157,13 @@ body,
     box-shadow: 0 4px 20px rgba(41, 74, 115, 0.6);
 }
 
+.SAND a:hover {
+    border: 2px solid #253818;
+    background-color: #253818;
+    color: white;
+    box-shadow: 0 4px 20px #25381899;
+}
+
 a.router-link-active {
     color: var(--bgColor);
     background-color: var(--textColor);
@@ -182,6 +189,13 @@ a.router-link-active {
     background-color: #294a73;
     color: white;
     box-shadow: 0 4px 20px rgba(41, 74, 115, 0.6);
+}
+
+.SAND a.router-link-active {
+    border: 2px solid #253818;
+    background-color: #253818;
+    color: white;
+    box-shadow: 0 4px 20px #25381899;
 }
 
 .rightMenu .loginButton {

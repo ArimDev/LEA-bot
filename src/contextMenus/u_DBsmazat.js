@@ -24,6 +24,8 @@ export default async function run(bot, i) {
         if (admin.roles.cache.has("1391525331835420722")) passed = true; //FTO Commander
     } else if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true; //Leadership
+    } else if (bot.LEA.g.SAND.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1342063021991661572")) passed = true; //CO
     }
 
     if (!passed) return i.reply({ content: "> 🛑 **K tomuhle má přístup jen admin.**", ephemeral: true });
@@ -167,7 +169,7 @@ export default async function run(bot, i) {
                 .setColor(getServer(guild.id).color)
                 .setFooter(getServer(guild.id).footer);
 
-            await submit.editReply({ content: "", embeds: [deleteEmbed], files: [file], components: [], ephemeral: true });
+            await submit.editReply({ content: "", embeds: [deleteEmbed], components: [], ephemeral: true });
 
             if (!member) submit.followUp({
                 content: "*Role a přezdívka nebyly vymazány protože officer již není na tomhle serveru.*",
@@ -191,7 +193,6 @@ export default async function run(bot, i) {
                         + `\n> **Odznak:** \`${worker.badge}\``
                         + `\n> **Důvod:**\`\`\`${reason}\`\`\``,
                     color: "#ff0000",
-                    file: file
                 }
             );
 

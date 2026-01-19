@@ -36,8 +36,6 @@ bot.LEA = {
         "411436203330502658", //b1ngo
         "607915400604286997", //samus
         "846451292388851722", //aldix_eu
-        "343386988000444417", //cenovka
-        "881891977606619156", //kubikxde
         "918542346453385247", //m4art1x
     ],
     c: {
@@ -46,6 +44,7 @@ bot.LEA = {
         SAHP: "#457cc0",
         LSSD: "#bd8131",
         LSCSO: "#b68f68",
+        SAND: "#253818",
         duty: "#5245c0",
         apology: "#c05245",
         summary: "#25be5c",
@@ -56,19 +55,22 @@ bot.LEA = {
         LSPD: "<:LSPD:1178108366514565181>",
         SAHP: "<:SAHP:1174876044570931210>",
         LSSD: "<:LSSD:1178106303198011412>",
-        LSCSO: "<:LSCSO:1266078681479254176>"
+        LSCSO: "<:LSCSO:1266078681479254176>",
+        SAND: "<:SAND:1460373510617829553>",
     },
     g: {
         LSPD: ["1301163398515396668"],
         LSSD: ["1385604665252642897"],
-        SAHP: []
+        SAHP: [],
+        SAND: ["1342063021811433514"],
     },
     i: {
         LEAbot: "https://i.imgur.com/EnZErOi.png",
         LSPD: "https://i.imgur.com/gfL0fGf.png",
         SAHP: "https://i.imgur.com/xgFoKuX.png",
         LSSD: "https://i.imgur.com/X3cH2iu.png",
-        LSCSO: "https://i.imgur.com/Hex0MQF.png"
+        LSCSO: "https://i.imgur.com/Hex0MQF.png",
+        SAND: "https://i.imgur.com/OvRkxFN.png",
     },
     o: "411436203330502658", //b1ngo
     r: {
@@ -90,6 +92,12 @@ bot.LEA = {
             warn: "",
             suspend: "",
         },
+        SAND: {
+            strike1: "1460374013477126375",
+            strike2: "1460374066580951245",
+            warn: "1460373937358770218",
+            suspend: "1460373987266658437",
+        },
     },
     ch: {
         LSPD: {
@@ -103,6 +111,10 @@ bot.LEA = {
         SAHP: {
             warns: "",
             suspends: "",
+        },
+        SAND: {
+            warns: "1343191988421263410",
+            suspends: "1343191988421263410",
         },
     },
 };

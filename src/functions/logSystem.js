@@ -65,6 +65,19 @@ export async function dcLog(bot, guildID, member, options = {}) {
             .setColor(color)
             .setFooter({ text: `SAHP | LEA-Bot v${bot.version} 🏳️`, iconURL: bot.LEA.i.SAHP });
         await channel.send({ embeds: [logEmbed], files: files });
+    } else if (gotServer.id === 4) {
+        let files = [];
+        if (!!file) files = [file];
+
+        guild = await bot.guilds.fetch("1342063021811433514");
+        channel = await guild.channels.fetch("1460387895209758741");
+        const logEmbed = new EmbedBuilder()
+            .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
+            .setTitle(title)
+            .setDescription(description)
+            .setColor(color)
+            .setFooter({ text: `SAND | LEA-Bot v${bot.version} 🏳️`, iconURL: bot.LEA.i.SAND });
+        await channel.send({ embeds: [logEmbed], files: files });
     }
 }
 
@@ -81,6 +94,9 @@ export async function simpleLog(bot, guildID, options) {
     } else if (gotServer.id === 3) {
         guild = await bot.guilds.fetch(/* MISSING ID */);
         channel = await guild.channels.fetch(/* MISSING ID */);
+    } else if (gotServer.id === 4) {
+        guild = await bot.guilds.fetch("1342063021811433514");
+        channel = await guild.channels.fetch("1342639680809598976");
     }
 
     const logEmbed = new EmbedBuilder()

@@ -30,8 +30,8 @@
 				<li class="LSSD">
 					<RouterLink to="/lssd">LSSD</RouterLink>
 				</li>
-				<li class="SAHP">
-					<span class="disabled">SAHP</span>
+				<li class="SAND">
+					<RouterLink to="/sand">SAND</RouterLink>
 				</li>
 				<div class="loginSide">
 					<Login @alert="openPopBox" @popup="popup" />

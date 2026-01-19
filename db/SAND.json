@@ -1,0 +1,74 @@
+[
+    {
+        "rank": "General",
+        "slots": 1,
+        "firstCallsign": "Alpha-1",
+        "title": false
+    },
+    {
+        "rank": "Lieutenant General",
+        "slots": 1,
+        "firstCallsign": "Alpha-2",
+        "title": false
+    },
+    {
+        "rank": "Major General",
+        "slots": 1,
+        "firstCallsign": "Alpha-3",
+        "title": false
+    },
+    {
+        "rank": "Brigadier General",
+        "slots": 1,
+        "firstCallsign": "Alpha-4",
+        "title": false
+    },
+    {
+        "rank": "Colonel",
+        "slots": 2,
+        "firstCallsign": "Fox-1",
+        "title": false
+    },
+    {
+        "rank": "Major",
+        "slots": 2,
+        "firstCallsign": "Frost-1",
+        "title": " "
+    },
+    {
+        "rank": "Captain",
+        "slots": 3,
+        "firstCallsign": "Gamma-1",
+        "title": false
+    },
+    {
+        "rank": "Sergeant Major",
+        "slots": 3,
+        "firstCallsign": "Shadow-1",
+        "title": "SERGEANTS"
+    },
+    {
+        "rank": "Sergeant",
+        "slots": 6,
+        "firstCallsign": "Spartan-1",
+        "title": false
+    },
+    {
+        "rank": "Corporal",
+        "slots": 10,
+        "firstCallsign": "Cold-1",
+        "title": "Corporal"
+    },
+    {
+        "rank": "Private First Class",
+        "slots": 20,
+        "firstCallsign": "Delta-1",
+        "title": "Private First Class"
+    },
+    {
+        "rank": "Private",
+        "slots": 20,
+        "firstCallsign": "Beta-1",
+        "title": "Private"
+    }
+]

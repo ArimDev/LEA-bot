@@ -109,7 +109,7 @@ export default async function api(bot, app) {
         res.status(200).json({ code: me.status, passed: true, user: response });
     });
 
-    app.get(apiPath + "/db/getTable/:dep(LSSD|LSPD|SAHP)", async (req, res) => {
+    app.get(apiPath + "/db/getTable/:dep(LSSD|LSPD|SAHP|SAND)", async (req, res) => {
         const origin = req.headers.host;
         if (!origin.includes(secret().parsed.domain)) {
             return res.status(403).json({});
@@ -224,6 +224,22 @@ export default async function api(bot, app) {
                     && !worker.roles.omluvenka
                     && (Math.round((worker.hours + Number.EPSILON) * 100) / 100) === 0
                 ) hours0 = true;
+            } else if (dep === "SAHP" && worker.m) {
+                worker.roles.warn = worker.m.roles.cache.has("1434593533272002612");
+                worker.roles.suspend = worker.m.roles.cache.has("1434593566960910436");
+                if (worker.m.roles.cache.has("1342909750081491004")) worker.div.push("101");
+                if (worker.m.roles.cache.has("1342909854288973980")) worker.div.push("MP");
+                if (worker.m.roles.cache.has("1349384070936662117")) worker.div.push("DF");
+                if (worker.m.roles.cache.has("1344293277637283910")) worker.div.push("SU");
+                if (worker.m.roles.cache.has("1342063021811433522")) worker.div.push("MTI");
+
+                //ACCESS TO THE TABLES - Discord role
+                if (worker.m.roles.cache.has("1342063021991661572")) leadership = true;
+                if (
+                    !leadership
+                    && !worker.roles.omluvenka
+                    && (Math.round((worker.hours + Number.EPSILON) * 100) / 100) === 0
+                ) hours0 = true;
             }
 
             if (worker.roles.suspend || hours0) worker.header.red = true;
@@ -248,7 +264,7 @@ export default async function api(bot, app) {
         res.status(200).json({ passed: true, guildID: verRep.guildID, user: verRep.user, member: verRep.member, workers: final });
     });
 
-    app.get(apiPath + "/login/verifyMe/:dep(LSSD|LSPD|SAHP)", async (req, res) => {
+    app.get(apiPath + "/login/verifyMe/:dep(LSSD|LSPD|SAHP|SAND)", async (req, res) => {
         const origin = req.headers.host;
         if (!origin.includes(secret().parsed.domain)) {
             return res.status(403).json({});
@@ -286,11 +302,24 @@ export default async function api(bot, app) {
             } else if (dep === "SAHP") {
                 if (!index || index === 1) return "LSPD";
                 else if (index === 2) return "LSSD";
+            } else if (dep === "SAND") {
+                if (!index || index === 1) return "LSPD";
+                else if (index === 2) return "LSSD";
             }
         }
 
-        const roles = { LSSD: "1391525298461347971", LSPD: "1301163398557339686", SAHP: "xxx" /* MISSING ID */ };
-        const govRoles = { LSSD: "1391525312994738206", LSPD: "1301163398540689494", SAHP: "xxx" /* MISSING ID */ };
+        const roles = { 
+            LSSD: "1391525298461347971",
+            LSPD: "1301163398557339686",
+            SAHP: "xxx" /* MISSING ID */,
+            SAND: "1342063021991661572",
+        };
+        const govRoles = { 
+            LSSD: "1391525312994738206",
+            LSPD: "1301163398540689494",
+            SAHP: "xxx" /* MISSING ID */,
+            SAND: "1342063021991661572",
+        };
 
         const first = await fetch(`https://discord.com/api/users/@me/guilds/${bot.LEA.g[dep][0]}/member`, {
             headers: { authorization: authString }

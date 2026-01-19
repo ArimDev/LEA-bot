@@ -4,12 +4,14 @@ import viewsHome from "../views/Home.vue";
 import viewsLSPD from "../views/LSPD.vue";
 import viewsLSSD from "../views/LSSD.vue";
 import viewsSAHP from "../views/SAHP.vue";
+import viewsSAND from "../views/SAND.vue";
 import viewsBlacklist from "../views/Blacklist.vue";
 import views404 from "../views/404.vue";
 
 import badgeLSPD from "../assets/logo/LSPD.png";
 import badgeLSSD from "../assets/logo/LSSD.png";
 import badgeSAHP from "../assets/logo/SAHP.png";
+import badgeSAND from "../assets/logo/SAND.png";
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,6 +32,11 @@ const router = createRouter({
 		{
 			path: "/sahp", name: "SAHP", component: viewsSAHP, meta: {
 				title: "SAHP", image: badgeSAHP, color: "#294a73"
+			},
+		},
+		{
+			path: "/sand", name: "SAND", component: viewsSAND, meta: {
+				title: "SAND", image: badgeSAND, color: "#294a73"
 			},
 		},
 		{

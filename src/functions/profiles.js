@@ -17,6 +17,8 @@ export async function getProfile(bot, id) {
     if (!member) return false;
 
     const worker = db.data;
+    let SAND = false;
+    if (bot.LEA.g.SAND.includes(i.guild.id)) SAND = true;
 
     let profileEmbed = new EmbedBuilder()
         .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
@@ -24,7 +26,7 @@ export async function getProfile(bot, id) {
             `> **App:** <@${id}>\n`
             + `> **Volačka:** \`${worker.radio}\`\n`
             + `> **Hodnost:** \`${worker.rank}\`\n`
-            + `> **Odznak:** \`${worker.badge}\`\n`
+            + (!SAND ? `> **Odznak:** \`${worker.badge}\`\n` : "")
             + (worker.folder ? `> **Složka:** <#${worker.folder}>\n` : "> **Složka:** `N/A`\n")
             + `> **Počet hodin:** \`${worker.hours}\``
             // + (rep.p === 0 && rep.n === 0 ? "" : `> **Reputace:** \`${rep.p !== 0 ? `+${rep.p}` : ``} ${rep.n !== 0 ? `-${rep.n}` : ``}\``)
@@ -44,7 +46,8 @@ export async function findWorker(type, input) {
 
     workers = fs.readdirSync(path.resolve("./db/LSPD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json")
         .concat(fs.readdirSync(path.resolve("./db/LSSD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json"))
-        .concat(fs.readdirSync(path.resolve("./db/SAHP")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json"));
+        .concat(fs.readdirSync(path.resolve("./db/SAHP")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json"))
+        .concat(fs.readdirSync(path.resolve("./db/SAND")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json"));
 
     for (const log of workers) {
         const gotDB = getDB(log.split(".")[0]);

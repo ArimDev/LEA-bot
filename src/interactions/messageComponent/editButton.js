@@ -19,6 +19,8 @@ export default async function run(bot, i) {
         if (admin.roles.cache.has("1391525331835420722")) passed = true; //FTO Commander
     } else if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true; //Leadership
+    } else if (bot.LEA.g.SAND.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1342063021991661572")) passed = true; //CO
     }
 
     if (!passed) return i.reply({ content: "> 🛑 **Tenhle zápis nemáš právo upravovat.**", ephemeral: true });
@@ -159,6 +161,7 @@ export default async function run(bot, i) {
                 if (bot.LEA.g.LSPD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSPD") + "/" + authorID + ".json");
                 else if (bot.LEA.g.LSSD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSSD") + "/" + authorID + ".json");
                 else if (bot.LEA.g.SAHP.includes(i.guild.id)) workersPath = (path.resolve("./db/SAHP") + "/" + authorID + ".json");
+                else if (bot.LEA.g.SAND.includes(i.guild.id)) workersPath = (path.resolve("./db/SAND") + "/" + authorID + ".json");
 
                 fs.writeFileSync(
                     workersPath,

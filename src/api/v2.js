@@ -37,7 +37,7 @@ export default async function api(bot, app) {
     });
 
     //DATABASE
-    app.get(apiPath + "/db/:dep(LSSD|LSPD|SAHP)/positions", async (req, res) => {
+    app.get(apiPath + "/db/:dep(LSSD|LSPD|SAHP|SAND)/positions", async (req, res) => {
         const dep = req.params.dep || "LSSD";
         try {
             const pos = await fs.readFileSync((path.resolve("./db/" + dep) + ".json"), "utf-8");

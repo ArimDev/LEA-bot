@@ -28,7 +28,14 @@ export default async function run(bot, i) {
             }
         }
 
-        onNotSorted.sort((a, b) => a.data.badge - b.data.badge);
+        onNotSorted.sort((a, b) => {
+            const aBadge = a.data.badge;
+            const bBadge = b.data.badge;
+            if (aBadge == null && bBadge == null) return 1;
+            if (aBadge == null) return 1;
+            if (bBadge == null) return -1;
+            return aBadge - bBadge;
+        });
         for (const o of onNotSorted) {
             onSorted.push(`<@${o.m.id}>`);
         };

@@ -9,7 +9,9 @@ export function checkDB(id) {
         ||
         fs.existsSync((path.resolve("./db/LSPD") + "/" + id + ".json"))
         ||
-        fs.existsSync((path.resolve("./db/SAHP") + "/" + id + ".json"));
+        fs.existsSync((path.resolve("./db/SAHP") + "/" + id + ".json"))
+        ||
+        fs.existsSync((path.resolve("./db/SAND") + "/" + id + ".json"));
 
     return exists;
 }
@@ -37,6 +39,13 @@ export function getDB(id) {
         r.guildName = "SAHP";
         r.guildEmoji = bot.LEA.e.SAHP;
         r.guildID = bot.LEA.g.SAHP[0];
+    } else if (fs.existsSync((path.resolve("./db/SAND") + "/" + id + ".json"))) {
+        r.exists = true;
+        r.data = JSON.parse(fs.readFileSync((path.resolve("./db/SAND") + "/" + id + ".json"), "utf-8"));
+        r.guild = 4;
+        r.guildName = "SAND";
+        r.guildEmoji = bot.LEA.e.SAND;
+        r.guildID = bot.LEA.g.SAND[0];
     }
 
     return r;
@@ -65,6 +74,11 @@ export function getServer(guildID) {
         r.footer = { text: `SAHP | LEA-Bot v${bot.version} 🏳️`, iconURL: bot.LEA.i.SAHP };
         r.color = bot.LEA.c.SAHP;
         r.id = 3;
+    } else if (bot.LEA.g.SAND.includes(guildID)) {
+        r.name = "SAND";
+        r.footer = { text: `SAND | LEA-Bot v${bot.version} 🏳️`, iconURL: bot.LEA.i.SAND };
+        r.color = bot.LEA.c.SAND;
+        r.id = 4;
     } else {
         r.name = "XXXX";
         r.footer = { text: `LEA-Bot v${bot.version} 🏳️`, iconURL: bot.LEA.i.LEAbot };

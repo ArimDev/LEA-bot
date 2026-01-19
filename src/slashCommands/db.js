@@ -34,7 +34,7 @@ export default async function run(bot, i) {
     const user = i.options.getUser("user");
     const visible = i.options.getBoolean("visible") || false;
 
-    let passed = false;
+    let passed = false, SAND = false;
     i.guild.fetch();
     const admin = i.member;
     if (admin.id === bot.LEA.o) passed = true; //PetyXbron / b1ngo
@@ -47,9 +47,12 @@ export default async function run(bot, i) {
         if (admin.roles.cache.has("1391525331835420722")) passed = true; //FTO Commander
     } else if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
         if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true; //Leadership
+    } else if (bot.LEA.g.SAND.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1342063021991661572")) passed = true; //CO
     }
 
     if (!passed) return i.reply({ content: "> 🛑 **K tomuhle má přístup jen admin.**", ephemeral: true });
+    if (bot.LEA.g.SAND.includes(i.guild.id)) SAND = true;
 
     if (choice === "p") {
         const modal = new ModalBuilder()
@@ -99,7 +102,7 @@ export default async function run(bot, i) {
         const actionRow3 = new ActionRowBuilder().addComponents(badgeInput);
         const actionRow4 = new ActionRowBuilder().addComponents(rankInput);
 
-        modal.addComponents(actionRow0, actionRow1, actionRow2, actionRow3, actionRow4);
+        modal.addComponents(actionRow0, actionRow1, actionRow2, ...(!SAND ? [actionRow3] : []), actionRow4);
 
         i.showModal(modal);
     } else if (choice === "r") {
@@ -147,7 +150,7 @@ export default async function run(bot, i) {
         const actionRow2 = new ActionRowBuilder().addComponents(badgeInput);
         const actionRow3 = new ActionRowBuilder().addComponents(rankInput);
 
-        modal.addComponents(actionRow0, actionRow1, actionRow2, actionRow3);
+        modal.addComponents(actionRow0, actionRow1, ...(!SAND ? [actionRow2] : []), actionRow3);
 
         i.showModal(modal);
     } else if (choice === "u") {
@@ -206,7 +209,7 @@ export default async function run(bot, i) {
         const actionRow3 = new ActionRowBuilder().addComponents(badgeInput);
         const actionRow4 = new ActionRowBuilder().addComponents(rankInput);
 
-        modal.addComponents(actionRow0, actionRow1, actionRow2, actionRow3, actionRow4);
+        modal.addComponents(actionRow0, actionRow1, actionRow2, ...(!SAND ? [actionRow3] : []), actionRow4);
 
         i.showModal(modal);
     } else if (choice === "s") {
@@ -345,7 +348,7 @@ export default async function run(bot, i) {
                     .setColor(getServer(guild.id).color)
                     .setFooter(getServer(guild.id).footer);
 
-                await submit.editReply({ content: "", embeds: [deleteEmbed], files: [file], components: [], ephemeral: !visible });
+                await submit.editReply({ content: "", embeds: [deleteEmbed], components: [], ephemeral: !visible });
 
                 if (!member) submit.followUp({
                     content: "*Role a přezdívka nebyly vymazány protože officer již není na tomhle serveru.*",
@@ -369,7 +372,6 @@ export default async function run(bot, i) {
                             + `\n> **Odznak:** \`${worker.badge}\``
                             + `\n> **Důvod:**\`\`\`${reason}\`\`\``,
                         color: "#ff0000",
-                        file: file
                     }
                 );
 
@@ -384,6 +386,6 @@ export default async function run(bot, i) {
 
                 return;
             })
-            .catch(() => {});
+            .catch(() => { });
     }
 };
