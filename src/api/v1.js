@@ -224,16 +224,18 @@ export default async function api(bot, app) {
                     && !worker.roles.omluvenka
                     && (Math.round((worker.hours + Number.EPSILON) * 100) / 100) === 0
                 ) hours0 = true;
-            } else if (dep === "SAHP" && worker.m) {
-                worker.roles.warn = worker.m.roles.cache.has("1434593533272002612");
-                worker.roles.suspend = worker.m.roles.cache.has("1434593566960910436");
-                if (worker.m.roles.cache.has("1342909750081491004")) worker.div.push("101");
-                if (worker.m.roles.cache.has("1342909854288973980")) worker.div.push("MP");
-                if (worker.m.roles.cache.has("1349384070936662117")) worker.div.push("DF");
+            } else if (dep === "SAND" && worker.m) {
+                worker.roles.warn = worker.m.roles.cache.has("1460373937358770218");
+                worker.roles.suspend = worker.m.roles.cache.has("1460373987266658437");
+                if (worker.m.roles.cache.has("1342063021811433522")) worker.div.push("MT");
+                else if (worker.m.roles.cache.has("1346934374079139942")) worker.div.push("MT");
                 if (worker.m.roles.cache.has("1344293277637283910")) worker.div.push("SU");
-                if (worker.m.roles.cache.has("1342063021811433522")) worker.div.push("MTI");
+                else if (worker.m.roles.cache.has("1344293643170615296")) worker.div.push("SU");
+                if (worker.m.roles.cache.has("1349384070936662117")) worker.div.push("DF");
+                if (worker.m.roles.cache.has("1342909854288973980")) worker.div.push("MP");
+                if (worker.m.roles.cache.has("1342909750081491004")) worker.div.push("101");
 
-                //ACCESS TO THE TABLES - Discord role
+                //ACCESS TO THE TABLES - Discord role "CO"
                 if (worker.m.roles.cache.has("1342063021991661572")) leadership = true;
                 if (
                     !leadership
