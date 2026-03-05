@@ -137,10 +137,11 @@ export default async function run(bot, i) {
         else if (content.rank === "Trooper I") oldRolesIDs = [/* MISSING IDs */], oldGrade = 1;
         else if (content.rank === "Trooper Trainee") oldRolesIDs = [/* MISSING IDs */], oldGrade = 0;
     } else if (i.guild.id === "1342063021811433514") { //SAND
-        if (newRank === "General") rolesIDs = ["1342063021991661576"], tagID = false, newGrade = 12;
-        else if (newRank === "Lieutenant General") rolesIDs = ["1342063021991661575"], tagID = false, newGrade = 11;
-        else if (newRank === "Major General") rolesIDs = ["1342063021991661574"], tagID = false, newGrade = 10;
-        else if (newRank === "Brigadier General") rolesIDs = ["1454204899528278138"], tagID = false, newGrade = 9;
+        if (newRank === "General") rolesIDs = ["1342063021991661576"], tagID = false, newGrade = 13;
+        else if (newRank === "Lieutenant General") rolesIDs = ["1342063021991661575"], tagID = false, newGrade = 12;
+        else if (newRank === "Major General") rolesIDs = ["1342063021991661574"], tagID = false, newGrade = 11;
+        else if (newRank === "Brigadier General") rolesIDs = ["1454204899528278138"], tagID = false, newGrade = 10;
+        else if (newRank === "Lieutenant Colonel") rolesIDs = ["1342063021991661575"], tagID = false, newGrade = 9;
         else if (newRank === "Colonel") rolesIDs = ["1342063021991661571"], tagID = false, newGrade = 8;
         else if (newRank === "Major") rolesIDs = ["1342063021991661569"], tagID = false, newGrade = 7;
         else if (newRank === "Captain") rolesIDs = ["1342063021991661568"], tagID = false, newGrade = 6;
@@ -159,10 +160,11 @@ export default async function run(bot, i) {
         try { folderCh = await i.guild.channels.fetch(content.folder); } catch { }
         if (!folderCh) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
 
-        if (content.rank === "General") oldRolesIDs = ["1342063021991661576"], tagID = false, oldGrade = 12;
-        else if (content.rank === "Lieutenant General") oldRolesIDs = ["1342063021991661575"], tagID = false, oldGrade = 11;
-        else if (content.rank === "Major General") oldRolesIDs = ["1342063021991661574"], tagID = false, oldGrade = 10;
-        else if (content.rank === "Brigadier General") oldRolesIDs = ["1454204899528278138"], tagID = false, oldGrade = 9;
+        if (content.rank === "General") oldRolesIDs = ["1342063021991661576"], tagID = false, oldGrade = 13;
+        else if (content.rank === "Lieutenant General") oldRolesIDs = ["1342063021991661575"], tagID = false, oldGrade = 12;
+        else if (content.rank === "Major General") oldRolesIDs = ["1342063021991661574"], tagID = false, oldGrade = 11;
+        else if (content.rank === "Brigadier General") oldRolesIDs = ["1454204899528278138"], tagID = false, oldGrade = 10;
+        else if (content.rank === "Lieutenant Colonel") oldRolesIDs = ["1342063021991661575"], tagID = false, oldGrade = 9;
         else if (content.rank === "Colonel") oldRolesIDs = ["1342063021991661571"], tagID = false, oldGrade = 8;
         else if (content.rank === "Major") oldRolesIDs = ["1342063021991661569"], tagID = false, oldGrade = 7;
         else if (content.rank === "Captain") oldRolesIDs = ["1342063021991661568"], tagID = false, oldGrade = 6;

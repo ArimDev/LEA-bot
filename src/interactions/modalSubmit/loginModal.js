@@ -302,6 +302,7 @@ export default async function run(bot, i) {
         else if (rank === "Lieutenant General") rolesIDs = ["1342063021991661575"], tagID = false;
         else if (rank === "Major General") rolesIDs = ["1342063021991661574"], tagID = false;
         else if (rank === "Brigadier General") rolesIDs = ["1454204899528278138"], tagID = false;
+        else if (rank === "Lieutenant Colonel") rolesIDs = ["1342063021991661575"], tagID = false;
         else if (rank === "Colonel") rolesIDs = ["1342063021991661571"], tagID = false;
         else if (rank === "Major") rolesIDs = ["1342063021991661569"], tagID = false;
         else if (rank === "Captain") rolesIDs = ["1342063021991661568"], tagID = false;

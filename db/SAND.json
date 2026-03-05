@@ -25,50 +25,56 @@
     },
     {
         "rank": "Colonel",
-        "slots": 2,
-        "firstCallsign": "Fox-1",
+        "slots": 1,
+        "firstCallsign": "Bravo-1",
+        "title": "CO"
+    },
+    {
+        "rank": "Lieutenant Colonel",
+        "slots": 1,
+        "firstCallsign": "Charlie-1",
         "title": false
     },
     {
         "rank": "Major",
-        "slots": 2,
-        "firstCallsign": "Frost-1",
-        "title": " "
+        "slots": 1,
+        "firstCallsign": "Delta-1",
+        "title": false
     },
     {
         "rank": "Captain",
         "slots": 3,
-        "firstCallsign": "Gamma-1",
+        "firstCallsign": "Echo-1",
         "title": false
     },
     {
         "rank": "Sergeant Major",
-        "slots": 3,
-        "firstCallsign": "Shadow-1",
-        "title": "SERGEANTS"
+        "slots": 2,
+        "firstCallsign": "Foxtrot-1",
+        "title": "NCO"
     },
     {
         "rank": "Sergeant",
-        "slots": 6,
-        "firstCallsign": "Spartan-1",
-        "title": false
+        "slots": 12,
+        "firstCallsign": "Golf-1",
+        "title": null
     },
     {
         "rank": "Corporal",
-        "slots": 10,
-        "firstCallsign": "Cold-1",
+        "slots": 16,
+        "firstCallsign": "Hotel-1",
         "title": "Corporal"
     },
     {
         "rank": "Private First Class",
         "slots": 20,
-        "firstCallsign": "Delta-1",
+        "firstCallsign": "India-1",
         "title": "Private First Class"
     },
     {
         "rank": "Private",
-        "slots": 20,
-        "firstCallsign": "Beta-1",
+        "slots": 40,
+        "firstCallsign": "Kilo-1",
         "title": "Private"
     }
 ]

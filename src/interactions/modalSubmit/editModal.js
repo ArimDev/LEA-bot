@@ -153,6 +153,7 @@ export default async function run(bot, i) {
             else if (newRank === "Lieutenant General") rolesIDs = ["1342063021991661575"], tagID = false;
             else if (newRank === "Major General") rolesIDs = ["1342063021991661574"], tagID = false;
             else if (newRank === "Brigadier General") rolesIDs = ["1454204899528278138"], tagID = false;
+            else if (newRank === "Lieutenant Colonel") rolesIDs = ["1342063021991661575"], tagID = false;
             else if (newRank === "Colonel") rolesIDs = ["1342063021991661571"], tagID = false;
             else if (newRank === "Major") rolesIDs = ["1342063021991661569"], tagID = false;
             else if (newRank === "Captain") rolesIDs = ["1342063021991661568"], tagID = false;
@@ -169,6 +170,7 @@ export default async function run(bot, i) {
             else if (content.rank === "Lieutenant General") oldRolesIDs = ["1342063021991661575"], tagID = false;
             else if (content.rank === "Major General") oldRolesIDs = ["1342063021991661574"], tagID = false;
             else if (content.rank === "Brigadier General") oldRolesIDs = ["1454204899528278138"], tagID = false;
+            else if (content.rank === "Lieutenant Colonel") rolesIDs = ["1342063021991661575"], tagID = false;
             else if (content.rank === "Colonel") oldRolesIDs = ["1342063021991661571"], tagID = false;
             else if (content.rank === "Major") oldRolesIDs = ["1342063021991661569"], tagID = false;
             else if (content.rank === "Captain") oldRolesIDs = ["1342063021991661568"], tagID = false;
