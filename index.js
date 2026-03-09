@@ -5,8 +5,8 @@ else { runType = 2; console.error("ERR! Correct launch: \"node index.js test|sta
 export { runType };
 
 console.log("-------------------------------> LEA Bot <-------------------------------");
-if (runType === 0) console.log("                                starting...                               ");
-if (runType === 1) console.log("                                testing...                                ");
+if (runType === 0) console.log("                                starting...");
+if (runType === 1) console.log("                                testing...");
 console.log("");
 
 import { config as secret } from "dotenv";
@@ -27,6 +27,7 @@ let bot = new Client({
 
 import fs from "fs/promises";
 const packageJson = JSON.parse(await fs.readFile("./package.json"));
+console.log(`                            launching v${packageJson.version}`);
 
 bot.version = packageJson.version;
 bot.slashes = new Collection();

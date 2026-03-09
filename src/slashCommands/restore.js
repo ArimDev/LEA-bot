@@ -39,6 +39,7 @@ export default async function run(bot, i) {
         if (start && index < start) continue;
 
         let worker = JSON.parse(fs.readFileSync((path.resolve(`./db/${server}`) + "/" + file), "utf-8"));
+        console.log(`[R] Obnovuji složku pro ${worker.name} (${index}/${db.length})`);
 
         const workerId = file.slice(0, -5);
         const rank = worker.rank;
@@ -49,19 +50,19 @@ export default async function run(bot, i) {
 
         let roleID, tagID;
         if (server === "LSPD") {
-            if (rank === "Chief of Police") roleID = "1301163398595350582", tagID = "1394017573586341898";
-            else if (rank === "Assistant Chief of Police") roleID = "1301163398595350581", tagID = "1394017573586341898";
-            else if (rank === "Deputy Chief of Police") roleID = "1301163398595350580", tagID = "1394017573586341898";
-            else if (rank === "Commander") roleID = "1301163398595350578", tagID = "1394017573586341898";
-            else if (rank === "Captain") roleID = "1301163398557339688", tagID = "1394017573586341898";
-            else if (rank === "Lieutenant") roleID = "1301163398557339687", tagID = "1394017573586341898";
-            else if (rank === "Sergeant II") roleID = "1301163398557339685", tagID = "1394017606662619297";
-            else if (rank === "Sergeant I") roleID = "1301163398557339684", tagID = "1394017606662619297";
-            else if (rank === "Police Officer III+I") roleID = "1367967086365773956", tagID = "1394017661620584578";
-            else if (rank === "Police Officer III") roleID = "1301163398557339681", tagID = "1394017679207170059";
-            else if (rank === "Police Officer II") roleID = "1301163398557339680", tagID = "1394017698236862466";
-            else if (rank === "Police Officer I") roleID = "1301163398557339679", tagID = "1394017709552832612";
-            else if (rank === "Cadet") roleID = "1301163398540689497", tagID = "1394017721641074810";
+            if (rank === "Chief") roleID = "1301163398595350582", tagID = false;
+            else if (rank === "Assistant Chief") roleID = "1301163398595350581", tagID = false;
+            else if (rank === "Deputy Chief") roleID = "1301163398595350580", tagID = false;
+            else if (rank === "Commander") roleID = "1301163398595350578", tagID = false;
+            else if (rank === "Captain") roleID = "1301163398557339688", tagID = false;
+            else if (rank === "Lieutenant") roleID = "1301163398557339687", tagID = false;
+            else if (rank === "Sergeant II") roleID = "1301163398557339685", tagID = false;
+            else if (rank === "Sergeant I") roleID = "1301163398557339684", tagID = false;
+            else if (rank === "Police Officer III+I") roleID = "1367967086365773956", tagID = false;
+            else if (rank === "Police Officer III") roleID = "1301163398557339681", tagID = false;
+            else if (rank === "Police Officer II") roleID = "1301163398557339680", tagID = false;
+            else if (rank === "Police Officer I") roleID = "1301163398557339679", tagID = false;
+            else if (rank === "Cadet") roleID = "1301163398540689497", tagID = false;
             else roleID = false, tagID = false;
         } else if (server === "LSSD") {
             if (rank === "Sheriff") roleID = "1391525286021169185", tagID = "1417958911549505579";
@@ -80,7 +81,7 @@ export default async function run(bot, i) {
             else roleID = false, tagID = false;
         }
 
-        if (!roleID || !tagID) { failed++; failedList.push(workerId); continue; }
+        if (!roleID) { failed++; failedList.push(workerId); continue; }
 
         const rankUpDateArr = worker.rankups[worker.rankups.length - 1].date.split(". ");
         const rankUpDate = new Date(rankUpDateArr[1] + "/" + rankUpDateArr[0] + "/" + rankUpDateArr[2]);
@@ -116,7 +117,7 @@ export default async function run(bot, i) {
                 embeds: [workerEmbed],
                 components: [row]
             },
-            appliedTags: [tagID],
+            appliedTags: tagID ? [tagID] : [],
             reason: "LEA-bot obnova složek"
         });
         worker.folder = folder.id;
