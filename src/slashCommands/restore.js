@@ -50,19 +50,19 @@ export default async function run(bot, i) {
 
         let roleID, tagID;
         if (server === "LSPD") {
-            if (rank === "Chief") roleID = "1301163398595350582", tagID = false;
-            else if (rank === "Assistant Chief") roleID = "1301163398595350581", tagID = false;
-            else if (rank === "Deputy Chief") roleID = "1301163398595350580", tagID = false;
-            else if (rank === "Commander") roleID = "1301163398595350578", tagID = false;
-            else if (rank === "Captain") roleID = "1301163398557339688", tagID = false;
-            else if (rank === "Lieutenant") roleID = "1301163398557339687", tagID = false;
-            else if (rank === "Sergeant II") roleID = "1301163398557339685", tagID = false;
-            else if (rank === "Sergeant I") roleID = "1301163398557339684", tagID = false;
-            else if (rank === "Police Officer III+I") roleID = "1367967086365773956", tagID = false;
-            else if (rank === "Police Officer III") roleID = "1301163398557339681", tagID = false;
-            else if (rank === "Police Officer II") roleID = "1301163398557339680", tagID = false;
-            else if (rank === "Police Officer I") roleID = "1301163398557339679", tagID = false;
-            else if (rank === "Cadet") roleID = "1301163398540689497", tagID = false;
+            if (rank === "Chief of Police") roleID = "1510304641202782381", tagID = false;
+            else if (rank === "Assistant Chief of Police") roleID = "1510304641202782380", tagID = false;
+            else if (rank === "Deputy Chief of Police") roleID = "1510304641194266866", tagID = false;
+            else if (rank === "Commander") roleID = "1510304641194266865", tagID = false;
+            else if (rank === "Captain") roleID = "1510304641194266863", tagID = false;
+            else if (rank === "Lieutenant") roleID = "1510304641194266862", tagID = false;
+            else if (rank === "Sergeant II") roleID = "1535022074681360477", tagID = false;
+            else if (rank === "Sergeant") roleID = "1510304641194266858", tagID = false;
+            else if (rank === "Police Officer III+I") roleID = "1517180950793158859", tagID = false;
+            else if (rank === "Police Officer III") roleID = "1510304641181814914", tagID = false;
+            else if (rank === "Police Officer II") roleID = "1510304641181814913", tagID = false;
+            else if (rank === "Police Officer I") roleID = "1510304641181814912", tagID = false;
+            else if (rank === "Cadet") roleID = "1510304641181814910", tagID = false;
             else roleID = false, tagID = false;
         } else if (server === "LSSD") {
             if (rank === "Sheriff") roleID = "1391525286021169185", tagID = "1417958911549505579";

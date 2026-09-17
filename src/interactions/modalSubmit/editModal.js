@@ -24,7 +24,7 @@ export default async function run(bot, i) {
     const visible = i.customId.includes("_") ? (/true/).test(i.customId.split("_")[1]) : false;
 
     let content, oldRolesIDs, rolesIDs, tagID, gotNick = true, gotRole = true, newRank = i.fields.getTextInputValue("rank");
-    if (i.guild.id === "1301163398515396668") { //LSPD
+    if (i.guild.id === "1510304641135673384") { //LSPD
         content = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
         let folderExists = true;
         try { if (!(await i.guild.channels.fetch(content.folder))) folderExists = false; }
@@ -32,35 +32,35 @@ export default async function run(bot, i) {
         if (!folderExists) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
 
         if (newRank !== content.rank) {
-            if (newRank === "Chief of Police") rolesIDs = ["1301163398595350582", "1301163398557339686"], tagID = "1394017573586341898";
-            else if (newRank === "Assistant Chief of Police") rolesIDs = ["1301163398595350581", "1301163398557339686"], tagID = "1394017573586341898";
-            else if (newRank === "Deputy Chief of Police") rolesIDs = ["1301163398595350580", "1301163398557339686"], tagID = "1394017573586341898";
-            else if (newRank === "Commander") rolesIDs = ["1301163398595350578", "1301163398557339686"], tagID = "1394017573586341898";
-            else if (newRank === "Captain") rolesIDs = ["1301163398557339688", "1301163398557339686"], tagID = "1394017573586341898";
-            else if (newRank === "Lieutenant") rolesIDs = ["1301163398557339687", "1301163398557339686"], tagID = "1394017573586341898";
-            else if (newRank === "Sergeant II") rolesIDs = ["1301163398557339685", "1301163398557339683"], tagID = "1394017606662619297";
-            else if (newRank === "Sergeant I") rolesIDs = ["1301163398557339684", "1301163398557339683"], tagID = "1394017606662619297";
-            else if (newRank === "Police Officer III+I") rolesIDs = ["1367967086365773956"], tagID = "1394017661620584578";
-            else if (newRank === "Police Officer III") rolesIDs = ["1301163398557339681"], tagID = "1394017679207170059";
-            else if (newRank === "Police Officer II") rolesIDs = ["1301163398557339680"], tagID = "1394017698236862466";
-            else if (newRank === "Police Officer I") rolesIDs = ["1301163398557339679"], tagID = "1394017709552832612";
-            else if (newRank === "Cadet") rolesIDs = ["1301163398540689497"], tagID = "1394017721641074810";
+            if (newRank === "Chief of Police") rolesIDs = ["1510304641202782381", "1510304641194266860"], tagID = "1394017573586341898";
+            else if (newRank === "Assistant Chief of Police of Police") rolesIDs = ["1510304641202782380", "1510304641194266860"], tagID = "1394017573586341898";
+            else if (newRank === "Deputy Chief of Police of Police") rolesIDs = ["1510304641194266866", "1510304641194266860"], tagID = "1394017573586341898";
+            else if (newRank === "Commander") rolesIDs = ["1510304641194266865", "1510304641194266860"], tagID = "1394017573586341898";
+            else if (newRank === "Captain") rolesIDs = ["1510304641194266863", "1510304641194266860"], tagID = "1394017573586341898";
+            else if (newRank === "Lieutenant") rolesIDs = ["1510304641194266862", "1510304641194266860"], tagID = "1394017573586341898";
+            else if (newRank === "Sergeant II") rolesIDs = ["1535022074681360477", "1510304641194266857"], tagID = "1394017606662619297";
+            else if (newRank === "Sergeant") rolesIDs = ["1510304641194266858", "1510304641194266857"], tagID = "1394017606662619297";
+            else if (newRank === "Police Officer III+I") rolesIDs = ["1517180950793158859"], tagID = "1394017661620584578";
+            else if (newRank === "Police Officer III") rolesIDs = ["1510304641181814914"], tagID = "1394017679207170059";
+            else if (newRank === "Police Officer II") rolesIDs = ["1510304641181814913"], tagID = "1394017698236862466";
+            else if (newRank === "Police Officer I") rolesIDs = ["1510304641181814912"], tagID = "1394017709552832612";
+            else if (newRank === "Cadet") rolesIDs = ["1510304641181814910"], tagID = "1394017721641074810";
             else rolesIDs = false, tagID = false;
             if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${newRank}\`)**`, ephemeral: true });
 
-            if (content.rank === "Chief of Police") oldRolesIDs = ["1301163398595350582", "1301163398557339686"];
-            else if (content.rank === "Assistant Chief of Police") oldRolesIDs = ["1301163398595350581", "1301163398557339686"];
-            else if (content.rank === "Deputy Chief of Police") oldRolesIDs = ["1301163398595350580", "1301163398557339686"];
-            else if (content.rank === "Commander") oldRolesIDs = ["1301163398595350578", "1301163398557339686"];
-            else if (content.rank === "Captain") oldRolesIDs = ["1301163398557339688", "1301163398557339686"];
-            else if (content.rank === "Lieutenant") oldRolesIDs = ["1301163398557339687", "1301163398557339686"];
-            else if (content.rank === "Sergeant II") oldRolesIDs = ["1301163398557339685", "1301163398557339683"];
-            else if (content.rank === "Sergeant I") oldRolesIDs = ["1301163398557339684", "1301163398557339683"];
-            else if (content.rank === "Police Officer III+I") oldRolesIDs = ["1367967086365773956"];
-            else if (content.rank === "Police Officer III") oldRolesIDs = ["1301163398557339681"];
-            else if (content.rank === "Police Officer II") oldRolesIDs = ["1301163398557339680"];
-            else if (content.rank === "Police Officer I") oldRolesIDs = ["1301163398557339679"];
-            else if (content.rank === "Cadet") oldRolesIDs = ["1301163398540689497"];
+            if (content.rank === "Chief of Police") oldRolesIDs = ["1510304641202782381", "1510304641194266860"];
+            else if (content.rank === "Assistant Chief of Police of Police") oldRolesIDs = ["1510304641202782380", "1510304641194266860"];
+            else if (content.rank === "Deputy Chief of Police of Police") oldRolesIDs = ["1510304641194266866", "1510304641194266860"];
+            else if (content.rank === "Commander") oldRolesIDs = ["1510304641194266865", "1510304641194266860"];
+            else if (content.rank === "Captain") oldRolesIDs = ["1510304641194266863", "1510304641194266860"];
+            else if (content.rank === "Lieutenant") oldRolesIDs = ["1510304641194266862", "1510304641194266860"];
+            else if (content.rank === "Sergeant II") oldRolesIDs = ["1535022074681360477", "1510304641194266857"];
+            else if (content.rank === "Sergeant") oldRolesIDs = ["1510304641194266858", "1510304641194266857"];
+            else if (content.rank === "Police Officer III+I") oldRolesIDs = ["1517180950793158859"];
+            else if (content.rank === "Police Officer III") oldRolesIDs = ["1510304641181814914"];
+            else if (content.rank === "Police Officer II") oldRolesIDs = ["1510304641181814913"];
+            else if (content.rank === "Police Officer I") oldRolesIDs = ["1510304641181814912"];
+            else if (content.rank === "Cadet") oldRolesIDs = ["1510304641181814910"];
         }
     } else if (i.guild.id === "1385604665252642897") { //LSSD
         content = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
@@ -111,8 +111,8 @@ export default async function run(bot, i) {
             if (newRank === "Commissioner") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
             else if (newRank === "Deputy Commissioner") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
             else if (newRank === "Assistant Commissioner") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
-            else if (newRank === "Chief") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
-            else if (newRank === "Assistant Chief") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+            else if (newRank === "Chief of Police") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+            else if (newRank === "Assistant Chief of Police") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
             else if (newRank === "Captain") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
             else if (newRank === "Lieutenant") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
             else if (newRank === "Sergeant II") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
@@ -129,8 +129,8 @@ export default async function run(bot, i) {
             if (content.rank === "Commissioner") oldRolesIDs = [/* MISSING IDs */];
             else if (content.rank === "Deputy Commissioner") oldRolesIDs = [/* MISSING IDs */];
             else if (content.rank === "Assistant Commissioner") oldRolesIDs = [/* MISSING IDs */];
-            else if (content.rank === "Chief") oldRolesIDs = [/* MISSING IDs */];
-            else if (content.rank === "Assistant Chief") oldRolesIDs = [/* MISSING IDs */];
+            else if (content.rank === "Chief of Police") oldRolesIDs = [/* MISSING IDs */];
+            else if (content.rank === "Assistant Chief of Police") oldRolesIDs = [/* MISSING IDs */];
             else if (content.rank === "Captain") oldRolesIDs = [/* MISSING IDs */];
             else if (content.rank === "Lieutenant") oldRolesIDs = [/* MISSING IDs */];
             else if (content.rank === "Sergeant II") oldRolesIDs = [/* MISSING IDs */];

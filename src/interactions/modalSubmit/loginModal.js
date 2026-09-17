@@ -53,27 +53,27 @@ export default async function run(bot, i) {
 
     let post = false, gotNick = true, gotRole = true, folders;
     const today = new Date();
-    if (i.guild.id === "1301163398515396668") { //LSPD
-        folders = await i.guild.channels.fetch("1480281151414210631");
+    if (i.guild.id === "1510304641135673384") { //LSPD
+        folders = await i.guild.channels.fetch("1549487769838157834");
 
         let rolesIDs, tagID;
-        if (rank === "Chief") rolesIDs = ["1301163398595350582", "1301163398557339686"], tagID = false;
-        else if (rank === "Assistant Chief") rolesIDs = ["1301163398595350581", "1301163398557339686"], tagID = false;
-        else if (rank === "Deputy Chief") rolesIDs = ["1301163398595350580", "1301163398557339686"], tagID = false;
-        else if (rank === "Commander") rolesIDs = ["1301163398595350578", "1301163398557339686"], tagID = false;
-        else if (rank === "Captain") rolesIDs = ["1301163398557339688", "1301163398557339686"], tagID = false;
-        else if (rank === "Lieutenant") rolesIDs = ["1301163398557339687", "1301163398557339686"], tagID = false;
-        else if (rank === "Sergeant II") rolesIDs = ["1301163398557339685", "1301163398557339683"], tagID = false;
-        else if (rank === "Sergeant I") rolesIDs = ["1301163398557339684", "1301163398557339683"], tagID = false;
-        else if (rank === "Police Officer III+I") rolesIDs = ["1367967086365773956"], tagID = false;
-        else if (rank === "Police Officer III") rolesIDs = ["1301163398557339681"], tagID = false;
-        else if (rank === "Police Officer II") rolesIDs = ["1301163398557339680"], tagID = false;
-        else if (rank === "Police Officer I") rolesIDs = ["1301163398557339679"], tagID = false;
-        else if (rank === "Cadet") rolesIDs = ["1301163398540689497"], tagID = false;
+        if (rank === "Chief of Police") rolesIDs = ["1510304641202782381", "1510304641194266860"], tagID = false;
+        else if (rank === "Assistant Chief of Police") rolesIDs = ["1510304641202782380", "1510304641194266860"], tagID = false;
+        else if (rank === "Deputy Chief of Police") rolesIDs = ["1510304641194266866", "1510304641194266860"], tagID = false;
+        else if (rank === "Commander") rolesIDs = ["1510304641194266865", "1510304641194266860"], tagID = false;
+        else if (rank === "Captain") rolesIDs = ["1510304641194266863", "1510304641194266860"], tagID = false;
+        else if (rank === "Lieutenant") rolesIDs = ["1510304641194266862", "1510304641194266860"], tagID = false;
+        else if (rank === "Sergeant II") rolesIDs = ["1535022074681360477", "1510304641194266857"], tagID = false;
+        else if (rank === "Sergeant") rolesIDs = ["1510304641194266858", "1510304641194266857"], tagID = false;
+        else if (rank === "Police Officer III+I") rolesIDs = ["1517180950793158859"], tagID = false;
+        else if (rank === "Police Officer III") rolesIDs = ["1510304641181814914"], tagID = false;
+        else if (rank === "Police Officer II") rolesIDs = ["1510304641181814913"], tagID = false;
+        else if (rank === "Police Officer I") rolesIDs = ["1510304641181814912"], tagID = false;
+        else if (rank === "Cadet") rolesIDs = ["1510304641181814910"], tagID = false;
         else rolesIDs = false, tagID = false;
 
         if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${rank}\`)**`, ephemeral: true });
-        rolesIDs.push("1434435458066288720"); //LSPD role
+        rolesIDs.push("1510304641181814909"); //LSPD role
 
         await i.deferReply({ ephemeral: !visible });
 
@@ -114,7 +114,7 @@ export default async function run(bot, i) {
 
         try { await member.setNickname(`[${radio}] ${name}`); } catch { gotNick = false; }
         try { await member.roles.add(rolesIDs); } catch { gotRole = false; }
-        if (i.guild.id === "1301163398515396668" && rank === "Trooper Trainee")
+        if (i.guild.id === "1510304641135673384" && rank === "Trooper Trainee")
             try { await member.roles.remove(["1302389194836148226"]); } catch { gotRole = false; } //Akademik
 
         const slozkaEmbed = new EmbedBuilder()
@@ -124,7 +124,7 @@ export default async function run(bot, i) {
                 + "\n\n**Zde si povinně zapisujete časy služeb a případné omluvenky.**"
                 + "\n\nZápis probíhá pomocí bota **LEA-Bot**."
                 + "\n**Službu si zapisujete pomocí </duty:1170376396678377595> a omluvenku přes </omluvenka:1170382276492800131>.**"
-                + `\n\nV případě problémů, použijte <#1301163401527169068> nebo kontaktujte <@${bot.LEA.o}>.`
+                + `\n\nV případě problémů, použijte <#1510304642616266902> nebo kontaktujte <@${bot.LEA.o}>.`
             )
             .setThumbnail(bot.LEA.i.LSPD)
             .setColor(getServer(i.guild.id).color)
@@ -217,8 +217,8 @@ export default async function run(bot, i) {
         if (rank === "Commissioner") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
         else if (rank === "Deputy Commissioner") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
         else if (rank === "Assistant Commissioner") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
-        else if (rank === "Chief") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
-        else if (rank === "Assistant Chief") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Chief of Police") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
+        else if (rank === "Assistant Chief of Police") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
         else if (rank === "Captain") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
         else if (rank === "Lieutenant") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
         else if (rank === "Sergeant II") rolesIDs = [/* MISSING IDs */], tagID = "xxx" /* MISSING ID */;
