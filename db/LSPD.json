@@ -57,28 +57,28 @@
     },
     {
         "rank": "Police Officer III+I",
-        "slots": 30,
+        "slots": 25,
         "firstBadge": 1024,
         "firstCallsign": "William-1",
         "title": "Police Officer III+I"
     },
     {
         "rank": "Police Officer III",
-        "slots": 35,
+        "slots": 30,
         "firstBadge": 1049,
         "firstCallsign": "Victor-1",
         "title": "Police Officer III"
     },
     {
         "rank": "Police Officer II",
-        "slots": 30,
+        "slots": 25,
         "firstBadge": 1079,
         "firstCallsign": "Lincoln-1",
         "title": "Police Officer II"
     },
     {
         "rank": "Police Officer I",
-        "slots": 50,
+        "slots": 40,
         "firstBadge": 1104,
         "firstCallsign": "Queen-1",
         "title": "Police Officer I"
@@ -86,7 +86,7 @@
     {
         "rank": "Cadet",
         "slots": 30,
-        "firstBadge": 1122,
+        "firstBadge": 1200,
         "firstCallsign": "Tom-1",
         "title": "CADET"
     }
