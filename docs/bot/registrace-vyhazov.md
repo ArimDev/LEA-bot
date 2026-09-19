@@ -15,7 +15,7 @@ Pro registraci nového člena použijte příkaz `/db` a postupujte podle instru
 - **Číslo odznaku**.
 - **Hodnost**.
 
-Tabulku vyplňujete podle tabulek na webu [LEA Bot](https://leabot.petyxbron.cz), kde hledáte **volné políčko** pro volací znak a číslo odznaku daného člena.
+Tabulku vyplňujete podle tabulek na webu [LEA Bot](https://fresh.dutiesbot.com), kde hledáte **volné políčko** pro volací znak a číslo odznaku daného člena.
 
 Jakmile všechny požadované informace vyplníte, klikněte na **Odeslat** a systém automaticky přidá nového člena do příslušné tabulky. Veškeré informace jsou okamžitě synchronizovány a dostupné pro vedení.
 

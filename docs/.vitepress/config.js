@@ -125,7 +125,7 @@ export default async () => {
                     activeMatch: '/bot/'
                 },
                 {
-                    text: 'Tabulky', link: 'https://leabot.petyxbron.cz/',
+                    text: 'Tabulky', link: 'https://fresh.dutiesbot.com',
                     target: '_self',
                 }
             ],

@@ -13,17 +13,18 @@
 
 *Český Discord bot pro Law Enforcement Agencies na GTA V FiveM roleplay serveru [FreshRP](https://servers.fivem.net/servers/detail/994ldb).*
 
-*Aktuálně podporuje sbory LSSD <img src="https://i.imgur.com/X3cH2iu.png" width="15" height="15"/> a SAHP <img src="https://i.imgur.com/xgFoKuX.png" width="15" height="15"/>.*
-
 Funkce:
 - služby zaměstnanců (zápis, úprava, smazání, přehled)
 - omluveneky zaměstnanců (zápis, úprava, smazání, přehled)
 - absence při událostech (zápis, přehled)
-- blacklistu (zápis, úprava, smazání, přehled)
+- blacklist (zápis, úprava, smazání, přehled)
+- profilový systém (hledání officerů skrze všechny servery)
+- trestový systém (varování, strike)
 - webové tabulky *(Vue.js a Express.js s API)*
+    - blacklist (ze seznamu v DB)
     - LSSD tabulky
     - SAHP tabulky
-    - blacklist (ze seznamu v DB)
+    - SAND tabulky
     - *a vedlejší informační stránky*
 - a další
 
@@ -31,11 +32,11 @@ Funkce:
 
 ##### DOKUMENTY:
 
-[![Usage](https://img.shields.io/badge/Jak%20na%20to%3F-blue?style=for-the-badge)](/docs/usage.md) [![TOS](https://img.shields.io/badge/Podmínky%20Použití-yellow.svg?style=for-the-badge)](/docs/terms-of-use.md) [![Privacy-Policy](https://img.shields.io/badge/Zásady%20Ochrany%20Osoních%20Údajů-red.svg?style=for-the-badge)](/docs/privacy-policy.md)
+[![Usage](https://img.shields.io/badge/Jak%20na%20to%3F-blue?style=for-the-badge)](/docs/legal/usage.md) [![TOS](https://img.shields.io/badge/Podmínky%20Použití-yellow.svg?style=for-the-badge)](/docs/legal/terms-of-use.md) [![Privacy-Policy](https://img.shields.io/badge/Zásady%20Ochrany%20Osoních%20Údajů-red.svg?style=for-the-badge)](/docs/legal/privacy-policy.md)
 
 ##### GITHUB:
 
-[![Repo stars](https://img.shields.io/github/stars/ArimDev/LEA-bot?style=flat&logo=github&labelColor=232121&color=457cc0&label=Hvězdy)](https://github.com/ArimDev/LEA-bot/stargazers) [![Latest master version](https://img.shields.io/github/package-json/version/ArimDev/LEA-bot?color=457cc0&label=Verze&labelColor=232121&logo=github&sort=semver&style=flat)](https://github.com/ArimDev/LEA-bot/tree/master/) [![Repo licence](https://img.shields.io/badge/CC_BY_NC_ND_4.0-457cc0?style=flat&logo=github&labelColor=232121&label=Licence)](https://github.com/ArimDev/LEA-bot/blob/master/LICENSE.md)
+[![Repo stars](https://img.shields.io/github/stars/ArimDev/LEA-bot?style=flat&logo=github&labelColor=232121&color=457cc0&label=Hvězdy)](https://github.com/ArimDev/LEA-bot/stargazers) [![Latest master version](https://img.shields.io/github/package-json/version/ArimDev/LEA-bot?color=457cc0&label=Verze&labelColor=232121&logo=github&sort=semver&style=flat)](#) [![Repo licence](https://img.shields.io/badge/CC_BY_NC_ND_4.0-457cc0?style=flat&logo=github&labelColor=232121&label=Licence)](https://github.com/ArimDev/LEA-bot/blob/master/LICENSE.md)
 
 ##### VYTVOŘENO POMOCÍ:
 

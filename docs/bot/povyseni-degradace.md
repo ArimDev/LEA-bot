@@ -15,13 +15,13 @@ description: Návod pro povýšení a degradaci officera
    - **Číslo odznaku** odpovídající členu.
    - **Novou hodnost** podle aktuální tabulky.
 
-Při doplňování informací využijte tabulky dostupné na [LEA Bot webu](https://leabot.petyxbron.cz), kde hledejte volná políčka pro volací znak a číslo odznaku.
+Při doplňování informací využijte tabulky dostupné na [LEA Bot webu](https://fresh.dutiesbot.com), kde hledejte volná políčka pro volací znak a číslo odznaku.
 
 ![Formulář pro zápis služby](/media/assets/bot/povýšení2.png)
 
 3. **Odeslání:** Jakmile máte vše vyplněno správně, klikněte na tlačítko "Odeslat".
 
-Po odeslání se změny automaticky projeí v tabulkách. Tyto tabulky jsou synchronizovány a dostupné na webu [LEA Bot](https://leabot.petyxbron.cz).
+Po odeslání se změny automaticky projeí v tabulkách. Tyto tabulky jsou synchronizovány a dostupné na webu [LEA Bot](https://fresh.dutiesbot.com).
 
 **Poznámka:** Povýšení a degradace mohou provádět pouze oprávněné osoby, jako jsou členové leadershipu nebo supervisors. Správné vedení záznamů je klíčové pro udržení přehledu o aktuální struktůře a aktivitě sboru.
 

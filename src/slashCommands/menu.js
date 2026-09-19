@@ -75,10 +75,10 @@ export default async function run(bot, i) {
             {
                 name: `Info`, inline: false,
                 value:
-                    `> **Autor:** <@${bot.LEA.o}> ([web](https://petyxbron.cz/cs/p))
+                    `> **Autor:** <@${bot.LEA.o}> ([web](https://github.com/PetyXbron))
                     > **Sloužím:** LSSD ${bot.LEA.e.LSSD} a SAHP ${bot.LEA.e.SAHP}
                     > **FiveM:** FreshRP 🌴
-                    > **GitHub**: [petyxbron.cz/lea-bot](https://petyxbron.cz/lea-bot)`
+                    > **GitHub**: [github.com/ArimDev/LEA-bot](https://github.com/ArimDev/LEA-bot)`
             },
             {
                 name: `Další`, inline: true,

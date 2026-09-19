@@ -28,10 +28,10 @@
 					<RouterLink to="/lspd">LSPD</RouterLink>
 				</li>
 				<li class="LSSD">
-					<RouterLink to="/lssd">LSSD</RouterLink>
+					<span class="disabled">LSSD</span>
 				</li>
 				<li class="SAND">
-					<RouterLink to="/sand">SAND</RouterLink>
+					<span class="disabled">SAND</span>
 				</li>
 				<div class="loginSide">
 					<Login @alert="openPopBox" @popup="popup" />
@@ -59,20 +59,20 @@
 					</a>
 				</button>
 				<button>
-					<a target="_blank" href="https://github.com/Azator-Entertainment/LEA-bot">
+					<a target="_blank" href="https://github.com/ArimDev/LEA-bot">
 						<img id="githubImage" :class="{ darkMode }" src="/media/icon/github.png" width="20" height="20">
 					</a>
 				</button>
 			</div>
 			<div class="center">
-				<p>© 2024 - {{ currentYear }} <a target="_blank" href="https://github.com/Azator-Entertainment/LEA-bot">LEA-Bot</a> vytvořil <a target="_blank" href="https://petyxbron.cz/p">PetyXbron (b1ngo)</a></p>
+				<p>© 2024 - {{ currentYear }} <a target="_blank" href="https://github.com/ArimDev/LEA-bot">LEA-Bot</a> vytvořil <a target="_blank" href="https://github.com/PetyXbron">PetyXbron (b1ngo)</a></p>
 			</div>
 			<div class="right">
-				<a target="_blank" href="https://github.com/ArimDev/LEA-bot/blob/master/docs/usage.md">Jak používat</a>
+				<a target="_blank" href="https://leabook.eu/legal/usage">Jak používat</a>
 				|
-				<a target="_blank" href="https://github.com/ArimDev/LEA-bot/blob/master/docs/terms-of-use.md">Podmínky použití</a>
+				<a target="_blank" href="https://leabook.eu/legal/terms-of-use">Podmínky použití</a>
 				|
-				<a target="_blank" href="https://github.com/ArimDev/LEA-bot/blob/master/docs/privacy-policy.md">Zásady ochrany osobních údajů</a>
+				<a target="_blank" href="https://leabook.eu/legal/privacy-policy">Zásady ochrany osobních údajů</a>
 			</div>
 		</footer>
 	</div>
