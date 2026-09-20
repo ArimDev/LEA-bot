@@ -346,10 +346,8 @@ export default async function run(bot, i) {
     if (sub === "remove") {
         let passed = false;
         if (admin.id === bot.LEA.o) passed = true; //PetyXbron / b1ngo
-        else if (bot.LEA.g.LSSD.includes(i.guild.id)) {
-            if (admin.roles.cache.has("1391525294321696879")) passed = true; //Executive Staff
-        } else if (bot.LEA.g.LSPD.includes(i.guild.id)) {
-            if (admin.roles.cache.has("1310392880095039498")) passed = true; //High Command Staff
+        else if (bot.LEA.g.LSPD.includes(i.guild.id)) {
+            if (admin.roles.cache.has("1510304641194266860") && !admin.roles.cache.has("1510304641194266862")) passed = true; //Captain+
         }
 
         if (!passed)

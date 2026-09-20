@@ -75,17 +75,16 @@ export default async function run(bot, i) {
             {
                 name: `Info`, inline: false,
                 value:
-                    `> **Autor:** <@${bot.LEA.o}> ([web](https://github.com/PetyXbron))
-                    > **Sloužím:** LSSD ${bot.LEA.e.LSSD} a SAHP ${bot.LEA.e.SAHP}
+                    `> **Autor:** <@${bot.LEA.o}>
                     > **FiveM:** FreshRP 🌴
                     > **GitHub**: [github.com/ArimDev/LEA-bot](https://github.com/ArimDev/LEA-bot)`
             },
             {
                 name: `Další`, inline: true,
                 value:
-                    `> **Podmínky Použití (TOS):** [/docs/terms-of-use.md](https://github.com/ArimDev/LEA-bot/blob/master/docs/terms-of-use.md)
-                    > **Zásady Ochrany Osobních Údajů:** [/docs/privacy-policy.md](https://github.com/ArimDev/LEA-bot/blob/master/docs/privacy-policy.md)
-                    > **Jak Používat:** [/docs/usage.md](https://github.com/ArimDev/LEA-bot/blob/master/docs/usage.md)`
+                    `> **Podmínky Použití (TOS):** [/terms-of-use](https://leabook.eu/legal/terms-of-use)
+                    > **Zásady Ochrany Osobních Údajů:** [/privacy-policy](https://leabook.eu/legal/privacy-policy)
+                    > **Jak Používat:** [/usage](https://leabook.eu/legal/usage)`
             }
         ])
         .setColor(bot.LEA.c.LEAbot)

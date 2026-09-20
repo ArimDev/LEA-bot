@@ -33,8 +33,8 @@ export default async function run(bot, i) {
 
         if (newRank !== content.rank) {
             if (newRank === "Chief of Police") rolesIDs = ["1510304641202782381", "1510304641194266860"], tagID = "1394017573586341898";
-            else if (newRank === "Assistant Chief of Police of Police") rolesIDs = ["1510304641202782380", "1510304641194266860"], tagID = "1394017573586341898";
-            else if (newRank === "Deputy Chief of Police of Police") rolesIDs = ["1510304641194266866", "1510304641194266860"], tagID = "1394017573586341898";
+            else if (newRank === "Assistant Chief of Police") rolesIDs = ["1510304641202782380", "1510304641194266860"], tagID = "1394017573586341898";
+            else if (newRank === "Deputy Chief of Police") rolesIDs = ["1510304641194266866", "1510304641194266860"], tagID = "1394017573586341898";
             else if (newRank === "Commander") rolesIDs = ["1510304641194266865", "1510304641194266860"], tagID = "1394017573586341898";
             else if (newRank === "Captain") rolesIDs = ["1510304641194266863", "1510304641194266860"], tagID = "1394017573586341898";
             else if (newRank === "Lieutenant") rolesIDs = ["1510304641194266862", "1510304641194266860"], tagID = "1394017573586341898";
@@ -49,8 +49,8 @@ export default async function run(bot, i) {
             if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${newRank}\`)**`, ephemeral: true });
 
             if (content.rank === "Chief of Police") oldRolesIDs = ["1510304641202782381", "1510304641194266860"];
-            else if (content.rank === "Assistant Chief of Police of Police") oldRolesIDs = ["1510304641202782380", "1510304641194266860"];
-            else if (content.rank === "Deputy Chief of Police of Police") oldRolesIDs = ["1510304641194266866", "1510304641194266860"];
+            else if (content.rank === "Assistant Chief of Police") oldRolesIDs = ["1510304641202782380", "1510304641194266860"];
+            else if (content.rank === "Deputy Chief of Police") oldRolesIDs = ["1510304641194266866", "1510304641194266860"];
             else if (content.rank === "Commander") oldRolesIDs = ["1510304641194266865", "1510304641194266860"];
             else if (content.rank === "Captain") oldRolesIDs = ["1510304641194266863", "1510304641194266860"];
             else if (content.rank === "Lieutenant") oldRolesIDs = ["1510304641194266862", "1510304641194266860"];

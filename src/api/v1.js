@@ -308,15 +308,15 @@ export default async function api(bot, app) {
             }
         }
 
-        const roles = { 
+        const roles = {
             LSSD: "1391525298461347971",
             LSPD: "1510304641194266860",
             SAHP: "xxx" /* MISSING ID */,
             SAND: "1342063021991661572",
         };
-        const govRoles = { 
+        const govRoles = {
             LSSD: "1391525312994738206",
-            LSPD: "1301163398540689494",
+            LSPD: "1510304641181814907",
             SAHP: "xxx" /* MISSING ID */,
             SAND: "1342063021991661572",
         };
@@ -328,6 +328,7 @@ export default async function api(bot, app) {
         if (first.ok) {
             const firstRes = await first.json();
             passed = firstRes.roles.includes(roles[dep]) || firstRes.roles.includes(govRoles[dep]);
+            if (dep === "LSPD" && firstRes.roles.includes("1510304641181814909")) passed = true; //LSPD general access
             if (firstRes.user.id === bot.LEA.o) passed = true; //b1ngo access
 
             if (passed) {

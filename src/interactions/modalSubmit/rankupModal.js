@@ -25,8 +25,8 @@ export default async function run(bot, i) {
         oldGrade, newGrade, start = null;
     if (i.guild.id === "1510304641135673384") { //LSPD
         if (newRank === "Chief of Police") rolesIDs = ["1510304641202782381", "1510304641194266860"], tagID = "1394017573586341898", newGrade = 15;
-        else if (newRank === "Assistant Chief of Police of Police") rolesIDs = ["1510304641202782380", "1510304641194266860"], tagID = "1394017573586341898", newGrade = 14;
-        else if (newRank === "Deputy Chief of Police of Police") rolesIDs = ["1510304641194266866", "1510304641194266860"], tagID = "1394017573586341898", newGrade = 13;
+        else if (newRank === "Assistant Chief of Police") rolesIDs = ["1510304641202782380", "1510304641194266860"], tagID = "1394017573586341898", newGrade = 14;
+        else if (newRank === "Deputy Chief of Police") rolesIDs = ["1510304641194266866", "1510304641194266860"], tagID = "1394017573586341898", newGrade = 13;
         else if (newRank === "Commander") rolesIDs = ["1510304641194266865", "1510304641194266860"], tagID = "1394017573586341898", newGrade = 12;
         else if (newRank === "Captain") rolesIDs = ["1510304641194266863", "1510304641194266860"], tagID = "1394017573586341898", newGrade = 11;
         else if (newRank === "Lieutenant") rolesIDs = ["1510304641194266862", "1510304641194266860"], tagID = "1394017573586341898", newGrade = 10;
@@ -48,8 +48,8 @@ export default async function run(bot, i) {
         if (!folderCh) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
 
         if (content.rank === "Chief of Police") oldRolesIDs = ["1510304641202782381", "1510304641194266860"], oldGrade = 15;
-        else if (content.rank === "Assistant Chief of Police of Police") oldRolesIDs = ["1510304641202782380", "1510304641194266860"], oldGrade = 14;
-        else if (content.rank === "Deputy Chief of Police of Police") oldRolesIDs = ["1510304641194266866", "1510304641194266860"], oldGrade = 13;
+        else if (content.rank === "Assistant Chief of Police") oldRolesIDs = ["1510304641202782380", "1510304641194266860"], oldGrade = 14;
+        else if (content.rank === "Deputy Chief of Police") oldRolesIDs = ["1510304641194266866", "1510304641194266860"], oldGrade = 13;
         else if (content.rank === "Commander") oldRolesIDs = ["1510304641194266865", "1510304641194266860"], oldGrade = 12;
         else if (content.rank === "Captain") oldRolesIDs = ["1510304641194266863", "1510304641194266860"], oldGrade = 11;
         else if (content.rank === "Lieutenant") oldRolesIDs = ["1510304641194266862", "1510304641194266860"], oldGrade = 10;

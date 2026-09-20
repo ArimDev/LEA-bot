@@ -85,7 +85,7 @@ async function fetchBL() {
                 b.index = bl.indexOf(b);
                 blEnabled.push(b);
             }
-            return blEnabled;
+            return blEnabled.reverse();
         }
     } catch (error) {
         console.log(`[LEA-Bot / GET bl] Chyba při kontaktování serveru! (${error.response?.status || "500"})`);
@@ -100,7 +100,8 @@ import LSPD from "../assets/logo/LSPD.png";
 import LSCSO from "../assets/logo/LSCSO.png";
 import LSSD from "../assets/logo/LSSD.png";
 import SAHP from "../assets/logo/SAHP.png";
-const deps = { LSPD, LSCSO, LSSD, SAHP };
+import SAND from "../assets/logo/SAND.png";
+const deps = { LSPD, LSCSO, LSSD, SAHP, SAND };
 
 function getBadge(dep) {
     if (!dep) return LEA;
