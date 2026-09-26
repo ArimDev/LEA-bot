@@ -5,4 +5,6 @@ description: Seznam hodností u LSSD
 
 # Hodnosti LSSD
 
-<!-- content -->
+::: danger Mimo provoz
+Los Santos Sheriff Department je aktuálně neaktivní frakce.
+:::

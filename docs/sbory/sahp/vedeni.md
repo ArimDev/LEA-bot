@@ -5,4 +5,6 @@ description: Seznam a přehled členů vedení SAHP
 
 # Leadership SAHP
 
-<!-- content -->
+::: danger Mimo provoz
+San Andreas Highway Patrol je aktuálně neaktivní frakce.
+:::

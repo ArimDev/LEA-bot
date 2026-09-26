@@ -5,4 +5,6 @@ description: Seznam a přehled divizí LSSD
 
 # Divize LSSD
 
-<!-- content -->
+::: danger Mimo provoz
+Los Santos Sheriff Department je aktuálně neaktivní frakce.
+:::

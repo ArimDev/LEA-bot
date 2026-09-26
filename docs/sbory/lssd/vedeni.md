@@ -5,4 +5,6 @@ description: Seznam a přehled členů vedení LSSD
 
 # Leadership LSSD
 
-<!-- content -->
+::: danger Mimo provoz
+Los Santos Sheriff Department je aktuálně neaktivní frakce.
+:::

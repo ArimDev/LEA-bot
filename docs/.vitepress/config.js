@@ -135,21 +135,12 @@ export default async () => {
                     base: '/sbory/', items: [
                         { text: 'Úvod', link: 'uvod' },
                         {
-                            text: 'SAHP',
+                            text: 'LSPD',
                             collapsed: false,
                             items: [
-                                { text: 'Leadership', link: 'sahp/vedeni' },
-                                { text: 'Hodnosti', link: 'sahp/hodnosti' },
-                                { text: 'Divize', link: 'sahp/divize' }
-                            ]
-                        },
-                        {
-                            text: 'LSSD',
-                            collapsed: false,
-                            items: [
-                                { text: 'Leadership', link: 'lssd/vedeni' },
-                                { text: 'Hodnosti', link: 'lssd/hodnosti' },
-                                { text: 'Divize', link: 'lssd/divize' }
+                                { text: 'Leadership', link: 'lspd/vedeni' },
+                                { text: 'Hodnosti', link: 'lspd/hodnosti' },
+                                { text: 'Divize', link: 'lspd/divize' }
                             ]
                         },
                     ]
@@ -228,7 +219,7 @@ export default async () => {
             ],
 
             footer: {
-                copyright: '© 2024 - 2025 LEA-Bot<br>vytvořil PetyXbron (b1ngo)'
+                copyright: '© 2024 - 2026 Leabook.eu<br>Licence <a target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.cs">CC BY-NC-ND 4.0</a><br>Vytvořili b1ngo a Aldix'
             }
         },
     });
