@@ -1,7 +1,7 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, EmbedBuilder, InteractionType, ModalBuilder, TextInputBuilder, TextInputStyle, time } from "discord.js";
 import fs from "fs";
 import path from "path";
-import { checkDB, checkEVENT, getDB, getServer } from "../../functions/db.js";
+import { checkPermission, checkDB, checkEVENT, getDB, getServer } from "../../functions/db.js";
 import { dcLog, simpleLog } from "../../functions/logSystem.js";
 import { findWorker } from "../../functions/profiles.js";
 
@@ -34,6 +34,8 @@ export default async function run(bot, i) {
             if (badge === "xxx") badge = data.badge;
         }
     }
+
+    if (!checkPermission(i.member, rank, i.guild.id)) return i.reply({ content: "> 🛑 **Nemůžeš registrovat nového officera na stejnou nebo vyšší hodnost.**", ephemeral: true });
 
     if (bl.some(e => !e.removed && e.id === userId))
         return i.reply({ content: `> 🛑 <@${userId}> **je na blacklistu!**`, ephemeral: true });

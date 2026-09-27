@@ -1,7 +1,7 @@
 import { ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, ModalBuilder, SlashCommandBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
 import fs from "fs";
 import path from "path";
-import { checkDB, getDB, getServer } from "../functions/db.js";
+import { checkPermission, checkDB, getDB, getServer } from "../functions/db.js";
 import { dcLog, simpleLog } from "../functions/logSystem.js";
 
 export const slash = new SlashCommandBuilder()
@@ -110,6 +110,7 @@ export default async function run(bot, i) {
 
         const gotDB = getDB(user.id);
         if (!bot.LEA.g[gotDB.guildName].includes(i.guild.id)) return i.reply({ content: `> 🛑 **<@${user.id}> je členem \`${gotDB.guildName}\`!** (Nemůžeš ho povýšit)`, ephemeral: true });
+        if (!checkPermission(i.member, gotDB.data.rank, i.guild.id)) return i.reply({ content: "> 🛑 **Nemůžeš povýšit officera se stejnou nebo vyšší hodností.**", ephemeral: true });
 
         const modal = new ModalBuilder()
             .setCustomId("rankupModal_" + visible)
@@ -157,6 +158,7 @@ export default async function run(bot, i) {
         if (!(checkDB(user.id))) return i.reply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
         const gotDB = getDB(user.id);
         const data = gotDB.data;
+        if (!checkPermission(i.member, data.rank, i.guild.id)) return i.reply({ content: "> 🛑 **Nemůžeš upravit officera, který má stejnou nebo vyšší hodnost.**", ephemeral: true });
         const modal = new ModalBuilder()
             .setCustomId("editModal_" + visible)
             .setTitle("LEA | Úprava DB");
@@ -215,6 +217,7 @@ export default async function run(bot, i) {
     } else if (choice === "s") {
         const gotDB = getDB(user.id);
         if (!gotDB.exists) return i.reply({ content: "> 🛑 <@" + user.id + "> **už není v DB.**", ephemeral: true });
+        if (!checkPermission(i.member, gotDB.data.rank, i.guild.id)) return i.reply({ content: "> 🛑 **Nemůžeš vyhodit officera, který má stejnou nebo vyšší hodnost.**", ephemeral: true });
         const serverDB = getServer(i.guild.id);
 
         const modal = new ModalBuilder()

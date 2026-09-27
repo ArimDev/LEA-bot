@@ -1,13 +1,15 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, EmbedBuilder, InteractionType, ModalBuilder, TextInputBuilder, TextInputStyle, time } from "discord.js";
 import fs from "fs";
 import path from "path";
-import { checkDB, checkEVENT, getDB, getServer } from "../../functions/db.js";
+import { checkPermission, checkDB, checkEVENT, getDB, getServer } from "../../functions/db.js";
 import { dcLog, simpleLog } from "../../functions/logSystem.js";
 
 export default async function run(bot, i) {
     if (!(checkDB(i.fields.getTextInputValue("id"), i))) return i.reply({ content: "> 🛑 <@" + i.fields.getTextInputValue("id") + "> **není v DB.**", ephemeral: true });
     const gotDB = getDB(i.fields.getTextInputValue("id"));
     if (!bot.LEA.g[gotDB.guildName].includes(i.guild.id)) return i.reply({ content: `> 🛑 **<@${i.fields.getTextInputValue("id")}> je členem \`${gotDB.guildName}\`!** (Nemůžeš ho upravit)`, ephemeral: true });
+    if (!checkPermission(i.member, gotDB.data.rank, i.guild.id)) return i.reply({ content: "> 🛑 **Nemůžeš upravovat jiného officera se stejnou nebo vyšší hodností.**", ephemeral: true });
+    if (!checkPermission(i.member, i.fields.getTextInputValue("rank"), i.guild.id)) return i.reply({ content: "> 🛑 **Nemůžeš nastavit jinému officerovi stejnou nebo vyšší hodnost.**", ephemeral: true });
 
     let SAND = false;
     if (i.guild.id === "1342063021811433514") SAND = true;

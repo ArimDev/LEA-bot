@@ -4,97 +4,125 @@
         "slots": 1,
         "firstBadge": 100,
         "firstCallsign": "Heaven-1",
-        "title": false
+        "title": false,
+        "roles": ["xxx"],
+        "tag": false
     },
     {
         "rank": "Deputy Commissioner",
         "slots": 1,
         "firstBadge": 101,
         "firstCallsign": "Heaven-2",
-        "title": false
+        "title": false,
+        "roles": ["xxx"],
+        "tag": false
     },
     {
         "rank": "Assistant Commissioner",
         "slots": 1,
         "firstBadge": 102,
         "firstCallsign": "Heaven-3",
-        "title": false
+        "title": false,
+        "roles": ["xxx"],
+        "tag": false
     },
     {
         "rank": "Chief",
         "slots": 1,
         "firstBadge": 103,
         "firstCallsign": "Heaven-4",
-        "title": false
+        "title": false,
+        "roles": ["xxx"],
+        "tag": false
     },
     {
         "rank": "Assistant Chief",
         "slots": 1,
         "firstBadge": 104,
         "firstCallsign": "Heaven-5",
-        "title": false
+        "title": false,
+        "roles": ["xxx"],
+        "tag": false
     },
     {
         "rank": "Captain",
         "slots": 5,
         "firstBadge": 106,
         "firstCallsign": "Frost-1",
-        "title": " "
+        "title": " ",
+        "roles": ["xxx"],
+        "tag": false
     },
     {
         "rank": "Lieutenant",
         "slots": 9,
         "firstBadge": 111,
         "firstCallsign": "Mike-1",
-        "title": " "
+        "title": " ",
+        "roles": ["xxx"],
+        "tag": false
     },
     {
         "rank": "Sergeant II",
         "slots": 1,
         "firstBadge": 120,
         "firstCallsign": "Tango-1",
-        "title": "SERGEANT"
+        "title": "SERGEANT",
+        "roles": ["xxx"],
+        "tag": false
     },
     {
         "rank": "Sergeant I",
         "slots": 9,
         "firstBadge": 130,
         "firstCallsign": "Tango-2",
-        "title": false
+        "title": false,
+        "roles": ["xxx"],
+        "tag": false
     },
     {
         "rank": "Senior Trooper",
         "slots": 20,
         "firstBadge": 150,
         "firstCallsign": "Senior-1",
-        "title": "Senior Trooper"
+        "title": "Senior Trooper",
+        "roles": ["xxx"],
+        "tag": false
     },
     {
         "rank": "Trooper III",
         "slots": 30,
         "firstBadge": 200,
         "firstCallsign": "Ocean-1",
-        "title": "Trooper III"
+        "title": "Trooper III",
+        "roles": ["xxx"],
+        "tag": false
     },
     {
         "rank": "Trooper II",
         "slots": 30,
         "firstBadge": 300,
         "firstCallsign": "Comet-1",
-        "title": "Trooper II"
+        "title": "Trooper II",
+        "roles": ["xxx"],
+        "tag": false
     },
     {
         "rank": "Trooper I",
         "slots": 30,
         "firstBadge": 400,
         "firstCallsign": "Nova-1",
-        "title": "Trooper I"
+        "title": "Trooper I",
+        "roles": ["xxx"],
+        "tag": false
     },
     {
         "rank": "Trooper Trainee",
         "slots": 45,
         "firstBadge": 500,
         "firstCallsign": "Golf-1",
-        "title": "Trooper Trainee"
+        "title": "Trooper Trainee",
+        "roles": ["xxx"],
+        "tag": false
     }
 ]

@@ -3,78 +3,104 @@
         "rank": "General",
         "slots": 1,
         "firstCallsign": "Alpha-1",
-        "title": false
+        "title": false,
+        "roles": ["1342063021991661576"],
+        "tag": false
     },
     {
         "rank": "Lieutenant General",
         "slots": 1,
         "firstCallsign": "Alpha-2",
-        "title": false
+        "title": false,
+        "roles": ["1342063021991661575"],
+        "tag": false
     },
     {
         "rank": "Major General",
         "slots": 1,
         "firstCallsign": "Alpha-3",
-        "title": false
+        "title": false,
+        "roles": ["1342063021991661574"],
+        "tag": false
     },
     {
         "rank": "Brigadier General",
         "slots": 1,
         "firstCallsign": "Alpha-4",
-        "title": false
+        "title": false,
+        "roles": ["1454204899528278138"],
+        "tag": false
     },
     {
         "rank": "Colonel",
         "slots": 1,
         "firstCallsign": "Bravo-1",
-        "title": "CO"
+        "title": "CO",
+        "roles": ["1342063021991661571"],
+        "tag": false
     },
     {
         "rank": "Lieutenant Colonel",
         "slots": 1,
         "firstCallsign": "Charlie-1",
-        "title": false
+        "title": false,
+        "roles": ["1479225966353055916"],
+        "tag": false
     },
     {
         "rank": "Major",
         "slots": 1,
         "firstCallsign": "Delta-1",
-        "title": false
+        "title": false,
+        "roles": ["1342063021991661569"],
+        "tag": false
     },
     {
         "rank": "Captain",
         "slots": 3,
         "firstCallsign": "Echo-1",
-        "title": false
+        "title": false,
+        "roles": ["1342063021991661568"],
+        "tag": false
     },
     {
         "rank": "Sergeant Major",
         "slots": 2,
         "firstCallsign": "Foxtrot-1",
-        "title": "NCO"
+        "title": "NCO",
+        "roles": ["1342063021912100934"],
+        "tag": false
     },
     {
         "rank": "Sergeant",
         "slots": 12,
         "firstCallsign": "Golf-1",
-        "title": null
+        "title": null,
+        "roles": ["1342063021912100933"],
+        "tag": false
     },
     {
         "rank": "Corporal",
         "slots": 16,
         "firstCallsign": "Hotel-1",
-        "title": "Corporal"
+        "title": "Corporal",
+        "roles": ["1342063021912100926"],
+        "tag": false
     },
     {
         "rank": "Private First Class",
         "slots": 20,
         "firstCallsign": "India-1",
-        "title": "Private First Class"
+        "title": "Private First Class",
+        "roles": ["1342063021912100925"],
+        "tag": false
     },
     {
         "rank": "Private",
         "slots": 40,
         "firstCallsign": "Kilo-1",
-        "title": "Private"
+        "title": "Private",
+        "roles": ["1342063021857443899"],
+        "tag": false
     }
 ]

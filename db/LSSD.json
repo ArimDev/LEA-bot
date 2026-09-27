@@ -4,83 +4,107 @@
         "slots": 1,
         "firstBadge": 200,
         "firstCallsign": "County-1",
-        "title": false
+        "title": false,
+        "roles": ["1391525286021169185", "1391525298461347971"],
+        "tag": false
     },
     {
         "rank": "Undersheriff",
         "slots": 1,
         "firstBadge": 201,
         "firstCallsign": "County-2",
-        "title": false
+        "title": false,
+        "roles": ["1391525287421804624", "1391525298461347971"],
+        "tag": false
     },
     {
         "rank": "Assistant Sheriff",
         "slots": 1,
         "firstBadge": 202,
         "firstCallsign": "County-3",
-        "title": false
+        "title": false,
+        "roles": ["1391525289045266472", "1391525298461347971"],
+        "tag": false
     },
     {
         "rank": "Division Chief",
         "slots": 1,
         "firstBadge": 203,
         "firstCallsign": "County-4",
-        "title": false
+        "title": false,
+        "roles": ["1391525291620307044", "1391525298461347971"],
+        "tag": false
     },
     {
         "rank": "Area Commander",
         "slots": 1,
         "firstBadge": 204,
         "firstCallsign": "County-5",
-        "title": false
+        "title": false,
+        "roles": ["1391525292828524685", "1391525298461347971"],
+        "tag": false
     },
     {
         "rank": "Captain",
         "slots": 2,
         "firstBadge": 205,
         "firstCallsign": "King-1",
-        "title": " "
+        "title": " ",
+        "roles": ["1391525295432929341", "1391525298461347971"],
+        "tag": false
     },
     {
         "rank": "Lieutenant",
         "slots": 3,
         "firstBadge": 209,
         "firstCallsign": "Shock-1",
-        "title": " "
+        "title": " ",
+        "roles": ["1391525296385163334", "1391525298461347971"],
+        "tag": false
     },  
     {
         "rank": "Sergeant",
         "slots": 6,
         "firstBadge": 212,
         "firstCallsign": "Mike-1",
-        "title": "SERGEANT"
+        "title": "SERGEANT",
+        "roles": ["1391525302638874794", "1391525303733452860"],
+        "tag": false
     },
     {
         "rank": "Deputy III",
         "slots": 15,
         "firstBadge": 220,
         "firstCallsign": "Sam-1",
-        "title": "DEPUTY III"
+        "title": "DEPUTY III",
+        "roles": ["1391525305134354634"],
+        "tag": false
     },
     {
         "rank": "Deputy II",
         "slots": 15,
         "firstBadge": 235,
         "firstCallsign": "Sam-16",
-        "title": "DEPUTY II"
+        "title": "DEPUTY II",
+        "roles": ["1391525306505887956"],
+        "tag": false
     },
     {
         "rank": "Deputy I",
         "slots": 15,
         "firstBadge": 250,
         "firstCallsign": "Charlie-1",
-        "title": "DEPUTY I"
+        "title": "DEPUTY I",
+        "roles": ["1391525307550404799"],
+        "tag": false
     },
     {
         "rank": "Deputy Trainee",
         "slots": 30,
         "firstBadge": 270,
         "firstCallsign": "Green-1",
-        "title": "DEPUTY TRAINEE"
+        "title": "DEPUTY TRAINEE",
+        "roles": ["1391525308628205662"],
+        "tag": false
     }
 ]

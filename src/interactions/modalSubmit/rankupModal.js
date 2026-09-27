@@ -1,7 +1,7 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, EmbedBuilder, InteractionType, ModalBuilder, TextInputBuilder, TextInputStyle, time } from "discord.js";
 import fs from "fs";
 import path from "path";
-import { checkDB, checkEVENT, getDB, getServer } from "../../functions/db.js";
+import { checkPermission, checkDB, checkEVENT, getDB, getServer } from "../../functions/db.js";
 import { dcLog, simpleLog } from "../../functions/logSystem.js";
 
 export default async function run(bot, i) {
@@ -18,6 +18,8 @@ export default async function run(bot, i) {
             ephemeral: true
         });
     }
+
+    if (!checkPermission(i.member, i.fields.getTextInputValue("rank"), i.guild.id)) return i.reply({ content: "> 🛑 **Nemůžeš povýšit jiného officera na stejnou nebo vyšší hodnost.**", ephemeral: true });
 
     const visible = i.customId.includes("_") ? (/true/).test(i.customId.split("_")[1]) : false;
 
