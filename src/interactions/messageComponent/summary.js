@@ -29,7 +29,8 @@ export default async function run(bot, i) {
     else if (bot.LEA.g.LSSD.includes(i.guild.id)) log = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + worker.id + ".json"), "utf-8"));
     else if (bot.LEA.g.SAHP.includes(i.guild.id)) log = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + worker.id + ".json"), "utf-8"));
     else if (bot.LEA.g.SAND.includes(i.guild.id)) log = JSON.parse(fs.readFileSync((path.resolve("./db/SAND") + "/" + worker.id + ".json"), "utf-8"));
-    else return i.editReply({ content: "> 🛑 **Tenhle server není uveden a seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
+    else if (bot.LEA.g.SASP.includes(i.guild.id)) log = JSON.parse(fs.readFileSync((path.resolve("./db/SASP") + "/" + worker.id + ".json"), "utf-8"));
+    else return i.editReply({ content: "> 🛑 **Tenhle server není uveden na seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
     let moHours = 0;
     await log.duties.filter(d => !d.removed).forEach(function (e) {

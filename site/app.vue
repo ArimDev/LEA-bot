@@ -27,11 +27,8 @@
 				<li class="LSPD">
 					<RouterLink to="/lspd">LSPD</RouterLink>
 				</li>
-				<li class="LSSD">
-					<span class="disabled">LSSD</span>
-				</li>
-				<li class="SAND">
-					<span class="disabled">SAND</span>
+				<li class="SASP">
+					<RouterLink to="/sasp">SASP</RouterLink>
 				</li>
 				<div class="loginSide">
 					<Login @alert="openPopBox" @popup="popup" />

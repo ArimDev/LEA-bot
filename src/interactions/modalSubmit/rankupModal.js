@@ -175,6 +175,43 @@ export default async function run(bot, i) {
         else if (content.rank === "Corporal") oldRolesIDs = ["1342063021912100926"], tagID = false, oldGrade = 3;
         else if (content.rank === "Private First Class") oldRolesIDs = ["1342063021912100925"], tagID = false, oldGrade = 2;
         else if (content.rank === "Private") oldRolesIDs = ["1342063021857443899"], tagID = false, oldGrade = 1;
+    } else if (bot.LEA.g.SASP.includes(i.guild.id)) { //SASP
+        content = JSON.parse(fs.readFileSync((path.resolve("./db/SASP") + "/" + i.fields.getTextInputValue("id") + ".json"), "utf-8"));
+        if (newRank === "Commissioner") rolesIDs = ["1557478893290655812"], tagID = false, newGrade = 14;
+        else if (newRank === "Deputy Commissioner") rolesIDs = ["1557478893290655810"], tagID = false, newGrade = 13;
+        else if (newRank === "Assistant Commissioner") rolesIDs = ["1557478893290655809"], tagID = false, newGrade = 12;
+        else if (newRank === "Division Chief") rolesIDs = ["1557478893290655808"], tagID = false, newGrade = 11;
+        else if (newRank === "Major") rolesIDs = ["1557478893290655807"], tagID = false, newGrade = 10;
+        else if (newRank === "Captain") rolesIDs = ["1557478893248843926"], tagID = false, newGrade = 9;
+        else if (newRank === "Lieutenant") rolesIDs = ["1557478893248843925"], tagID = false, newGrade = 8;
+        else if (newRank === "First Sergeant") rolesIDs = ["1557478893248843922"], tagID = false, newGrade = 7;
+        else if (newRank === "Sergeant") rolesIDs = ["1557478893248843921"], tagID = false, newGrade = 6;
+        else if (newRank === "Trooper IV") rolesIDs = ["1557478893248843919"], tagID = false, newGrade = 5;
+        else if (newRank === "Trooper III") rolesIDs = ["1557478893248843918"], tagID = false, newGrade = 4;
+        else if (newRank === "Trooper II") rolesIDs = ["1557478893248843917"], tagID = false, newGrade = 3;
+        else if (newRank === "Trooper I") rolesIDs = ["1557478893202440272"], tagID = false, newGrade = 2;
+        else if (newRank === "Trooper Trainee") rolesIDs = ["1557478893202440271"], tagID = false, newGrade = 1;
+        else rolesIDs = false, tagID = false;
+
+        if (content.rank === "Commissioner") oldRolesIDs = ["1557478893290655812"], oldGrade = 14;
+        else if (content.rank === "Deputy Commissioner") oldRolesIDs = ["1557478893290655810"], oldGrade = 13;
+        else if (content.rank === "Assistant Commissioner") oldRolesIDs = ["1557478893290655809"], oldGrade = 12;
+        else if (content.rank === "Division Chief") oldRolesIDs = ["1557478893290655808"], oldGrade = 11;
+        else if (content.rank === "Major") oldRolesIDs = ["1557478893290655807"], oldGrade = 10;
+        else if (content.rank === "Captain") oldRolesIDs = ["1557478893248843926"], oldGrade = 9;
+        else if (content.rank === "Lieutenant") oldRolesIDs = ["1557478893248843925"], oldGrade = 8;
+        else if (content.rank === "First Sergeant") oldRolesIDs = ["1557478893248843922"], oldGrade = 7;
+        else if (content.rank === "Sergeant") oldRolesIDs = ["1557478893248843921"], oldGrade = 6;
+        else if (content.rank === "Trooper IV") oldRolesIDs = ["1557478893248843919"], oldGrade = 5;
+        else if (content.rank === "Trooper III") oldRolesIDs = ["1557478893248843918"], oldGrade = 4;
+        else if (content.rank === "Trooper II") oldRolesIDs = ["1557478893248843917"], oldGrade = 3;
+        else if (content.rank === "Trooper I") oldRolesIDs = ["1557478893202440272"], oldGrade = 2;
+        else if (content.rank === "Trooper Trainee") oldRolesIDs = ["1557478893202440271"], oldGrade = 1;
+
+        if (!rolesIDs || !oldRolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${newRank}\`)**`, ephemeral: true });
+        let folderCh = false;
+        try { folderCh = await i.guild.channels.fetch(content.folder); } catch { }
+        if (!folderCh) return i.reply({ content: "> 🛑 **Nebyla nalezena složka <@" + i.fields.getTextInputValue("id") + ">!**", ephemeral: true });
     }
 
     await i.deferReply({ ephemeral: !visible });
@@ -200,6 +237,7 @@ export default async function run(bot, i) {
     else if (bot.LEA.g.LSSD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSSD") + "/" + i.fields.getTextInputValue("id") + ".json");
     else if (bot.LEA.g.SAHP.includes(i.guild.id)) workersPath = (path.resolve("./db/SAHP") + "/" + i.fields.getTextInputValue("id") + ".json");
     else if (bot.LEA.g.SAND.includes(i.guild.id)) workersPath = (path.resolve("./db/SAND") + "/" + i.fields.getTextInputValue("id") + ".json");
+    else if (bot.LEA.g.SASP.includes(i.guild.id)) workersPath = (path.resolve("./db/SASP") + "/" + i.fields.getTextInputValue("id") + ".json");
 
     fs.writeFileSync(
         workersPath,

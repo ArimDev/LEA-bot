@@ -79,6 +79,22 @@ export default async function run(bot, i) {
             else if (rank === "Deputy I") roleID = "1391525307550404799", tagID = "1417959369714303026";
             else if (rank === "Deputy Trainee") roleID = "1391525308628205662", tagID = "1417959411946754069";
             else roleID = false, tagID = false;
+        } else if (server === "SASP") {
+            if (rank === "Commissioner") roleID = "1557478893290655812", tagID = false;
+            else if (rank === "Deputy Commissioner") roleID = "1557478893290655810", tagID = false;
+            else if (rank === "Assistant Commissioner") roleID = "1557478893290655809", tagID = false;
+            else if (rank === "Division Chief") roleID = "1557478893290655808", tagID = false;
+            else if (rank === "Major") roleID = "1557478893290655807", tagID = false;
+            else if (rank === "Captain") roleID = "1557478893248843926", tagID = false;
+            else if (rank === "Lieutenant") roleID = "1557478893248843925", tagID = false;
+            else if (rank === "First Sergeant") roleID = "1557478893248843922", tagID = false;
+            else if (rank === "Sergeant") roleID = "1557478893248843921", tagID = false;
+            else if (rank === "Trooper IV") roleID = "1557478893248843919", tagID = false;
+            else if (rank === "Trooper III") roleID = "1557478893248843918", tagID = false;
+            else if (rank === "Trooper II") roleID = "1557478893248843917", tagID = false;
+            else if (rank === "Trooper I") roleID = "1557478893202440272", tagID = false;
+            else if (rank === "Trooper Trainee") roleID = "1557478893202440271", tagID = false;
+            else roleID = false, tagID = false;
         }
 
         if (!roleID) { failed++; failedList.push(workerId); continue; }

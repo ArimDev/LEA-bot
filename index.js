@@ -46,6 +46,7 @@ bot.LEA = {
         LSSD: "#bd8131",
         LSCSO: "#b68f68",
         SAND: "#253818",
+        SASP: "#063673",
         duty: "#5245c0",
         apology: "#c05245",
         summary: "#25be5c",
@@ -58,12 +59,14 @@ bot.LEA = {
         LSSD: "<:LSSD:1178106303198011412>",
         LSCSO: "<:LSCSO:1266078681479254176>",
         SAND: "<:SAND:1460373510617829553>",
+        SASP: "<:SASP:1559277531939741696> ",
     },
     g: {
         LSPD: ["1510304641135673384"],
-        LSSD: ["1385604665252642897"],
+        LSSD: [""],
         SAHP: [],
-        SAND: ["1342063021811433514"],
+        SAND: [""],
+        SASP: ["1557478892774625282"],
     },
     i: {
         LEAbot: "https://i.imgur.com/EnZErOi.png",
@@ -72,6 +75,7 @@ bot.LEA = {
         LSSD: "https://i.imgur.com/X3cH2iu.png",
         LSCSO: "https://i.imgur.com/Hex0MQF.png",
         SAND: "https://i.imgur.com/OvRkxFN.png",
+        SASP: "https://i.imgur.com/m7C8hoX.png",
     },
     o: "411436203330502658", //b1ngo
     r: {
@@ -82,10 +86,10 @@ bot.LEA = {
             suspend: "1510304641135673388",
         },
         LSSD: {
-            strike1: "1391525354039935067",
-            strike2: "1391525355386437652",
-            warn: "1391525353083764826",
-            suspend: "1391525356321640478",
+            strike1: "",
+            strike2: "",
+            warn: "",
+            suspend: "",
         },
         SAHP: {
             strike1: "",
@@ -94,10 +98,16 @@ bot.LEA = {
             suspend: "",
         },
         SAND: {
-            strike1: "1460374013477126375",
-            strike2: "1460374066580951245",
-            warn: "1460373937358770218",
-            suspend: "1460373987266658437",
+            strike1: "",
+            strike2: "",
+            warn: "",
+            suspend: "",
+        },
+        SASP: {
+            strike1: "1557478892774625285",
+            strike2: "1557478892774625286",
+            warn: "1557478892774625287",
+            suspend: "1557478892774625288",
         },
     },
     ch: {
@@ -106,16 +116,20 @@ bot.LEA = {
             suspends: "1546553171055349880",
         },
         LSSD: {
-            warns: "1391525425146101860",
-            suspends: "1391525426857377973",
+            warns: "",
+            suspends: "",
         },
         SAHP: {
             warns: "",
             suspends: "",
         },
         SAND: {
-            warns: "1343191988421263410",
-            suspends: "1343191988421263410",
+            warns: "",
+            suspends: "",
+        },
+        SASP: {
+            warns: "1557478895882731610",
+            suspends: "1557478895421489309",
         },
     },
 };

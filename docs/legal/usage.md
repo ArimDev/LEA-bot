@@ -55,5 +55,5 @@ Bot se hlavně zatím používá pomocí jednoduchých příkazů:
 - ✅ značí příkaz, který je v téhle verzi **funkční**
 - ❌ značí příkaz, který je v téhle verzi **nefunkční / nedokončený**
 
-Zároveň nově hostuje stránky s **LSPD, LSSD, SAHP tabulkami a blacklistem** na bázi Express.js, Vue.js a API.
+Zároveň nově hostuje stránky s **tabulkami officerů a blacklistem** na bázi Express.js, Vue.js a API.
 Ty se aktualizují **přímo z databáze a Discord serverů** po každém načtení stránky.

@@ -11,7 +11,9 @@ export function checkDB(id) {
         ||
         fs.existsSync((path.resolve("./db/SAHP") + "/" + id + ".json"))
         ||
-        fs.existsSync((path.resolve("./db/SAND") + "/" + id + ".json"));
+        fs.existsSync((path.resolve("./db/SAND") + "/" + id + ".json"))
+        ||
+        fs.existsSync((path.resolve("./db/SASP") + "/" + id + ".json"));
 
     return exists;
 }
@@ -46,6 +48,13 @@ export function getDB(id) {
         r.guildName = "SAND";
         r.guildEmoji = bot.LEA.e.SAND;
         r.guildID = bot.LEA.g.SAND[0];
+    } else if (fs.existsSync((path.resolve("./db/SASP") + "/" + id + ".json"))) {
+        r.exists = true;
+        r.data = JSON.parse(fs.readFileSync((path.resolve("./db/SASP") + "/" + id + ".json"), "utf-8"));
+        r.guild = 5;
+        r.guildName = "SASP";
+        r.guildEmoji = bot.LEA.e.SASP;
+        r.guildID = bot.LEA.g.SASP[0];
     }
 
     return r;
@@ -83,6 +92,12 @@ export function getServer(guildID) {
         r.footer = { text: `SAND | LEA-Bot v${bot.version} 🏳️`, iconURL: bot.LEA.i.SAND };
         r.color = bot.LEA.c.SAND;
         r.ranks = path.resolve("./db/SAND.json");
+    } else if (bot.LEA.g.SASP.includes(guildID)) {
+        r.id = 5;
+        r.name = "SASP";
+        r.footer = { text: `SASP | LEA-Bot v${bot.version} 🏳️`, iconURL: bot.LEA.i.SASP };
+        r.color = bot.LEA.c.SASP;
+        r.ranks = path.resolve("./db/SASP.json");
     } else {
         r.id = 0;
         r.name = "XXXX";
@@ -102,12 +117,13 @@ export function getRank(rank, ranks) {
 }
 
 export function checkPermission(member, target, guildID) {
+    if (member.id === bot.LEA.o) return true;
+
     const rankLoc = getServer(guildID).ranks
     if (!rankLoc) return false;
     const ranks = JSON.parse(fs.readFileSync(rankLoc, "utf-8"));
 
     const targetRank = getRank(target, ranks);
-    if (member.user.id === bot.LEA.o) return true;
     if (!targetRank) return false;
 
     const memberRankName = ranks

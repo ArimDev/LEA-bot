@@ -96,6 +96,7 @@ export default async function run(bot, i) {
         if (bot.LEA.g.LSPD.includes(i.guild.id)) group = "**LSPD** " + bot.LEA.e.LSPD;
         else if (bot.LEA.g.LSSD.includes(i.guild.id)) group = "**LSSD** " + bot.LEA.e.LSSD;
         else if (bot.LEA.g.SAHP.includes(i.guild.id)) group = "**SAHP** " + bot.LEA.e.SAHP;
+        else if (bot.LEA.g.SASP.includes(i.guild.id)) group = "**SASP** " + bot.LEA.e.SASP;
         else group = false;
 
         if (group) helpEmbed.setDescription(`> ✅ Server **${i.guild.name}** je součástí sboru ${group}`);

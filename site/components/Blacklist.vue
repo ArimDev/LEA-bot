@@ -101,7 +101,8 @@ import LSCSO from "../assets/logo/LSCSO.png";
 import LSSD from "../assets/logo/LSSD.png";
 import SAHP from "../assets/logo/SAHP.png";
 import SAND from "../assets/logo/SAND.png";
-const deps = { LSPD, LSCSO, LSSD, SAHP, SAND };
+import SASP from "../assets/logo/SASP.png";
+const deps = { LSPD, LSCSO, LSSD, SAHP, SAND, SASP };
 
 function getBadge(dep) {
     if (!dep) return LEA;

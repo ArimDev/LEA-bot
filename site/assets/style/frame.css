@@ -164,6 +164,13 @@ body,
     box-shadow: 0 4px 20px #25381899;
 }
 
+.SASP a:hover {
+    border: 2px solid #063673;
+    background-color: #063673;
+    color: white;
+    box-shadow: 0 4px 20px #032047;
+}
+
 a.router-link-active {
     color: var(--bgColor);
     background-color: var(--textColor);

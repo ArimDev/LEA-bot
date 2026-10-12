@@ -11,16 +11,18 @@ export default async function run(bot, i) {
     let passed = false;
     const admin = i.member;
     if (admin.id === bot.LEA.o) passed = true; //PetyXbron / b1ngo
-    if (admin.id === authorID) passed = true;
     if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1510304641181814907")) passed = true; //Government
         if (admin.roles.cache.has("1510304641194266860")) passed = true; //Leadership
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("1391525298461347971")) passed = true; //Leadership
-        if (admin.roles.cache.has("1391525331835420722")) passed = true; //FTO Commander
+        if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true;
     } else if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true; //Leadership
+        if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true;
     } else if (bot.LEA.g.SAND.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("1342063021991661572")) passed = true; //CO
+        if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true;
+    } else if (bot.LEA.g.SASP.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1557478893202440266")) passed = true; //Government
+        if (admin.roles.cache.has("1557478893248843923")) passed = true; //Leadership
     }
 
     if (!passed) return i.reply({ content: "> 🛑 **Tenhle zápis nemáš právo smazat.**", ephemeral: true });;
@@ -71,6 +73,7 @@ export default async function run(bot, i) {
     else if (bot.LEA.g.LSSD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSSD") + "/" + authorID + ".json");
     else if (bot.LEA.g.SAHP.includes(i.guild.id)) workersPath = (path.resolve("./db/SAHP") + "/" + authorID + ".json");
     else if (bot.LEA.g.SAND.includes(i.guild.id)) workersPath = (path.resolve("./db/SAND") + "/" + authorID + ".json");
+    else if (bot.LEA.g.SASP.includes(i.guild.id)) workersPath = (path.resolve("./db/SASP") + "/" + authorID + ".json");
     fs.writeFileSync(
         workersPath,
         JSON.stringify(worker, null, 4)

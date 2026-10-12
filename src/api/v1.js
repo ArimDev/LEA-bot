@@ -109,7 +109,7 @@ export default async function api(bot, app) {
         res.status(200).json({ code: me.status, passed: true, user: response });
     });
 
-    app.get(apiPath + "/db/getTable/:dep(LSSD|LSPD|SAHP|SAND)", async (req, res) => {
+    app.get(apiPath + "/db/getTable/:dep(LSSD|LSPD|SAHP|SAND|SASP)", async (req, res) => {
         const origin = req.headers.host;
         if (!origin.includes(secret().parsed.domain)) {
             return res.status(403).json({});
@@ -240,6 +240,15 @@ export default async function api(bot, app) {
                     && !worker.roles.omluvenka
                     && (Math.round((worker.hours + Number.EPSILON) * 100) / 100) === 0
                 ) hours0 = true;
+            } else if (dep === "SASP" && worker.m) {
+                worker.roles.warn = worker.m.roles.cache.has(bot.LEA.r.SASP.warn);
+                worker.roles.suspend = worker.m.roles.cache.has(bot.LEA.r.SASP.suspend);
+                if (worker.m.roles.cache.has("1557478893248843923")) leadership = true;
+                if (
+                    !leadership
+                    && !worker.roles.omluvenka
+                    && (Math.round((worker.hours + Number.EPSILON) * 100) / 100) === 0
+                ) hours0 = true;
             }
 
             if (worker.roles.suspend || hours0) worker.header.red = true;
@@ -264,7 +273,7 @@ export default async function api(bot, app) {
         res.status(200).json({ passed: true, guildID: verRep.guildID, user: verRep.user, member: verRep.member, workers: final });
     });
 
-    app.get(apiPath + "/login/verifyMe/:dep(LSSD|LSPD|SAHP|SAND)", async (req, res) => {
+    app.get(apiPath + "/login/verifyMe/:dep(LSSD|LSPD|SAHP|SAND|SASP)", async (req, res) => {
         const origin = req.headers.host;
         if (!origin.includes(secret().parsed.domain)) {
             return res.status(403).json({});
@@ -296,29 +305,39 @@ export default async function api(bot, app) {
             if (dep === "LSPD") {
                 if (!index || index === 1) return "LSSD";
                 else if (index === 2) return "SAHP";
+                else if (index === 3) return "SASP";
             } else if (dep === "LSSD") {
                 if (!index || index === 1) return "LSPD";
                 else if (index === 2) return "SAHP";
+                else if (index === 3) return "SASP";
             } else if (dep === "SAHP") {
                 if (!index || index === 1) return "LSPD";
                 else if (index === 2) return "LSSD";
+                else if (index === 3) return "SASP";
             } else if (dep === "SAND") {
                 if (!index || index === 1) return "LSPD";
                 else if (index === 2) return "LSSD";
+                else if (index === 3) return "SASP";
+            } else if (dep === "SASP") {
+                if (!index || index === 1) return "LSPD";
+                else if (index === 2) return "LSSD";
+                else if (index === 3) return "SAHP";
             }
         }
 
         const roles = {
-            LSSD: "1391525298461347971",
+            LSSD: "xxx" /* MISSING ID */,
             LSPD: "1510304641194266860",
             SAHP: "xxx" /* MISSING ID */,
-            SAND: "1342063021991661572",
+            SAND: "xxx" /* MISSING ID */,
+            SASP: "1557478893248843923",
         };
         const govRoles = {
-            LSSD: "1391525312994738206",
+            LSSD: "xxx" /* MISSING ID */,
             LSPD: "1510304641181814907",
             SAHP: "xxx" /* MISSING ID */,
-            SAND: "1342063021991661572",
+            SAND: "xxx" /* MISSING ID */,
+            SASP: "1557478893202440266",
         };
 
         const first = await fetch(`https://discord.com/api/users/@me/guilds/${bot.LEA.g[dep][0]}/member`, {

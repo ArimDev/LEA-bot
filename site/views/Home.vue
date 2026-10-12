@@ -8,7 +8,7 @@
 		<p>
 			<br>Součástí projektu je <b>Discord bot</b> s hl. ovládáním
 			<br>a <b>webové stránky</b> k přehlednému zobrazení zaměstnanců v tabulkách.
-			<br><br>Web je zabezpečen <b>přihlášením přes Discord</b> a zároveň kontroluje, zda-li je součástí Leadershipu.
+			<br><br>Web je zabezpečen <b>přihlášením přes Discord</b>.
 		</p>
 	</div>
 </template>

@@ -53,6 +53,7 @@ export default async function run(bot, i) {
         i.member.roles.cache.has("xxx" /* MISSING ID */) //LSPD cadet
         || i.member.roles.cache.has("1391525308628205662") //LSSD trainee
         || i.member.roles.cache.has("1510304641181814910") //SAHP trainee
+        || i.member.roles.cache.has("1557478893202440271") //SASP trainee
     ) {
         const colleaguesInput = new TextInputBuilder()
             .setCustomId("kolega")

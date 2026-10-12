@@ -18,7 +18,7 @@ export async function getProfile(bot, id) {
 
     const worker = db.data;
     let SAND = false;
-    if (bot.LEA.g.SAND.includes(i.guild.id)) SAND = true;
+    if (bot.LEA.g.SAND.includes(db.guildName)) SAND = true;
 
     let profileEmbed = new EmbedBuilder()
         .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
@@ -47,7 +47,8 @@ export async function findWorker(type, input) {
     workers = fs.readdirSync(path.resolve("./db/LSPD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json")
         .concat(fs.readdirSync(path.resolve("./db/LSSD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json"))
         .concat(fs.readdirSync(path.resolve("./db/SAHP")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json"))
-        .concat(fs.readdirSync(path.resolve("./db/SAND")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json"));
+        .concat(fs.readdirSync(path.resolve("./db/SAND")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json"))
+        .concat(fs.readdirSync(path.resolve("./db/SASP")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json"));
 
     for (const log of workers) {
         const gotDB = getDB(log.split(".")[0]);

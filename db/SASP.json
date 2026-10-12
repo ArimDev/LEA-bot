@@ -1,0 +1,128 @@
+[
+    {
+        "rank": "Commissioner",
+        "slots": 1,
+        "firstBadge": 101,
+        "firstCallsign": "State-1",
+        "title": "High Command Staff",
+        "roles": ["1557478893290655812", "1557478893248843923", "1557478893290655806"],
+        "tag": false
+    },
+    {
+        "rank": "Deputy Commissioner",
+        "slots": 1,
+        "firstBadge": 102,
+        "firstCallsign": "State-2",
+        "title": false,
+        "roles": ["1557478893290655810", "1557478893248843923", "1557478893290655806"],
+        "tag": false
+    },
+    {
+        "rank": "Assistant Commissioner",
+        "slots": 1,
+        "firstBadge": 103,
+        "firstCallsign": "State-3",
+        "title": false,
+        "roles": ["1557478893290655809", "1557478893248843923", "1557478893290655806"],
+        "tag": false
+    },
+    {
+        "rank": "Division Chief",
+        "slots": 1,
+        "firstBadge": 104,
+        "firstCallsign": "State-4",
+        "title": false,
+        "roles": ["1557478893290655808", "1557478893248843923", "1557478893290655806"],
+        "tag": false
+    },
+    {
+        "rank": "Major",
+        "slots": 1,
+        "firstBadge": 105,
+        "firstCallsign": "State-5",
+        "title": false,
+        "roles": ["1557478893290655807", "1557478893248843923", "1557478893290655806"],
+        "tag": false
+    },
+    {
+        "rank": "Captain",
+        "slots": 3,
+        "firstBadge": 106,
+        "firstCallsign": "State-6",
+        "title": "Command Staff",
+        "roles": ["1557478893248843926", "1557478893248843923", "1557478893248843924"],
+        "tag": false
+    },
+    {
+        "rank": "Lieutenant",
+        "slots": 4,
+        "firstBadge": 109,
+        "firstCallsign": "Viktor-1",
+        "title": " ",
+        "roles": ["1557478893248843925", "1557478893248843923", "1557478893248843924"],
+        "tag": false
+    },
+    {
+        "rank": "First Sergeant",
+        "slots": 3,
+        "firstBadge": 113,
+        "firstCallsign": "Viktor-5",
+        "title": "Supervisory Staff",
+        "roles": ["1557478893248843922", "1557478893248843920"],
+        "tag": false
+    },
+    {
+        "rank": "Sergeant",
+        "slots": 6,
+        "firstBadge": 116,
+        "firstCallsign": "Viktor-8",
+        "title": " ",
+        "roles": ["1557478893248843921", "1557478893248843920"],
+        "tag": false
+    },
+    {
+        "rank": "Trooper IV",
+        "slots": 12,
+        "firstBadge": 201,
+        "firstCallsign": "Viktor-14",
+        "title": "Trooper IV",
+        "roles": ["1557478893248843919"],
+        "tag": false
+    },
+    {
+        "rank": "Trooper III",
+        "slots": 20,
+        "firstBadge": 213,
+        "firstCallsign": "Viktor-26",
+        "title": "Trooper III",
+        "roles": ["1557478893248843918"],
+        "tag": false
+    },
+    {
+        "rank": "Trooper II",
+        "slots": 25,
+        "firstBadge": 233,
+        "firstCallsign": "Viktor-36",
+        "title": "Trooper II",
+        "roles": ["1557478893248843917"],
+        "tag": false
+    },
+    {
+        "rank": "Trooper I",
+        "slots": 30,
+        "firstBadge": 258,
+        "firstCallsign": "Viktor-61",
+        "title": "Trooper I",
+        "roles": ["1557478893202440272"],
+        "tag": false
+    },
+    {
+        "rank": "Trooper Trainee",
+        "slots": 30,
+        "firstBadge": 301,
+        "firstCallsign": "Tom-1",
+        "title": "Trainees",
+        "roles": ["1557478893202440271"],
+        "tag": false
+    }
+]

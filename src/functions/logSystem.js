@@ -78,6 +78,19 @@ export async function dcLog(bot, guildID, member, options = {}) {
             .setColor(color)
             .setFooter({ text: `SAND | LEA-Bot v${bot.version} 🏳️`, iconURL: bot.LEA.i.SAND });
         await channel.send({ embeds: [logEmbed], files: files });
+    } else if (gotServer.id === 5) {
+        let files = [];
+        if (!!file) files = [file];
+
+        guild = await bot.guilds.fetch("1557478892774625282");
+        channel = await guild.channels.fetch("1559298832003768370");
+        const logEmbed = new EmbedBuilder()
+            .setAuthor({ name: member.displayName, iconURL: member.displayAvatarURL() })
+            .setTitle(title)
+            .setDescription(description)
+            .setColor(color)
+            .setFooter({ text: `SASP | LEA-Bot v${bot.version} 🏳️`, iconURL: bot.LEA.i.SASP });
+        await channel.send({ embeds: [logEmbed], files: files });
     }
 }
 
@@ -89,14 +102,17 @@ export async function simpleLog(bot, guildID, options) {
         guild = await bot.guilds.fetch("1510304641135673384");
         channel = await guild.channels.fetch("1550224135278301224");
     } else if (gotServer.id === 2) {
-        guild = await bot.guilds.fetch("1385604665252642897");
-        channel = await guild.channels.fetch("1391525480515108914");
+        guild = await bot.guilds.fetch(/* MISSING ID */);
+        channel = await guild.channels.fetch(/* MISSING ID */);
     } else if (gotServer.id === 3) {
         guild = await bot.guilds.fetch(/* MISSING ID */);
         channel = await guild.channels.fetch(/* MISSING ID */);
     } else if (gotServer.id === 4) {
-        guild = await bot.guilds.fetch("1342063021811433514");
-        channel = await guild.channels.fetch("1342639680809598976");
+        guild = await bot.guilds.fetch(/* MISSING ID */);
+        channel = await guild.channels.fetch(/* MISSING ID */);
+    } else if (gotServer.id === 5) {
+        guild = await bot.guilds.fetch("1557478892774625282");
+        channel = await guild.channels.fetch("1559298629070757929");
     }
 
     const logEmbed = new EmbedBuilder()

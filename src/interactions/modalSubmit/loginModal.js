@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, EmbedBuilder, InteractionType, ModalBuilder, TextInputBuilder, TextInputStyle, time } from "discord.js";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, InteractionType, ModalBuilder, TextInputBuilder, TextInputStyle, time } from "discord.js";
 import fs from "fs";
 import path from "path";
 import { checkPermission, checkDB, checkEVENT, getDB, getServer } from "../../functions/db.js";
@@ -370,6 +370,77 @@ export default async function run(bot, i) {
             .setColor(getServer(i.guild.id).color)
             .setFooter({ text: `LEA-Bot v${bot.version} 🏳️`, iconURL: bot.user.avatarURL() });
         await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
+    } else if (bot.LEA.g.SASP.includes(i.guild.id)) { //SASP
+        folders = await i.guild.channels.fetch("1559284426276348077");
+
+        let rolesIDs;
+        if (rank === "Commissioner") rolesIDs = ["1557478893290655812"];
+        else if (rank === "Deputy Commissioner") rolesIDs = ["1557478893290655810"];
+        else if (rank === "Assistant Commissioner") rolesIDs = ["1557478893290655809"];
+        else if (rank === "Division Chief") rolesIDs = ["1557478893290655808"];
+        else if (rank === "Major") rolesIDs = ["1557478893290655807"];
+        else if (rank === "Captain") rolesIDs = ["1557478893248843926"];
+        else if (rank === "Lieutenant") rolesIDs = ["1557478893248843925"];
+        else if (rank === "First Sergeant") rolesIDs = ["1557478893248843922"];
+        else if (rank === "Sergeant") rolesIDs = ["1557478893248843921"];
+        else if (rank === "Trooper IV") rolesIDs = ["1557478893248843919"];
+        else if (rank === "Trooper III") rolesIDs = ["1557478893248843918"];
+        else if (rank === "Trooper II") rolesIDs = ["1557478893248843917"];
+        else if (rank === "Trooper I") rolesIDs = ["1557478893202440272"];
+        else if (rank === "Trooper Trainee") rolesIDs = ["1557478893202440271"];
+        else rolesIDs = false;
+
+        if (!rolesIDs) return i.reply({ content: `> 🛑 **Neznámá hodnost... (\`${rank}\`)**`, ephemeral: true });
+        rolesIDs.push("1557478893202440270"); //SASP role
+
+        await i.deferReply({ ephemeral: !visible });
+
+        const workerEmbed = new EmbedBuilder()
+            .setAuthor({ name: `[${radio}] ${name}`, iconURL: member.displayAvatarURL() })
+            .setDescription(
+                `> **App:** <@${member.id}>`
+                + `\n> **Jméno:** \`${name}\``
+                + `\n> **Hodnost:** <@&${rolesIDs[0]}>`
+                + `\n> **Odznak:** \`${badge}\``
+                + `\n> **Volačka:** \`${radio}\``
+                + "\n\n"
+                + `\n> **Hodin:** \`${data ? data.hours : "0"}\``
+                + `\n> **Omluvenek:** \`${data ? data.apologies.filter(a => !a.removed).length : "0"}\``
+                + `\n> **Povýšení:** ${time(today, "R")}`
+            )
+            .setThumbnail(bot.LEA.i.SASP)
+            .setColor(bot.LEA.c.SASP)
+            .setFooter({ text: `SASP | LEA-Bot v${bot.version} 🏳️`, iconURL: bot.LEA.i.SASP });
+        const row = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+                .setCustomId("summary_" + member.id)
+                .setStyle(ButtonStyle.Success)
+                .setLabel("Souhrn")
+                .setEmoji("📑")
+        );
+        post = await folders.threads.create({
+            name: `[${radio}] ${name}`,
+            message: { content: `<@${member.id}>`, embeds: [workerEmbed], components: [row] },
+            appliedTags: [],
+            reason: (data ? "OBNOVA" : "") + " Registrace od " + i.user.tag
+        });
+
+        try { await member.setNickname(`[${radio}] ${name}`); } catch { gotNick = false; }
+        try { await member.roles.add(rolesIDs); } catch { gotRole = false; }
+
+        const slozkaEmbed = new EmbedBuilder()
+            .setTitle("Vítejte ve Vaší složce!")
+            .setDescription(
+                `<@${member.id}>, gratulujeme Vám k úspěšnému přijetí na hodnost <@&${rolesIDs[0]}>.`
+                + "\n\n**Zde si povinně zapisujete časy služeb a případné omluvenky.**"
+                + "\n\nZápis probíhá pomocí bota **LEA-Bot**."
+                + "\n**Službu si zapisujete pomocí </duty:1170376396678377595> a omluvenku přes </omluvenka:1170382276492800131>.**"
+                + `\n\nV případě problémů, použijte <#1557478897791148125> nebo kontaktujte <@${bot.LEA.o}>.`
+            )
+            .setThumbnail(bot.LEA.i.SASP)
+            .setColor(bot.LEA.c.SASP)
+            .setFooter({ text: `LEA-Bot v${bot.version} 🏳️`, iconURL: bot.user.avatarURL() });
+        await post.send({ content: `<@${member.id}>`, embeds: [slozkaEmbed] });
     }
 
     let workersPath, worker;
@@ -377,6 +448,7 @@ export default async function run(bot, i) {
     else if (bot.LEA.g.LSSD.includes(i.guild.id)) workersPath = (path.resolve("./db/LSSD") + "/" + userId + ".json");
     else if (bot.LEA.g.SAHP.includes(i.guild.id)) workersPath = (path.resolve("./db/SAHP") + "/" + userId + ".json");
     else if (bot.LEA.g.SAND.includes(i.guild.id)) workersPath = (path.resolve("./db/SAND") + "/" + userId + ".json");
+    else if (bot.LEA.g.SASP.includes(i.guild.id)) workersPath = (path.resolve("./db/SASP") + "/" + userId + ".json");
     else return i.editReply({ content: "> 🛑 **Tenhle server není uveden na seznamu.**\nKontaktuj majitele (viz. </menu:1170376396678377596>).", ephemeral: true });
 
     if (!data) {

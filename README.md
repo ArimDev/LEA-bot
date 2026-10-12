@@ -22,9 +22,7 @@ Funkce:
 - trestový systém (varování, strike)
 - webové tabulky *(Vue.js a Express.js s API)*
     - blacklist (ze seznamu v DB)
-    - LSSD tabulky
-    - SAHP tabulky
-    - SAND tabulky
+    - tabulky různých policejních sborů
     - *a vedlejší informační stránky*
 - a další
 

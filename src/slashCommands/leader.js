@@ -23,14 +23,17 @@ export default async function run(bot, i) {
     const admin = i.member;
     if (admin.id === bot.LEA.o) passed = true; //PetyXbron / b1ngo
     if (bot.LEA.g.LSPD.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1510304641181814907")) passed = true; //Government
         if (admin.roles.cache.has("1510304641194266860")) passed = true; //Leadership
     } else if (bot.LEA.g.LSSD.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("1391525298461347971")) passed = true; //Leadership
-        if (admin.roles.cache.has("1391525331835420722")) passed = true; //FTO Commander
+        if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true;
     } else if (bot.LEA.g.SAHP.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true; //Leadership
+        if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true;
     } else if (bot.LEA.g.SAND.includes(i.guild.id) && !passed) {
-        if (admin.roles.cache.has("1342063021991661572")) passed = true; //CO
+        if (admin.roles.cache.has("xxx" /* MISSING ID */)) passed = true;
+    } else if (bot.LEA.g.SASP.includes(i.guild.id) && !passed) {
+        if (admin.roles.cache.has("1557478893202440266")) passed = true; //Government
+        if (admin.roles.cache.has("1557478893248843923")) passed = true; //Leadership
     }
 
     if (!passed) return i.reply({ content: "> 🛑 **K tomuhle má přístup jen admin.**", ephemeral: true });
@@ -87,11 +90,15 @@ export default async function run(bot, i) {
                 if (bot.LEA.g.LSPD.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/LSPD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
                 else if (bot.LEA.g.LSSD.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/LSSD")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
                 else if (bot.LEA.g.SAHP.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/SAHP")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
+                else if (bot.LEA.g.SAND.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/SAND")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
+                else if (bot.LEA.g.SASP.includes(i.guild.id)) db = fs.readdirSync(path.resolve("./db/SASP")).filter(file => file.endsWith(".json") && file !== "000000000000000001.json");
                 for (const file of db) {
                     let worker;
                     if (bot.LEA.g.LSPD.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSPD") + "/" + file), "utf-8"));
                     else if (bot.LEA.g.LSSD.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/LSSD") + "/" + file), "utf-8"));
                     else if (bot.LEA.g.SAHP.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/SAHP") + "/" + file), "utf-8"));
+                    else if (bot.LEA.g.SAND.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/SAND") + "/" + file), "utf-8"));
+                    else if (bot.LEA.g.SASP.includes(i.guild.id)) worker = JSON.parse(fs.readFileSync((path.resolve("./db/SASP") + "/" + file), "utf-8"));
 
                     let m = false;
                     try { m = await i.guild.members.fetch(file.split(".")[0]); } catch { }
@@ -106,6 +113,8 @@ export default async function run(bot, i) {
                             if (m.roles.cache.has("1391525298461347971")) apologized = true; //Leadership
                         } else if (bot.LEA.g.SAHP.includes(i.guild.id)) {
                             if (m.roles.cache.has("xxx" /* MISSING ID */)) apologized = true; //Leadership
+                        } else if (bot.LEA.g.SASP.includes(i.guild.id)) {
+                            if (m.roles.cache.has("1557478893248843923")) apologized = true; //Leadership
                         }
                         if (ignored.includes(worker.badge.toString())) apologized = true;
 
